@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>URL</th>
+        <th>数量</th>
+        <th>状态</th>
+        <th>用户ID</th>
+      </tr>
+
+    </thead>
+      <tbody>
+      <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.url}}</td>
+        <td>{{item.count}}</td>
+        <td>{{statusPdict[item.status]}}<th>
+        <td>{{item.real_name}}</td>
+      </tr>
+      </tbody>
+  </table>
+</body>
+</html>
