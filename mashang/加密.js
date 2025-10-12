@@ -1,74 +1,161 @@
-import CryptoJS from "crypto-js"
+const CryptoJS = require("crypto-js")
+//mashangpa 第六题加密
+// ================== 配置部分 ==================
+const KEY = "jo8j9wGw%6HbxfFn";    // 密钥（需与服务端一致）
+const IV = "0123456789ABCDEF";     // 初始向量
 
-const crypto = require('crypto');
+// ================== 密钥处理修正 ==================
+// 修复关键点：使用UTF8解析原始密钥，并转换为合法HEX格式
+const keyBytes = CryptoJS.enc.Utf8.parse(KEY);
+const hexKey = keyBytes.toString(CryptoJS.enc.Hex);    // 转成HEX字符串
+const formattedKey = CryptoJS.enc.Hex.parse(hexKey.slice(0, 32));  // 前32字符 = 16字节 (AES-128)
+const formattedIV = CryptoJS.enc.Utf8.parse(IV);
+
+// ================== 加密函数 ==================
+function encrypt(plainText) {
+  // 明文转为CryptoJS格式
+  const textData = CryptoJS.enc.Utf8.parse(plainText);
+
+  // 执行AES-CBC-PKCS7加密
+  const encrypted = CryptoJS.AES.encrypt(textData, formattedKey, {
+    iv: formattedIV,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7
+  });
+
+  // 返回HEX格式密文
+  return encrypted.ciphertext.toString(CryptoJS.enc.Hex);
+}
+
+// ================== 功能验证 ==================
+
+// 测试执行
+
+
+// ================== 动态调用 ==================
 function loadPage(pageNumber) {
-    const timestamp = Date.now();
-    const hash = crypto.createHash('md5');
-    hash.update("tuling" + timestamp + pageNumber);
-    const token = hash.digest('hex');
-    a='https://www.mashangpa.com/api/problem-detail/4/data/?page='+pageNumber+'&sign='+token.toString()+'&_ts='+timestamp
-    return a
+  const params = {
+    page: pageNumber,
+    _ts: Date.now()
+  };
+  return encrypt(JSON.stringify(params));
 }
 
-let dd = {'a': CryptoJS};
-const _0x38addf = _0x66a7;
-function _0x66a7(_0x7461a9, _0x14ffcc) {
-    const _0x4f0d09 = _0x4f0d();
-    return _0x66a7 = function (_0x66a780, _0x2abc15) {
-        _0x66a780 = _0x66a780 - 0xc5;
-        let _0x477d8f = _0x4f0d09[_0x66a780];
-        return _0x477d8f;
-    }, _0x66a7(_0x7461a9, _0x14ffcc);
-}
-function _0x4f0d() {
-    const _0x341c37 = ['2440720SaQcQw', 'jo8j9wGw%6HbxfFn', '9735516pjwmiO', '68862pbatqQ', 'mode', 'AES', '1923264HnviQd', '36906bPsIrd', '12hEJHOd', 'enc', 'pad', 'encrypt', 'Hex', 'Utf8', '689460JbShaf', 'parse', '957060HmuxSn', 'toString', '445UZKyxv'];
-    _0x4f0d = function () {
-        return _0x341c37;
-    };
-    return _0x4f0d();
-}
-function _0x66a7(_0x7461a9, _0x14ffcc) {
-    const _0x4f0d09 = _0x4f0d();
-    return _0x66a7 = function (_0x66a780, _0x2abc15) {
-        _0x66a780 = _0x66a780 - 0xc5;
-        let _0x477d8f = _0x4f0d09[_0x66a780];
-        return _0x477d8f;
-    }, _0x66a7(_0x7461a9, _0x14ffcc);
+
+window = this, function (n) {
+    function r(n, r) {
+        var t = (65535 & n) + (65535 & r);
+        return (n >> 16) + (r >> 16) + (t >> 16) << 16 | 65535 & t
+    }
+
+    function t(n, t, o, u, e, c) {
+        return r(function (n, r) {
+            return n << e | n >>> 32 - e
+        }(r(r(t, n), r(u, c))), o)
+    }
+
+    function o(n, r, o, u, e, c, f) {
+        return t(r & o | ~r & u, n, r, e, c, f)
+    }
+
+    function u(n, r, o, u, e, c, f) {
+        return t(r & u | o & ~u, n, r, e, c, f)
+    }
+
+    function e(n, r, o, u, e, c, f) {
+        return t(r ^ o ^ u, n, r, e, c, f)
+    }
+
+    function c(n, r, o, u, e, c, f) {
+        return t(o ^ (r | ~u), n, r, e, c, f)
+    }
+
+    function f(n, t) {
+        var f, i, a, h, g;
+        n[t >> 5] |= 128 << t % 32, n[14 + (t + 64 >>> 9 << 4)] = t;
+        var l = 1732584193, d = -271733879, v = -1732584194, C = 271733878;
+        for (f = 0; f < n.length; f += 16) d = c(d = c(d = c(d = c(d = e(d = e(d = e(d = e(d = u(d = u(d = u(d = u(d = o(d = o(d = o(d = o(a = d, v = o(h = v, C = o(g = C, l = o(i = l, d, v, C, n[f], 7, -680876936), d, v, n[f + 1], 12, -389564586), l, d, n[f + 2], 17, 606105819), C, l, n[f + 3], 22, -1044525330), v = o(v, C = o(C, l = o(l, d, v, C, n[f + 4], 7, -176418897), d, v, n[f + 5], 12, 1200080426), l, d, n[f + 6], 17, -1473231341), C, l, n[f + 7], 22, -45705983), v = o(v, C = o(C, l = o(l, d, v, C, n[f + 8], 7, 1770035416), d, v, n[f + 9], 12, -1958414417), l, d, n[f + 10], 17, -42063), C, l, n[f + 11], 22, -1990404162), v = o(v, C = o(C, l = o(l, d, v, C, n[f + 12], 7, 1804603682), d, v, n[f + 13], 12, -40341101), l, d, n[f + 14], 17, -1502002290), C, l, n[f + 15], 22, 1236535329), v = u(v, C = u(C, l = u(l, d, v, C, n[f + 1], 5, -165796510), d, v, n[f + 6], 9, -1069501632), l, d, n[f + 11], 14, 643717713), C, l, n[f], 20, -373897302), v = u(v, C = u(C, l = u(l, d, v, C, n[f + 5], 5, -701558691), d, v, n[f + 10], 9, 38016083), l, d, n[f + 15], 14, -660478335), C, l, n[f + 4], 20, -405537848), v = u(v, C = u(C, l = u(l, d, v, C, n[f + 9], 5, 568446438), d, v, n[f + 14], 9, -1019803690), l, d, n[f + 3], 14, -187363961), C, l, n[f + 8], 20, 1163531501), v = u(v, C = u(C, l = u(l, d, v, C, n[f + 13], 5, -1444681467), d, v, n[f + 2], 9, -51403784), l, d, n[f + 7], 14, 1735328473), C, l, n[f + 12], 20, -1926607734), v = e(v, C = e(C, l = e(l, d, v, C, n[f + 5], 4, -378558), d, v, n[f + 8], 11, -2022574463), l, d, n[f + 11], 16, 1839030562), C, l, n[f + 14], 23, -35309556), v = e(v, C = e(C, l = e(l, d, v, C, n[f + 1], 4, -1530992060), d, v, n[f + 4], 11, 1272893353), l, d, n[f + 7], 16, -155497632), C, l, n[f + 10], 23, -1094730640), v = e(v, C = e(C, l = e(l, d, v, C, n[f + 13], 4, 681279174), d, v, n[f], 11, -358537222), l, d, n[f + 3], 16, -722521979), C, l, n[f + 6], 23, 76029189), v = e(v, C = e(C, l = e(l, d, v, C, n[f + 9], 4, -640364487), d, v, n[f + 12], 11, -421815835), l, d, n[f + 15], 16, 530742520), C, l, n[f + 2], 23, -995338651), v = c(v, C = c(C, l = c(l, d, v, C, n[f], 6, -198630844), d, v, n[f + 7], 10, 1126891415), l, d, n[f + 14], 15, -1416354905), C, l, n[f + 5], 21, -57434055), v = c(v, C = c(C, l = c(l, d, v, C, n[f + 12], 6, 1700485571), d, v, n[f + 3], 10, -1894986606), l, d, n[f + 10], 15, -1051523), C, l, n[f + 1], 21, -2054922799), v = c(v, C = c(C, l = c(l, d, v, C, n[f + 8], 6, 1873313359), d, v, n[f + 15], 10, -30611744), l, d, n[f + 6], 15, -1560198380), C, l, n[f + 13], 21, 1309151649), v = c(v, C = c(C, l = c(l, d, v, C, n[f + 4], 6, -145523070), d, v, n[f + 11], 10, -1120210379), l, d, n[f + 2], 15, 718787259), C, l, n[f + 9], 21, -343485551), l = r(l, i), d = r(d, a), v = r(v, h), C = r(C, g);
+        return [l, d, v, C]
+    }
+
+    function i(n) {
+        var r, t = "", o = 32 * n.length;
+        for (r = 0; r < o; r += 8) t += String.fromCharCode(n[r >> 5] >>> r % 32 & 255);
+        return t
+    }
+
+    function a(n) {
+        var r, t = [];
+        for (t[(n.length >> 2) - 1] = void 0, r = 0; r < t.length; r += 1) t[r] = 0;
+        var o = 8 * n.length;
+        for (r = 0; r < o; r += 8) t[r >> 5] |= (255 & n.charCodeAt(r / 8)) << r % 32;
+        return t
+    }
+
+    function h(n) {
+        var r, t, o = "0123456789abcdef", u = "";
+        for (t = 0; t < n.length; t += 1) r = n.charCodeAt(t), u += o.charAt(r >>> 4 & 15) + o.charAt(15 & r);
+        return u
+    }
+
+    function g(n) {
+        return unescape(encodeURIComponent(n))
+    }
+
+    function l(n) {
+        return function (n) {
+            return i(f(a(n), 8 * n.length))
+        }(g(n))
+    }
+
+    function d(n, r) {
+        return function (n, r) {
+            var t, o, u = a(n), e = [], c = [];
+            for (e[15] = c[15] = void 0, 16 < u.length && (u = f(u, 8 * n.length)), t = 0; t < 16; t += 1) e[t] = 909522486 ^ u[t], c[t] = 1549556828 ^ u[t];
+            return o = f(e.concat(a(r)), 512 + 8 * r.length), i(f(c.concat(o), 640))
+        }(g(n), g(r))
+    }
+
+    window.xxoo = function (n, r, t) {
+        return r ? t ? d(r, n) : function (n, r) {
+            return h(d(n, r))
+        }(r, n) : t ? l(n) : function (n) {
+            return h(l(n))
+        }(n)
+    }
+}();
+
+function s() {
+    window.ttt = new Date().getTime();
+    window.token = window.xxoo("sssssbbbbb" + window.ttt)
+    window.hhh = {
+        s: window.token,
+        tt: window.ttt,
+    }
+    return [window.token,window.ttt]
 }
 
-let key, iv;
-['a']=CryptoJS;
-key = dd['a'][_0x38addf(0xd6)][_0x38addf(0xc7)][_0x38addf(0xc9)](_0x38addf(0xce));
-iv = dd['a'][_0x38addf(0xd6)]['Utf8'][_0x38addf(0xc9)]('0123456789ABCDEF');
-function encrypt(_0x277028) {
-    const _0x4d843e = _0x38addf;
-    let _0x2703a2 = dd['a'][_0x4d843e(0xd6)]['Utf8']['parse'](_0x277028),
-        _0x50fcf0 = dd['a'][_0x4d843e(0xd2)][_0x4d843e(0xc5)](_0x2703a2, key, {
-            'mode': dd['a'][_0x4d843e(0xd1)]['CBC'],
-            'padding': dd['a'][_0x4d843e(0xd7)]['Pkcs7'],
-            'iv': iv
-        });
-    return _0x50fcf0['ciphertext'][_0x4d843e(0xcb)](Crypto[_0x4d843e(0xd6)][_0x4d843e(0xc6)]);
+dd = {
+    a: CryptoJS
 }
 
-function loadPage(pageNumber) {
-    var csrfTokenInput = document.querySelector('input[name="csrfmiddlewaretoken"]');
-    const timestamp = new Date().getTime();
-    const params = {
-        page: pageNumber,
-        _ts: timestamp,
-    };
-    const jsonString = JSON.stringify(params);
-    let encryptedQuery = encrypt(jsonString);
-    fetch(`/api/problem-detail/${problemId}/data/`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({xl: encryptedQuery})
-    })
-        .then(response => response.json())
-        .then(data => updatePageContent(data))
-        .catch(error => console.error('Error fetching problem details:', error));
+let kkkk = dd.a.enc.Utf8.parse("xxxxxxxxoooooooo");
+let iiii = dd.a.enc.Utf8.parse("0123456789ABCDEF");
+
+function xxxxoooo(encryptedHex) {
+    // 修复：定义 dd 对象并将其指向 CryptoJS
+    let enccc = dd.a.enc.Hex.parse(encryptedHex);
+    let deccc = dd.a.AES["decr" + "ypt"]({ciphertext: enccc}, kkkk, {
+        mode: dd.a.mode.CBC,
+        padding: dd.a.pad.Pkcs7,
+        iv: iiii,
+    });
+    return deccc.toString(dd.a.enc.Utf8);
 }
-console.log(loadPage('1'))
+function updatePageContent(t) {
+    return JSON.parse(xxxxoooo(t))
+}
+
+// data={t:"361d3626adcf4a361c385c8f0b39c963f0469b9c6ff6d23c7e0b145e1b885851be1cff3c2d5ef470376708d6f60fad1c4c9987e181d330ca77dc5cb91d0ab5c1680f095d61499b9023658e14181dee9f1345ad91df727ce58e869da5f59aef9df7f38b4730811ba0fe75bd3c2c95fdd5054eb1e57ee01817f2ade931100f307b497bc2b6dade4143419d9613f268f80283cdf202aba59e969fd8e4338e9678f4d5301e80407904687f5e0c68d4ba413d0a66dbc4f2758901aa4ff102be1b31aeea6d53acc884ea1abf6dba04fd8b9582027caf80badcefa2df46b1076ff883ed99aa1acd9860c7050a9e4ea36493a5b9f26ea29bd1bc5378f881856e9648ad3e977a57d33ffab33a406087a34ba40abd66859bb0f0328978c5ad97b43f3d8142724f9f051f4b276ec253da7fd33b0a3b66e900ba30f749420f402d178d77994097279565ce7630f5840ec5a5754fce466dfb215b96f9c0a795e844bece955f54e294d71c4e2cd96b92b110392629e1771938ae09d9f7c4c75d47af17d744e13134be19913373c7b6b17de26f68c1777d572120475bd605739dbc48752a502d3c7d766298efa5de14017c586be09b372cfb8c9c29846a211a8a810c08f971b2f44598eff58a7d7acdbb2543043ff3a1da122fdccefafba45f62357ad2f977f5b7fd35a8f69988f707acce001b03176390"}
+// console.log(s())
+// console.log(updatePageContent(data.t))
