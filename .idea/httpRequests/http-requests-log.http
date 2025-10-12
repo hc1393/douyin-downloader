@@ -1,0 +1,132 @@
+GET https://www.acgice.com/sjz/
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-18T130246.200.html
+
+###
+
+GET https://api.acgice.com/api/sjz/item_list?a=&top=1-2&p=1&mid=0&n=&token=f1900d5a61414d9cdbc50bf2176e3f2a&timestamp=1758162943
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+###
+
+GET https://api.acgice.com/api/sjz/item_list?a=&top=1-2&p=1&mid=0&n=&token=f1900d5a61414d9cdbc50bf2176e3f2a&timestamp=1758162943
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+###
+
+GET https://www.acgice.com/sjz/v/keys?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTI5NjEsIm5hbWUiOiI1MDkwMzFBMzZDQUExRkY1MUU1QUUzNzdGODg4QTA5OCIsImdyb3VwX2lkIjoxLCJwYXJlbnRfaWQiOjAsInR5cGUiOiIiLCJjcmVhdGVfdGltZSI6IjIwMjUtMDktMTRUMTM6MTM6MjguNTIyNjAxNjE5KzA4OjAwIiwiZXhwIjoxNzU3ODYyODA4fQ.nyECeZydboLUccDj1QuIU7um6Zxb-DIwht1JGvuw3so
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-14T141410.200.html
+
+###
+
+GET https://www.acgice.com/sjz/v/keys?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTI5NjEsIm5hbWUiOiI1MDkwMzFBMzZDQUExRkY1MUU1QUUzNzdGODg4QTA5OCIsImdyb3VwX2lkIjoxLCJwYXJlbnRfaWQiOjAsInR5cGUiOiIiLCJjcmVhdGVfdGltZSI6IjIwMjUtMDktMTRUMTM6MTM6MjguNTIyNjAxNjE5KzA4OjAwIiwiZXhwIjoxNzU3ODYyODA4fQ.nyECeZydboLUccDj1QuIU7um6Zxb-DIwht1JGvuw3so
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-14T141103.200.html
+
+###
+
+GET https://www.acgice.com/sjz/v/keys?t=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTI5NjEsIm5hbWUiOiI1MDkwMzFBMzZDQUExRkY1MUU1QUUzNzdGODg4QTA5OCIsImdyb3VwX2lkIjoxLCJwYXJlbnRfaWQiOjAsInR5cGUiOiIiLCJjcmVhdGVfdGltZSI6IjIwMjUtMDktMTRUMTM6MTM6MjguNTIyNjAxNjE5KzA4OjAwIiwiZXhwIjoxNzU3ODYyODA4fQ.nyECeZydboLUccDj1QuIU7um6Zxb-DIwht1JGvuw3so
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-14T141048.200.html
+
+###
+
+GET https://api.acgice.com/api/sjz/jzv3_gunList?token=bcde352842a27aa2bc50f65435be5cb2&timestamp=1757575207
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+###
+
+GET https://okmv.cc/dianying
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-10T151505.200.html
+
+###
+
+GET https://www.mashangpa.com/api/problem-detail/1/data/?page=1
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-09T230759.200.json
+
+###
+
+GET https://u6.y.qq.com/cgi-bin/musics.fcg?_=1757344170657&encoding=ag-1&sign=zzcfbfa98akdcfbjectucl7tbkjdgjtwvk12y9888a8e6
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-08T231024.200.txt
+
+###
+
+GET https://aqqmusic.tc.qq.com/RS02060WVl0B0lnCR7.mp3?guid=2779307742&vkey=A9370748896082C5E8F08889D856EC97748CAC0CDD392C2AB51D0E0FA0B37B1F38892CA1539C29E23C9E0F706DD80F9FB20A3509A83F6481__v2b9aba50&uin=&fromtag=123052
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-08T225951.544.mpeg
+
+###
+
+GET https://api.acgice.com/api/sjz/item_list?a=&top=1-2&p=1&mid=0&n=&token=31054048f20f64f4c6a61dceac879e3d&timestamp=1757342829
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+###
+
+GET https://www.acgice.com/sjz/v/zb_diy
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-08T224549.200.html
+
+###
+
+GET https://examples.http-client.intellij.net/get?generated-in=PyCharm
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-09-08T224429.200.json
+
+###
+

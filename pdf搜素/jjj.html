@@ -1,0 +1,45 @@
+fetch("https://www.jiumodiary.com/init_hubs.php", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Microsoft Edge\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "body": "q=%E5%BE%AE%E5%88%86&remote_ip=&time_int=1758349938568",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+q=encodeURIComponent(g_prom_mark)
+
+rerutn session
+
+
+fetch("https://www5.jiumodiary.com/ajax_fetch_hubs.php", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+    "cache-control": "no-cache",
+    "content-type": "application/x-www-form-urlencoded",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Microsoft Edge\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "body": "id=ZEtidlV6R0FjdnM1ZHFaWUhGM0xCZz09&set=0",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+});

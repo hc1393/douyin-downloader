@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="hc@localhost">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.52">
+    <root id="1">
+      <DefaultCasing>lower/lower</DefaultCasing>
+      <DefaultEngine>MyISAM</DefaultEngine>
+      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
+      <ServerVersion>5.7.26</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="information_schema">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <schema id="3" parent="1" name="hc">
+      <Current>1</Current>
+      <LastIntrospectionLocalTimestamp>2025-09-07.15:36:14</LastIntrospectionLocalTimestamp>
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <table id="4" parent="3" name="order">
+      <Engine>MyISAM</Engine>
+      <CollationName>utf8_unicode_ci</CollationName>
+    </table>
+    <table id="5" parent="3" name="userinfo">
+      <Engine>MyISAM</Engine>
+      <CollationName>utf8_unicode_ci</CollationName>
+    </table>
+    <table id="6" parent="3" name="username">
+      <Engine>MyISAM</Engine>
+      <CollationName>utf8_unicode_ci</CollationName>
+    </table>
+    <table id="7" parent="3" name="道具价格数据表">
+      <Engine>MyISAM</Engine>
+      <CollationName>utf8_unicode_ci</CollationName>
+    </table>
+    <column id="8" parent="4" name="id">
+      <DasType>int(11)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="9" parent="4" name="url">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="10" parent="4" name="count">
+      <DasType>int(11)|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="11" parent="4" name="user_id">
+      <DasType>int(11)|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="12" parent="4" name="status">
+      <DasType>tinyint(4)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="13" parent="5" name="id">
+      <AutoIncrement>4</AutoIncrement>
+      <DasType>int(11)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="14" parent="5" name="mobile">
+      <DasType>varchar(11)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="15" parent="5" name="password">
+      <DasType>varchar(64)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="16" parent="5" name="real_name">
+      <DasType>varchar(15)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="17" parent="5" name="role">
+      <DasType>tinyint(10)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <index id="18" parent="5" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="19" parent="5" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="20" parent="6" name="user">
+      <DasType>varchar(5)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="21" parent="6" name="password">
+      <DasType>varchar(28)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="22" parent="6" name="sex">
+      <DasType>char(1)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="23" parent="7" name="名称">
+      <DasType>text|0s</DasType>
+      <Position>1</Position>
+    </column>
+    <column id="24" parent="7" name="类别">
+      <DasType>text|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="25" parent="7" name="等级">
+      <DasType>int(11)|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="26" parent="7" name="更新时间">
+      <DasType>text|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="27" parent="7" name="当前价格">
+      <DasType>int(11)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="28" parent="7" name="缩略图">
+      <DasType>text|0s</DasType>
+      <Position>6</Position>
+    </column>
+  </database-model>
+</dataSource>

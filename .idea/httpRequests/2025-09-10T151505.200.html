@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+    <title>免费好看的电影大全_FreeOK</title>
+    <meta name="description"
+          content="免费好看的电影大全_FreeOK"/>
+    <link rel="canonical" href="https://okmv.cc/dianying">
+
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <script src="/static/tailwind.js"></script>
+    <script async src="https://s4.cnzz.com/z.js?id=1281410420"></script>
+    <script defer src="/static/jq.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col dark:bg-gray-900 dark:text-gray-100">
+
+<header class="sticky top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-sm border-b border-gray-100 dark:border-gray-800 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+
+        <div class="flex-shrink-0">
+            <a href="/" class="flex items-center transition-all duration-300 hover:opacity-80">
+                <svg width="150" height="40" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="#38B2AC" font-family="Arial, sans-serif" font-weight="bold">
+                        <text x="10" y="30" font-size="28" class="dark:text-white">OKMV</text>
+                    </g>
+                    <text x="100" y="30" font-size="14" fill="#38B2AC" font-family="Arial, sans-serif"
+                          font-weight="bold" class="dark:text-white">.CC
+                    </text>
+                    <line x1="10" y1="35" x2="130" y2="35" stroke="#38B2AC" stroke-width="2"
+                          class="dark:stroke-white"></line>
+                </svg>
+            </a>
+        </div>
+
+
+        <div class="flex items-center space-x-4 md:hidden">
+            <button type="button" id="mobile-search-btn"
+                    class="p-2 rounded-full text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+            </button>
+
+
+            <button type="button" id="menu-button"
+                    class="p-2 rounded-full text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="hidden md:flex items-center space-x-6">
+            <a href="/"
+               class="text-gray-600 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 font-medium transition-colors duration-200">首页</a>
+            <a href="/type"
+               class="text-gray-600 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 font-medium transition-colors duration-200">最新</a>
+            <a href="/hot"
+               class="text-gray-600 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400 font-medium transition-colors duration-200">热门</a>
+
+
+            <div class="relative">
+                <input type="text" placeholder="搜索视频..."
+                       class="w-64 pl-10 pr-4 py-2 rounded-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200">
+                <div class="absolute left-3 top-2.5 text-gray-400 dark:text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+            </div>
+
+
+            <button id="theme-toggle" type="button"
+                    class="p-2 rounded-full text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200">
+
+                <svg id="dark-icon" class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+
+                <svg id="light-icon" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                          fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+<nav class="bg-gray-50 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-12 md:h-14 overflow-x-auto scrollbar-hide">
+
+            <div class="flex items-center space-x-1 overflow-x-auto scrollbar-hide py-1 w-full">
+
+                <a href="/dianying"
+                   class="px-3 py-2 rounded-md text-gray-600 hover:text-teal-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center whitespace-nowrap">
+                    <span class="text-sm font-medium">电影</span>
+                </a>
+
+                <a href="/dianshiju"
+                   class="px-3 py-2 rounded-md text-gray-600 hover:text-teal-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center whitespace-nowrap">
+                    <span class="text-sm font-medium">电视剧</span>
+                </a>
+
+                <a href="/dongman"
+                   class="px-3 py-2 rounded-md text-gray-600 hover:text-teal-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center whitespace-nowrap">
+                    <span class="text-sm font-medium">动漫</span>
+                </a>
+
+                <a href="/duanju"
+                   class="px-3 py-2 rounded-md text-gray-600 hover:text-teal-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center whitespace-nowrap">
+                    <span class="text-sm font-medium">短剧</span>
+                </a>
+
+                <a href="/zongyi"
+                   class="px-3 py-2 rounded-md text-gray-600 hover:text-teal-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center whitespace-nowrap">
+                    <span class="text-sm font-medium">综艺</span>
+                </a>
+
+                <a href="/hot"
+                   class="px-3 py-2 rounded-md text-gray-600 hover:text-teal-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center whitespace-nowrap">
+                    <span class="text-sm font-medium">热门</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div id="mobile-menu" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 hidden">
+    <div class="absolute right-0 top-0 bottom-0 w-64 bg-white dark:bg-gray-900 shadow-lg transform transition-transform duration-300 translate-x-0">
+        <div class="p-5 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white">菜单</h3>
+            <button id="close-menu"
+                    class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="p-5">
+            <nav class="space-y-3">
+                <a href="/"
+                   class="block py-2 px-4 rounded-md text-gray-700 hover:bg-gray-100 hover:text-red-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-500 transition-colors duration-200">首页</a>
+                <a href="/type"
+                   class="block py-2 px-4 rounded-md text-gray-700 hover:bg-gray-100 hover:text-red-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-500 transition-colors duration-200">最新</a>
+                <a href="/hot"
+                   class="block py-2 px-4 rounded-md text-gray-700 hover:bg-gray-100 hover:text-red-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-500 transition-colors duration-200">热门</a>
+            </nav>
+            <div class="mt-5">
+                <input type="text" placeholder="搜索视频..."
+                       class="w-full pl-10 pr-4 py-2 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuButton = document.querySelector('#menu-button');
+        const mobileMenu = document.querySelector('#mobile-menu');
+        const closeMenu = document.querySelector('#close-menu');
+
+        if (menuButton && mobileMenu && closeMenu) {
+            menuButton.addEventListener('click', function () {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            closeMenu.addEventListener('click', function () {
+                mobileMenu.classList.add('hidden');
+            });
+
+
+            document.addEventListener('click', function (event) {
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    if (!mobileMenu.contains(event.target) && event.target !== menuButton) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+
+
+            mobileMenu.addEventListener('click', function (e) {
+                if (e.target === mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        }
+
+
+        const mobileSearchBtn = document.querySelector('#mobile-search-btn');
+        if (mobileSearchBtn) {
+            mobileSearchBtn.addEventListener('click', function () {
+                window.scrollTo({
+                    top: document.querySelector('section:first-of-type').offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    });
+</script>
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <script type="application/ld+json">
+        {"@context":"https://schema.org","@type":"ItemList","name":"电影视频","description":"包含多个电影视频列表","itemListElement":[{"@type":"VideoObject","position":1,"name":"绝命追杀 | 免费在线观看全集高清视频 - FreeOK","description":"绝命追杀 | 剧情：内详。","url":"https://okmv.cc/detail/68aed05b2625dfef5c8388e0","uploadDate":"2025-08-27T09:31:07Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"绝命追杀免费在线观看,绝命追杀高清播放,绝命追杀完整,绝命追杀电影推荐,绝命追杀剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aed05b2625dfef5c8388e0.jpg"},{"@type":"VideoObject","position":2,"name":"大唐妖物志杀人凤凰 | 免费在线观看全集高清视频 - FreeOK","description":"大唐妖物志杀人凤凰 | 剧情：内详。","url":"https://okmv.cc/detail/68aecb612625dfef5c829b7c","uploadDate":"2025-08-27T09:09:53Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"大唐妖物志杀人凤凰免费在线观看,大唐妖物志杀人凤凰高清播放,大唐妖物志杀人凤凰完整,大唐妖物志杀人凤凰电影推荐,大唐妖物志杀人凤凰剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecb612625dfef5c829b7c.jpg"},{"@type":"VideoObject","position":3,"name":"无敌贾特 | 免费在线观看全集高清视频 - FreeOK","description":"无敌贾特 | 剧情：内详。","url":"https://okmv.cc/detail/68aed3982625dfef5c841d64","uploadDate":"2025-08-27T09:44:56Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"无敌贾特免费在线观看,无敌贾特高清播放,无敌贾特完整,无敌贾特电影推荐,无敌贾特剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aed3982625dfef5c841d64.jpg"},{"@type":"VideoObject","position":4,"name":"护肤品 | 免费在线观看全集高清视频 - FreeOK","description":"护肤品 | 剧情：内详。","url":"https://okmv.cc/detail/68aed23a2625dfef5c83d218","uploadDate":"2025-08-27T09:39:06Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"护肤品免费在线观看,护肤品高清播放,护肤品完整,护肤品电影推荐,护肤品剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aed23a2625dfef5c83d218.jpg"},{"@type":"VideoObject","position":5,"name":"自卫的艺术 | 免费在线观看全集高清视频 - FreeOK","description":"自卫的艺术 | 剧情：内详。","url":"https://okmv.cc/detail/68aecd2a2625dfef5c82f4c8","uploadDate":"2025-08-27T09:17:30Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"自卫的艺术免费在线观看,自卫的艺术高清播放,自卫的艺术完整,自卫的艺术电影推荐,自卫的艺术剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecd2a2625dfef5c82f4c8.jpg"},{"@type":"VideoObject","position":6,"name":"一千灵异夜之死连环 | 免费在线观看全集高清视频 - FreeOK","description":"一千灵异夜之死连环 | 剧情：内详。","url":"https://okmv.cc/detail/68aece812625dfef5c8335f8","uploadDate":"2025-08-27T09:23:13Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"一千灵异夜之死连环免费在线观看,一千灵异夜之死连环高清播放,一千灵异夜之死连环完整,一千灵异夜之死连环电影推荐,一千灵异夜之死连环剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aece812625dfef5c8335f8.jpg"},{"@type":"VideoObject","position":7,"name":"青春硬起来 | 免费在线观看全集高清视频 - FreeOK","description":"青春硬起来 | 剧情：内详。","url":"https://okmv.cc/detail/68aecf172625dfef5c834ee4","uploadDate":"2025-08-27T09:25:43Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"青春硬起来免费在线观看,青春硬起来高清播放,青春硬起来完整,青春硬起来电影推荐,青春硬起来剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecf172625dfef5c834ee4.jpg"},{"@type":"VideoObject","position":8,"name":"陆小凤传奇之陆小凤前传 | 免费在线观看全集高清视频 - FreeOK","description":"陆小凤传奇之陆小凤前传 | 剧情：内详。","url":"https://okmv.cc/detail/68aecdcf2625dfef5c8313c4","uploadDate":"2025-08-27T09:20:15Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"陆小凤传奇之陆小凤前传免费在线观看,陆小凤传奇之陆小凤前传高清播放,陆小凤传奇之陆小凤前传完整,陆小凤传奇之陆小凤前传电影推荐,陆小凤传奇之陆小凤前传剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecdcf2625dfef5c8313c4.jpg"},{"@type":"VideoObject","position":9,"name":"蒙混过关 | 免费在线观看全集高清视频 - FreeOK","description":"蒙混过关 | 剧情：内详。","url":"https://okmv.cc/detail/68aed2a32625dfef5c83e730","uploadDate":"2025-08-27T09:40:51Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"蒙混过关免费在线观看,蒙混过关高清播放,蒙混过关完整,蒙混过关电影推荐,蒙混过关剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aed2a32625dfef5c83e730.jpg"},{"@type":"VideoObject","position":10,"name":"狙击精英: 背水一战 | 免费在线观看全集高清视频 - FreeOK","description":"狙击精英: 背水一战 | 剧情：内详。","url":"https://okmv.cc/detail/68aed2fd2625dfef5c83fa02","uploadDate":"2025-08-27T09:42:21Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"狙击精英: 背水一战免费在线观看,狙击精英: 背水一战高清播放,狙击精英: 背水一战完整,狙击精英: 背水一战电影推荐,狙击精英: 背水一战剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aed2fd2625dfef5c83fa02.jpg"},{"@type":"VideoObject","position":11,"name":"基督再临 | 免费在线观看全集高清视频 - FreeOK","description":"基督再临 | 剧情：内详。","url":"https://okmv.cc/detail/68aecbd12625dfef5c82b2cc","uploadDate":"2025-08-27T09:11:45Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"基督再临免费在线观看,基督再临高清播放,基督再临完整,基督再临电影推荐,基督再临剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecbd12625dfef5c82b2cc.jpg"},{"@type":"VideoObject","position":12,"name":"长腿怪2024 | 免费在线观看全集高清视频 - FreeOK","description":"长腿怪2024 | 剧情：内详。","url":"https://okmv.cc/detail/68aed2242625dfef5c83ce48","uploadDate":"2025-08-27T09:38:44Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"长腿怪2024免费在线观看,长腿怪2024高清播放,长腿怪2024完整,长腿怪2024电影推荐,长腿怪2024剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aed2242625dfef5c83ce48.jpg"},{"@type":"VideoObject","position":13,"name":"冒名之肤 | 免费在线观看全集高清视频 - FreeOK","description":"冒名之肤 | 剧情：内详。","url":"https://okmv.cc/detail/68aecc6b2625dfef5c82cfaa","uploadDate":"2025-08-27T09:14:19Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"冒名之肤免费在线观看,冒名之肤高清播放,冒名之肤完整,冒名之肤电影推荐,冒名之肤剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecc6b2625dfef5c82cfaa.jpg"},{"@type":"VideoObject","position":14,"name":"2015年中央电视台春节联欢晚会 | 免费在线观看全集高清视频 - FreeOK","description":"2015年中央电视台春节联欢晚会 | 剧情：内详。","url":"https://okmv.cc/detail/68aecbfd2625dfef5c82b9cc","uploadDate":"2025-08-27T09:12:29Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"2015年中央电视台春节联欢晚会免费在线观看,2015年中央电视台春节联欢晚会高清播放,2015年中央电视台春节联欢晚会完整,2015年中央电视台春节联欢晚会电影推荐,2015年中央电视台春节联欢晚会剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecbfd2625dfef5c82b9cc.jpg"},{"@type":"VideoObject","position":15,"name":"狼孩的真实冒险 | 免费在线观看全集高清视频 - FreeOK","description":"狼孩的真实冒险 | 剧情：内详。","url":"https://okmv.cc/detail/68aed9e02625dfef5c84e69d","uploadDate":"2025-08-27T10:11:44Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"狼孩的真实冒险免费在线观看,狼孩的真实冒险高清播放,狼孩的真实冒险完整,狼孩的真实冒险电影推荐,狼孩的真实冒险剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aed9e02625dfef5c84e69d.jpg"},{"@type":"VideoObject","position":16,"name":"王牌御史猎妖教室 | 免费在线观看全集高清视频 - FreeOK","description":"王牌御史猎妖教室 | 剧情：内详。","url":"https://okmv.cc/detail/68aecdad2625dfef5c830d3a","uploadDate":"2025-08-27T09:19:41Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"王牌御史猎妖教室免费在线观看,王牌御史猎妖教室高清播放,王牌御史猎妖教室完整,王牌御史猎妖教室电影推荐,王牌御史猎妖教室剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecdad2625dfef5c830d3a.jpg"},{"@type":"VideoObject","position":17,"name":"人皮客栈 | 免费在线观看全集高清视频 - FreeOK","description":"人皮客栈 | 剧情：内详。","url":"https://okmv.cc/detail/68aecc582625dfef5c82cbcc","uploadDate":"2025-08-27T09:14:00Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"人皮客栈免费在线观看,人皮客栈高清播放,人皮客栈完整,人皮客栈电影推荐,人皮客栈剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecc582625dfef5c82cbcc.jpg"},{"@type":"VideoObject","position":18,"name":"速度与激情8 | 免费在线观看全集高清视频 - FreeOK","description":"速度与激情8 | 剧情：内详。","url":"https://okmv.cc/detail/68aecfce2625dfef5c836ec4","uploadDate":"2025-08-27T09:28:46Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"速度与激情8免费在线观看,速度与激情8高清播放,速度与激情8完整,速度与激情8电影推荐,速度与激情8剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecfce2625dfef5c836ec4.jpg"},{"@type":"VideoObject","position":19,"name":"最后的复仇者们2 | 免费在线观看全集高清视频 - FreeOK","description":"最后的复仇者们2 | 剧情：内详。","url":"https://okmv.cc/detail/68aeda072625dfef5c84eb60","uploadDate":"2025-08-27T10:12:23Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"最后的复仇者们2免费在线观看,最后的复仇者们2高清播放,最后的复仇者们2完整,最后的复仇者们2电影推荐,最后的复仇者们2剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aeda072625dfef5c84eb60.jpg"},{"@type":"VideoObject","position":20,"name":"河东狮吼2 | 免费在线观看全集高清视频 - FreeOK","description":"河东狮吼2 | 剧情：内详。","url":"https://okmv.cc/detail/68aeca0c2625dfef5c825bae","uploadDate":"2025-08-27T09:04:12Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"河东狮吼2免费在线观看,河东狮吼2高清播放,河东狮吼2完整,河东狮吼2电影推荐,河东狮吼2剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aeca0c2625dfef5c825bae.jpg"},{"@type":"VideoObject","position":21,"name":"家在水草丰茂的地方 | 免费在线观看全集高清视频 - FreeOK","description":"家在水草丰茂的地方 | 剧情：内详。","url":"https://okmv.cc/detail/68aed91c2625dfef5c84cbde","uploadDate":"2025-08-27T10:08:28Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"家在水草丰茂的地方免费在线观看,家在水草丰茂的地方高清播放,家在水草丰茂的地方完整,家在水草丰茂的地方电影推荐,家在水草丰茂的地方剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aed91c2625dfef5c84cbde.jpg"},{"@type":"VideoObject","position":22,"name":"大话神捕 | 免费在线观看全集高清视频 - FreeOK","description":"大话神捕 | 剧情：内详。","url":"https://okmv.cc/detail/68aec9eb2625dfef5c825560","uploadDate":"2025-08-27T09:03:39Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"大话神捕免费在线观看,大话神捕高清播放,大话神捕完整,大话神捕电影推荐,大话神捕剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aec9eb2625dfef5c825560.jpg"},{"@type":"VideoObject","position":23,"name":"弯刀 | 免费在线观看全集高清视频 - FreeOK","description":"弯刀 | 剧情：内详。","url":"https://okmv.cc/detail/68aecc3a2625dfef5c82c5d6","uploadDate":"2025-08-27T09:13:30Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"弯刀免费在线观看,弯刀高清播放,弯刀完整,弯刀电影推荐,弯刀剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecc3a2625dfef5c82c5d6.jpg"},{"@type":"VideoObject","position":24,"name":"破门 | 免费在线观看全集高清视频 - FreeOK","description":"破门 | 剧情：内详。","url":"https://okmv.cc/detail/68aecd462625dfef5c82f986","uploadDate":"2025-08-27T09:17:58Z","author":{"@type":"Person","name":"FreeOK"},"keywords":"破门免费在线观看,破门高清播放,破门完整,破门电影推荐,破门剧情介绍","thumbnailUrl":"https://okmv.cc/img/id/68aecd462625dfef5c82f986.jpg"}]}
+    </script>
+
+    <section
+            class="mb-8 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+
+        <div class="border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-full flex items-center justify-center shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-teal-600 dark:text-teal-400" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold">电影高级筛选</h2>
+            </div>
+            <div class="text-sm text-gray-500 dark:text-gray-400 flex items-center">
+                <span class="hidden sm:inline mr-2">找到</span>
+                <span class="font-semibold text-teal-600 dark:text-teal-500">43483</span>
+                <span class="ml-1">个结果</span>
+            </div>
+        </div>
+
+
+        <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                </svg>
+                分类筛选
+            </h3>
+            <div id="tags-filter-container" class="flex flex-wrap gap-2">
+                <a href="/dianying"
+                   class="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-teal-500 text-white border-teal-500 shadow-sm">
+                    全部分类
+                </a>
+
+                <a href="/dianying?class=%E5%8A%A8%E4%BD%9C"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    动作
+                </a>
+
+                <a href="/dianying?class=%E5%96%9C%E5%89%A7"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    喜剧
+                </a>
+
+                <a href="/dianying?class=%E7%88%B1%E6%83%85"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    爱情
+                </a>
+
+                <a href="/dianying?class=%E7%A7%91%E5%B9%BB"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    科幻
+                </a>
+
+                <a href="/dianying?class=%E5%8A%A8%E7%94%BB"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    动画
+                </a>
+
+                <a href="/dianying?class=%E6%82%AC%E7%96%91"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    悬疑
+                </a>
+
+                <a href="/dianying?class=%E6%83%8A%E6%82%9A"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    惊悚
+                </a>
+
+                <a href="/dianying?class=%E6%81%90%E6%80%96"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    恐怖
+                </a>
+
+                <a href="/dianying?class=%E5%89%A7%E6%83%85"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    剧情
+                </a>
+
+                <a href="/dianying?class=%E5%A5%87%E5%B9%BB"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    奇幻
+                </a>
+
+                <a href="/dianying?class=%E6%AD%A6%E4%BE%A0"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    武侠
+                </a>
+
+                <a href="/dianying?class=%E5%86%92%E9%99%A9"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 ">
+                    冒险
+                </a>
+
+                <a href="/dianying?class=%E7%8A%AF%E7%BD%AA"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    犯罪
+                </a>
+
+                <a href="/dianying?class=%E5%AE%B6%E5%BA%AD"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    家庭
+                </a>
+
+                <a href="/dianying?class=%E5%8E%86%E5%8F%B2"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    历史
+                </a>
+
+                <a href="/dianying?class=%E6%88%98%E4%BA%89"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    战争
+                </a>
+
+                <a href="/dianying?class=%E9%9F%B3%E4%B9%90"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    音乐
+                </a>
+
+                <a href="/dianying?class=%E6%AD%8C%E8%88%9E"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    歌舞
+                </a>
+
+                <a href="/dianying?class=%E4%BC%A0%E8%AE%B0"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    传记
+                </a>
+
+                <a href="/dianying?class=%E7%BA%AA%E5%BD%95%E7%89%87"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    纪录片
+                </a>
+
+                <a href="/dianying?class=%E7%9F%AD%E7%89%87"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    短片
+                </a>
+
+                <a href="/dianying?class=%E5%85%B6%E4%BB%96"
+                   class="tags-filter-item inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30 hidden">
+                    其他
+                </a>
+
+            </div>
+        </div>
+
+        <div class="p-6">
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"/>
+                </svg>
+                排序方式
+            </h3>
+            <div class="flex flex-wrap gap-3">
+                <a href="/dianying?sort_field=last_id"
+                   class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm font-medium transition-all duration-200 bg-teal-500 text-white border-teal-500 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    最近更新
+                </a>
+
+                <a href="/dianying?sort_field=score"
+                   class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm font-medium transition-all duration-200 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-200 dark:hover:border-teal-800/30">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                    </svg>
+                    评分最高
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-8">
+        <div id="image-grid"
+             class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-5">
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aed05b2625dfef5c8388e0"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="绝命追杀"
+                             data-src="/img/id/68aed05b2625dfef5c8388e0.jpg?width=480"
+                             data-srcset="/img/id/68aed05b2625dfef5c8388e0.jpg?width=480 480w, /img/id/68aed05b2625dfef5c8388e0.jpg?width=800 800w, /img/id/68aed05b2625dfef5c8388e0.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aed05b2625dfef5c8388e0"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">绝命追杀</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            绝命追杀</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecb612625dfef5c829b7c"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="大唐妖物志杀人凤凰"
+                             data-src="/img/id/68aecb612625dfef5c829b7c.jpg?width=480"
+                             data-srcset="/img/id/68aecb612625dfef5c829b7c.jpg?width=480 480w, /img/id/68aecb612625dfef5c829b7c.jpg?width=800 800w, /img/id/68aecb612625dfef5c829b7c.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecb612625dfef5c829b7c"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">大唐妖物志杀人凤凰</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            大唐妖物志杀人凤凰</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aed3982625dfef5c841d64"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="无敌贾特"
+                             data-src="/img/id/68aed3982625dfef5c841d64.jpg?width=480"
+                             data-srcset="/img/id/68aed3982625dfef5c841d64.jpg?width=480 480w, /img/id/68aed3982625dfef5c841d64.jpg?width=800 800w, /img/id/68aed3982625dfef5c841d64.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aed3982625dfef5c841d64"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">无敌贾特</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            无敌贾特</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aed23a2625dfef5c83d218"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="护肤品"
+                             data-src="/img/id/68aed23a2625dfef5c83d218.jpg?width=480"
+                             data-srcset="/img/id/68aed23a2625dfef5c83d218.jpg?width=480 480w, /img/id/68aed23a2625dfef5c83d218.jpg?width=800 800w, /img/id/68aed23a2625dfef5c83d218.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aed23a2625dfef5c83d218"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">护肤品</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            护肤品</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecd2a2625dfef5c82f4c8"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="自卫的艺术"
+                             data-src="/img/id/68aecd2a2625dfef5c82f4c8.jpg?width=480"
+                             data-srcset="/img/id/68aecd2a2625dfef5c82f4c8.jpg?width=480 480w, /img/id/68aecd2a2625dfef5c82f4c8.jpg?width=800 800w, /img/id/68aecd2a2625dfef5c82f4c8.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecd2a2625dfef5c82f4c8"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">自卫的艺术</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            自卫的艺术</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aece812625dfef5c8335f8"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="一千灵异夜之死连环"
+                             data-src="/img/id/68aece812625dfef5c8335f8.jpg?width=480"
+                             data-srcset="/img/id/68aece812625dfef5c8335f8.jpg?width=480 480w, /img/id/68aece812625dfef5c8335f8.jpg?width=800 800w, /img/id/68aece812625dfef5c8335f8.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aece812625dfef5c8335f8"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">一千灵异夜之死连环</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            一千灵异夜之死连环</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecf172625dfef5c834ee4"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="青春硬起来"
+                             data-src="/img/id/68aecf172625dfef5c834ee4.jpg?width=480"
+                             data-srcset="/img/id/68aecf172625dfef5c834ee4.jpg?width=480 480w, /img/id/68aecf172625dfef5c834ee4.jpg?width=800 800w, /img/id/68aecf172625dfef5c834ee4.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecf172625dfef5c834ee4"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">青春硬起来</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            青春硬起来</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecdcf2625dfef5c8313c4"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="陆小凤传奇之陆小凤前传"
+                             data-src="/img/id/68aecdcf2625dfef5c8313c4.jpg?width=480"
+                             data-srcset="/img/id/68aecdcf2625dfef5c8313c4.jpg?width=480 480w, /img/id/68aecdcf2625dfef5c8313c4.jpg?width=800 800w, /img/id/68aecdcf2625dfef5c8313c4.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecdcf2625dfef5c8313c4"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">陆小凤传奇之陆小凤前传</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            陆小凤传奇之陆小凤前传</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aed2a32625dfef5c83e730"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="蒙混过关"
+                             data-src="/img/id/68aed2a32625dfef5c83e730.jpg?width=480"
+                             data-srcset="/img/id/68aed2a32625dfef5c83e730.jpg?width=480 480w, /img/id/68aed2a32625dfef5c83e730.jpg?width=800 800w, /img/id/68aed2a32625dfef5c83e730.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aed2a32625dfef5c83e730"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">蒙混过关</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            蒙混过关</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aed2fd2625dfef5c83fa02"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="狙击精英: 背水一战"
+                             data-src="/img/id/68aed2fd2625dfef5c83fa02.jpg?width=480"
+                             data-srcset="/img/id/68aed2fd2625dfef5c83fa02.jpg?width=480 480w, /img/id/68aed2fd2625dfef5c83fa02.jpg?width=800 800w, /img/id/68aed2fd2625dfef5c83fa02.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aed2fd2625dfef5c83fa02"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">狙击精英: 背水一战</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            狙击精英: 背水一战</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecbd12625dfef5c82b2cc"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="基督再临"
+                             data-src="/img/id/68aecbd12625dfef5c82b2cc.jpg?width=480"
+                             data-srcset="/img/id/68aecbd12625dfef5c82b2cc.jpg?width=480 480w, /img/id/68aecbd12625dfef5c82b2cc.jpg?width=800 800w, /img/id/68aecbd12625dfef5c82b2cc.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecbd12625dfef5c82b2cc"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">基督再临</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            基督再临</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aed2242625dfef5c83ce48"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="长腿怪2024"
+                             data-src="/img/id/68aed2242625dfef5c83ce48.jpg?width=480"
+                             data-srcset="/img/id/68aed2242625dfef5c83ce48.jpg?width=480 480w, /img/id/68aed2242625dfef5c83ce48.jpg?width=800 800w, /img/id/68aed2242625dfef5c83ce48.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aed2242625dfef5c83ce48"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">长腿怪2024</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            长腿怪2024</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecc6b2625dfef5c82cfaa"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="冒名之肤"
+                             data-src="/img/id/68aecc6b2625dfef5c82cfaa.jpg?width=480"
+                             data-srcset="/img/id/68aecc6b2625dfef5c82cfaa.jpg?width=480 480w, /img/id/68aecc6b2625dfef5c82cfaa.jpg?width=800 800w, /img/id/68aecc6b2625dfef5c82cfaa.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecc6b2625dfef5c82cfaa"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">冒名之肤</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            冒名之肤</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecbfd2625dfef5c82b9cc"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="2015年中央电视台春节联欢晚会"
+                             data-src="/img/id/68aecbfd2625dfef5c82b9cc.jpg?width=480"
+                             data-srcset="/img/id/68aecbfd2625dfef5c82b9cc.jpg?width=480 480w, /img/id/68aecbfd2625dfef5c82b9cc.jpg?width=800 800w, /img/id/68aecbfd2625dfef5c82b9cc.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecbfd2625dfef5c82b9cc"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">
+                                2015年中央电视台春节联欢晚会</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            2015年中央电视台春节联欢晚会</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aed9e02625dfef5c84e69d"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="狼孩的真实冒险"
+                             data-src="/img/id/68aed9e02625dfef5c84e69d.jpg?width=480"
+                             data-srcset="/img/id/68aed9e02625dfef5c84e69d.jpg?width=480 480w, /img/id/68aed9e02625dfef5c84e69d.jpg?width=800 800w, /img/id/68aed9e02625dfef5c84e69d.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aed9e02625dfef5c84e69d"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">狼孩的真实冒险</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            狼孩的真实冒险</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecdad2625dfef5c830d3a"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="王牌御史猎妖教室"
+                             data-src="/img/id/68aecdad2625dfef5c830d3a.jpg?width=480"
+                             data-srcset="/img/id/68aecdad2625dfef5c830d3a.jpg?width=480 480w, /img/id/68aecdad2625dfef5c830d3a.jpg?width=800 800w, /img/id/68aecdad2625dfef5c830d3a.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecdad2625dfef5c830d3a"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">王牌御史猎妖教室</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            王牌御史猎妖教室</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecc582625dfef5c82cbcc"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="人皮客栈"
+                             data-src="/img/id/68aecc582625dfef5c82cbcc.jpg?width=480"
+                             data-srcset="/img/id/68aecc582625dfef5c82cbcc.jpg?width=480 480w, /img/id/68aecc582625dfef5c82cbcc.jpg?width=800 800w, /img/id/68aecc582625dfef5c82cbcc.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecc582625dfef5c82cbcc"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">人皮客栈</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            人皮客栈</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecfce2625dfef5c836ec4"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="速度与激情8"
+                             data-src="/img/id/68aecfce2625dfef5c836ec4.jpg?width=480"
+                             data-srcset="/img/id/68aecfce2625dfef5c836ec4.jpg?width=480 480w, /img/id/68aecfce2625dfef5c836ec4.jpg?width=800 800w, /img/id/68aecfce2625dfef5c836ec4.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecfce2625dfef5c836ec4"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">速度与激情8</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            速度与激情8</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aeda072625dfef5c84eb60"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="最后的复仇者们2"
+                             data-src="/img/id/68aeda072625dfef5c84eb60.jpg?width=480"
+                             data-srcset="/img/id/68aeda072625dfef5c84eb60.jpg?width=480 480w, /img/id/68aeda072625dfef5c84eb60.jpg?width=800 800w, /img/id/68aeda072625dfef5c84eb60.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aeda072625dfef5c84eb60"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">最后的复仇者们2</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            最后的复仇者们2</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aeca0c2625dfef5c825bae"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="河东狮吼2"
+                             data-src="/img/id/68aeca0c2625dfef5c825bae.jpg?width=480"
+                             data-srcset="/img/id/68aeca0c2625dfef5c825bae.jpg?width=480 480w, /img/id/68aeca0c2625dfef5c825bae.jpg?width=800 800w, /img/id/68aeca0c2625dfef5c825bae.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aeca0c2625dfef5c825bae"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">河东狮吼2</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            河东狮吼2</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aed91c2625dfef5c84cbde"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="家在水草丰茂的地方"
+                             data-src="/img/id/68aed91c2625dfef5c84cbde.jpg?width=480"
+                             data-srcset="/img/id/68aed91c2625dfef5c84cbde.jpg?width=480 480w, /img/id/68aed91c2625dfef5c84cbde.jpg?width=800 800w, /img/id/68aed91c2625dfef5c84cbde.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aed91c2625dfef5c84cbde"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">家在水草丰茂的地方</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            家在水草丰茂的地方</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aec9eb2625dfef5c825560"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="大话神捕"
+                             data-src="/img/id/68aec9eb2625dfef5c825560.jpg?width=480"
+                             data-srcset="/img/id/68aec9eb2625dfef5c825560.jpg?width=480 480w, /img/id/68aec9eb2625dfef5c825560.jpg?width=800 800w, /img/id/68aec9eb2625dfef5c825560.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aec9eb2625dfef5c825560"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">大话神捕</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            大话神捕</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecc3a2625dfef5c82c5d6"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="弯刀"
+                             data-src="/img/id/68aecc3a2625dfef5c82c5d6.jpg?width=480"
+                             data-srcset="/img/id/68aecc3a2625dfef5c82c5d6.jpg?width=480 480w, /img/id/68aecc3a2625dfef5c82c5d6.jpg?width=800 800w, /img/id/68aecc3a2625dfef5c82c5d6.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecc3a2625dfef5c82c5d6"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">弯刀</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            弯刀</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+
+                <div class="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700">
+
+                    <a href="/detail/68aecd462625dfef5c82f986"
+                       class="block w-full aspect-[3/4] relative overflow-hidden rounded-t-2xl">
+                        <img loading="lazy"
+                             class="lazy-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             alt="破门"
+                             data-src="/img/id/68aecd462625dfef5c82f986.jpg?width=480"
+                             data-srcset="/img/id/68aecd462625dfef5c82f986.jpg?width=480 480w, /img/id/68aecd462625dfef5c82f986.jpg?width=800 800w, /img/id/68aecd462625dfef5c82f986.jpg 1200w"
+                             sizes="(max-width: 768px) 160px, 220px"
+                             decoding="async"
+                             data-id="68aecd462625dfef5c82f986"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+ <span class="w-12 h-12 bg-teal-500/80 rounded-full flex items-center justify-center">
+ <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+ </svg>
+ </span>
+                        </div>
+
+
+                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <h3 class="text-sm font-medium line-clamp-2 drop-shadow-md">破门</h3>
+                        </div>
+                    </a>
+
+
+                    <div class="p-3 bg-white dark:bg-gray-800 rounded-b-2xl flex-grow flex flex-col justify-between">
+                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300">
+                            破门</h3>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <div class="flex justify-center items-center flex-wrap gap-2 my-8">
+        <a href="/dianying?page=0"
+           class="px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-sm hover:shadow text-sm font-medium transition-all duration-200 hover:bg-teal-500 hover:text-white dark:hover:bg-teal-600">
+            首页
+        </a>
+
+        <a href="/dianying?page=0"
+           class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 bg-teal-500 text-white shadow-sm">
+            1
+        </a>
+
+        <a href="/dianying?page=1"
+           class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 bg-white dark:bg-gray-800 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 text-gray-700 dark:text-gray-300 shadow-sm hover:shadow">
+            2
+        </a>
+
+        <a href="/dianying?page=2"
+           class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 bg-white dark:bg-gray-800 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 text-gray-700 dark:text-gray-300 shadow-sm hover:shadow">
+            3
+        </a>
+
+        <a href="/dianying?page=3"
+           class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 bg-white dark:bg-gray-800 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 text-gray-700 dark:text-gray-300 shadow-sm hover:shadow">
+            4
+        </a>
+
+        <a href="/dianying?page=4"
+           class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 bg-white dark:bg-gray-800 hover:bg-teal-50 dark:hover:bg-teal-900/10 hover:text-teal-600 dark:hover:text-teal-400 text-gray-700 dark:text-gray-300 shadow-sm hover:shadow">
+            5
+        </a>
+
+        <a href="/dianying?page=1811"
+           class="px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-sm hover:shadow text-sm font-medium transition-all duration-200 hover:bg-teal-500 hover:text-white dark:hover:bg-teal-600">
+            尾页
+        </a>
+    </div>
+
+</main>
+
+<footer class="bg-gray-50 dark:bg-gray-900 pt-10 pb-6 border-t border-gray-100 dark:border-gray-800">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+
+            <div>
+                <h3 class="text-base font-medium text-gray-800 dark:text-white mb-4 flex items-center">
+ <span class="w-8 h-8 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mr-2">
+ <svg class="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+ </svg>
+ </span>
+                    关于我们
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                    FreeOK是一个视频分享平台，致力于为用户提供高质量的视频内容。
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-base font-medium text-gray-800 dark:text-white mb-4 flex items-center">
+ <span class="w-8 h-8 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mr-2">
+ <svg class="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+ </svg>
+ </span>
+                    快速链接
+                </h3>
+                <ul class="space-y-2 ml-10">
+                    <li>
+                        <a href="/"
+                           class="text-gray-600 hover:text-teal-600 dark:text-gray-400 dark:hover:text-teal-400 text-sm transition-colors duration-200 flex items-center">
+                            <svg class="w-3 h-3 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/type"
+                           class="text-gray-600 hover:text-teal-600 dark:text-gray-400 dark:hover:text-teal-400 text-sm transition-colors duration-200 flex items-center">
+                            <svg class="w-3 h-3 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            最新视频
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/hot"
+                           class="text-gray-600 hover:text-teal-600 dark:text-gray-400 dark:hover:text-teal-400 text-sm transition-colors duration-200 flex items-center">
+                            <svg class="w-3 h-3 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            热门视频
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-base font-medium text-gray-800 dark:text-white mb-4 flex items-center">
+ <span class="w-8 h-8 bg-teal-50 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mr-2">
+ <svg class="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+ </svg>
+ </span>
+                    联系我们
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2 ml-10 flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    投稿邮箱：dajirou001@outlook.com
+                </p>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-100 dark:border-gray-800 pt-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">
+                        &copy; FreeOK 2025. All rights reserved. 所有素材为用户投稿，仅供个人学习交流使用，版权归原作者所有，请勿用于任何商业用途。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<button id="backToTop"
+        class="fixed bottom-6 right-6 bg-white dark:bg-gray-800 text-green-600 dark:text-green-500 rounded-full p-3 shadow-md opacity-0 scale-0 transition-all duration-300 hover:bg-green-600 hover:text-white dark:hover:bg-green-600 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 z-50 border border-gray-200 dark:border-gray-700 group">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         class="h-5 w-5 transform group-hover:-translate-y-1 transition-transform duration-300" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+    <span class="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 dark:bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+ 返回顶部
+ </span>
+</button>
+<script>
+
+    const backToTopButton = document.getElementById('backToTop');
+    let scrollTimeout;
+
+
+    function throttle(func, limit) {
+        let inThrottle;
+        return function () {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        }
+    }
+
+
+    const handleScroll = throttle(() => {
+        const scrolled = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+
+        if (scrolled > windowHeight * 0.3) {
+            backToTopButton.classList.remove('opacity-0', 'scale-0');
+            backToTopButton.classList.add('opacity-100', 'scale-100');
+        } else {
+            backToTopButton.classList.remove('opacity-100', 'scale-100');
+            backToTopButton.classList.add('opacity-0', 'scale-0');
+        }
+    }, 100);
+
+    window.addEventListener('scroll', handleScroll);
+
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+
+        backToTopButton.classList.add('ring');
+        setTimeout(() => {
+            backToTopButton.classList.remove('ring');
+        }, 600);
+    });
+
+    class LazyImageLoader {
+        constructor() {
+            this.imageObserver = null;
+            this.init();
+        }
+
+        init() {
+
+            if ('IntersectionObserver' in window) {
+                this.imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.loadImage(entry.target);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px 20px',
+                });
+
+                const lazyImages = document.querySelectorAll('.lazy-image');
+                lazyImages.forEach(image => {
+                    this.imageObserver.observe(image);
+                });
+            } else {
+
+                this.loadAllImages();
+            }
+        }
+
+        loadImage(image) {
+            const src = image.dataset.src;
+            const srcset = image.dataset.srcset;
+            if (srcset) {
+                image.srcset = srcset;
+            }
+            if (src) {
+                image.src = src;
+            }
+            image.classList.add('loaded');
+            image.classList.remove('lazy-image');
+        }
+
+        loadAllImages() {
+            const lazyImages = document.querySelectorAll('.lazy-image');
+            lazyImages.forEach(image => {
+                this.loadImage(image);
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        new LazyImageLoader();
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const toggleTagsFilter = document.getElementById('toggle-tags-filter');
+        if (toggleTagsFilter) {
+            toggleTagsFilter.addEventListener('click', function () {
+                const hiddenItems = document.querySelectorAll('.tags-filter-item.hidden');
+                const toggleText = this.querySelector('.toggle-text');
+                const toggleIcon = this.querySelector('.toggle-icon');
+
+                if (hiddenItems.length > 0) {
+
+                    hiddenItems.forEach(item => item.classList.remove('hidden'));
+                    toggleText.textContent = '收起';
+                    toggleIcon.style.transform = 'rotate(180deg)';
+                } else {
+
+                    const allItems = document.querySelectorAll('.tags-filter-item');
+                    allItems.forEach((item, index) => {
+                        if (index >= 12) item.classList.add('hidden');
+                    });
+                    toggleText.textContent = '查看全部';
+                    toggleIcon.style.transform = 'rotate(0deg)';
+                }
+            });
+        }
+
+        const filterItems = document.querySelectorAll('a[href]');
+        filterItems.forEach(item => {
+            item.addEventListener('click', function () {
+                this.classList.add('scale-95');
+                setTimeout(() => {
+                    this.classList.remove('scale-95');
+                }, 100);
+            });
+        });
+
+
+    });
+</script>
+</body>
+</html>

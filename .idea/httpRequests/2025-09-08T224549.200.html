@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <title>鼠鼠DIY卡战备_自定义凑战备_实时更新_三角洲行动_三角洲小涛查-三角洲经济学，三角洲攻略站-三角洲鼠鼠工具-三角洲行动助手-acgice_B站Orzice
+        | 三角洲小涛查</title>
+    <meta name="keywords" content=""/>
+    <meta name="description"
+          content="鼠鼠DIY卡战备_自定义凑战备_实时更新_三角洲行动_三角洲小涛查-三角洲经济学，三角洲攻略站-三角洲鼠鼠工具-三角洲行动助手-acgice_B站Orzice | 三角洲小涛查"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <link rel="icon" href="/favicon.png">
+    <script src="/static/js/vue-2.6.14.min.js"></script>
+    <script> var BaseApiHost = "https:\/\/api.acgice.com";
+    var TimeUnix = 1757342749;
+    var TimeUnixBD = Math.round(new Date().getTime() / 1000);
+    var TimeUnixDiff = TimeUnixBD - TimeUnix;
+
+    function GetTimeUnix() {
+        let time_unix = Math.round(new Date().getTime() / 1000);
+        return time_unix - TimeUnixDiff;
+    }
+
+    function SetLoginCookie(url) {
+        const currentUrl = url || window.location.href;
+        const expirationDate = new Date();
+        expirationDate.setHours(expirationDate.getHours() + 1);
+        const cookieString = `login_redirect_url=${currentUrl}; expires=${expirationDate.toUTCString()}; path=/`;
+        document.cookie = cookieString;
+    }
+
+    function HTLogin() {
+        SetLoginCookie();
+        window.location.href = "/desk/login";
+    }
+
+    function HTLoginOut() {
+        SetLoginCookie();
+        window.location.href = "/desk/login_out";
+    } </script>
+    <link href="/static/plus/element-ui-2.15.14.css" rel="stylesheet">
+    <link href="https://smart.aimatech.com/static/js/element-ui/daisyui.5.0.css" rel="stylesheet" type="text/css"
+          referrerpolicy="no-referrer"/>
+    <script src="/static/js/element-ui-2.15.14-index.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.11.1.min.js"></script>
+    <script src="https://smart.aimatech.com/static/js/element-ui/axios-1.6.5.js" referrerpolicy="no-referrer"></script>
+    <script src="/static/js/crypto-js.min.js"></script>
+    <script src="/static/js/token.js"></script>
+    <script src="/static/func/base1.js"></script>
+    <script src="https://smart.aimatech.com/static/js/element-ui/tailwind.js" referrerpolicy="no-referrer"></script>
+    <link href="/static/css/sanjiaozhou.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/ad.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/new_common.css" rel="stylesheet" type="text/css"/>
+    <style> .title-highlight {
+        font-size: 24px;
+        text-shadow: none;
+    }
+
+    @media (max-width: 768px) {
+        .title-highlight {
+            font-size: 16px;
+            text-shadow: none;
+        }
+
+        .el-message-box {
+            left: 50% !important;
+            top: 50% !important;
+            max-width: 90% !important;
+            margin: 0 !important;
+        }
+
+        .kuaizhuang {
+            width: 90% !important;
+        }
+    }
+
+    .el-scrollbar .el-scrollbar__bar {
+        opacity: 1 !important;
+    }</style>
+</head>
+<body>
+<div id="appHeader">
+    <div class="ht-header flex items-center justify-between w-screen pl-3 pr-3 border-b border-base-300 h-14 bg-base-100">
+        <div class="flex-none">
+            <button class="btn btn-square btn-ghost" onclick="MenuView()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     class="inline-block h-5 w-5 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="flex-1"><a class="btn btn-ghost text-xl" href="/sjz/">三角洲小涛查</a></div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1 cursor-default">
+                <li>
+                    <a href="https://qm.qq.com/cgi-bin/qm/qr?k=MDjzyAwuCfbrfL_F0_SpzInvKgl5p63a&jump_from=webapi&authKey=yCgmGp3ISS8pym0zDF3luC6YIxik6k+H/ejf1lTdB7DDQ7ME7a0fkaTf8nqq2Hvs"
+                       target="_blank">反馈QQ群：781697278</a></li>
+                <li><a href="https://space.bilibili.com/4201439" target="_blank">B站：Orzice</a></li>
+            </ul>
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 150px;">
+                    <div class="w-10 rounded-full"><img referrerpolicy="no-referrer"
+                                                        src="https://i0.hdslb.com/bfs/face/e1c03b788b0440e84c82c118a84e9ce2e0e8c572.jpg"/>
+                    </div>
+                    <div style="display: inline-flex;align-items: center;"> 未登录</div>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    <li><a class="justify-between" href="###" onclick="HTLogin()" style="color: red"> QQ登录 <span
+                            class="badge">无需注册</span> </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script> var base_vue = new Vue({
+    el: '#appHeader', data() {
+        return {path: "/sjz/",}
+    }, mounted() {
+    }, methods: {
+        windowOpen(url) {
+            window.open(url);
+        }, locationHref(url) {
+            window.location.href = url;
+        }, handleCommand(command) {
+        }
+    }
+})</script>
+<style> :root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #f093fb;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --card-hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --border-radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.main-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    margin: 20px;
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.page-title {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+}
+
+.modern-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.modern-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.modern-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.modern-list-item {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.modern-list-item:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    transform: translateX(5px);
+}
+
+.modern-list-item:active {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    transform: scale(0.98);
+}
+
+.modern-list-item:last-child {
+    border-bottom: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .modern-list-item:hover {
+        transform: none;
+        background: none;
+    }
+
+    .modern-list-item:active {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        transform: scale(0.98);
+    }
+
+    .modern-card:hover {
+        transform: none;
+        box-shadow: var(--card-shadow);
+    }
+
+    .item-image:hover {
+        transform: none;
+    }
+}
+
+.modern-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    color: white;
+}
+
+.badge-primary {
+    background: linear-gradient(135deg, #52b1a9, #089f14);
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #ea6666, #b30021);
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, var(--warning-color), #d97706);
+}
+
+.item-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: var(--transition);
+}
+
+.item-image:hover {
+    transform: scale(1.1);
+}
+
+.modern-alert {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1));
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.modern-alert svg {
+    color: var(--warning-color);
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .el-main {
+        padding: 0;
+    }
+
+    .main-container {
+        margin: 8px;
+        padding: 16px;
+        border-radius: 12px;
+        position: relative;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+    }
+
+    .modern-card {
+        margin-bottom: 16px;
+        border-radius: 12px;
+    }
+
+    .modern-card .p-6 {
+        padding: 16px !important;
+    }
+
+    .modern-list-item {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+
+    .item-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+    }
+
+    .modern-badge {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+        min-width: 60px;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+        margin: 1.5rem 0 1rem 0;
+        flex-wrap: wrap;
+    }
+
+    .section-title span {
+        width: 100%;
+        font-size: 0.875rem;
+        margin-left: 0 !important;
+        margin-top: 4px;
+    }
+
+    .modern-alert {
+        padding: 16px;
+        gap: 12px;
+        border-radius: 12px;
+        margin: 16px 0;
+    }
+
+    .modern-alert svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .grid.lg\\:grid-cols-3 {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .grid.lg\\:grid-cols-2 {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .bg-gradient-to-r.from-green-50 .grid-cols-3, .bg-gradient-to-r.from-blue-50 .grid-cols-3, .bg-gradient-to-r.from-orange-50 .grid-cols-3, .bg-gradient-to-r.from-purple-50 .grid-cols-3, .bg-gradient-to-r.from-teal-50 .grid-cols-3, .bg-gradient-to-r.from-gray-50 .grid-cols-3, .bg-gradient-to-r.from-indigo-50 .grid-cols-3 {
+        gap: 8px;
+    }
+
+    .bg-gradient-to-r.from-green-50 .grid-cols-3 > div, .bg-gradient-to-r.from-blue-50 .grid-cols-3 > div, .bg-gradient-to-r.from-orange-50 .grid-cols-3 > div, .bg-gradient-to-r.from-purple-50 .grid-cols-3 > div, .bg-gradient-to-r.from-teal-50 .grid-cols-3 > div, .bg-gradient-to-r.from-gray-50 .grid-cols-3 > div, .bg-gradient-to-r.from-indigo-50 .grid-cols-3 > div {
+        font-size: 0.75rem;
+    }
+
+    .bg-gradient-to-r.from-green-50 .font-bold, .bg-gradient-to-r.from-blue-50 .font-bold, .bg-gradient-to-r.from-orange-50 .font-bold, .bg-gradient-to-r.from-purple-50 .font-bold, .bg-gradient-to-r.from-teal-50 .font-bold, .bg-gradient-to-r.from-gray-50 .font-bold, .bg-gradient-to-r.from-indigo-50 .font-bold {
+        font-size: 0.875rem;
+    }
+
+    .grid.md\\:grid-cols-2 {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .w-48.h-48 {
+        width: 120px !important;
+        height: 120px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        margin: 4px;
+        padding: 12px;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .modern-list-item {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .item-image {
+        width: 36px;
+        height: 36px;
+    }
+
+    .modern-badge {
+        padding: 3px 6px;
+        font-size: 0.65rem;
+        min-width: 50px;
+    }
+
+    .bg-gradient-to-r.from-green-50, .bg-gradient-to-r.from-blue-50, .bg-gradient-to-r.from-orange-50, .bg-gradient-to-r.from-purple-50, .bg-gradient-to-r.from-teal-50, .bg-gradient-to-r.from-gray-50, .bg-gradient-to-r.from-indigo-50 {
+        padding: 12px;
+    }
+
+    .space-y-4 > div {
+        padding: 12px;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.icon-gold {
+    display: flex;
+    align-items: center;
+}
+
+.icon-gold::before {
+    content: " ";
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(https://game.gtimg.cn/images/dfm/cp/a20240807community/profile/gold_icon.png);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+.modern-card, .modern-list-item, .modern-badge {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+#tips {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 50;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.main-container {
+    margin-top: 80px;
+}
+
+.ids-id {
+    margin-bottom: 45px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+}
+
+.switch-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.switch-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #667eea;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #667eea;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+input[readonly] {
+    color: #a9a9a9;
+}</style>
+<div class="flex desk-home">
+    <div id="appMenu" class="el-aside pt-3 pl-3 bg-base-100" style="">
+        <ul class="menu rounded-box w-56">
+            <li><a href="/sjz/v/index" menu-key="index" class="">首页</a></li>
+            <li><a href="/sjz/v/follow" menu-key="follow">我的关注</a></li>
+            <li>
+                <details open>
+                    <summary>实时交易行</summary>
+                    <ul>
+                        <li><a href="/sjz/v/zb_ss" menu-key="zb_ss">卡战备(V3.2)</a></li>
+                        <li><a href="/sjz/v/zb_diy" menu-key="zb_diy">DIY凑战备(自定义)</a></li>
+                        <li><a href="/sjz/v/zb_top" menu-key="zb_top">实时假账排行榜(新功能)</a></li>
+                        <li><a href="/sjz/v/zbV3_tj" menu-key="zbV3_tj">头盔护甲战备数据</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>鼠鼠必备</summary>
+                    <ul>
+                        <li><a href="/sjz/v/mnq_sstc" menu-key="mnq_sstc">偷吃模拟器(开容器)</a></li>
+                        <li><a href="/sjz/v/scp_book" menu-key="scp_book">收藏品图鉴</a></li>
+                        <li><a href="/sjz/v/task_S5" menu-key="task_S5">S5赛季任务</a></li>
+                        <li><a href="/sjz/v/item_jz" menu-key="item_jz">物品单格价值</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li class="ad-guanggao">
+                <details open>
+                    <summary>金主赞助</summary>
+                    <ul>
+                        <li><a href="/sjz/v/support" menu-key="support">赞助我们</a></li>
+                        <li><a href="https://pxb7.com/api/promotion/s?p=M0Vpz2q" target="_blank"> <img
+                                src="https://api.acgice.com/img/px_1.png"> </a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>特勤处</summary>
+                    <ul>
+                        <li><a href="/sjz/v/manufacture?t=1" menu-key="manufacture?t=1">技术中心</a></li>
+                        <li><a href="/sjz/v/manufacture?t=2" menu-key="manufacture?t=2">工作台</a></li>
+                        <li><a href="/sjz/v/manufacture?t=3" menu-key="manufacture?t=3">制药台</a></li>
+                        <li><a href="/sjz/v/manufacture?t=4" menu-key="manufacture?t=4">防具台</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>子弹</summary>
+                    <ul>
+                        <li><a href="/sjz/v/ammo" menu-key="ammo">子弹列表</a></li>
+                        <li>
+                            <details open>
+                                <summary>子弹经济学</summary>
+                                <ul>
+                                    <li><a href="/sjz/v/ammo_pay" menu-key="ammo_pay">子弹涨跌Top</a></li>
+                                    <li><a href="/sjz/v/ammo_zr_yz" menu-key="ammo_zr_yz">昨日倒子弹最高收益</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li><a href="/sjz/v/ammo_top" menu-key="ammo_top">子弹自选包收益</a></li>
+                        <li><a href="/sjz/v/ammo_day" menu-key="ammo_day">子弹低价补货预测</a></li>
+                        <li><a href="/sjz/v/zb_ammo_day" menu-key="zb_ammo_day">今日子弹低价补货预测</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>钥匙卡</summary>
+                    <ul>
+                        <li><a href="/sjz/v/keys" menu-key="keys">钥匙卡列表</a></li>
+                        <li><a href="/sjz/v/keys_day" menu-key="keys_day">钥匙卡低价补货预测</a></li>
+                        <li><a href="/sjz/v/keys_day_yc" menu-key="keys_day_yc">【明日】钥匙卡预测</a></li>
+                        <li><a href="/sjz/v/zb_keys_day" menu-key="zb_keys_day">今日钥匙卡低价预测</a></li>
+                        <li><a href="/sjz/v/zb_keys_day_yc" menu-key="zb_keys_day_yc">明日钥匙卡低价预测</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>枪械/装备/收集品</summary>
+                    <ul>
+                        <li><a href="/sjz/v/gun" menu-key="gun">武器</a></li>
+                        <li><a href="/sjz/v/acc" menu-key="acc">武器配件</a></li>
+                        <li><a href="/sjz/v/helmet" menu-key="helmet">头盔</a></li>
+                        <li><a href="/sjz/v/armor" menu-key="armor">护甲</a></li>
+                        <li><a href="/sjz/v/chest" menu-key="chest">胸挂</a></li>
+                        <li><a href="/sjz/v/bag" menu-key="bag">背包</a></li>
+                        <li><a href="/sjz/v/consume" menu-key="consume">消耗品</a></li>
+                        <li><a href="/sjz/v/collection" menu-key="collection">收集品</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>实用工具</summary>
+                    <ul>
+                        <li><a href="/sjz/v/map" menu-key="map">【强烈推荐】地图工具</a></li>
+                        <li><a href="https://www.acgice.com/doc/pack/sanjiaozhou.html" target="_blank" menu-key="pc">《三角洲行动助手》PC版</a>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>其他</summary>
+                    <ul>
+                        <li><a href="/sjz/v/about" menu-key="about">开发人员与鸣谢</a></li>
+                        <li><a href="/sjz/v/wenti" menu-key="wenti">问题反馈</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>共创社区</summary>
+                    <ul>
+                        <li><a href="/sjz/v/api_sq" menu-key="api_sq">【API】我们提供的接口</a></li>
+                        <li><a href="/sjz/v/tools_process" menu-key="tools_process">【共创】流程图制作工具</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li style="height: 80px;background-color: var(--root-bg, var(--color-base-100));"></li>
+        </ul>
+    </div>
+    <div class="ele-admin-shade" onclick="MenuView()"></div>
+    <script> var vueData = new Vue({
+        el: '#appMenu', data() {
+            return {active: "zb_diy", path: "/sjz/v/",}
+        }, mounted() {
+        }, methods: {
+            locationHref(url) {
+                window.location.href = url;
+            }, handleSelect(key) {
+                if (key == "" || !key) {
+                    return;
+                }
+                if (key == "pc") {
+                    window.open("https://www.acgice.com/doc/pack/sanjiaozhou.html");
+                    return;
+                }
+                this.locationHref(this.path + key);
+            }
+        }
+    });
+    $(function () {
+        $("#appMenu a").removeClass("menu-active");
+        $("#appMenu a[menu-key='zb_diy']").addClass("menu-active");
+        let menu_key = $("#appMenu a[menu-key='zb_diy']");
+        $("#appMenu").scrollTop(menu_key.offset().top - $("#appMenu").offset().top);
+    });
+
+    function MenuView() {
+        $("#appMenu").toggle();
+        if ($("#appMenu").is(':visible')) {
+            $(".ele-admin-shade").css("display", "block");
+        } else {
+            $(".ele-admin-shade").css("display", "none");
+        }
+    };</script>
+    <main id="app" class="el-main h-full fp-content">
+        <div class="overflow-x-auto " id="tips">
+            <div class="tabs-lift tabs " style="width: 250px;"><label class="tab" @click="showId('0')"> <input
+                    type="radio" name="my_tabs_4" :checked="showId == '0'"/> 🏆 自定义配置 </label> <label class="tab"
+                                                                                                          @click="showId('1')">
+                <input type="radio" name="my_tabs_4" :checked="showId == '1'"/> 🚀 生成配装 </label></div>
+        </div>
+        <div class="main-container fade-in-up" style="width: 100%;">
+            <h1 class="page-title"> 🎯 鼠鼠DIY凑战备系统【新算法】
+                <div style="font-size: 1rem; font-weight: 500; color: #6b7280; margin-top: 8px;"> 32核 112G内存
+                    物理机为您免费服务，成本巨高，B站：Orzice
+                </div>
+            </h1>
+            <div class="modern-alert">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div>
+                    <div style="font-weight: 600; color: #92400e; margin-bottom: 4px;">教程提示</div>
+                    <div style="color: #78350f;">数据更新与卡战备一致！此功能是你想补充凑战备，自己提前买好自己想用的东西，使用教程：<a
+                            href="https://www.bilibili.com/video/BV1UgbxzkEJn" style="color: red" target="_blank">《点击我，查看功能使用方法和教程》</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <div id="0" class="ids-id"></div>
+                    <div class="modern-card p-6 mb-6 fade-in-up">
+                        <div class="section-title">
+                            <div style="display: flex;justify-content: space-between;width: 100%;align-items: center;">
+                                <div>🔒 自定义配置</div>
+                                <a class="text-sm font-bold text-red-600" href="/sjz/v/zb_top"
+                                   target="_blank">《实时假账排行榜》</a></div>
+                        </div>
+                        <div class="form-group"><label>战备值（点击下拉选择）</label> <select v-model="targetAmount"
+                                                                                            class="form-control">
+                            <option value="112500">【11W】机密</option>
+                            <option value="187500">【18W】机密</option>
+                            <option value="350000">【35W】绝密巴克什</option>
+                            <option value="450000">【45W】绝密航天</option>
+                            <option value="780000">【78W】绝密监狱</option>
+                        </select></div>
+                        <div class="form-group"><label>当前战备值：【{{ NumQfw(currentAmount) }}】</label> <input
+                                type="number" v-model="currentAmount" placeholder="请输入当前战备值"></div>
+                        <div class="form-group"><label>差值:</label> <input type="text" :value="NumQfw(difference)"
+                                                                            readonly></div>
+                        <div class="form-group"><label>你的空余槽位</label></div>
+                        <div class="switch-group">
+                            <div class="switch-item"><label class="switch"> <input type="checkbox"
+                                                                                   v-model="typeSwitches.is_gun"> <span
+                                    class="slider round"></span> </label> <span style="cursor:pointer;"
+                                                                                @click="typeSwitches.is_gun = !typeSwitches.is_gun">枪械和配件</span>
+                            </div>
+                            <div class="switch-item"><label class="switch"> <input type="checkbox"
+                                                                                   v-model="typeSwitches.is_tk"> <span
+                                    class="slider round"></span> </label> <span style="cursor:pointer;"
+                                                                                @click="typeSwitches.is_tk = !typeSwitches.is_tk">头盔</span>
+                            </div>
+                            <div class="switch-item"><label class="switch"> <input type="checkbox"
+                                                                                   v-model="typeSwitches.is_hj"> <span
+                                    class="slider round"></span> </label> <span style="cursor:pointer;"
+                                                                                @click="typeSwitches.is_hj = !typeSwitches.is_hj">护甲</span>
+                            </div>
+                            <div class="switch-item"><label class="switch"> <input type="checkbox"
+                                                                                   v-model="typeSwitches.is_xg"> <span
+                                    class="slider round"></span> </label> <span style="cursor:pointer;"
+                                                                                @click="typeSwitches.is_xg = !typeSwitches.is_xg">胸挂</span>
+                            </div>
+                            <div class="switch-item"><label class="switch"> <input type="checkbox"
+                                                                                   v-model="typeSwitches.is_bb"> <span
+                                    class="slider round"></span> </label> <span style="cursor:pointer;"
+                                                                                @click="typeSwitches.is_bb = !typeSwitches.is_bb">背包</span>
+                            </div>
+                            <div class="switch-item"><label class="switch"> <input type="checkbox"
+                                                                                   v-model="typeSwitches.is_sq"> <span
+                                    class="slider round"></span> </label> <span style="cursor:pointer;"
+                                                                                @click="typeSwitches.is_sq = !typeSwitches.is_sq">手枪</span>
+                            </div>
+                        </div>
+                        <div class="form-group"><label>图片验证码</label>
+                            <div style="display: flex;"><input type="number" v-model="captcha_num"
+                                                               placeholder="请输入图片验证码"> <img alt=""
+                                                                                                    v-if="captcha"
+                                                                                                    :src="captcha"
+                                                                                                    @click="changeCode"
+                                                                                                    class="login-captcha"/>
+                            </div>
+                        </div>
+                        <div style="text-align: center">
+                            <button @click="submitForm" style="width: 80%;height: 40px;cursor: pointer;font-size: 16px;"
+                                    class="modern-badge badge-primary">计算
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div id="1" class="ids-id"></div>
+                    <div class="modern-card fade-in-up p-6">
+                        <div class="section-title"> 🚀 生成配装 <span class="text-sm font-normal text-gray-500 ml-2">不保证全部符合要求，仅作参考</span>
+                        </div>
+                        <div class="modern-card fade-in-up" :style="'animation-delay: 0.1s'">
+                            <div class="p-6">
+                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 mb-4 border border-green-200">
+                                    <div class="grid grid-cols-3 gap-2 text-center">
+                                        <div>
+                                            <div class="text-xs text-gray-500 mb-1">估算战备</div>
+                                            <div class="font-bold text-green-600 icon-gold"
+                                                 style="justify-content: center;">{{ NumQfw(zb.jz) }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs text-gray-500 mb-1">预计花费</div>
+                                            <div class="font-bold text-blue-600 icon-gold"
+                                                 style="justify-content: center;">{{NumQfw(zb.price)}}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs text-gray-500 mb-1">估算假账</div>
+                                            <div class="font-bold text-purple-600 icon-gold"
+                                                 style="justify-content: center;">{{ NumQfw(zb.cz) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="modern-list-item" v-for="(item,i) in zb.data" :key="item.id"
+                                         @click="GoLinesV3(item.id,item.name,item)"><img class="item-image"
+                                                                                         :data-grade="item.grade"
+                                                                                         :src="item.pic"
+                                                                                         :alt="item.name"/>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-gray-800">{{item.name}}</div>
+                                            <div class="text-sm text-gray-500 icon-gold">{{NumQfw(item.price)}}</div>
+                                        </div>
+                                        <span v-if="item.jiazhang == 0" class="modern-badge badge-success">{{NumQfw(item.jz)}}</span>
+                                        <span v-if="item.jiazhang == 1" class="modern-badge badge-primary">{{NumQfw(item.jz)}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modern-card text-center py-12 mb-8">
+                <div class="max-w-2xl mx-auto"><h3 class="text-2xl font-bold text-gray-800 mb-8">联系我们</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <div class="text-sm text-gray-600 mb-2">三角洲QQ群</div>
+                                <a href="https://qm.qq.com/cgi-bin/qm/qr?k=F1IOibrOYab5x2rAuvXc5ErKwGcRY-0g&jump_from=webapi&authKey=Aoz7Rmlb0zQoRbcxzEA2J2NUYd6Upe7KpSC5usDAjLvS9TF3T+K5O9hnis0yn67U"
+                                   target="_blank"
+                                   class="text-xl font-bold text-red-600 hover:text-red-800 transition-colors">
+                                    705750784 </a>
+                                <div class="text-xs text-gray-500 mt-1">点击群号加群</div>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                                <div class="text-sm text-gray-600 mb-2">官方网址</div>
+                                <div class="text-lg font-mono text-green-700"> https://www.acgice.com</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="text-sm text-red-600 font-semibold mb-4">小程序【三角洲小涛查】</div>
+                            <img class="w-48 h-48 rounded-2xl shadow-lg border-4 border-white" src="/static/wxapp.jpg"
+                                 alt="小程序【三角洲小涛查】" style="filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%;">
+            <div class="mt-5 mb-5 text-center">
+                <div class="bg-base-200 rounded-lg p-4"><p class="text-sm text-base-content/70"><span
+                        class="font-medium">💡 温馨提示：</span> 我们的运营成本很高，如果您有能力的话,可以通过赞助的方式支持我们的运营
+                    <a href="/sjz/v/support" style="color:red;">点击我，前往赞助</a></p></div>
+            </div>
+            <div class="mt-5"><p style="font-size: 12px;color: #b3b3b3"> 本网站作为腾讯热门游戏《三角洲行动》的攻略站点，为玩家提供各类实用攻略。<br>
+                网站所使用的游戏图片、素材，版权归腾讯公司所有，仅用于非商业展示和游戏资料参考。<br>
+                网站数据皆来源于《三角洲行动》官方公开内容，若权利人认定存在侵权，可立即联系我们删除，本网站会及时处理。<br>
+                欢迎在抖音等短视频平台转载本站内容或制作视频发布，但请明确标注来源为“三角洲小涛查”，或采用其他显著的指引方式。<br>
+            </p></div>
+        </div>
+        <div style="height: 80px;width: 100%;"></div>
+    </main>
+</div>
+<script src="/static/js/highcharts.js"></script>
+<style> #container {
+    height: 70vh;
+}</style>
+<div id="LinesDataV3" style="display: none;" class="relative z-200" aria-labelledby="modal-title" role="dialog"
+     aria-modal="true">
+    <div class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
+    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-lg bg-base-100 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                 style="max-width: 80%;min-width: 350px;">
+                <div class="bg-base-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:items-start ">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"><h3
+                                class="text-base font-semibold text-gray-900" id="modal-title"></h3>
+                            <div class="mt-2">
+                                <figure class="highcharts-figure">
+                                    <div id="container"></div>
+                                </figure>
+                                <div id="average"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-base-100 px-4 pt-1 pb-4 sm:p-6 sm:pb-4"></div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                    <button onclick="EndLinesV3()" type="button"
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-base-100 px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto">
+                        关 闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/func/baseV3.js"></script>
+<script>var jc_click = false;
+let tu_hover_index = 0;
+let p_id = null;
+let p_name = null;
+let p_data = null;
+let cache = {};
+let cache_hour = {};
+let cache_day = {};
+
+function GoLinesV3(id, name, data) {
+    if (base_vue) {
+        base_vue.$message({message: '【实时分析折线图】请先登录，才能查看', type: 'error'});
+    } else {
+        alert("【实时分析折线图】请先登录，才能查看");
+    }
+    return;
+}
+
+function followV3() {
+    if (p_id == null) {
+        return;
+    }
+    let data = localStorage.getItem('followV3');
+    if (data == null) {
+        data = [];
+    } else {
+        data = JSON.parse(data);
+    }
+    if (data.length >= 20) {
+        alert("最多关注20个");
+        return;
+    }
+    let obj = {name: p_name, id: p_id, pic: p_data.pic, grade: p_data.grade,};
+    let index = data.findIndex(item => item.id === p_id);
+    if (index !== -1) {
+        if (base_vue) {
+            base_vue.$message({message: '已经关注过了', type: 'error'});
+        } else {
+            alert("已经关注过了");
+        }
+    } else {
+        data.push(obj);
+        if (base_vue) {
+            base_vue.$message({message: '关注成功，可在关注列表中查看', type: 'success'});
+        } else {
+            alert("关注成功，可在关注列表中查看");
+        }
+    }
+    localStorage.setItem('followV3', JSON.stringify(data));
+}
+
+var ErrorLinesId = [];
+
+function GoLinesMinuteV3() {
+    let p = " (分钟)";
+    if (cache[p_id]) {
+        ShowLinesPlusV3(p_name, cache[p_id].a, cache[p_id].b, [], [], cache[p_id].zb, p);
+        $("#LinesDataV3").show();
+        return;
+    }
+    FuncShowLinesMinuteV3(p_id, p);
+}
+
+function GoLinesHourV3() {
+    let p = " (72小时分析)";
+    if (cache_hour[p_id]) {
+        ShowLinesPlusV3(p_name, cache_hour[p_id], p);
+        $("#LinesDataV3").show();
+        return;
+    }
+    let Errtext = "不支持查看价格折线图";
+    if (p_id <= 0) {
+        GoItemLinesV3();
+        if (base_vue) {
+            base_vue.$message({message: Errtext, type: 'error'});
+        } else {
+            alert(Errtext);
+        }
+        return;
+    }
+    if (ErrorLinesId.includes(p_id)) {
+        GoItemLinesV3();
+        if (base_vue) {
+            base_vue.$message({message: Errtext, type: 'error'});
+        } else {
+            alert(Errtext);
+        }
+        return;
+    }
+    FuncShowLinesHourV3(p_id, Errtext, p);
+}
+
+function GoLinesDayV3(day) {
+    let p = " (" + day + "天)";
+    if (cache_day[p_id + "_" + day]) {
+        ShowLinesPlusV3(p_name, cache_day[p_id + "_" + day].a, cache_day[p_id + "_" + day].b, cache_day[p_id + "_" + day].max, cache_day[p_id + "_" + day].min, cache_day[p_id + "_" + day].zb, p);
+        $("#LinesDataV3").show();
+        return;
+    }
+    FuncShowLinesDayV3(day, p);
+}
+
+function GoItemLinesV3() {
+    if (p_id == null || p_id == 0) {
+        return;
+    }
+}
+
+function NumQfwV3(num) {
+    return Number(num).toLocaleString();
+}
+
+function ShowLinesPlusV3(name, json_data, p = "") {
+    let title = json_data.a;
+    let data = json_data.b;
+    let maxL = [];
+    let minL = [];
+    let zb = [];
+    let maxD = [];
+    let minD = [];
+    if (json_data.max) {
+        maxL = json_data.max;
+    }
+    if (json_data.min) {
+        minL = json_data.min;
+    }
+    if (json_data.zb) {
+        zb = json_data.zb;
+    }
+    if (json_data.maxD) {
+        maxD = json_data.maxD;
+    }
+    if (json_data.minD) {
+        minD = json_data.minD;
+    }
+    $("#LinesDataV3").show();
+    let services = [];
+    services.push({name: "平均", data: data});
+    if (maxL.length > 0) {
+        services.push({name: "最高", data: maxL});
+    }
+    if (minL.length > 0) {
+        services.push({name: "最低", data: minL});
+    }
+    if (zb.length > 0) {
+        services.push({name: "战备", data: zb});
+    }
+    Highcharts.addEvent(Highcharts.Point, 'mouseOver', function () {
+        const chart = this.series.chart;
+        let text = ``;
+        HoverTu(this.index, json_data);
+        return;
+        switch (this.series.name) {
+            case "价格":
+                text = `<b>${this.key}</b><br/>${this.series.name} ${this.y}`;
+                break;
+            case "最高":
+                text = `<b>${maxD[this.index]}</b><br/>${this.series.name} ${this.y}`;
+                break;
+            case "最低":
+                text = `<b>${minD[this.index]}</b><br/>${this.series.name} ${this.y}`;
+                break;
+            case "战备":
+                text = `<b>${this.key}</b><br/>${this.series.name} ${this.y}`;
+                break;
+        }
+        const anchorX = this.plotX + this.series.xAxis.pos;
+        const anchorY = this.plotY + this.series.yAxis.pos;
+        const align = anchorX < chart.chartWidth - 200 ? 'left' : 'right';
+        const x = align === 'left' ? anchorX + 10 : anchorX - 10;
+        const y = anchorY - 30;
+        if (!chart.sticky) {
+            chart.sticky = chart.renderer.label(text, x, y, 'callout', anchorX, anchorY).attr({
+                align,
+                fill: 'rgba(0, 0, 0, 0.75)',
+                padding: 10,
+                zIndex: 7
+            }).css({color: 'white'}).on('click', function () {
+                chart.sticky = chart.sticky.destroy();
+            }).add();
+        } else {
+            chart.sticky.attr({align, text}).animate({anchorX, anchorY, x, y}, {duration: 250});
+        }
+    });
+    Highcharts.addEvent(Highcharts.Point, 'mouseOut', function () {
+        const chart = this.series.chart;
+        if (chart.sticky) {
+            chart.sticky.destroy();
+            chart.sticky = null;
+        }
+    });
+    Highcharts.chart('container', {
+        chart: {zooming: {type: 'x'}},
+        title: {text: name + p, align: 'left'},
+        subtitle: {text: '数据来源于《三角洲小涛查》独家数据，与游戏内基本一致', align: 'left'},
+        yAxis: {title: {text: '价格'}},
+        xAxis: {accessibility: {rangeDescription: ''}, categories: title},
+        tooltip: {crosshairs: true, shared: true},
+        plotOptions: {series: {marker: {radius: 4, lineWidth: 1}}},
+        series: services,
+        responsive: {
+            rules: [{
+                condition: {maxWidth: "80%"},
+                chartOptions: {legend: {layout: 'horizontal', align: 'center', verticalAlign: 'bottom'}}
+            }]
+        }
+    });
+    setTimeout(function () {
+        jc_click = true;
+    }, 500);
+}
+
+function HoverTu(index, json_data) {
+    if (tu_hover_index == index) {
+        return
+    }
+    tu_hover_index = index;
+    let txt = "";
+    if (json_data.max) {
+        txt += "<span class='pl-2'>最高：";
+        txt += `<div class="badge badge-secondary" style="color: rgb(255, 255, 255); width: 150px;margin-right: 5px">` + json_data.maxD[index] + `</div>`;
+        txt += "</span>";
+    }
+    if (json_data.min) {
+        txt += "<span class='pl-2'>最低：";
+        txt += `<div class="badge badge-primary" style="color: rgb(255, 255, 255); width: 150px;margin-right: 5px">` + json_data.minD[index] + `</div>`;
+        txt += "</span>";
+    }
+    $("#average").html(txt);
+}
+
+function EndLinesV3() {
+    $("#LinesDataV3").hide();
+    jc_click = false;
+}</script>
+<script src="/static/func/zbv3_div.js" referrerpolicy="no-referrer"></script>
+<script> var GunVue = new Vue({
+    el: '#app', data() {
+        return {
+            tips: false,
+            tips_error: false,
+            tips_title: "",
+            tips_desc: "",
+            top: "0",
+            days: "",
+            grade: "-1",
+            showIdS: "1",
+            showPrice: true,
+            captcha: '',
+            captcha_key: '',
+            captcha_num: '',
+            zb: {data: [], time: "",},
+            targetAmount: '112500',
+            currentAmount: 0,
+            typeSwitches: {is_hj: true, is_gun: false, is_tk: true, is_xg: true, is_sq: false, is_bb: true}
+        }
+    }, computed: {
+        difference() {
+            return this.targetAmount - this.currentAmount;
+        }
+    }, mounted() {
+        this.count = 0;
+        this.getData();
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let day = today.getDate();
+        let hours = today.getHours();
+        let formattedDate = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+        this.days = formattedDate + ' ' + (hours < 10 ? '0' : '') + hours + "时";
+    }, methods: {
+        goTimestampToTimeText(timestamp, format = 'YYYY-MM-DD HH:mm:ss') {
+            const jsTimestamp = timestamp * 1000;
+            const date = new Date(jsTimestamp);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            return format.replace('YYYY', year).replace('MM', month).replace('DD', day).replace('HH', hours).replace('mm', minutes).replace('ss', seconds);
+        }, changeCode() {
+            axios.get('/api/captcha').then(res => {
+                if (res.data.code === 0) {
+                    this.captcha = res.data.data.captcha;
+                    this.captcha_key = res.data.data.key;
+                } else {
+                    this.$message.error(res.data.msg);
+                }
+            }).catch(e => {
+                this.$message.error(e.message);
+            });
+        }, getData() {
+            this.changeCode();
+            $(document).ready(function () {
+            })
+        }, windowOpen(url) {
+            window.open(url);
+        }, locationHref(url) {
+            window.location.href = url;
+        }, showId(Id) {
+            this.showIdS = Id;
+            let element = document.getElementById(Id);
+            if (element) {
+                element.scrollIntoView({behavior: 'smooth'});
+            }
+        }, jsonToUrlParam(json) {
+            return new URLSearchParams(json).toString();
+        }, NumQfw(num) {
+            return Number(num).toLocaleString();
+        }, GoLines() {
+        }, submitForm() {
+            ZbV3DiyFunc();
+        }
+    }
+});</script>
+<script> $(document).ready(function () {
+    if (navigator.userAgent.indexOf('Windows') !== -1 || navigator.userAgent.indexOf('Macintosh') !== -1) {
+    } else {
+        var laiyuan = document.referrer;
+        if (!laiyuan || laiyuan == "") {
+            laiyuan = localStorage.getItem("laiyuan");
+        }
+        if (laiyuan && laiyuan.indexOf(window.location.host) !== -1) {
+            laiyuan = localStorage.getItem("laiyuan");
+        }
+        if (laiyuan && laiyuan != "" && laiyuan.indexOf('xiaoheihe.cn') !== -1) {
+            $(".ad-guanggao").hide();
+            $("body").css("margin-top", "100px");
+            $("#app").css("height", "calc(100vh - 156px) !important");
+            localStorage.setItem("laiyuan", laiyuan);
+        }
+    }
+});</script>
+<script> var _hmt = _hmt || [];
+(function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?478a782a8156dd110651a25857abf563";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();</script>
+</body>
+</html>
