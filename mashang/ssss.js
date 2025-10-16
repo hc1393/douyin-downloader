@@ -1896,4 +1896,13 @@ function R() {
 
   return R();
 }
-
+function decodeUnicode(str) {
+    return str.replace(/\\u[\dA-F]{4}/gi, function (match) {
+        return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+    });
+}
+function jiema(str){
+  const kkk=xxxxoooo(str)
+  const parsed = decodeUnicode(kkk);
+  return kkk
+}

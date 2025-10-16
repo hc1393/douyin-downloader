@@ -1,207 +1,182 @@
 import requests
 import json
 import execjs
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from threading import Lock
 
-def get_url():
-  with open('ssss.js', 'r', encoding='utf-8') as f:
-    j = f.read()
-    ctx = execjs.compile(j)
-    result = ctx.call('hh')
-  return result
 
-def fetch_page_data(page, token, proxy=None):
-    """获取单页数据"""
-    # 修复URL构造
-    url = f"https://www.mashangpa.com/api/problem-detail/7/data/?page={page}&x={token[0]}"
-    
-    headers = {
-        "accept": "application/json, text/javascript, */*; q=0.01",
-        "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-        "cache-control": "no-cache",
-        "pragma": "no-cache",
-        "priority": "u=1, i",
-        # 使用从token中获取的m值
-        "m": token[1],
-        "sec-ch-ua": '"Microsoft Edge";v="141", "Not?A_Brand";v="8", "Chromium";v="141"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"Windows"',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-        # 使用从token中获取的时间戳
-        "ts": str(token[2]),
-        "x-requested-with": "XMLHttpRequest",
-        "Referer": "https://www.mashangpa.com/problem-detail/7/",
-        # 添加User-Agent
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-    }
-    
-    # 使用session保持cookies
-    session = requests.Session()
-    
-    # 如果提供了代理，则设置代理
-    if proxy:
-        session.proxies = {
-            "http": proxy,
-            "https": proxy,
-        }
-        print(f"使用代理: {proxy}")
-    
-    # 先访问主页获取必要的cookies
-    session.get("https://www.mashangpa.com/problem-detail/7/", headers={
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
-    })
-    
-    # 发送API请求
-    response = session.get(url, headers=headers)
-    return response.json()
+class ProblemSolver:
+    def __init__(self):
+        # 读取js文件
+        with open('ssss.js', 'r', encoding='utf-8') as f:
+            js_content = f.read()
+            self.ctx = execjs.compile(js_content)
+        # 创建会话对象，复用连接
+        self.session = requests.Session()
+        # 设置会话的默认headers
+        self.session.headers.update({
+            "accept": "application/json, text/javascript, */*; q=0.01",
+            "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+            "cache-control": "no-cache",
+            "pragma": "no-cache",
+            "priority": "u=1, i",
+            "sec-ch-ua": '"Microsoft Edge";v="141", "Not?A_Brand";v="8", "Chromium";v="141"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-origin",
+            "x-requested-with": "XMLHttpRequest",
+            "Referer": "https://www.mashangpa.com/problem-detail/7/",
+            'cookie': 'sessionid=3aqg7x6jxhww1c9z8lkqz071glt3iodr; Hm_lvt_0d2227abf9548feda3b9cb6fddee26c0=1760439553,1760452447,1760530880,1760576639; HMACCOUNT=81475DFC18DA7E74; Hm_lpvt_0d2227abf9548feda3b9cb6fddee26c0=1760576660',
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+        })
+        # 创建锁对象，确保线程安全的打印
+        self.lock = Lock()
+        # 初始化cookies
+        self._init_cookies()
 
-# 新增函数：直接使用fetch代码中的参数发送请求
-def fetch_with_static_params(proxy=None):
-    """
-    根据fetch代码直接发送请求
-    """
-    url = "https://www.mashangpa.com/api/problem-detail/7/data/?page=1&x=08e678a0c9a3bf98411c24128d8b49a7ccfd6c1b93088bacbb57f8d3ad31cb20"
-    
-    headers = {
-        "accept": "application/json, text/javascript, */*; q=0.01",
-        "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-        "cache-control": "no-cache",
-        "m": "eff63b4fad7ec7b2949bbea1028bce36",
-        "pragma": "no-cache",
-        "priority": "u=1, i",
-        "sec-ch-ua": '"Microsoft Edge";v="141", "Not?A_Brand";v="8", "Chromium";v="141"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"Windows"',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-        "ts": "1760536220314",
-        "x-requested-with": "XMLHttpRequest",
-        "Referer": "https://www.mashangpa.com/problem-detail/7/",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-    }
-    
-    # 使用session保持cookies
-    session = requests.Session()
-    
-    # 如果提供了代理，则设置代理
-    if proxy:
-        session.proxies = {
-            "http": proxy,
-            "https": proxy,
-        }
-        print(f"使用代理: {proxy}")
-    
-    # 先访问主页获取必要的cookies
-    session.get("https://www.mashangpa.com/problem-detail/7/", headers={
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
-    })
-    
-    # 发送API请求
-    response = session.get(url, headers=headers)
-    return response.json()
+    def _init_cookies(self):
+        """初始化cookies"""
+        try:
+            self.session.get("https://www.mashangpa.com/problem-detail/7/", headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+            })
+        except Exception as e:
+            with self.lock:
+                print(f"初始化cookies失败: {e}")
 
-def ss(proxy=None):
-    total = 0
-    for i in range(1, 2):
-      token=get_url()
-      print(token)
-      data=fetch_page_data(i, token, proxy)
-      return data
+    def get_token(self):
+        """获取请求参数token"""
+        try:
+            result = self.ctx.call('hh')
+            return result
+        except Exception as e:
+            with self.lock:
+                print(f"获取token失败: {e}")
+            return None
 
-# 代理配置函数
-def setup_proxy(proxy_type="http", host="127.0.0.1", port=8080, username=None, password=None):
-    """
-    配置代理服务器
-    
-    参数:
-    proxy_type: 代理类型 ("http", "https", "socks5")
-    host: 代理服务器地址
-    port: 代理服务器端口
-    username: 代理用户名（如果需要认证）
-    password: 代理密码（如果需要认证）
-    
-    返回:
-    格式化后的代理URL
-    """
-    if username and password:
-        proxy_url = f"{proxy_type}://{username}:{password}@{host}:{port}"
-    else:
-        proxy_url = f"{proxy_type}://{host}:{port}"
-    
-    return proxy_url
+    def decrypt_data(self, encrypted_data):
+        """解密返回的数据"""
+        try:
+            result = self.ctx.call('jiema', encrypted_data)
+            return result
+        except Exception as e:
+            with self.lock:
+                print(f"解密数据失败: {e}")
+            return None
 
-# 测试代理连接
-def test_proxy_connection(proxy):
-    """
-    测试代理连接是否正常
-    """
-    try:
-        session = requests.Session()
-        if proxy:
-            session.proxies = {
-                "http": proxy,
-                "https": proxy,
+    def fetch_page_data(self, page):
+        """获取单页数据"""
+        token = self.get_token()
+        if not token:
+            return page, 0, []
+
+        try:
+            # 确保token中的值是字符串
+            x_value = str(token[0]) if len(token) > 0 and token[0] else ""
+            m_value = str(token[1]) if len(token) > 1 and token[1] else ""
+            ts_value = str(token[2]) if len(token) > 2 and token[2] else ""
+
+            # 构造URL
+            url = f"https://www.mashangpa.com/api/problem-detail/7/data/?page={page}&x={x_value}"
+
+            # 更新headers中的动态值
+            headers = {
+                "m": m_value,
+                "ts": ts_value,
             }
-        
-        response = session.get("http://httpbin.org/ip", timeout=10)
-        if response.status_code == 200:
-            print("代理连接成功!")
-            print("当前IP地址:", response.json())
-            return True
-        else:
-            print(f"代理连接失败，状态码: {response.status_code}")
-            return False
-    except Exception as e:
-        print(f"代理连接测试失败: {e}")
-        return False
+
+            # 发送API请求
+            response = self.session.get(url, headers=headers)
+            response.raise_for_status()
+            data = response.json()
+
+            # 解密数据
+            if isinstance(data, dict) and 'r' in data:
+                encrypted_content = data['r']
+                decrypted_content = self.decrypt_data(encrypted_content)
+
+                if isinstance(decrypted_content, str):
+                    # 如果解密后的内容是字符串，尝试解析为JSON
+                    try:
+                        decrypted_content = json.loads(decrypted_content)
+                    except json.JSONDecodeError:
+                        with self.lock:
+                            print(f"第{page}页解密内容无法解析为JSON: {decrypted_content}")
+                        return page, 0, []
+
+                if isinstance(decrypted_content, dict) and 'current_array' in decrypted_content:
+                    current_array = decrypted_content['current_array']
+                    # 计算当前页的和
+                    page_sum = sum(current_array)
+                    with self.lock:
+                        print(f"第{page}页数据: {current_array}, 本页合计: {page_sum}")
+                    return page, page_sum, current_array
+                else:
+                    with self.lock:
+                        print(f"第{page}页解密后格式不正确: {decrypted_content}")
+            else:
+                with self.lock:
+                    print(f"第{page}页响应格式不正确: {data}")
+            return page, 0, []
+        except requests.exceptions.HTTPError as e:
+            if response.status_code == 403:
+                with self.lock:
+                    print(f"第{page}页请求被拒绝(403)，可能需要等待或检查认证信息")
+            else:
+                with self.lock:
+                    print(f"第{page}页HTTP错误: {e}")
+            return page, 0, []
+        except Exception as e:
+            with self.lock:
+                print(f"获取第{page}页数据时出错: {e}")
+                import traceback
+                traceback.print_exc()
+            return page, 0, []
+
+
+def calculate_total():
+    """计算所有页面数据总和"""
+    solver = ProblemSolver()
+    total = 0
+
+    print("开始获取数据...")
+
+    # 使用线程池并发处理页面，但控制并发数避免触发反爬机制
+    with ThreadPoolExecutor(max_workers=5) as executor:  # 增加到5个线程
+        # 提交所有任务
+        future_to_page = {executor.submit(solver.fetch_page_data, page_num): page_num for page_num in range(1, 21)}
+
+        # 收集结果
+        results = []
+        for future in as_completed(future_to_page):
+            page_num, page_sum, data = future.result()
+            results.append((page_num, page_sum, data))
+
+        # 按页面顺序排序结果
+        results.sort(key=lambda x: x[0])
+
+        # 计算总和并打印结果
+        for page_num, page_sum, data in results:
+            total += page_sum
+            with solver.lock:
+                print(f"当前累计值: {total}")
+
+    return total
+
 
 if __name__ == "__main__":
-    # 代理配置 - 请根据你的实际情况修改这里
-    # 以下是几种常见的代理配置方式:
-    
-    # 1. 不使用代理（直接连接）
-    # proxy = None
-    
-    # 2. HTTP代理
-    # proxy = setup_proxy("http", "127.0.0.1", 8080)
-    
-    # 3. HTTPS代理
-    # proxy = setup_proxy("https", "127.0.0.1", 8443)
-    
-    # 4. SOCKS5代理（需要安装: pip install requests[socks]）
-    # proxy = setup_proxy("socks5", "127.0.0.1", 1080)
-    
-    # 5. 需要认证的代理
-    # proxy = setup_proxy("http", "proxy.server", 8080, "username", "password")
-    
-    # 实际使用的代理配置
-    proxy = None  # 修改这里来使用代理
-    
-    # 测试代理连接
-    if proxy:
-        print("正在测试代理连接...")
-        if not test_proxy_connection(proxy):
-            print("代理连接测试失败，将继续尝试发送请求...")
-        print()
-    
-    # 尝试使用动态生成的参数
     try:
-        print("尝试使用动态生成的参数:")
-        result = ss(proxy)
-        print("请求成功!")
-        print(result)
+        start_time = time.time()
+        final_total = calculate_total()
+        end_time = time.time()
+        print(f"最终总计: {final_total}")
+        print(f"耗时: {end_time - start_time:.2f} 秒")
     except Exception as e:
-        print(f"动态参数请求失败: {e}")
-        
-        # 如果动态参数失败，尝试使用静态参数
-        print("\n尝试使用静态参数:")
-        try:
-            result = ss()
-            print("请求成功!")
-            print(result)
-        except Exception as e:
-            print(f"静态参数请求也失败了: {e}")
+        print(f"程序执行出错: {e}")
+        import traceback
+
+        traceback.print_exc()

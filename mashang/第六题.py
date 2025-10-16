@@ -11,7 +11,7 @@ from threading import Lock
 class DataFetcher:
     def __init__(self, js_file_path='加密.js'):
         """初始化DataFetcher，加载JS文件路径"""
-        self.js_file_path = os.path.abspath(js_file_path)
+        self.js_file_path = os.path.abspath(js_file_path) if js_file_path else os.path.abspath('加密.js')
         self.lock = Lock()  # 用于线程安全的打印
     
     def get_token(self):
@@ -39,12 +39,17 @@ class DataFetcher:
             
         try:
             # 执行JS代码
+            # 显式设置环境变量解决Windows下的编码问题
+            env = os.environ.copy()
+            env['PYTHONIOENCODING'] = 'utf-8'
+            
             result = subprocess.run(
                 ["node", temp_js_file], 
                 capture_output=True, 
                 text=True,
                 encoding='utf-8',
-                cwd=os.path.dirname(os.path.abspath(__file__))
+                cwd=os.path.dirname(os.path.abspath(__file__)),
+                env=env
             )
             
             if result.returncode == 0 and result.stdout.strip():
@@ -53,6 +58,27 @@ class DataFetcher:
                 return [token_data['token'], token_data['timestamp']]
             else:
                 raise Exception(f"执行JS代码失败: {result.stderr}")
+        except UnicodeDecodeError as e:
+            # 如果仍然出现编码错误，尝试使用errors='ignore'或errors='replace'参数
+            try:
+                result = subprocess.run(
+                    ["node", temp_js_file], 
+                    capture_output=True, 
+                    text=True,
+                    encoding='utf-8',
+                    errors='replace',  # 替换无法解码的字符
+                    cwd=os.path.dirname(os.path.abspath(__file__)),
+                    env=env
+                )
+                
+                if result.returncode == 0 and result.stdout.strip():
+                    # 解析返回的结果
+                    token_data = json.loads(result.stdout.strip())
+                    return [token_data['token'], token_data['timestamp']]
+                else:
+                    raise Exception(f"执行JS代码失败: {result.stderr}")
+            except Exception as inner_e:
+                raise Exception(f"执行JS代码失败: {str(inner_e)}")
         finally:
             # 删除临时文件
             if os.path.exists(temp_js_file):
@@ -84,13 +110,18 @@ class DataFetcher:
             
         try:
             # 执行JS代码
+            # 显式设置环境变量解决Windows下的编码问题
+            env = os.environ.copy()
+            env['PYTHONIOENCODING'] = 'utf-8'
+            
             result = subprocess.run(
                 ["node", temp_js_file], 
                 capture_output=True, 
                 text=True,
                 encoding='utf-8',
                 cwd=os.path.dirname(os.path.abspath(__file__)),
-                timeout=30
+                timeout=30,
+                env=env
             )
             
             if result.returncode == 0 and result.stdout.strip():
@@ -101,6 +132,30 @@ class DataFetcher:
                 raise Exception(f"执行JS解密代码失败: {result.stderr}")
             else:
                 raise Exception("解密结果为空")
+        except UnicodeDecodeError as e:
+            # 如果仍然出现编码错误，尝试使用errors='ignore'或errors='replace'参数
+            try:
+                result = subprocess.run(
+                    ["node", temp_js_file], 
+                    capture_output=True, 
+                    text=True,
+                    encoding='utf-8',
+                    errors='replace',  # 替换无法解码的字符
+                    cwd=os.path.dirname(os.path.abspath(__file__)),
+                    timeout=30,
+                    env=env
+                )
+                
+                if result.returncode == 0 and result.stdout.strip():
+                    # 解析返回的结果
+                    decrypted_data = json.loads(result.stdout.strip())
+                    return decrypted_data
+                elif result.stderr:
+                    raise Exception(f"执行JS解密代码失败: {result.stderr}")
+                else:
+                    raise Exception("解密结果为空")
+            except Exception as inner_e:
+                raise Exception(f"执行JS解密代码失败: {str(inner_e)}")
         finally:
             # 删除临时文件
             if os.path.exists(temp_js_file):
