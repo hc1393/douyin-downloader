@@ -1,0 +1,4 @@
+<view class="{{'flex items-center justify-center pt-16 px-16 pb-40 mt-24 -mb-48 '+(transparent?'':'bg-_h_FFF8E8')+' rounded-lt-24 rounded-rt-24'}}">
+    <text class="i-jinggao text-30 c-_h_F80"></text>
+    <text class="text-24 font-400 leading-140_p_ c-_h_F80 pl-4">{{words}}</text>
+</view>

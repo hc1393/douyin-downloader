@@ -1,0 +1,140 @@
+<view class="pt-24 _22d9131a " style="{{config.style}}" wx:if="{{isShowMemberEquity}}">
+    <view class="box _22d9131a " style="{{boxStyle}}" wx:if="{{isOpenSwiper}}">
+        <swiper bindchange="onSwiperChange" class="w-full h-full _22d9131a " current="{{currentLevel-1}}" easingFunction="easeInOutCubic">
+            <swiper-item class=" _22d9131a " wx:for="{{levelList}}" wx:key="levelId">
+                <view bindtap="go" class=" _22d9131a " data-index="{{index}}" id="__std_userMemberContainer">
+                    <view class="h-full mx-24 rd-16 overflow-hidden box-border bg-_bl__h_FFF_br_ flex flex-col _22d9131a ">
+                        <view class="relative w-full h-240 rd-16 overflow-hidden _22d9131a " wx:if="{{showCardCover}}">
+                            <image lazyLoad class="w-full h-full _22d9131a " mode="scaleToFill" src="{{__oss__.s(mpxExt,item.designCardUrl||item.cardUrl,0)}}" wx:if="{{showCardCover&&(item.designCardUrl||item.cardUrl)}}"></image>
+                            <block wx:if="{{mode===2}}">
+                                <view class="absolute top-31 left-47 z-9 text-primary _22d9131a " style="color: {{item.designColor}}" wx:if="{{showCardLevel}}">
+                                    <text class="text-64 font-900 align-baseline _22d9131a ">{{item.cardName}}</text>
+                                </view>
+                                <view class="absolute left-47 bottom-40 min-w-3_s_5 z-9 _22d9131a " wx:if="{{showUpgrade||showExp}}">
+                                    <design-user-upgrade-info allCover emphasize class=" _22d9131a " customColor="{{item.designColor}}" relativeExp="{{item.nextLevelExp}}" relativeLevel="{{item.nextLevel}}" relativeLevelName="{{item.nextLevelName}}" wx:if="{{showUpgrade}}"></design-user-upgrade-info>
+                                    <progress activeColor="{{item.designColor}}" bgColor="rgba(255, 255, 255, 0.5)" class=" _22d9131a " percent="{{item.percent}}" wx:if="{{showExp}}">
+                                        <view class="flex items-center text-24 ml-16 text-primary _22d9131a " style="color: {{item.designColor}}">
+                                            <text class=" _22d9131a ">{{currentExp}}</text>
+                                            <block wx:if="{{!item.isMaxLevel}}">
+                                                <text class=" _22d9131a ">/</text>
+                                                <text class=" _22d9131a ">{{item.nextLevelExp}}</text>
+                                            </block>
+                                        </view>
+                                    </progress>
+                                </view>
+                            </block>
+                        </view>
+                        <view class="flex-1 pt-24 pb-60 flex flex-col _22d9131a " wx:if="{{mode===1&&(showUpgrade||showExp)||showEquityIcon}}">
+                            <view class="h-42 flex justify-between items-center px-24 _22d9131a ">
+                                <view class="w-fit h-full flex items-center _22d9131a ">
+                                    <view class="flex justify-start items-center _22d9131a ">
+                                        <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 mr-4 _22d9131a ">{{item.cardName}}</text>
+                                        <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 _22d9131a " wx:if="{{item.level>currentLevel}}">{{_i1+'\n                      '}}</text>
+                                        <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 _22d9131a " wx:else>{{_i2}}</text>
+                                        <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 mx-4 _22d9131a ">{{item.benefitsNum}}</text>
+                                        <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 _22d9131a ">{{_i3}}</text>
+                                    </view>
+                                    <tag background="#EBEBEB" class="ml-16 _22d9131a " color="#666" content="{{_i4}}" wx:if="{{item.level>currentLevel}}"></tag>
+                                </view>
+                                <view class="min-w-120 h-24 flex justify-between items-center _22d9131a ">
+                                    <text class="text-_bl__h_999_br_ text-24 _22d9131a ">{{_i5}}</text>
+                                    <text class="i-arrow-r _i_text-22 _i_text-_bl__h_999_br_ _22d9131a "></text>
+                                </view>
+                            </view>
+                            <view class="pt-24 flex-1 _22d9131a " wx:if="{{showEquityIcon}}">
+                                <scroll-view scrollX class=" _22d9131a ">
+                                    <view class="w-full flex flex-nowrap px-12 box-border _22d9131a ">
+                                        <view class="w-1_s_4 flex justify-center items-center _22d9131a " wx:for="{{item.benefitsList}}" wx:for-item="child" wx:key="index">
+                                            <design-user-equity-icon badge="{{child.num}}" class=" _22d9131a " equityType="{{child.benefitsType}}" isDesignCustom="{{item.isDesignCustomEquity}}" isLocked="{{item.level>currentLevel}}" label="{{child.title||child.benefitsLabel}}" labelColor="#666" src="{{child.img||child.benefitsIcon}}"></design-user-equity-icon>
+                                        </view>
+                                    </view>
+                                </scroll-view>
+                            </view>
+                            <view class="h-fit px-24 pt-12 _22d9131a " wx:if="{{mode===1&&(showUpgrade||showExp)}}">
+                                <progress class=" _22d9131a " percent="{{item.percent}}" wx:if="{{showExp}}"></progress>
+                                <view class="h-34 flex items-center {{showExp?'pt-6':''}} {{showUpgrade?'justify-between':'justify-end'}} _22d9131a " wx:if="{{showUpgrade||showExp}}">
+                                    <design-user-upgrade-info emphasize class=" _22d9131a " relativeExp="{{item.nextLevelExp}}" relativeLevel="{{item.nextLevel}}" relativeLevelName="{{item.nextLevelName}}" wx:if="{{showUpgrade}}"></design-user-upgrade-info>
+                                    <view class="flex items-center text-24 _22d9131a " wx:if="{{showExp}}">
+                                        <text class="text-primary _22d9131a ">{{currentExp}}</text>
+                                        <block wx:if="{{!item.isMaxLevel}}">
+                                            <text class="text-_bl__h_999_br_ _22d9131a ">/</text>
+                                            <text class="text-_bl__h_999_br_ _22d9131a ">{{item.nextLevelExp}}</text>
+                                        </block>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class="absolute left-0 bottom-24 w-full flex justify-center items-center _22d9131a ">
+            <view class="{{'w-12 h-12 mx-6 rd-full bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_3_pr__br_ '+(current===index?'w-30 bg-primary':'')+' _22d9131a '}}" wx:for="{{levelList}}" wx:key="*this"></view>
+        </view>
+    </view>
+    <view bindtap="go" class=" _22d9131a " data-index="{{currentLevel-1}}" wx:else>
+        <view class="h-full mx-24 rd-16 overflow-hidden box-border bg-_bl__h_FFF_br_ flex flex-col _22d9131a ">
+            <view class="relative w-full h-240 rd-16 overflow-hidden _22d9131a " wx:if="{{showCardCover}}">
+                <image lazyLoad class="w-full h-full _22d9131a " mode="scaleToFill" src="{{__oss__.s(mpxExt,itemLevel.designCardUrl||itemLevel.cardUrl,0)}}" wx:if="{{showCardCover&&(itemLevel.designCardUrl||itemLevel.cardUrl)}}"></image>
+                <block wx:if="{{mode===2}}">
+                    <view class="absolute top-31 left-47 z-9 text-primary _22d9131a " style="color: {{itemLevel.designColor}}" wx:if="{{showCardLevel}}">
+                        <text class="text-64 font-900 align-baseline _22d9131a ">{{itemLevel.cardName}}</text>
+                    </view>
+                    <view class="absolute left-47 bottom-40 min-w-3_s_5 z-9 _22d9131a " wx:if="{{showUpgrade||showExp}}">
+                        <design-user-upgrade-info allCover emphasize class=" _22d9131a " customColor="{{itemLevel.designColor}}" relativeExp="{{itemLevel.nextLevelExp}}" relativeLevel="{{itemLevel.nextLevel}}" relativeLevelName="{{itemLevel.nextLevelName}}" wx:if="{{showUpgrade}}"></design-user-upgrade-info>
+                        <progress activeColor="{{itemLevel.designColor}}" bgColor="rgba(255, 255, 255, 0.5)" class=" _22d9131a " percent="{{itemLevel.percent}}" wx:if="{{showExp}}">
+                            <view class="flex items-center text-24 ml-16 text-primary _22d9131a " style="color: {{itemLevel.designColor}}">
+                                <text class=" _22d9131a ">{{currentExp}}</text>
+                                <block wx:if="{{!itemLevel.isMaxLevel}}">
+                                    <text class=" _22d9131a ">/</text>
+                                    <text class=" _22d9131a ">{{itemLevel.nextLevelExp}}</text>
+                                </block>
+                            </view>
+                        </progress>
+                    </view>
+                </block>
+            </view>
+            <view class="flex-1 py-24 flex flex-col _22d9131a " wx:if="{{mode===1&&(showUpgrade||showExp)||showEquityIcon}}">
+                <view class="h-42 flex justify-between items-center px-24 _22d9131a ">
+                    <view class="w-fit h-full flex items-center _22d9131a ">
+                        <view class="flex justify-start items-center _22d9131a ">
+                            <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 _22d9131a ">{{itemLevel.cardName}}</text>
+                            <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 _22d9131a " wx:if="{{itemLevel.level>currentLevel}}">{{_i6+'\n                '}}</text>
+                            <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 _22d9131a " wx:else>{{_i7}}</text>
+                            <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 _22d9131a ">{{itemLevel.benefitsNum}}</text>
+                            <text class="text-30 font-500 text-_bl__h_333_br_ lh-42 _22d9131a ">{{_i8}}</text>
+                        </view>
+                        <tag background="#EBEBEB" class="ml-16 _22d9131a " color="#666" content="{{_i9}}" wx:if="{{itemLevel.level>currentLevel}}"></tag>
+                    </view>
+                    <view class="min-w-120 h-24 flex justify-between items-center _22d9131a ">
+                        <text class="text-_bl__h_999_br_ text-24 _22d9131a ">{{_i10}}</text>
+                        <text class="i-arrow-r _i_text-22 _i_text-_bl__h_999_br_ _22d9131a "></text>
+                    </view>
+                </view>
+                <view class="pt-24 flex-1 _22d9131a " wx:if="{{showEquityIcon}}">
+                    <scroll-view scrollX class=" _22d9131a ">
+                        <view class="w-full flex flex-nowrap px-12 box-border _22d9131a ">
+                            <view class="w-1_s_4 flex justify-center items-center _22d9131a " wx:for="{{itemLevel.benefitsList}}" wx:for-item="child" wx:key="index">
+                                <design-user-equity-icon badge="{{child.num}}" class=" _22d9131a " equityType="{{child.benefitsType}}" isDesignCustom="{{itemLevel.isDesignCustomEquity}}" isLocked="{{itemLevel.level>currentLevel}}" label="{{child.title||child.benefitsLabel}}" labelColor="#666" src="{{child.img||child.benefitsIcon}}"></design-user-equity-icon>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view class="h-fit px-24 pt-12 _22d9131a " wx:if="{{mode===1&&(showUpgrade||showExp)}}">
+                    <progress class=" _22d9131a " percent="{{itemLevel.percent}}" wx:if="{{showExp}}"></progress>
+                    <view class="h-34 flex items-center {{showExp?'pt-6':''}} {{showUpgrade?'justify-between':'justify-end'}} _22d9131a " wx:if="{{showUpgrade||showExp}}">
+                        <design-user-upgrade-info emphasize class=" _22d9131a " relativeExp="{{itemLevel.nextLevelExp}}" relativeLevel="{{itemLevel.nextLevel}}" relativeLevelName="{{itemLevel.nextLevelName}}" wx:if="{{showUpgrade}}"></design-user-upgrade-info>
+                        <view class="flex items-center text-24 _22d9131a " wx:if="{{showExp}}">
+                            <text class="text-primary _22d9131a ">{{currentExp}}</text>
+                            <block wx:if="{{!itemLevel.isMaxLevel}}">
+                                <text class="text-_bl__h_999_br_ _22d9131a ">/</text>
+                                <text class="text-_bl__h_999_br_ _22d9131a ">{{itemLevel.nextLevelExp}}</text>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

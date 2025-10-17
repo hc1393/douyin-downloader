@@ -1,0 +1,12 @@
+<template name="member-vip-tag">
+    <view class="member-vip-tag">
+        <image class="member-vip-tag-icon" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2022/02/07/vip-card-icon.png',0)}}"></image>
+        <text class="member-vip-tag-black-font" wx:if="{{info.memberRuleVo&&info.memberRuleVo.goodsLabel}}">
+      {{info.memberRuleVo.goodsLabel}}</text>
+        <text class="member-vip-tag-black-font" wx:else>{{info.memberPriceName}}</text>
+        <text class="member-vip-tag-red-font">{{currencySymbol+info.memberPrice}}</text>
+        <text class="member-vip-tag-red-font" wx:if="{{info.isAdd}}">起</text>
+        <text class="member-vip-tag-red-font" wx:if="{{info.memberRuleVo&&info.memberRuleVo.limitNum}}">,限{{info.memberRuleVo.limitNum}}件</text>
+    </view>
+</template>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>

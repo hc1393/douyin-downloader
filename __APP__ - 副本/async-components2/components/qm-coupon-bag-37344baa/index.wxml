@@ -1,0 +1,68 @@
+<view class="qm-coupon-bag _37344baa " style="{{info.miniStyle}}" wx:if="{{packageList.length}}">
+    <view class="package-title _37344baa ">
+        <view class="package-title__left _37344baa ">{{info.propsValue.title||info.title}}</view>
+        <view catchtap="goCouponBagList" class="package-title__right _37344baa ">
+            <text class="more-link _37344baa ">查看更多 <text class="more-link-arrow iconfont i-jiantou-you _37344baa "></text>
+            </text>
+        </view>
+    </view>
+    <view class="bag-small-pattern _37344baa " wx:if="{{info.propsValue&&info.propsValue.list_type==2}}">
+        <view bindtap="goDetail" class="bag-small-pattern__info _37344baa " data-id="{{item.id}}" style="border-radius: {{info.propsValue.borderRadius}}px" wx:for="{{packageList}}" wx:key="id">
+            <view class="bag-list-top _37344baa ">
+                <image class="bag-img _37344baa " lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item.detailInfo.activityImgUrl[0],0)}}"></image>
+                <block wx:if="{{info.propsValue.dateVisible}}">
+                    <view class="right-info-clock _37344baa " wx:if="{{item.countdownEndDate&&item.countdownEndDate!='0'}}">
+                        <text class="right-info-clock__text _37344baa ">距离结束</text>
+                        <count-down class=" _37344baa " format="距结束DD天HH:mm:ss" idProper="{{item.id}}" second="{{item.countdownEndDate}}" timeStyle="width: 100%;height: 44rpx;text-align:center;line-height: 44rpx; background: linear-gradient(-54deg, #FF2E58, #FF5246);position: absolute; left: 0; bottom: 0; font-size: 24rpx;color: white;"></count-down>
+                    </view>
+                </block>
+            </view>
+            <view class="pag-list-main _37344baa ">
+                <view class="right-info relative _37344baa ">
+                    <view class="right-info-name truncate right-info-name-small _37344baa " wx:if="{{info.propsValue.nameVisible}}">{{item.activityName}}</view>
+                    <view class="right-info-tags _37344baa " wx:if="{{info.propsValue.labelVisible&&item.couponPackageLabelList&&item.couponPackageLabelList.length}}">
+                        <view class="tag-item _37344baa " wx:for="{{item.couponPackageLabelList}}" wx:key="label">{{item}}</view>
+                    </view>
+                    <view class="right-info-small _37344baa ">
+                        <view class="price-box _37344baa ">
+                            <view class="present_price black _37344baa ">￥{{item.detailInfo.sellPrice}}</view>
+                            <text class="old_price _37344baa " wx:if="{{item.detailInfo.marketPrice>item.detailInfo.sellPrice&&info.propsValue.priceVisible}}">￥{{item.detailInfo.marketPrice}}</text>
+                        </view>
+                        <view class="bar-text-small _37344baa " wx:if="{{info.propsValue.btnVisible}}">马上抢</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{info.propsValue&&info.propsValue.list_type==3}}">
+        <view bindtap="goDetail" class="voucher-list-info _37344baa " data-id="{{item.id}}" style="border-radius: {{info.propsValue.borderRadius}}px" wx:for="{{packageList}}" wx:key="id">
+            <view class="voucher-list-left _37344baa ">
+                <image class="voucher-img _37344baa " lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item.detailInfo.activityImgUrl[0],0)}}"></image>
+            </view>
+            <view class="voucher-list-right _37344baa ">
+                <view class="right-info min-h-140 flex flex-col justify-between _37344baa ">
+                    <view class="right-info-name leading-tight truncate _37344baa " wx:if="{{info.propsValue.nameVisible}}">{{item.activityName}}</view>
+                    <view class="right-info-tags _37344baa " wx:if="{{info.propsValue.labelVisible&&item.couponPackageLabelList&&item.couponPackageLabelList.length}}">
+                        <view class="tag-item _37344baa " wx:for="{{item.couponPackageLabelList}}" wx:key="label">{{item}}</view>
+                    </view>
+                    <block wx:if="{{info.propsValue.dateVisible}}">
+                        <view class="right-info-clock _37344baa " wx:if="{{item.countdownEndDate&&item.countdownEndDate!='0'}}">
+                            <text class="icon-clock _37344baa "></text>
+                            <text class="right-info-clock__text _37344baa ">距结束还有</text>
+                            <count-down class=" _37344baa " idProper="{{item.id}}" scene="style_1" second="{{item.countdownEndDate}}" timeStyle="color:#FB2542;font-size:24rpx;background:#F8F8F8;padding:0 0;"></count-down>
+                        </view>
+                    </block>
+                    <view class="right-info-bar {{info.propsValue.btnVisible?'right-info-bar-red':''}} _37344baa ">
+                        <view class="price-box _37344baa ">
+                            <view class="present_price _37344baa ">￥<text class="present-price-text _37344baa ">{{item.detailInfo.sellPrice}}</text>
+                            </view>
+                            <text class="old_price _37344baa " wx:if="{{item.detailInfo.marketPrice>item.detailInfo.sellPrice&&info.propsValue.priceVisible}}">￥{{item.detailInfo.marketPrice}}</text>
+                        </view>
+                        <view class="bar-text _37344baa " wx:if="{{info.propsValue.btnVisible}}">马上抢</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

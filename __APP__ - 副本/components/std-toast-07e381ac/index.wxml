@@ -1,0 +1,5 @@
+<view animation="{{animationData}}" class="fixed top-1_s_2 left-1_s_2 z-999999 flex justify-center w-full translate-x--1_s_2 translate-y--100_p_ opacity-0 pointer-events-none">
+    <view class="max-w-60_p_ px-30 py-20 bg-hex-000000b3 rd-18">
+        <view class="w-full h-full c-hex-fff text-26 text-center">{{content}}</view>
+    </view>
+</view>

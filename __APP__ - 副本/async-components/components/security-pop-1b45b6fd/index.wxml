@@ -1,0 +1,18 @@
+<qm-popup bindclose="handleClose" position="bottom" show="{{show}}" zIndex="99999">
+    <view bindtap="handleClose" class="flex flex-col box-border w-_bl_100_p__br_ pb-120rpx bg-_bl__h_ffffff_br_ border-rd-_bl_20rpx_20rpx_0_0_br_">
+        <view class="relative h-120rpx font-bold text-36rpx lh-120rpx text-center">
+            <text class="absolute top--10rpx right-32rpx text-_bl__h_8a8a8a_br_ text-36rpx i-close"></text>{{payInfo.shareTitle}}</view>
+        <view class="box-border px-30rpx py-0 text-28rpx lh-normal text-left">
+            <view class="mb-20rpx text-_bl__h_333_br_ text-30rpx lh-normal">{{payInfo.title}}</view>
+            <view class="box-border mb-20rpx p-20rpx bg-_bl__h_f5f5f5_br_ border-rd-10rpx">
+                <view class="relative flex items-start justify-start pb-36rpx last-pb-0rpx" wx:for="{{payInfo.overTimePayCouponInfoRespone}}" wx:key="index">
+                    <text class="{{'absolute bottom--13rpx left-93rpx w-1rpx h-_bl_100_p__br_ bg-_bl__h_e1e1e1_br_ '+(index==payInfo.overTimePayCouponInfoRespone.length-1?'hidden':'')}}"></text>
+                    <text class="w-72rpx text-_bl__h_999_br_">{{item.time}}</text>
+                    <text class="relative mx-15rpx mt-13rpx mb-0 bg-_bl__h_fff_br_ box-border w-16rpx h-16rpx border-transparent border-rd-_bl_100_p__br_" style="background-color: {{item.highlight?colorTheme:''}}" wx:if="{{item.highlight}}"></text>
+                    <text class="relative mx-15rpx mt-13rpx mb-0 bg-_bl__h_fff_br_ box-border w-16rpx h-16rpx border-1rpx border-solid border-_bl__h_eaeaea_br_ border-rd-_bl_100_p__br_" wx:else></text>
+                    <text class="line-clamp-2 flex-1 text-_bl__h_666_br_ lh-38rpx text-ellipsis" style="color:{{item.highlight?colorTheme:''}}">{{item.content}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</qm-popup>

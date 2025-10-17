@@ -1,0 +1,11 @@
+<view bindtouchcancel="endDrag" bindtouchend="endDrag" bindtouchmove="onDrag" bindtouchstart="startDrag" class="relative overflow-hidden" data-key="cell">
+    <view style="{{wrapperStyle}}">
+        <view class="absolute top-0 h-_bl_100_p__br_ left-0" data-key="left" style="transform: translate3d(-100%, 0, 0)" wx:if="{{leftWidth}}">
+            <slot name="left"></slot>
+        </view>
+        <slot></slot>
+        <view class="absolute top-0 h-_bl_100_p__br_ right-0" data-key="right" style="transform: translate3d(100%, 0, 0)" wx:if="{{rightWidth}}">
+            <slot name="right"></slot>
+        </view>
+    </view>
+</view>

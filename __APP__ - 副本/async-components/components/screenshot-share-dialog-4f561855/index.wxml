@@ -1,0 +1,1 @@
+<canvas canvasId="screenshotShareCanvas" id="screenshotShareCanvas" style="position: absolute; top: -2000px; left: -2000px; width: 600rpx; height: 800rpx" type="2d"></canvas>

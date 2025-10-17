@@ -1,0 +1,25 @@
+<view class="inline-block relative">
+    <view class="flex flex-wrap">
+        <view bindtap="onClickPreview" class="mr-16 mb-16 relative" data-index="{{index}}" wx:if="{{previewImage}}" wx:for="{{lists}}" wx:key="index">
+            <image alt="{{item.name||'图片'+index}}" bindtap="onPreviewImage" class="block h-160 overflow-hidden w-160" data-index="{{index}}" mode="{{imageFit}}" src="{{__oss__.s(mpxExt,item.thumb||item.url,0)}}" style="{{utils.sizeStyle( {previewSize:previewSize} )}}" wx:if="{{item.isImage}}"></image>
+            <video autoplay="{{item.autoplay}}" bindtap="onPreviewVideo" class="block h-160 overflow-hidden w-160" data-index="{{index}}" poster="{{__oss__.s(mpxExt,item.thumb,0)}}" src="{{item.url}}" style="{{utils.sizeStyle( {previewSize:previewSize} )}}" title="{{item.name||'视频'+index}}" wx:elif="{{item.isVideo}}"></video>
+            <view bindtap="onPreviewFile" class="items-center bg-hex-f7f8fa flex flex-col h-160 justify-center w-160" data-index="{{index}}" style="{{utils.sizeStyle( {previewSize:previewSize} )}}" wx:else>
+                <view class="box-border c-hex-646566 text-24 mt-16 px-8 text-center w-full">{{item.name||item.url}}</view>
+            </view>
+            <view class="items-center bg-hex-323233 bottom-0 c-hex-fff flex flex-col justify-center left-0 absolute right-0 top-0" wx:if="{{item.status==='uploading'||item.status==='failed'}}">
+                <view class="i-close-2 text-44" wx:if="{{item.status==='failed'}}"></view>
+                <std-loading mainStyle="color:#fff !important;height:44rpx;width:44rpx;" wx:else></std-loading>
+                <text class="text-24 lh-28 mt-6px px-8" wx:if="{{item.message}}"> {{item.message}} </text>
+            </view>
+            <view catch:tap="deleteItem" class="items-center flex h-52 justify-center absolute right--26 top--26 w-52" data-index="{{index}}" wx:if="{{deletable&&item.deletable}}">
+                <view class="i-delete-2 c-hex-666 text-44"></view>
+            </view>
+        </view>
+        <view bindtap="startUpload" class="items-center border-2rpx border-dashed border-hex-ababab rounded-8 flex flex-col h-114 justify-center w-114" wx:if="{{isInCount}}">
+            <view class="i-upload text-hex-a0a0a0 text-29"></view>
+            <view class="text-hex-999 text-18 font-400 leading-25 mt-7">上传图片</view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="utils" src="../../wxs/index0c843ec8.wxs"/>

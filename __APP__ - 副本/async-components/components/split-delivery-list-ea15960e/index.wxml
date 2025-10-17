@@ -1,0 +1,24 @@
+<view>
+    <view class="flex mb-10rpx px-0 py-24rpx font-bold text-30rpx">本单商品已分开配送</view>
+    <view>
+        <view class="flex" wx:for="{{deliveryList}}" wx:key="deliveryId">
+            <view class="flex flex-col items-center w-17rpx pr-16rpx">
+                <text class="{{(index==0?'invisible':'')+' w-0 h-12rpx border-l-1px border-l-solid border-l-_bl__h_e1e1e1_br_'}}"></text>
+                <text class="w-15rpx h-15rpx border-2rpx border-solid border-_bl__h_d8d8d8_br_ border-rd-_bl_50_p__br_ bg-_bl__h_d8d8d8_br_"></text>
+                <text class="{{(index==deliveryList.length-1?'hidden':'')+' grow-1 w-0 border-l-1px border-l-solid border-l-_bl__h_e1e1e1_br_'}}"></text>
+            </view>
+            <view class="w-_bl_calc_pl_100_p_-150rpx_pr__br_ pb-40rpx">
+                <view class="truncate w-_bl_100_p__br_ text-28rpx lh-40rpx">配送{{item.sequence}} {{item.statusName}}</view>
+                <view class="truncate w-_bl_100_p__br_ text-_bl__h_999_br_ text-24rpx lh-34rpx mt-8rpx">{{item.statusLog}}</view>
+            </view>
+            <view class="text-_bl__h_999_br_ text-30rpx lh-42rpx text-right flex ml-auto">
+                <view bindtap="calling" class="ml-36 first-ml-0" data-phone="{{item.driverPhone}}" wx:if="{{item.status>=3&&item.driverPhone}}">
+                    <view class="text-40rpx i-dianhua"></view>
+                </view>
+                <view bindtap="toDeliveryDetail" class="ml-36 first-ml-0" wx:if="{{item.status>2&&item.status<6}}">
+                    <view class="text-40rpx i-dizhi_huaban"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

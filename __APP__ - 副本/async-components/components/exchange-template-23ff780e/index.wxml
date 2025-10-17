@@ -1,0 +1,38 @@
+<view class="flex w-_bl_100_p__br_ h-80rpx mb-16rpx bg-_bl__h_fff_br_ _23ff780e " wx:if="{{tab&&tab.length}}">
+    <view bindtap="tabChange" class="relative flex items-center justify-center w-_bl_50_p__br_ _23ff780e " data-index="{{item.value}}" wx:for="{{tab}}" wx:key="value">
+        <view class="flex flex-col items-center justify-end text-_bl__h_666_br_ font-500 text-30rpx _23ff780e " style="color: {{tabIndex===index?colorTheme:''}}">{{item.label}}<view class="absolute bottom-0 w-38rpx h-6rpx bg-_bl__h_d9a776_br_ border-rd-3rpx _23ff780e " style="background: {{colorTheme}}" wx:if="{{tabIndex===index}}"></view>
+        </view>
+    </view>
+</view>
+<view class="px-24 mb-60 {{!tab.length?'pt-30':'pt-0'}} _23ff780e ">
+    <form bindsubmit="goExchange" class=" _23ff780e ">
+        <view class="flex justify-between box-border w-_bl_100_p__br_ px-8rpx py-0 bg-_bl__h_fff_br_ border-rd-20rpx _23ff780e " wx:if="{{tabIndex===1}}">
+            <view class="w-_bl_100_p__br_ _23ff780e ">
+                <view class="flex items-center box-border w-_bl_100_p__br_ h-120rpx border-b-1rpx border-b-solid border-b-_bl__h_eee_br_ _23ff780e ">
+                    <input bindinput="inputCardNo" class="flex-1 h-110rpx px-30rpx py-0 _23ff780e " name="cardNo" placeholder="请输入{{isFrom=='coupon'||isFrom=='rightsCard'?'兑换码':'卡号'}}" placeholderClass="c-hex-cecece text-30" value="{{cardNo}}"></input>
+                    <view catchtap="scan" class="i-scan flex flex-none items-center justify-center w-76rpx h-100rpx text-44rpx bg-_bl__h_fff_br_ _23ff780e "></view>
+                </view>
+                <view class="flex items-center box-border w-_bl_100_p__br_ h-120rpx _23ff780e ">
+                    <input bindinput="inputCardPsd" class="flex-1 h-110rpx px-30rpx py-0 _23ff780e " name="cardPsd" placeholder="请输入{{isFrom=='coupon'||isFrom=='rightsCard'?'密钥':'卡密'}}" placeholderClass="c-hex-cecece text-30" value="{{cardPsd}}"></input>
+                </view>
+            </view>
+        </view>
+        <view class="flex justify-between box-border w-_bl_100_p__br_ px-8rpx py-0 bg-_bl__h_fff_br_ border-rd-20rpx _23ff780e " wx:else>
+            <view class="flex items-center box-border w-_bl_100_p__br_ h-120rpx _23ff780e ">
+                <input bindinput="inputCardNo" class="flex-1 h-110rpx px-30rpx py-0 _23ff780e " name="cardNo" placeholder="请输入{{isFrom=='coupon'||isFrom=='rightsCard'?'兑换码':'密钥'}}" placeholderClass="c-hex-cecece text-30" value="{{cardNo}}"></input>
+                <view catchtap="scan" class="i-scan flex flex-none items-center justify-center w-76rpx h-100rpx text-44rpx bg-_bl__h_fff_br_ _23ff780e "></view>
+            </view>
+        </view>
+        <view class="fixed right-0 bottom-100rpx left-0 h-88rpx mx-30rpx my-0 _23ff780e ">
+            <button bindtap="goLogin" class="w-_bl_100_p__br_ h-88rpx text-_bl__h_fff_br_ text-34rpx bg-_bl_rgb_pl_169_2c_185_2c_16_pr__br_ border-rd-44rpx flex items-center justify-center _23ff780e " style="background: {{colorTheme}}" wx:if="{{!isAuth}}">确认{{cardActionFont}}</button>
+            <button class="w-_bl_100_p__br_ h-88rpx text-_bl__h_fff_br_ text-34rpx bg-_bl_rgb_pl_169_2c_185_2c_16_pr__br_ border-rd-44rpx flex items-center justify-center _23ff780e " formType="submit" style="background: {{colorTheme}}" wx:else>确认{{cardActionFont}}</button>
+        </view>
+    </form>
+</view>
+<view class="px-24rpx py-0 _23ff780e " wx:if="{{isPhysical}}">
+    <view class="text-26rpx text-_bl__h_999999_br_ lh-_bl_150_p__br_ mx-0 my-24rpx _23ff780e ">说明：</view>
+    <view class="text-26rpx text-_bl__h_999999_br_ lh-_bl_150_p__br_ mx-0 my-24rpx _23ff780e " wx:if="{{tabIndex===1}}">1、输入实体储值卡卡片上的卡号和卡密进行绑卡</view>
+    <view class="text-26rpx text-_bl__h_999999_br_ lh-_bl_150_p__br_ mx-0 my-24rpx _23ff780e " wx:else>1、输入实体储值卡卡片上的卡密进行绑卡</view>
+    <view class="text-26rpx text-_bl__h_999999_br_ lh-_bl_150_p__br_ mx-0 my-24rpx _23ff780e ">2、卡片绑定后，该实体储值卡的充值消费退款等流水只记录实体储值卡账户的流水（手机号仅作身份识别）</view>
+</view>
+<authorization class=" _23ff780e " id="authorization"></authorization>

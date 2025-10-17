@@ -1,0 +1,213 @@
+<view class=" _46fca6cb " style="{{info?info.miniStyle:''}}" wx:if="{{info.propsValue.notLoggedInimg&&!isAuth}}">
+    <view class=" _46fca6cb " style="border-radius: {{info.propsValue.borderRadius}}rpx; margin-left: {{info.propsValue.marginLeft}}px; margin-right: {{info.propsValue.marginRight}}px;">
+        <image bindtap="checkLogin" class="block w-_bl_100_p__br_ _46fca6cb " data-content="授权头像昵称" data-element-id="{{info.id}}" data-element-type="{{info.title}}" data-name="授权头像昵称" data-operation-type="查看会员登录" data-screen-type="{{traceScreenType}}" id="authUserInfo" mode="widthFix" src="{{__oss__.s(mpxExt,info.propsValue.notLoggedInimg,0)}}"></image>
+    </view>
+</view>
+<view class=" _46fca6cb " style="{{info?info.miniStyle:''}}" wx:elif="{{!isAuth&&(info.propsValue.memberStyle!=5||info.propsValue.memberStyle==5&&info.propsValue.notLoggedInEnable)}}">
+    <view class="h-174rpx border-rd-8rpx flex items-center justify-around bg-_bl__h_fff_br_ px-20rpx py-0 box-border _46fca6cb " style="border-radius: {{info.propsValue.borderRadius}}rpx; margin-left: {{info.propsValue.marginLeft}}px; margin-right: {{info.propsValue.marginRight}}px;">
+        <user-avatar avatarFrame="{{customerLevelInfo}}" bindrunAuthorization="runAuthorization" class=" _46fca6cb " size="88" traceScreenType="{{traceScreenType}}"></user-avatar>
+        <view class="flex-1 ml-20rpx _46fca6cb ">
+            <view class="text-30rpx _46fca6cb ">{{storeName+_i1}}</view>
+            <view class="text-24rpx mt-10rpx _46fca6cb ">{{info.propsValue.notLoggedInText||'为给您提供更好的服务请授权登录'}}</view>
+        </view>
+        <view bindtap="checkLogin" class="w-164rpx h-60rpx border-rd-30rpx text-24rpx lh-60rpx text-center text-_bl__h_fff_br_ _46fca6cb " data-element-content="登录/注册" data-element-id="{{info.id}}" data-element-name="会员登录" data-element-type="{{info.title}}" data-operation-type="查看会员登录" data-screen-type="{{traceScreenType}}" style="background-color:{{colorTheme}}">登录/注册</view>
+    </view>
+</view>
+<view class=" _46fca6cb " style="{{info?info.miniStyle:''}}" wx:else>
+    <view class="flex items-center box-border h-150rpx pt-0 pb-0 pl-24rpx pr-0 bg-_bl__h_fff_br_ _46fca6cb " style="border-radius: {{info.propsValue.borderRadius}}rpx; margin-left: {{info.propsValue.marginLeft}}px; margin-right: {{info.propsValue.marginRight}}px;" wx:if="{{info.propsValue.memberStyle==1}}">
+        <user-avatar avatarFrame="{{customerLevelInfo}}" bindrunAuthorization="runAuthorization" class=" _46fca6cb " traceScreenType="{{traceScreenType}}"></user-avatar>
+        <view class="flex flex-1 flex-col justify-between box-border h-94rpx px-24rpx py-0 _46fca6cb ">
+            <view class=" _46fca6cb ">
+                <text class="pr-10rpx text-_bl__h_333_br_ font-bold text-30rpx _46fca6cb ">我的{{pointName}}</text>{{customerData['integral']==null?'':customerData['integral']}}</view>
+            <view bindtap="goMyPoints" class="flex items-center text-_bl__h_999_br_ text-24rpx _46fca6cb " data-content="我的积分" data-element-content="{{'我的'+pointName}}" data-element-id="{{info.id}}" data-element-type="{{info.title}}" data-name="我的积分" data-operation-type="查看积分" data-screen-type="{{traceScreenType}}" id="goMyPoints">可兑换优惠券及限量周边<image class="w-18rpx h-18rpx ml-6rpx _46fca6cb " src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/08/26/1e3e40261839e496.png',0)}}"></image>
+            </view>
+        </view>
+        <view bindtap="goMemberQrCode" class="flex flex-col items-center justify-center px-44rpx py-0 _46fca6cb " data-content="会员码" data-element-id="{{info.id}}" data-element-type="{{info.title}}" data-name="会员码" data-operation-type="查看会员登录" data-screen-type="{{traceScreenType}}" id="memberCode">
+            <text class="iconfont i-qr-code w-50rpx h-50rpx mb-2rpx text-_bl__h_000_br_ text-50rpx _46fca6cb "></text>
+            <text class="mt-10rpx text-_bl__h_333_br_ font-500 text-20rpx lh-20rpx _46fca6cb ">会员码</text>
+        </view>
+    </view>
+    <view class="{{'flex items-center box-border h-150rpx px-24rpx py-0 bg-no-repeat bg-center bg-_bl_length_c_cover_br_ '+(backgroundImage?'bg-transparent':'bg-_bl__h_fff_br_')+' _46fca6cb '}}" style="{{backgroundImage}} border-radius: {{info.propsValue.borderRadius}}rpx; margin-left: {{info.propsValue.marginLeft}}px; margin-right: {{info.propsValue.marginRight}}px;" wx:elif="{{info.propsValue.memberStyle==2}}">
+        <user-avatar avatarFrame="{{customerLevelInfo}}" bindrunAuthorization="runAuthorization" class=" _46fca6cb " traceScreenType="{{traceScreenType}}"></user-avatar>
+        <view class="flex flex-1 items-center box-border min-w-0 h-94rpx px-24rpx py-0 _46fca6cb ">
+            <view bindtap="linkUserInfo" class="overflow-hidden font-600 text-30rpx lh-30rpx whitespace-nowrap text-ellipsis _46fca6cb " data-element-content="{{username}}" data-element-id="{{info.id}}" data-element-name="个人资料" data-element-type="{{info.title}}" data-operation-type="查看会员个人资料" data-screen-type="{{traceScreenType}}">
+                <text class=" _46fca6cb ">{{username}}</text>
+            </view>
+            <view bindtap="linkMemberLevel" class="shrink-0 h-28rpx ml-20rpx px-14rpx py-0 text-white text-18rpx lh-28rpx border-rd-14rpx _46fca6cb " style="background-color: {{colorTheme}};" wx:if="{{isShowLevel&&customerLevelInfo.cardName}}">{{customerLevelInfo.cardName}}</view>
+        </view>
+        <view class="flex justify-end items-center min-w-210rpx _46fca6cb ">
+            <view bindtap="onLink" class="flex flex-1 flex-col items-center justify-center _46fca6cb " data-asset="{{item.key}}" data-content="{{item.label||item.placeholder}}" data-element-content="{{item.label}}" data-element-id="{{item.id}}" data-element-name="{{item.placeholder}}" data-element-type="{{item.key}}" data-name="{{item.label||item.placeholder}}" data-operation-type="{{'查看'+item.placeholder}}" data-screen-type="{{traceScreenType}}" id="memberInfo" wx:for="{{assetsList}}" wx:key="*this">
+                <view class="text-_bl__h_333_br_ font-bold text-48rpx _46fca6cb " style="color:{{isAuth&&info.propsValue.assetsValueColor}};">{{customerData[item.key=='card'?'giftCard':item.key]}}</view>
+                <view class="text-_bl__h_333_br_ text-24rpx _46fca6cb " style="color:{{isAuth&&info.propsValue.assetsTitleColor}};">{{item.label||item.placeholder}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="box-border min-h-150rpx pt-28rpx pb-28rpx pl-30rpx pr-0 bg-_bl__h_fff_br_ bg-no-repeat bg-center bg-_bl_length_c_100_p__100_p__br_ _46fca6cb " style="{{backgroundImage}} border-radius: {{info.propsValue.borderRadius}}rpx; margin-left: {{info.propsValue.marginLeft}}px; margin-right: {{info.propsValue.marginRight}}px;" wx:elif="{{info.propsValue.memberStyle==3||info.propsValue.memberStyle==4}}">
+        <view class="flex items-center relative _46fca6cb ">
+            <view class="absolute bottom-0rpx left-0 z-11 w-113rpx h-35rpx bg-_bl__h_414141_br_ text-center text-20rpx text-_bl__h_d9bd97_br_ lh-34rpx border-rd-_bl_0rpx_17rpx_0px_17rpx_br_ overflow-hidden whitespace-nowrap text-ellipsis px-5rpx py-0 box-border _46fca6cb " wx:if="{{info.propsValue.memberStyle==4&&info.propsValue.showPayMember&&paidBenefitsCardName}}">{{paidBenefitsCardName}}</view>
+            <user-avatar avatarFrame="{{customerLevelInfo}}" bindrunAuthorization="runAuthorization" class=" _46fca6cb " traceScreenType="{{traceScreenType}}"></user-avatar>
+            <view class="flex-1 box-border min-w-0 px-24rpx py-0 _46fca6cb ">
+                <view class="flex items-center relative mt-16rpx overflow-hidden whitespace-nowrap text-ellipsis _46fca6cb ">
+                    <view bindtap="linkUserInfo" class="overflow-hidden font-600 text-30rpx lh-30rpx whitespace-nowrap text-ellipsis _46fca6cb " data-element-content="{{userNameDisplay}}" data-element-id="{{info.id}}" data-element-name="个人资料" data-element-type="{{info.title}}" data-operation-type="查看会员个人资料" data-screen-type="{{traceScreenType}}">
+                        <text class=" _46fca6cb ">{{userNameDisplay}}</text>
+                    </view>
+                    <view class="w-34rpx h-32rpx ml-10rpx _46fca6cb " wx:if="{{info.propsValue.memberStyle==4&&info.propsValue.showPayMember&&paidBenefitsCardName}}">
+                        <image class="w-34rpx h-32rpx _46fca6cb " lazyLoad="{{true}}" src="{{__oss__.s(mpxExt,info.propsValue.payMemberLogo||'https://images.qmai.cn/resource/20210824210816/2023/06/12/qyk-V.png',0)}}"></image>
+                    </view>
+                    <view bindtap="linkMemberLevel" class="h-30rpx ml-20rpx px-10rpx py-0 text-_bl__h_fff_br_ font-500 text-22rpx lh-30rpx border-rd-_bl_12rpx_12rpx_12rpx_4rpx_br_ _46fca6cb " style="background-color: {{colorTheme}};" wx:if="{{isShowLevel&&customerLevelInfo.cardName}}">{{customerLevelInfo.cardName}}</view>
+                </view>
+                <view class="flex items-center mt-15rpx _46fca6cb " wx:if="{{info.propsValue.memberStyle==3&&assetsList&&assetsList.length}}">
+                    <view bindtap="onLink" class="pr-30rpx text-_bl__h_333_br_ text-20rpx lh-20rpx _46fca6cb " data-asset="{{item.key}}" data-content="{{item.label||item.placeholder}}" data-element-content="{{item.label}}" data-element-id="{{item.id}}" data-element-name="{{item.placeholder}}" data-element-type="{{item.key}}" data-name="{{item.label||item.placeholder}}" data-operation-type="{{'查看'+item.placeholder}}" data-screen-type="{{traceScreenType}}" id="memberInfo" wx:for="{{assetsList}}" wx:key="*this">
+                        <text class=" _46fca6cb " style="color:{{isAuth&&info.propsValue.assetsTitleColor}};">{{item.label||item.placeholder}}</text>：<text class=" _46fca6cb " style="color:{{isAuth&&info.propsValue.assetsValueColor}};">{{customerData[item.key=='card'?'giftCard':item.key]}}</text>
+                    </view>
+                </view>
+                <view bindtap="navRights" class="flex items-center mt-16rpx _46fca6cb " data-element-content="会员等级" data-element-id="{{info.id}}" data-element-name="会员等级" data-element-type="{{info.title}}" data-operation-type="查看会员等级权益" data-screen-type="{{traceScreenType}}" wx:if="{{isShowLevel&&!(customerLevelInfo.max&&configCenterByKeys&&configCenterByKeys['Member.Level.Experience']==='other')}}">
+                    <view class="relative w-240rpx h-12rpx bg-_bl__h_f5f5f5_br_ border-rd-6rpx _46fca6cb ">
+                        <view class="absolute top-0 left-0 w-0 max-w-_bl_100_p__br_ h-12rpx border-rd-6rpx transition-all transition-duration-0_d_3s transition-ease _46fca6cb " style="background-color: {{colorTheme}}; width: {{customerLevelInfo.percent}}%;"></view>
+                    </view>
+                    <view class="pl-24rpx text-_bl__h_383838_br_ font-500 text-20rpx lh-20rpx _46fca6cb " wx:if="{{customerLevelInfo.currentValue>0}}">
+                        <text class=" _46fca6cb " style="color: {{colorTheme}}">{{customerLevelInfo.currentValue||0}}</text>/{{customerLevelInfo.nextConditionValue||0}}</view>
+                </view>
+            </view>
+            <view bindtap="goMemberQrCode" class="flex flex-col items-center justify-center px-44rpx py-0 _46fca6cb " data-content="会员码" data-element-id="{{info.id}}" data-element-type="{{info.title}}" data-name="会员码" data-operation-type="查看会员码" data-screen-type="{{traceScreenType}}" id="memberCode">
+                <text class="iconfont i-qr-code w-50rpx h-50rpx mb-2rpx text-_bl__h_000_br_ text-50rpx _46fca6cb "></text>
+                <text class="mt-10rpx text-_bl__h_333_br_ font-500 text-20rpx lh-20rpx _46fca6cb ">会员码</text>
+            </view>
+        </view>
+        <view class="flex items-center box-border h-130rpx pt-28rpx _46fca6cb " wx:if="{{info.propsValue.memberStyle==4&&assetsList.length}}">
+            <view bindtap="onLink" class="{{' flex flex-1 items-center justify-center last-border-none '+(isAuth&&info.propsValue.upLocation=='value'?'flex-col-reverse':'flex-col')+' '+(backgroundImage?'border-r-1px border-r-solid border-r-_bl__h_fff_br_':'border-r-1px border-r-solid border-r-_bl__h_f5f5f5_br_')+' _46fca6cb '}}" data-asset="{{item.key}}" data-content="{{item.label||item.placeholder}}" data-element-content="{{item.label}}" data-element-id="{{item.id}}" data-element-name="{{item.placeholder}}" data-element-type="{{item.key}}" data-name="{{item.label||item.placeholder}}" data-operation-type="{{'查看'+item.placeholder}}" data-screen-type="{{traceScreenType}}" id="memberInfo" wx:for="{{assetsList}}" wx:key="*this">
+                <text class="pb-10rpx text-_bl__h_999_br_ font-500 text-24rpx _46fca6cb " style="color:{{isAuth&&info.propsValue.assetsTitleColor}};">{{item.label||item.placeholder}}</text>
+                <text class="text-_bl__h_383838_br_ font-600 text-34rpx _46fca6cb " style="color:{{isAuth&&info.propsValue.assetsValueColor}};">{{customerData[item.key=='card'?'giftCard':item.key]}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="other-style-wrap other-style-5 _46fca6cb " wx:if="{{info.propsValue.memberStyle==5}}">
+        <view class="left _46fca6cb " style="border-radius: {{info.propsValue.borderRadius}}rpx;">
+            <user-avatar avatarFrame="{{customerLevelInfo}}" bindrunAuthorization="runAuthorization" class=" _46fca6cb " traceScreenType="{{traceScreenType}}"></user-avatar>
+            <view bindtap="navRights" class="level-name _46fca6cb " wx:if="{{isShowLevel}}">{{customerLevelInfo.cardName||'登录查看'}}<text class="iconfont i-jiantou-you _46fca6cb "></text>
+            </view>
+            <view bindtap="navRights" class="progress _46fca6cb " data-element-content="会员等级" data-element-id="{{info.id}}" data-element-name="会员等级" data-element-type="{{info.title}}" data-operation-type="查看会员等级权益" data-screen-type="{{traceScreenType}}" wx:if="{{isShowLevel&&!(customerLevelInfo.max&&configCenterByKeys&&configCenterByKeys['Member.Level.Experience']==='other')}}">
+                <view class="progress-box _46fca6cb ">
+                    <view class="progress-inner _46fca6cb " style="background-color: {{colorTheme}};width: {{customerLevelInfo.percent}}%;"></view>
+                </view>
+                <text class="progress-font _46fca6cb ">{{customerLevelInfo.currentValue>=0?customerLevelInfo.currentValue:'*'}}/{{customerLevelInfo.nextConditionValue||'*'}}</text>
+            </view>
+            <view class="blocks _46fca6cb ">
+                <view bindtap="onLink" class="item {{assetsList.length>2&&index==1?'border-bottom':''}} _46fca6cb " data-asset="{{item.key}}" data-content="{{item.label||item.placeholder}}" data-element-content="{{item.label}}" data-element-id="{{item.id}}" data-element-name="{{item.placeholder}}" data-element-type="{{item.key}}" data-name="{{item.label||item.placeholder}}" data-operation-type="{{'查看'+item.placeholder}}" data-screen-type="{{traceScreenType}}" id="memberInfo" wx:for="{{assetsList}}" wx:key="key">
+                    <text class="item-title _46fca6cb " style="color:{{isAuth&&info.propsValue.assetsTitleColor}};">{{item.label||item.placeholder}}</text>
+                    <text class="item-value _46fca6cb " style="color:{{isAuth&&info.propsValue.assetsValueColor}};">{{customerData[item.key=='card'?'giftCard':item.key]}}</text>
+                    <text class="item-des _46fca6cb " wx:if="{{item.key=='coupon'}}">不定期发放</text>
+                    <text class="item-des _46fca6cb " wx:elif="{{item.key=='card'}}">兑换金额或礼品券</text>
+                    <text class="item-des _46fca6cb " wx:elif="{{item.key=='integral'&&recommendIntergral!='*'}}">
+                        <text class=" _46fca6cb " style="color: {{colorTheme}};">{{recommendIntergral}}</text>{{pointName}}兑换{{recommendExchange}}
+                </text>
+                    <text class="item-des _46fca6cb " wx:elif="{{item.key=='balance'}}">充值支付更方便</text>
+                    <text class="item-des _46fca6cb " wx:elif="{{item.key=='collect'&&collectInfo.need}}">还差<text class=" _46fca6cb " style="color: {{colorTheme}};">{{collectInfo.need}}{{collectInfo.name}}</text>兑换优惠券</text>
+                </view>
+            </view>
+        </view>
+        <view class="right _46fca6cb " style="border-radius: {{info.propsValue.borderRadius}}rpx;">
+            <image bindtap="linkTakeIn" class="right-img _46fca6cb " data-content="堂食" data-name="堂食" id="linkTakeIn" lazyLoad="true" mode="scaleToFill" src="{{__oss__.s(mpxExt,info.propsValue.takeInImg||takeInLinkPic,0)}}"></image>
+            <image bindtap="linkTakeOut" class="right-img _46fca6cb " data-content="外卖" data-name="外卖" id="linkTakeOut" lazyLoad="true" mode="scaleToFill" src="{{__oss__.s(mpxExt,info.propsValue.takeOutImg||takeOutLinkPic,0)}}"></image>
+        </view>
+    </view>
+    <view class="other-style-wrap other-style-6 _46fca6cb " wx:elif="{{info.propsValue.memberStyle==6}}">
+        <view bindtap="navRights" class="item _46fca6cb " data-element-content="会员等级" data-element-id="{{info.id}}" data-element-name="会员等级" data-element-type="{{info.title}}" data-operation-type="查看会员等级权益" data-screen-type="{{traceScreenType}}">
+            <block wx:if="{{customerLevelInfo.cardName}}">
+                <view class="title _46fca6cb ">{{customerLevelInfo.cardName}}</view>
+                <view class="value _46fca6cb " wx:if="{{isShowLevel}}">
+                    <text class="big-font _46fca6cb ">L</text>
+                    <text class="small-font _46fca6cb ">V{{customerLevelInfo.level}}</text>
+                </view>
+                <view class="des _46fca6cb " wx:if="{{isShowLevel}}">还需要<text class="exp _46fca6cb " style="color: {{colorTheme}};">{{customerLevelInfo.needValue}}</text>经验值升级{{customerLevelInfo.nextCardName}}</view>
+            </block>
+            <view class="title _46fca6cb " wx:else>登录查看等级</view>
+            <view class="link-font _46fca6cb ">查看全部<text class="iconfont i-jiantou-you _46fca6cb "></text>
+            </view>
+            <image class="absolute right-18rpx bottom-18rpx z-1 w-100rpx h-100rpx _46fca6cb " lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,info.propsValue.gradeImg,0)}}" wx:if="{{info.propsValue.gradeImg}}"></image>
+            <text class="bg-icon iconfont i-putonghuiyuan _46fca6cb " style="color: {{colorTheme}};" wx:else></text>
+        </view>
+        <view bindtap="onLink" class="item {{index>0?'mt-20rpx':''}} _46fca6cb " data-asset="{{item.key}}" data-content="{{item.label||item.placeholder}}" data-element-content="{{item.label}}" data-element-id="{{item.id}}" data-element-name="{{item.placeholder}}" data-element-type="{{item.key}}" data-name="{{item.label||item.placeholder}}" data-operation-type="{{'查看'+item.placeholder}}" data-screen-type="{{traceScreenType}}" id="memberInfo" wx:for="{{assetsList}}" wx:key="key">
+            <view class="title _46fca6cb ">{{item.label||item.placeholder}}</view>
+            <view class="value _46fca6cb ">
+                <text class="big-font _46fca6cb ">{{customerData[item.key=='card'?'giftCard':item.key]}}{{' '}}</text>
+                <text class="small-font _46fca6cb " wx:if="{{item.key=='card'||item.key=='coupon'}}">张</text>
+                <text class="small-font _46fca6cb " wx:elif="{{item.key=='integral'}}">个</text>
+                <text class="small-font _46fca6cb " wx:elif="{{item.key=='balance'}}">元</text>
+                <text class="small-font _46fca6cb " wx:elif="{{item.key=='collect'}}">{{collectInfo.name}}</text>
+            </view>
+            <view class="des _46fca6cb " wx:if="{{item.key=='coupon'}}">不定期发放</view>
+            <view class="des _46fca6cb " wx:elif="{{item.key=='card'}}">兑换金额或礼品券</view>
+            <view class="des _46fca6cb " wx:elif="{{item.key=='integral'&&recommendIntergral!='*'}}">
+                <text class=" _46fca6cb " style="color: {{colorTheme}};">{{recommendIntergral}}</text>{{pointName}}兑换{{recommendExchange}}</view>
+            <view class="des _46fca6cb " wx:elif="{{item.key=='balance'}}">充值支付更方便</view>
+            <view class="des _46fca6cb " wx:elif="{{item.key=='collect'&&collectInfo.need}}">还差<text class=" _46fca6cb " style="color: {{colorTheme}};">{{collectInfo.need}}{{collectInfo.name}}</text>兑换优惠券</view>
+            <view class="link-font _46fca6cb ">查看全部<text class="iconfont i-jiantou-you _46fca6cb "></text>
+            </view>
+            <view catchtap="linkToBuyCard" class="buy-card-btn _46fca6cb " style="color: {{colorTheme}};border-color:{{colorTheme}};" wx:if="{{item.key=='card'}}">购买</view>
+            <image class="absolute right-18rpx bottom-18rpx z-1 w-100rpx h-100rpx _46fca6cb " lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,item.img,0)}}" wx:if="{{item.img}}"></image>
+            <text class="bg-icon iconfont {{item.key==='coupon'?'i-piaofang':''}} {{item.key==='integral'?'i-jifen':''}} {{item.key==='balance'?'i-zhanghuyue':''}} {{item.key==='card'?'i-lipinqia':''}} {{item.key==='collect'?'i-naichatianpin':''}} _46fca6cb " style="color: {{colorTheme}};" wx:else></text>
+        </view>
+    </view>
+    <view class="other-style-wrap other-style-7 _46fca6cb " wx:elif="{{info.propsValue.memberStyle==7}}">
+        <view bindtap="navRights" class="item _46fca6cb " data-element-content="会员等级" data-element-id="{{info.id}}" data-element-name="会员等级" data-element-type="{{info.title}}" data-operation-type="查看会员等级权益" data-screen-type="{{traceScreenType}}">
+            <block wx:if="{{customerLevelInfo.cardName}}">
+                <view class="title _46fca6cb ">{{customerLevelInfo.cardName}}</view>
+                <view class="value _46fca6cb " wx:if="{{isShowLevel}}">
+                    <text class="big-font _46fca6cb ">L</text>
+                    <text class="small-font _46fca6cb ">V{{customerLevelInfo.level}}</text>
+                </view>
+                <view class="des _46fca6cb " wx:if="{{isShowLevel}}">还需要<text class="exp _46fca6cb " style="color: {{colorTheme}};">{{customerLevelInfo.needValue}}</text>经验值升级{{customerLevelInfo.nextCardName}}</view>
+            </block>
+            <view class="title _46fca6cb " wx:else>登录查看等级</view>
+            <image class="absolute right-0 bottom-0 w-90rpx h-90rpx m-auto _46fca6cb " lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,info.propsValue.gradeImg,0)}}" wx:if="{{info.propsValue.gradeImg}}"></image>
+            <text class="bg-icon iconfont i-putonghuiyuan _46fca6cb " style="color: {{colorTheme}};" wx:else></text>
+        </view>
+        <view bindtap="onLink" class="item {{index>1?'mt-20rpx':''}} _46fca6cb " data-asset="{{item.key}}" data-content="{{item.label||item.placeholder}}" data-element-content="{{item.label}}" data-element-id="{{item.id}}" data-element-name="{{item.placeholder}}" data-element-type="{{item.key}}" data-name="{{item.label||item.placeholder}}" data-operation-type="{{'查看'+item.placeholder}}" data-screen-type="{{traceScreenType}}" id="memberInfo" wx:for="{{assetsList}}" wx:key="key">
+            <view class="title _46fca6cb ">{{item.label||item.placeholder}}</view>
+            <view class="value _46fca6cb ">
+                <text class="big-font _46fca6cb ">{{customerData[item.key=='card'?'giftCard':item.key]}}{{' '}}</text>
+                <text class="small-font _46fca6cb " wx:if="{{item.key=='card'||item.key=='coupon'}}">张</text>
+                <text class="small-font _46fca6cb " wx:elif="{{item.key=='integral'}}">个</text>
+                <text class="small-font _46fca6cb " wx:elif="{{item.key=='balance'}}">元</text>
+                <text class="small-font _46fca6cb " wx:elif="{{item.key=='collect'}}">{{collectInfo.name}}</text>
+            </view>
+            <view class="des _46fca6cb " wx:if="{{item.key=='coupon'}}">不定期发放</view>
+            <view class="des _46fca6cb " wx:elif="{{item.key=='integral'&&recommendIntergral!='*'}}">
+                <text class=" _46fca6cb " style="color: {{colorTheme}};">{{recommendIntergral}}</text>{{pointName}}兑换{{recommendExchange}}</view>
+            <view class="des _46fca6cb " wx:elif="{{item.key=='balance'}}">充值支付更方便</view>
+            <view class="des _46fca6cb " wx:elif="{{item.key=='collect'&&collectInfo.need}}">还差<text class=" _46fca6cb " style="color: {{colorTheme}};">{{collectInfo.need}}{{collectInfo.name}}</text>兑换优惠券</view>
+            <view catchtap="linkToBuyCard" class="buy-card-btn _46fca6cb " style="color: {{colorTheme}};border-color:{{colorTheme}};" wx:if="{{item.key=='card'}}">购买</view>
+            <image class="absolute right-0 bottom-0 w-90rpx h-90rpx m-auto _46fca6cb " lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,item.img,0)}}" wx:if="{{item.img}}"></image>
+            <text class="bg-icon iconfont {{item.key==='coupon'?'i-piaofang':''}} {{item.key==='integral'?'i-jifen':''}} {{item.key==='balance'?'i-zhanghuyue':''}} {{item.key==='card'?'i-lipinqia':''}} {{item.key==='collect'?'i-naichatianpin':''}} _46fca6cb " style="color: {{colorTheme}};" wx:else></text>
+        </view>
+    </view>
+    <view class="flex justify-between box-border items-center w-auto p-20rpx _46fca6cb " style="border-radius: {{info.propsValue.borderRadius}}rpx; margin-left: {{info.propsValue.marginLeft}}px; margin-right: {{info.propsValue.marginRight}}px;" wx:elif="{{info.propsValue.memberStyle==8}}">
+        <user-avatar avatarFrame="{{customerLevelInfo}}" bindrunAuthorization="runAuthorization" class=" _46fca6cb " traceScreenType="{{traceScreenType}}"></user-avatar>
+        <view class="flex flex-1 flex-col justify-center box-border pt-0 pb-0 pl-40rpx pr-20rpx _46fca6cb ">
+            <view bindtap="linkUserInfo" class="text-_bl__h_000_br_ font-bold text-30rpx line-clamp-1 _46fca6cb " data-element-content="{{username}}" data-element-id="{{info.id}}" data-element-name="个人资料" data-element-type="{{info.title}}" data-operation-type="查看会员个人资料" data-screen-type="{{traceScreenType}}">
+                <text class=" _46fca6cb ">{{username}}</text>
+            </view>
+            <view bindtap="goMyPoints" class="text-_bl__h_000_br_ font-500 text-24rpx _46fca6cb " data-element-content="{{'我的'+pointName}}" data-element-id="{{info.id}}" data-element-name="积分" data-element-type="{{info.title}}" data-operation-type="查看积分" data-screen-type="{{traceScreenType}}">我的{{pointName}}<text class="pr-4rpx text-_bl__h_000_br_ font-bold text-30rpx _46fca6cb ">{{customerData['integral']}}</text>
+                <text class="text-_bl__h_000_br_ font-500 text-24rpx iconfont i-jiantou-you _46fca6cb "></text>
+            </view>
+        </view>
+        <view bindtap="goCoupon" class="relative z-1 flex items-center w-240rpx h-68rpx _46fca6cb " data-element-content="优惠券" data-element-id="{{info.id}}" data-element-name="优惠券" data-element-type="{{info.title}}" data-operation-type="查看优惠券" data-screen-type="{{traceScreenType}}">
+            <view class="absolute top-0 left-0 z--1 flex items-center box-border w-_bl_100_p__br_ h-_bl_100_p__br_ px-20rpx py-0 _46fca6cb ">
+                <image class="absolute bottom-0 left-0 z--1 w-_bl_100_p__br_ h-_bl_100_p__br_ _46fca6cb " lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,info.propsValue.couponImg,0)}}" wx:if="{{info.propsValue.couponImg}}"></image>
+                <block wx:else>
+                    <view class="absolute top-0 left-0 z--1 w-_bl_100_p__br_ h-_bl_100_p__br_ border-rd-34rpx op-25 _46fca6cb " style="background-color: {{colorTheme}};"></view>
+                    <text class="absolute left-16rpx font-400 text-46rpx _46fca6cb " style="color: {{colorTheme}};">{{_i2}}</text>
+                    <view class="absolute right-4rpx w-163rpx h-60rpx bg-_bl__h_fff_br_ border-rd-30rpx _46fca6cb "></view>
+                </block>
+            </view>
+            <view class="absolute right-4rpx w-163rpx h-60rpx font-500 text-20rpx lh-60rpx text-center _46fca6cb " style="color: {{info.propsValue.couponTextColor||colorTheme}};">
+                <block wx:if="{{customerData.coupon!='***'&&customerData.coupon>0}}">
+                    <text class="relative top-2rpx pr-10rpx font-bold text-44rpx _46fca6cb ">{{customerData.coupon}}</text>张卡券</block>
+                <text class="font-500 text-26rpx _46fca6cb " wx:else>暂无卡券</text>
+            </view>
+        </view>
+    </view>
+</view>
+<std-design-jump-help class=" _46fca6cb " id="std-design-jump-help"></std-design-jump-help>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

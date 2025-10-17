@@ -1,0 +1,79 @@
+<view class="box-border w-_bl_100_p__br_ mx-0 my-20rpx px-30rpx py-0 overflow-hidden bg-_bl__h_fbf3f2_br_ border-rd-16rpx relative" style="background-color: {{tools.hexToRgba(colorTheme,'0.1')}};">
+    <view class="flex items-center justify-center min-w-72rpx h-30rpx box-border px-10rpx py-0 border-rd-_bl_0_16rpx_0_16rpx_br_ text-22rpx text-_bl__h_ffffff_br_ absolute right-0 top-0" style="background-color: {{colorTheme}};" wx:if="{{!hideNumber}}">{{coupon.benefitNum}}张</view>
+    <view class="relative flex items-center w-_bl_100_p__br_ h-146rpx">
+        <view class="flex flex-col items-center justify-between w-150rpx h-94rpx">
+            <view>
+                <block wx:if="{{coupon.type===1||coupon.type===2||coupon.type===3||coupon.type===15}}">
+                    <view class="text-_bl__h_ff1717_br_ font-bold text-38rpx" wx:if="{{couponFreeFlag}}">{{coupon.type===3?'兑换':'免费'}}</view>
+                    <block wx:else>
+                        <text class="px-4rpx py-0 text-_bl__h_ff1717_br_ font-bold text-50rpx lh-none">{{coupon.discountAmount||0}}</text>
+                        <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx">{{coupon.discountUnit==2?'折':'元'}}</text>
+                    </block>
+                </block>
+                <block wx:if="{{coupon.type===5}}">
+                    <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx">免</text>
+                    <text class="px-4rpx py-0 text-_bl__h_ff1717_br_ font-bold text-50rpx lh-none">{{coupon.discountGoodsCount}}</text>
+                    <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx">件</text>
+                </block>
+                <block wx:if="{{coupon.type===4}}">
+                    <block wx:if="{{coupon.discountAmount}}">
+                        <text class="px-4rpx py-0 text-_bl__h_ff1717_br_ font-bold text-50rpx lh-none">{{coupon.discountAmount}}</text>
+                        <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx">{{coupon.discountUnit==2?'折':'元'}}</text>
+                    </block>
+                    <block wx:else>
+                        <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx">免</text>
+                        <text class="px-4rpx py-0 text-_bl__h_ff1717_br_ font-bold text-50rpx lh-none" wx:if="{{coupon.giveCount}}">{{coupon.giveCount}}</text>
+                        <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx">件</text>
+                    </block>
+                </block>
+                <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx" wx:if="{{coupon.type===6}}">免运费</text>
+                <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx" wx:if="{{coupon.type===7}}">免排队</text>
+                <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx" wx:if="{{coupon.type===13}}">兑换商品</text>
+                <text class="text-_bl__h_ff1717_br_ font-bold text-24rpx" wx:if="{{coupon.type===11}}">{{coupon.reduceDiscountType==2?'低':'减'}}至{{coupon.discountAmount}}元</text>
+            </view>
+            <view class="text-_bl__h_999999_br_ text-20rpx" wx:if="{{coupon.type===13}}">限线下使用</view>
+            <view class="text-_bl__h_999999_br_ text-20rpx" wx:elif="{{coupon.thresholdType===1}}">{{_i1}}</view>
+            <view class="text-_bl__h_999999_br_ text-20rpx" wx:else>满{{coupon.useThreshold||0}}{{coupon.thresholdType==2?'元':''}}{{coupon.thresholdType==3?'件':''}}{{coupon.thresholdType==4?'千克':''}}可用</view>
+        </view>
+        <view class="flex flex-1 flex-col justify-between box-border h-94rpx px-20rpx py-0">
+            <view class="line-clamp-1 text-_bl__h_454545_br_ text-32rpx lh-_bl_120_p__br_ text-ellipsis">{{coupon.name}}</view>
+            <view class="text-_bl__h_999999_br_ text-22rpx" wx:if="{{coupon.validDateDesc}}">{{coupon.validDateDesc}}</view>
+        </view>
+        <view class="absolute bottom-0 left-0 w-_bl_100_p__br_ h-0 border-t-1px border-t-dashed border-t-_bl__h_ff5948_br_ op-20"></view>
+    </view>
+    <view>
+        <view bindtap="openFn" class="relative flex items-center w-_bl_100_p__br_ h-70rpx">
+            <view class="absolute top--10rpx left--40rpx w-20rpx h-20rpx bg-white border-rd-10rpx"></view>
+            <text class="pr-10rpx text-_bl__h_666666_br_ text-22rpx">使用规则</text>
+            <text class="text-_bl__h_b5b5b5_br_ text-24rpx i-jiantou1"></text>
+            <text class="text-22rpx text-_bl__h_f93a4a_br_ pl-50rpx" wx:if="{{coupon.applyStoreWay==2}}">仅在购券门店使用</text>
+            <view class="absolute top--10rpx right--40rpx w-20rpx h-20rpx bg-white border-rd-10rpx"></view>
+        </view>
+        <view class="pb-30rpx" wx:if="{{open}}">
+            <view catchtap="toApplicable" class="flex lh-_bl_150_p__br_" data-applytype="{{coupon.applyStoreType}}" data-coupon="{{coupon}}" data-hasthird="{{coupon.isThirdCoupon}}" data-id="{{coupon.id}}" data-type="2">
+                <text class="text-_bl__h_999999_br_ text-22rpx w-120rpx">适用门店：</text>
+                <view class="flex-1 inline-flex items-center text-_bl__h_666666_br_ text-22rpx">
+                    <text class="flex-1 inline-flex items-center text-_bl__h_666666_br_ text-22rpx" wx:if="{{coupon.applyStoreWay==2}}">仅购买门店可用</text>
+                    <text class="pl-10rpx text-_bl__h_ff5948_br_ font-size-inherit" wx:else>查看门店<text class="text-18rpx i-jiantou-you"></text>
+                    </text>
+                </view>
+            </view>
+            <view catchtap="toApplicable" class="flex lh-_bl_150_p__br_" data-applytype="{{coupon.applyGoodsType}}" data-coupontype="{{coupon.type}}" data-id="{{coupon.id}}" data-type="1">
+                <text class="text-_bl__h_999999_br_ text-22rpx w-120rpx">适用商品：</text>
+                <text class="flex-1 inline-flex items-center text-_bl__h_666666_br_ text-22rpx" wx:if="{{coupon.applyGoodsType==1}}">所有商品适用</text>
+                <text class="flex-1 inline-flex items-center text-_bl__h_666666_br_ text-22rpx" wx:elif="{{coupon.applyGoodsType==2||coupon.applyGoodsType==3}}">{{coupon.applyGoodsType==2?'指定商品适用':'指定商品不适用'}}<text class="pl-10rpx text-_bl__h_ff5948_br_ font-size-inherit">查看商品<text class="text-18rpx i-jiantou-you"></text>
+                    </text>
+                </text>
+            </view>
+            <view class="flex lh-_bl_150_p__br_">
+                <text class="text-_bl__h_999999_br_ text-22rpx w-120rpx">使用场景：</text>
+                <text class="flex-1 inline-flex items-center text-_bl__h_666666_br_ text-22rpx">{{coupon.useSceneText}}</text>
+            </view>
+            <view class="flex lh-_bl_150_p__br_">
+                <text class="text-_bl__h_999999_br_ text-22rpx w-120rpx">使用说明：</text>
+                <text class="flex-1 inline-flex items-center text-_bl__h_666666_br_ text-22rpx">{{coupon.instruction}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

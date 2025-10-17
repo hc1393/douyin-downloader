@@ -1,0 +1,54 @@
+<std-popup round bind:after-leave="hideAfter" bindclose="hide" customStyle="{{authorizedDialogBgImg?'background-color: transparent':''}}" duration="{{authorizedDialogBgImg?0:300}}" position="bottom" safeAreaInsetBottom="{{false}}" show="{{isShow}}" zIndex="10001">
+    <view class="{{authorizedDialogBgImg?'w-full h-100vh bg-no-repeat bg-bottom _bl_background-size_c_100_p__auto_br_ flex flex-col justify-end':''}}" style="{{authorizedDialogBgImg?'background-image: url('+authorizedDialogBgImg+');':''}}">
+        <view class="box-border w-full px-47 pb-24 overflow-hidden relative z-10" style="background-color: {{authorizedDialogBgImg?'transparent':'#fff'}}">
+            <block wx:if="{{!authorizedDialogBgImg}}">
+                <view class="h-80 pt-40">
+                    <image class="w-80 h-80 rounded-full" lazyLoad="true" src="{{__oss__.s(mpxExt,brandLogo,0)}}"></image>
+                </view>
+                <block wx:if="{{isTiktokDaojia}}"></block>
+                <block wx:else>
+                    <view class="text-36 font-bold leading-none mt-20 text-hex-333333">{{welcomeJoin+storeName}}</view>
+                    <view class="text-hex-666666 text-28 leading-none mt-20">{{joinEnjoy}}</view>
+                </block>
+            </block>
+            <button bindtap="showTrialToast" class="btn w-520 h-88 mt-86 mx-auto text-white text-34 leading-88 text-center bg-hex-40ba5a rounded-44" style="background: {{colorTheme}}" wx:if="{{isTrial}}">{{confirmText}}</button>
+            <block wx:else>
+                <button bindtap="checkAgreeOpen" class="btn w-520 h-88 mt-86 mx-auto text-white text-34 leading-88 text-center bg-hex-40ba5a rounded-44" data-element-content="{{confirmText}}" data-element-type="button" data-operation-type="进行会员登录" data-screen-type="{{traceScreenType}}" style="{{loginBtnStyle}}" wx:if="{{!agreeOpen}}">{{confirmText}}</button>
+                <auth-mobile activityId="{{activityId}}" bindfail="cancel" bindsuccess="getPhoneNumber" bindtap="tapLogin" channelCode="{{channelCode}}" force="{{force}}" inviteInfo="{{inviteInfo}}" loginScene="{{loginScene}}" registerSource="{{registerSource}}" skip="{{false}}" traceOperationType="进行会员登录" traceScreenType="{{traceScreenType}}" update="{{update}}" wx:else>
+                    <button bindtap="hide" class="btn w-520 h-88 mt-86 mx-auto text-white text-34 leading-88 text-center bg-hex-40ba5a rounded-44" style="{{loginBtnStyle}}">{{confirmText}}</button>
+                </auth-mobile>
+            </block>
+            <view catchtap="skipLogin" class="mt-32 text-center text-30 c-hex-666" style="{{skipBtnStyle}}">{{skipTemporarily}}</view>
+            <view catchtap="checkboxChange" class="text-24 mt-82 relative">
+                <view class="flex {{isAgreeOn?'animate-shake-horizontal animate-duration-800ms animate-ease-in-out':''}}">
+                    <view class="i-circle mr-12 text-36 text-hex-b7b7b7" wx:if="{{!agreeOpen}}"></view>
+                    <view class="i-xuanze_xuanzhong mr-12 text-36 text-hex-b7b7b7" style="color: {{colorTheme}}" wx:else></view>
+                    <view class="leading-40 pb-20 text-hex-333333">
+                        <text>{{requestAuthorizationDesc}}</text>
+                        <block wx:for="{{list}}" wx:key="id">
+                            <text catchtap="toProtocol" class="c-hex-344f78" data-id="{{item.id}}">《{{item.name}}》</text>
+                            <text wx:if="{{index!==list.length-1}}">、</text>
+                        </block>
+                        <text>{{etcContent}}</text>
+                    </view>
+                </view>
+                <view class="{{'absolute w-222 h-58 leading-58 text-center rounded-8 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_6_pr__br_ text-hex-fff text-24 top--68 left--24 '+(isAgreeTip?'animate-appear animate-duration-0s animate-delay-2s animate-forwards invisible':'')}}" wx:if="{{!agreeOpen}}">{{pleaseReadAndAgree}}<view class="w-0 h-0 border-solid border-10rpx border-transparent relative left-32" style="border-top-color: rgba(0, 0, 0, 0.6)"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</std-popup>
+<std-dialog showCancelButton showConfirmButton useCancelButtonSlot useConfirmButtonSlot useSlot confirmButtonColor="#06CF6E" show="{{showProtocolPopup}}" width="574rpx" zIndex="10009">
+    <view class="w-574rpx px-32rpx py-40rpx box-border c-_h_666 text-30 text-center break-all whitespace-pre-wrap">
+        <text class="break-all whitespace-pre-wrap">我已阅读并同意</text>
+        <text catchtap="toProtocol" class="c-_h_06CF6E break-all whitespace-pre-wrap" data-id="{{item.id}}" wx:for="{{list}}" wx:key="id">《{{item.name}}》</text>
+        <text class="break-all whitespace-pre-wrap">等内容，允许在必要场景下合理使用个人信息</text>
+    </view>
+    <view class="flex border-t-0_d_5px border-t-solid border-t-_bl__h_eee_br_">
+        <button bindtap="onCloseProtocolPopup" class="flex w-284rpx h-88rpx m-x-0 justify-center items-center bg-_h_fff border-r-0_d_5px border-r-solid border-r-_bl__h_eee_br_" slot="cancel-button">取消</button>
+        <auth-mobile activityId="{{activityId}}" bindfail="cancel" bindsuccess="getPhoneNumber" channelCode="{{channelCode}}" force="{{force}}" inviteInfo="{{inviteInfo}}" loginScene="{{loginScene}}" registerSource="{{registerSource}}" skip="{{false}}" slot="confirm-button" traceOperationType="进行会员登录" traceScreenType="{{traceScreenType}}" update="{{update}}">
+            <button bindtap="hide" class="flex w-284rpx h-88rpx m-x-0 justify-center items-center bg-_h_fff c-_h_06CF6E">确认</button>
+        </auth-mobile>
+    </view>
+</std-dialog>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

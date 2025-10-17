@@ -1,0 +1,9 @@
+<view bindtap="toExchange" class="w-full h-fit pb-24 box-border">
+    <view class="w-full h-72 bg-_bl__h_FFF_br_ px-30 rd-36 flex justify-between items-center overflow-hidden box-border shadow-_bl_0_12px_14px_0_rgba_pl_220_2c_227_2c_232_2c_0_d_3_pr__br_">
+        <view class="h-full flex items-center">
+            <text class="i i-exchange _i_text-primary _i_text-30 mr-10"></text>
+            <text class="text-24 text-primary">{{_i1}}</text>
+        </view>
+        <text class="i i-arrow-r _i_text-primary _i_text-28"></text>
+    </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "renderer": "webview",
+  "navigationBarTitleText": "玩转 AR 黑科技",
+  "navigationStyle": "custom",
+  "disableScroll": true
+}

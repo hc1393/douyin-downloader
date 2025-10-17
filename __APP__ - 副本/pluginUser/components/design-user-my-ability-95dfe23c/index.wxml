@@ -1,0 +1,36 @@
+<view class="_i_py-0 box-border" style="{{config.style}}">
+    <view class="rd-inherit bg-_bl__h_FFF_br_ overflow-hidden">
+        <view class="pb-16" wx:if="{{mode==='grid'}}">
+            <view class="w-full h-94 flex items-center pl-24 box-border">
+                <text class="text-32 text-_bl__h_3D3D3D_br_ lh-46 font-500">{{titleText}}</text>
+            </view>
+            <view class="grid gap-x-16 gap-y-40 grid-cols-4 py-16">
+                <button binderror="customerServiceHrefError" bindim="customerServiceHrefSuccess" bindplatformim="customerServiceHrefSuccess" bindtap="{{utils.isSpecialType(item.link)?'':'goLink'}}" class="button w-full h-full border-none px-0 flex flex-col justify-center items-center" data-im-id="{{item.link==='/tiktokIMCustomerService'?ttImId:''}}" data-item="{{item}}" data-platform-im-type="{{item.link==='/tiktokPlatformCustomerService'?'group_buy':''}}" openType="{{utils.matchOpenType(item.link)}}" wx:for="{{abilityList}}" wx:key="index">
+                    <view class="w-60 h-60 flex justify-center items-center">
+                        <image lazyLoad class="w-50 h-50" mode="scaleToFill" src="{{__oss__.s(mpxExt,item.img,0)}}" wx:if="{{item.isCustomImg}}"></image>
+                        <text class="{{' '+(item.icon==='i-design-multi-exp'?'i-design-multi-exp':'')+' '+(item.icon==='i-design-multi-integral'?'i-design-multi-integral':'')+' '+(item.icon==='i-design-discount'?'i-design-discount':'')+' '+(item.icon==='i-design-free-queue'?'i-design-free-queue':'')+' '+(item.icon==='i-design-free-delivery'?'i-design-free-delivery':'')+' '+(item.icon==='i-design-value-add'?'i-design-value-add':'')+' '+(item.icon==='i-design-service-qualification'?'i-design-service-qualification':'')+' '+(item.icon==='i-design-address'?'i-design-address':'')+' '+(item.icon==='i-design-about-us'?'i-design-about-us':'')+' '+(item.icon==='i-design-gift-card'?'i-design-gift-card':'')+' '+(item.icon==='i-design-promotion-gift'?'i-design-promotion-gift':'')+' '+(item.icon==='i-design-user-welfare'?'i-design-user-welfare':'')+' '+(item.icon==='i-design-member-code'?'i-design-member-code':'')+' '+(item.icon==='i-design-faq'?'i-design-faq':'')+' '+(item.icon==='i-design-redeem-offer'?'i-design-redeem-offer':'')+' '+(item.icon==='i-design-integral-mall'?'i-design-integral-mall':'')+' '+(item.icon==='i-design-suggested-feedback'?'i-design-suggested-feedback':'')+' '+(item.icon==='i-design-customer-service'?'i-design-customer-service':'')+' '+(item.icon==='i-design-voucher'?'i-design-voucher':'')+' '+(item.icon==='i-design-physical-card'?'i-design-physical-card':'')+' '+(item.icon==='i-design-equity-card'?'i-design-equity-card':'')+' '+(item.icon==='i-design-stored-value-card'?'i-design-stored-value-card':'')+' '+(item.icon==='i-design-member-agreement'?'i-design-member-agreement':'')+' _i_text-52 text-_bl__h_666_br_ '}}" wx:else></text>
+                    </view>
+                    <text class="text-24 text-_bl__h_666_br_ lh-34">{{item.text}}</text>
+                </button>
+            </view>
+        </view>
+        <view class="pt-24 pl-24" wx:if="{{mode==='list'}}">
+            <view class="text-32 text-_bl__h_3D3D3D_br_ lh-52 font-500">{{titleText}}</view>
+            <button binderror="customerServiceHrefError" bindim="customerServiceHrefSuccess" bindplatformim="customerServiceHrefSuccess" bindtap="{{utils.isSpecialType(item.link)?'':'goLink'}}" class="button w-full h-100 border-none px-0 flex" data-im-id="{{item.link==='/tiktokIMCustomerService'?ttImId:''}}" data-item="{{item}}" data-platform-im-type="{{item.link==='/tiktokPlatformCustomerService'?'group_buy':''}}" openType="{{utils.matchOpenType(item.link)}}" wx:for="{{abilityList}}" wx:key="index">
+                <view class="w-68 h-full flex justify-center items-center">
+                    <image lazyLoad class="w-50 h-50" mode="scaleToFill" src="{{__oss__.s(mpxExt,item.img,0)}}" wx:if="{{item.isCustomImg}}"></image>
+                    <text class="{{' '+(item.icon==='i-design-service-qualification'?'i-design-service-qualification':'')+' '+(item.icon==='i-design-address'?'i-design-address':'')+' '+(item.icon==='i-design-about-us'?'i-design-about-us':'')+' '+(item.icon==='i-design-gift-card'?'i-design-gift-card':'')+' '+(item.icon==='i-design-promotion-gift'?'i-design-promotion-gift':'')+' '+(item.icon==='i-design-user-welfare'?'i-design-user-welfare':'')+' '+(item.icon==='i-design-member-code'?'i-design-member-code':'')+' '+(item.icon==='i-design-faq'?'i-design-faq':'')+' '+(item.icon==='i-design-redeem-offer'?'i-design-redeem-offer':'')+' '+(item.icon==='i-design-integral-mall'?'i-design-integral-mall':'')+' '+(item.icon==='i-design-suggested-feedback'?'i-design-suggested-feedback':'')+' '+(item.icon==='i-design-customer-service'?'i-design-customer-service':'')+' '+(item.icon==='i-design-voucher'?'i-design-voucher':'')+' '+(item.icon==='i-design-physical-card'?'i-design-physical-card':'')+' '+(item.icon==='i-design-equity-card'?'i-design-equity-card':'')+' '+(item.icon==='i-design-stored-value-card'?'i-design-stored-value-card':'')+' '+(item.icon==='i-design-member-agreement'?'i-design-member-agreement':'')+' _i_text-48 text-_bl__h_666_br_ '}}" wx:else></text>
+                </view>
+                <view class="flex-1 h-full pl-8 pr-16 border-b border-b-solid border-_bl__h_E5E5E5_br_ flex items-center">
+                    <view class="w-fit text-28 text-_bl__h_333_br_ lh-none">{{item.text}}</view>
+                    <view class="flex-1 flex justify-end items-center">
+                        <text class="text-24 text-_bl__h_999_br_ lh-none">{{item.extraText}}</text>
+                        <text class="i-arrow-r _i_text-24 text-_bl__h_999_br_ ml-6 lh-none"></text>
+                    </view>
+                </view>
+            </button>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="utils" src="../../wxs/index95df9542.wxs"/>

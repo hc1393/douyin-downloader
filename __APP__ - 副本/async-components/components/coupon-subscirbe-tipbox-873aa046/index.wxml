@@ -1,0 +1,16 @@
+<view class="fixed top-0 right-0 bottom-0 left-0 z-110 flex items-center justify-center" wx:if="{{couponSubRule}}">
+    <view catchtap="couponSubChange" catchtouchmove="noop" class="absolute top-0 right-0 bottom-0 left-0 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_6_pr__br_"></view>
+    <view catchtouchmove="noop" class="relative z-12 flex flex-col items-center box-border w-640rpx px-56rpx pt-64rpx pb-72rpx bg-_bl__h_fff_br_ border-rd-20rpx">
+        <view class="font-bold text-36rpx">优惠券提醒</view>
+        <view class="text-26rpx mt-46rpx">1、优惠券提醒将以服务通知的形式进行推送， 单次推送后需再次订阅</view>
+        <view class="mt-40rpx text-26rpx">2、提醒分为优惠券到账提醒和优惠券到期提醒</view>
+        <view class="mt-40rpx text-26rpx">3、为了提高订阅效率，建议勾选“保持以上选 择，不再询问”</view>
+        <view class="w-520rpx h-350rpx mt-30rpx">
+            <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2022/01/13/dd1512aeb739684a.png',0)}}"></image>
+        </view>
+        <view catchtap="couponSubChange" class="absolute right-0 bottom--100rpx left-0 w-60rpx h-60rpx mx-auto my-0">
+            <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2022/01/13/98b1b72c6cf4a043.png',0)}}"></image>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

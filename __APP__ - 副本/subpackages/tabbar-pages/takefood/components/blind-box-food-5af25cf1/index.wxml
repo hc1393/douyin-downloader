@@ -1,0 +1,122 @@
+<import src="/subpackages/tabbar-pages/takefood/template/member-vip-tag4b8b9f89.wxml"></import>
+<view bindtap="closeSlide" catchtouchmove="{{canIUsePageContainer?'':'pop'}}" class="food-sku_mask fixed" style="{{maskIsShow?'':'display:none;'}}" wx:if="{{!canIUsePageContainer}}"></view>
+<view catchtouchmove="{{!canIUsePageContainer?'pop':''}}" class=" {{!canIUsePageContainer?'transition':''}} {{isShow?'active':''}} {{modeLarge=='large'?'mode_large':''}} {{canIUsePageContainer?'food-sku_main':'food-sku_main fixed'}} flex flex-col ">
+    <view class="absolute top-0 left-0 pl-32rpx w-100vw h-108rpx box-border bg-_bl__h_fff_br_ op-0 z-1 flex justify-between items-center" style="opacity: {{headerTitleOpacity}}">
+        <view class="truncate w-432rpx text-36rpx font-bold lh-108rpx">{{info.name}}</view>
+    </view>
+    <view class="flex justify-end absolute top-25rpx right-24rpx w-216rpx z-1 bg-transparent">
+        <view class="food-sku_btn-close flex items-center justify-center" wx:if="{{hasShare}}">
+            <view>
+                <button class="block w-56rpx h-56rpx after-border-none" data-type="goods" hoverClass="none" openType="share" style="background-color: transparent">
+                    <view class="absolute top-0 right-0 bottom-0 left-0 z-100 flex items-center justify-center rounded-full bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_2_pr__br_">
+                        <view class="i-Union text-white text-26"></view>
+                    </view>
+                </button>
+            </view>
+        </view>
+        <view bindtap="closeSlide" class="food-sku_btn-close flex items-center justify-center rounded-full bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_2_pr__br_">
+            <view class="i-guanbi2 text-white text-24"></view>
+        </view>
+    </view>
+    <scroll-view scrollY bindscroll="onSkuContentScroll" bounces="{{false}}" class="food-sku_main-scroll-wrap food-sku_main_scroll main-have-footer {{isIpx?'food-sku_main-ipx':''}}" enhanced="{{true}}" id="mainScrollWrap" scrollIntoView="{{moveTopView}}" scrollTop="{{scrollTop}}" style="{{isRect?'padding-top: 0':''}}">
+        <image catchtap="previewImage" class="food-sku_m-img bl" data-img="{{curGoodsBg}}" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,curGoodsBg,0)}}"></image>
+        <view class="px-32rpx pt-0 pb-48rpx" wx:if="{{info}}">
+            <view class="text-36rpx font-bold lh-none">{{info.name}}</view>
+            <view class="blind-box-goods-desc" wx:if="{{info.baseCombinedSkuList&&info.baseCombinedSkuList.length}}">商品制作完成后开盲盒，随机{{info.baseCombinedSkuList.length}}选{{info.blindBoxQuantity||1}}，一次只能购买1件</view>
+            <view class="food-sku-desc" style="font-size: 26rpx; {{skuDescDisplayHeight?'height:'+skuDescDisplayHeight+'px':''}};color:#333;" wx:if="{{info.richTextDetail}}">
+                <rich-text id="food-sku-richtext" nodes="{{info.richTextDetail}}"></rich-text>
+            </view>
+            <view class="food-sku-desc-mask" wx:if="{{isShowSkuDescSwitcher&&isSkuDescCollapsed}}"></view>
+            <view bindtap="skuDescDisplayToggle" class="food-sku-desc-toggle" wx:if="{{isShowSkuDescSwitcher}}">{{isSkuDescCollapsed?'展开':'收起'}}<text class="ml-14rpx text-24rpx iconfont {{isSkuDescCollapsed?'i-jiantou-xia':'i-jiantou-shang'}}"></text>
+            </view>
+            <view class="food-sku_m-act-wrap flex items-center" wx:if="{{!info.goodsCouponsInfo&&(info.activityText||info.minBuyNum||info.memberPrice)}}">
+                <block wx:if="{{info.activityText&&info.activityText.length}}">
+                    <qm-label customStyle="margin-right: 6rpx" label="{{item}}" wx:for="{{info.activityText}}" wx:key="index"></qm-label>
+                </block>
+                <view class="food-sku_member-price" wx:elif="{{info.memberPrice!==null&&!isShowRecommendPaidCard&&orderData['memberPrice']}}">
+                    <template is="member-vip-tag" data="{{info:info,mpxExt:mpxExt}}" wx:if="{{info.memberPriceName}}"></template>
+                    <block wx:else>
+                        <view class="food-sku_food-money-price">￥{{info.memberPrice}}起<text wx:if="{{info.memberRuleVo&&info.memberRuleVo.limitNum}}">，限{{info.memberRuleVo.limitNum}}件</text>
+                        </view>
+                        <view class="food-sku_member-price-tip">新品未上架</view>
+                    </block>
+                </view>
+                <qm-label customStyle="margin-right: 6rpx" label="{{'升级后解锁'+info.nextLevelName+' ￥'+info.nextMemberPrice+'起'}}" theme="{{colorTheme}}" wx:if="{{info.nextLevelName&&info.nextLevelName.length&&info.nextMemberPrice}}"></qm-label>
+            </view>
+            <scroll-view enablePassive scrollX class="blind-box-wrapper">
+                <view class="blind-box-item" wx:for="{{info.baseCombinedSkuList}}" wx:for-item="blindBoxItem" wx:key="index">
+                    <view class="blind-box-img">
+                        <image class="goods-img" src="{{__oss__.s(mpxExt,blindBoxItem.pictureUrlList[0],0)}}" wx:if="{{blindBoxItem.pictureUrlList&&blindBoxItem.pictureUrlList.length}}"></image>
+                        <image class="blind-box-hide" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/08/21/blind-box-hide-icon.png',0)}}" wx:if="{{blindBoxItem.isMystery}}"></image>
+                    </view>
+                    <view class="blind-box-name">{{blindBoxItem.name}}</view>
+                    <view class="blind-box-price">￥{{blindBoxItem.combinedItemSkuSalePrice}}</view>
+                </view>
+            </scroll-view>
+            <view class="food-sku_m-sku" wx:if="{{attributesData&&attributesData.length||info.unit_type}}">
+                <block wx:for="{{attributesData}}" wx:key="id">
+                    <sku-selector bindchange="skuChange" entity="{{entity}}" groupData="{{item}}" isSingleSku="{{isSingleSku}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" usableSpecs="{{usableSpecs}}" wx:if="{{item.skuType==='specs'}}"></sku-selector>
+                    <sku-selector bindchange="skuChange" groupData="{{item}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" wx:elif="{{item.skuType==='property'}}"></sku-selector>
+                    <attach-selector bindattachImgShowChange="attachImgShowChange" bindchange="chargingChange" bindshowMore="chargingShowMore" groupAttach="{{item}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" wx:elif="{{item.skuType==='attach'}}"></attach-selector>
+                </block>
+            </view>
+        </view>
+        <view class="food-sku_botom-img-wrapper" wx:if="{{info.underPic}}">
+            <image class="food-sku_botom-img" mode="widthFix" src="{{__oss__.s(mpxExt,info.underPic,0)}}"></image>
+        </view>
+    </scroll-view>
+    <view class="food-sku_footer box-border" style="padding-bottom:{{pagePaddingBottom}}" wx:if="{{info.type!=10}}">
+        <view class="food-sku_f-main-wrap flex items-center">
+            <view class="food-sku_f-main flex1">
+                <view class="food-sku_f-price-box" wx:if="{{!isHidePrice}}">
+                    <view class="food-sku_f-price" wx:if="{{isIntegralGoods}}">{{currentPoints}}<view class="food-sku_f-price_grey_font">{{pointName}}</view>
+                        <block wx:if="{{currentPointsPrice}}">
+                            <view class="food-sku_f-price_grey_font">+</view>
+                            <text class="food-sku-currency-symbol">￥</text>{{currentPointsPrice}}</block>
+                    </view>
+                    <view class="food-sku_f-price" wx:else>
+                        <text class="food-sku-currency-symbol">￥</text>{{amount}}<text class="food-sku-amount-origin" wx:if="{{amountOriginal>amount}}">
+                            <text class="food-sku-currency-symbol">￥</text>{{amountOriginal}}</text>
+                    </view>
+                </view>
+                <view class="food-sku-text-wrapper">
+                    <view class="food-sku-text">
+                        <block wx:if="{{loadingGoodsText&&skuSelectText}}">[</block>{{skuSelectText}}<block wx:if="{{loadingGoodsText&&skuSelectText}}">]</block>
+                        <text style="color: {{colorTheme}};" wx:if="{{loadingGoodsText}}">
+                            <block wx:if="{{skuSelectText}}">,</block>{{loadingGoodsText}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="food-sku_buynow-btn" wx:if="{{!info.totalInventory}}">
+            <view bindtap="chooseOtherSellShop" class="food-sku-sell-out-btn" style="background:{{colorTheme}}">商品已售罄 查看附近门店</view>
+        </view>
+        <block wx:else>
+            <view class="food-sku_buynow-btn" wx:if="{{curSkuUnusable}}">
+                <view class="food-sku_buynow-btn-fill">
+                    <zm-button block round bindbtntap="addCartFun" disabled="{{cartButton.isDisable||isErrorStatus||isExistNoSelect}}" isImmediately="1" size="large" textColor="{{textColor}}">该规格不可加购,请选择其他规格</zm-button>
+                </view>
+            </view>
+            <view class="food-sku_buynow-btn" wx:elif="{{showOrderBtn}}">
+                <view class="food-sku_buynow-btn-fill">
+                    <zm-button block round bindbtntap="addCartFun" disabled="{{cartButton.isDisable||isErrorStatus||isExistNoSelect}}" isImmediately="1" size="large" textColor="{{textColor}}">去下单</zm-button>
+                </view>
+            </view>
+            <view class="food-sku_buynow-btn" wx:else>
+                <view class="{{goodsDetailData.immediateBuy?'food-sku_buynow-btn-fill':''}}" wx:if="{{goodsDetailData.immediateBuy&&!isMulit&&!isGroup&&!isPin&&!isSearchGoods}}">
+                    <zm-button block plain round bindbtntap="addCartFun" disabled="{{cartButton.isDisable||isErrorStatus||isExistNoSelect}}" isImmediately="1" size="large">立即购买</zm-button>
+                </view>
+                <view class="food-sku_buynow-btn-fill">
+                    <zm-button block round bindbtntap="addCartFunCheck" disabled="{{cartButton.isDisable||isErrorStatus||isExistNoSelect}}" size="large" textColor="{{textColor}}">{{cartButton.text||'加入购物车'}}</zm-button>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="food-sku_ipx-seat" wx:elif="{{isIpx}}"></view>
+</view>
+<view catchtap="attachImgShowChange" class="attach-img-view" wx:if="{{attachImgShow}}">
+    <image class="attach-img" src="{{__oss__.s(mpxExt,attachImg,0)}}"></image>
+    <view class="attach-name" style="background: {{tools.hexToRgba('#FFFFFF','0.15')}}">{{attachName}}</view>
+</view>
+<wxs module="__oss__" src="../../../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

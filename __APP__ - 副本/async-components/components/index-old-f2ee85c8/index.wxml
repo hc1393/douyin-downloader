@@ -1,0 +1,228 @@
+<view class="attach-selector-wrap _f2ee85c8 ">
+    <view class="attach-selector-group _f2ee85c8 " wx:for="{{groups}}" wx:key="id">
+        <view class="attach-selector-group-name {{useDecorate?jiaLiaoTitleBold?'bold':'':'bold'}} _f2ee85c8 " style="{{useDecorate?'font-size:'+jiaLiaoTitleFontSize+'rpx;':''}}" wx:if="{{!item.hideGroup}}">
+            <view class="attach-selector-group-title _f2ee85c8 ">{{item.name}}<block wx:if="{{item.limit&&item.limit.isLimit==2}}">（必选<block wx:if="{{item.limit.min}}">{{item.limit.min}}份</block>）</block>
+            </view>
+            <view class="food-sku-group-desc _f2ee85c8 " style="font-size: {{renovationData.jiaLiaoTipsFontSize+'rpx'}}" wx:if="{{item.desc}}">{{item.desc}}</view>
+        </view>
+        <view class="attach-selector-group-wrap1 _f2ee85c8 " wx:if="{{item.attachType==1}}">
+            <view class="food-sku_m-sku-item food-sku_m-charging flex items-center {{sonItem.activeClass=='active'?'active':sonItem.activeClass=='disable'?'disable':''}} _f2ee85c8 " style="background-color: {{sonItem.activeClass=='active'?tools.hexToRgba(colorTheme,skuSelectBgColorAlpha):''}};color: {{sonItem.activeClass==='active'?textColor+'!important':''}};{{sonItem.pictureUrlList&&sonItem.pictureUrlList.length&&showAttachGoodsImg?'padding-left:10rpx;':''}}" wx:if="{{(sonIndex<7||sonIndex>6&&item.isShowMore)&&!(mutexHideAttach&&sonItem.activeClass=='disable')}}" wx:for="{{item.attaches}}" wx:for-index="sonIndex" wx:for-item="sonItem" wx:key="attachGoodsId">
+                <view class="food-sku_m-c-name _f2ee85c8 ">
+                    <view class="attach-img-block _f2ee85c8 " wx:if="{{sonItem.pictureUrlList&&sonItem.pictureUrlList.length&&showAttachGoodsImg}}">
+                        <image catchtap="previewImage" class="attach-img _f2ee85c8 " data-img="{{sonItem.pictureUrlList[0]}}" data-name="{{sonItem.attachGoodsName}}" src="{{__oss__.s(mpxExt,sonItem.pictureUrlList[0],0)}}"></image>
+                    </view>
+                    <block wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleStar&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">
+                        <image class="subscript-icon-img _f2ee85c8 " lazyLoad="true" src="{{__oss__.s(mpxExt,renovationData.recommendStarIcon,0)}}" wx:if="{{renovationData.recommendStarIcon}}"></image>
+                        <text class="iconfont i-star _f2ee85c8 " style="color:{{sonItem.activeClass=='active'?textColor+'!important':''}}" wx:else></text>
+                    </block>
+                    <text class=" _f2ee85c8 ">{{sonItem.attachGoodsName}}<text class=" _f2ee85c8 " style="color:{{sonItem.activeClass=='active'?textColor+'!important':''}}" wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">（推荐）</text>
+                    </text>
+                    <block wx:if="{{sonItem.isRecommend&&renovationData.recommendStyleType==2&&sonItem.inventory&&sonItem.activeClass!='disable'&&!sonItem.count}}">
+                        <view class="recommend-tip-item recommend-tip-right-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                            <view class="recommend-tip-right-top-after _f2ee85c8 " style="border-right-color: {{colorTheme}}"></view>
+                        </view>
+                        <view class="recommend-tip-item recommend-tip-left-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                            <view class="recommend-tip-left-top-after _f2ee85c8 " style="border-left-color: {{colorTheme}}"></view>
+                        </view>
+                    </block>
+                </view>
+                <view class="food-sku_m-sku-c-price flex1 _f2ee85c8 " style="color: {{sonItem.activeClass==='active'?textColor+'!important':colorTheme}}">{{currencySymbol+sonItem.attachGoodsPrice}}</view>
+                <view class="food-sku_m-sku-c-num-wrap _f2ee85c8 ">
+                    <view class="text-right_i_ _f2ee85c8 " wx:if="{{!sonItem.inventory}}">
+                        <text class=" _f2ee85c8 " wx:if="{{!selloutBadge}}">{{_i1}}</text>
+                        <view class="samll-attach-item-sellout-absolute _f2ee85c8 " wx:if="{{selloutBadge}}">售罄</view>
+                    </view>
+                    <view class="flex items-center _f2ee85c8 " wx:else>
+                        <view bindtap="chargingChange" class="food-sku_m-sku-c-btn _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="cut" style="visibility: {{!!sonItem.count?'visible':'hidden'}}">
+                            <text class="iconfont i-minus-circle1 _f2ee85c8 " style="color: {{sonItem.activeClass=='disable'?'#ccc':''}};color: {{sonItem.activeClass==='active'?textColor+'!important':''}}"></text>
+                        </view>
+                        <view class="food-sku_m-sku-c-num flex1 _f2ee85c8 " style="color: {{sonItem.activeClass==='active'?textColor:''}};visibility: {{!!sonItem.count?'visible':'hidden'}}">{{sonItem.count||0}}</view>
+                        <view bindtap="chargingChange" class="food-sku_m-sku-c-btn _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="add">
+                            <text class="iconfont i-add-circle _f2ee85c8 " style="color: {{sonItem.activeClass=='disable'?'#ccc':''}};color: {{sonItem.activeClass==='active'?textColor+'!important':''}}"></text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="food-sku_show-more _f2ee85c8 ">
+                <view bindtap="isOpenMoreAttach" class="food-sku_show-more-btn _f2ee85c8 " data-index="{{index}}" data-isshowmore="{{item.isShowMore}}" style="color: {{colorTheme}};" wx:if="{{item.isFlod}}">更多<text class="iconfont {{item.isShowMore?'i-jiantou-shang':'i-jiantou-xia'}} _f2ee85c8 " style="margin: 0 0 0 6rpx;font-size:24rpx;color: {{colorTheme}};"></text>
+                </view>
+            </view>
+        </view>
+        <view class="attach-selector-group-wrap2 _f2ee85c8 " wx:elif="{{item.attachType==2}}">
+            <view class="food-sku_m-c-small flex items-center {{sonItem.activeClass=='active'?'active':sonItem.activeClass=='disable'?'disable':''}} _f2ee85c8 " style="background-color: {{sonItem.activeClass=='active'?tools.hexToRgba(colorTheme,skuSelectBgColorAlpha):''}};" wx:if="{{(sonIndex<7||sonIndex>6&&item.isShowMore)&&!(mutexHideAttach&&sonItem.activeClass=='disable')}}" wx:for="{{item.attaches}}" wx:for-index="sonIndex" wx:for-item="sonItem" wx:key="attachGoodsId">
+                <block wx:if="{{!sonItem.inventory}}">
+                    <view class="food-sku_m-c-s-name flex1 _f2ee85c8 ">{{sonItem.attachGoodsName}}</view>
+                    <view class=" _f2ee85c8 " wx:if="{{!selloutBadge}}">{{_i2}}</view>
+                    <view class="samll-attach-item-sellout-absolute _f2ee85c8 " wx:if="{{selloutBadge}}">售罄</view>
+                </block>
+                <block wx:else>
+                    <view bindtap="chargingChange" class="food-sku_m-sku-c-btn _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="cut">
+                        <text class="iconfont i-minus-circle1 _f2ee85c8 " style="color: {{sonItem.activeClass=='disable'?'#ccc':''}};color: {{sonItem.activeClass==='active'?textColor+'!important':''}}"></text>
+                    </view>
+                    <view class="food-sku_m-c-s-name flex1 _f2ee85c8 " style="color: {{sonItem.activeClass==='active'?textColor:''}}">
+                        <block wx:if="{{sonItem.isRecommend&&renovationData.recommendStyleType==2&&sonItem.inventory&&sonItem.activeClass!='disable'&&!sonItem.count}}">
+                            <view class="recommend-tip-item recommend-tip-right-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                                <view class="recommend-tip-right-top-after _f2ee85c8 " style="border-right-color: {{colorTheme}}"></view>
+                            </view>
+                            <view class="recommend-tip-item recommend-tip-left-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                                <view class="recommend-tip-left-top-after _f2ee85c8 " style="border-left-color: {{colorTheme}}"></view>
+                            </view>
+                        </block>
+                        <block wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleStar&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">
+                            <image class="subscript-icon-img _f2ee85c8 " lazyLoad="true" src="{{__oss__.s(mpxExt,renovationData.recommendStarIcon,0)}}" wx:if="{{renovationData.recommendStarIcon}}"></image>
+                            <text class="iconfont i-star _f2ee85c8 " style="color:{{sonItem.activeClass=='active'?textColor+'!important':''}}" wx:else></text>
+                        </block>{{sonItem.attachGoodsName}}<text class=" _f2ee85c8 " style="color:{{sonItem.activeClass=='active'?textColor+'!important':''}}" wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">（推荐）</text>
+                    </view>
+                    <view class="food-sku_m-c-s-price _f2ee85c8 " style="color: {{sonItem.activeClass==='active'?textColor:''}}">{{currencySymbol+sonItem.attachGoodsPrice}}</view>
+                    <view bindtap="chargingChange" class="food-sku_m-sku-c-btn _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="add">
+                        <text class="iconfont i-add-circle _f2ee85c8 " style="color: {{sonItem.activeClass=='disable'?'#ccc':''}};color: {{sonItem.activeClass==='active'?textColor+'!important':''}}"></text>
+                    </view>
+                    <view class="food-sku_m-c-s-num flex items-center justify-center _f2ee85c8 " style="background-color: {{colorTheme}};color:{{textColor}}" wx:if="{{sonItem.count>0}}">{{sonItem.count}}</view>
+                    <view class="click-hot-area _f2ee85c8 ">
+                        <view bindtap="chargingChange" class="hot-area-left _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="cut"></view>
+                        <view bindtap="chargingChange" class="hot-area-right _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="add"></view>
+                    </view>
+                </block>
+            </view>
+            <view class="food-sku_show-more _f2ee85c8 ">
+                <view bindtap="isOpenMoreAttach" class="food-sku_show-more-btn _f2ee85c8 " data-index="{{index}}" data-isshowmore="{{item.isShowMore}}" style="color: {{colorTheme}};" wx:if="{{item.isFlod}}">更多<text class="iconfont {{item.isShowMore?'i-jiantou-shang':'i-jiantou-xia'}} _f2ee85c8 " style="margin: 0 0 0 6rpx;font-size:24rpx;color: {{colorTheme}};"></text>
+                </view>
+            </view>
+        </view>
+        <view class="attach-selector-group-wrap3 _f2ee85c8 " wx:elif="{{item.attachType==3}}">
+            <view bindtap="chargingChange" class="food-sku_m-sku-item food-sku_m-specs {{sonItem.activeClass=='active'?'active':sonItem.activeClass=='disable'?'disable':''}} _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="add" style="background-color: {{sonItem.activeClass=='active'?colorTheme:''}};color: {{sonItem.activeClass==='active'?textColor+'!important':''}}" wx:for="{{item.attaches}}" wx:for-index="sonIndex" wx:for-item="sonItem" wx:key="attachGoodsId">{{sonItem.attachGoodsName}}</view>
+        </view>
+        <view class="attach-selector-group-wrap4 _f2ee85c8 " wx:elif="{{item.attachType==4}}">
+            <view bindtap="chargingChange" class="food-sku_m-sku-item food-sku_m-specs {{sonItem.activeClass=='active'?'active':sonItem.activeClass=='disable'?sonItem.disableType==='mutex'?'mutex-disable':'disable':''}} _f2ee85c8 " data-attachtype="{{item.attachType}}" data-groupid="{{item.id}}" data-is-relative-price="{{item.limit&&item.limit.isLimit==3}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="{{sonItem.activeClass=='active'?'cut':'add'}}" style="background-color: {{sonItem.activeClass=='active'?tools.hexToRgba(colorTheme,skuSelectBgColorAlpha):''}};{{sonItem.pictureUrlList&&sonItem.pictureUrlList.length&&showAttachGoodsImg?'padding-left:10rpx;':''}}" wx:if="{{(sonIndex<7||sonIndex>6&&item.isShowMore)&&!(mutexHideAttach&&sonItem.activeClass=='disable')}}" wx:for="{{item.attaches}}" wx:for-index="sonIndex" wx:for-item="sonItem" wx:key="attachGoodsId">
+                <block wx:if="{{!sonItem.inventory}}">
+                    <text class="samll-attach-item-sellout _f2ee85c8 ">{{sonItem.attachGoodsName}} {{selloutBadge?'':'已售罄'}}</text>
+                    <view class="samll-attach-item-sellout-absolute _f2ee85c8 " wx:if="{{selloutBadge}}">售罄</view>
+                </block>
+                <view class=" _f2ee85c8 " style="display: flex; align-items: center" wx:else>
+                    <view class="samll-attach-item-name _f2ee85c8 " style="color: {{sonItem.activeClass==='active'?textColor:''}};">
+                        <view class="attach-img-block-small _f2ee85c8 " wx:if="{{sonItem.pictureUrlList&&sonItem.pictureUrlList.length&&showAttachGoodsImg}}">
+                            <image catchtap="previewImage" class="attach-img _f2ee85c8 " data-img="{{sonItem.pictureUrlList[0]}}" data-name="{{sonItem.attachGoodsName}}" src="{{__oss__.s(mpxExt,sonItem.pictureUrlList[0],0)}}"></image>
+                        </view>
+                        <block wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleStar&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">
+                            <image class="subscript-icon-img _f2ee85c8 " lazyLoad="true" src="{{__oss__.s(mpxExt,renovationData.recommendStarIcon,0)}}" wx:if="{{renovationData.recommendStarIcon}}"></image>
+                            <text class="iconfont i-star _f2ee85c8 " style="color:{{sonItem.activeClass=='active'?textColor+'!important':''}}" wx:else></text>
+                        </block>
+                        <text class=" _f2ee85c8 ">{{sonItem.attachGoodsName}}<text class=" _f2ee85c8 " wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">（推荐）</text>
+                        </text>
+                    </view>
+                    <text class="samll-attach-item-price _f2ee85c8 " style="color: {{sonItem.activeClass==='active'?textColor:''}}" wx:if="{{addPriceStyle!=='badge'&&tools.attachPrice(item.limit,sonItem)}}">{{tools.attachPrice(item.limit,sonItem,addPriceStyle==='rmb'?currencySymbol:'')}}</text>
+                    <view class="samll-attach-item-price-absolute _f2ee85c8 " style="background-color: {{sonItem.activeClass=='active'?'#FFF':colorTheme}};color: {{sonItem.activeClass=='active'?colorTheme:'#FFF'}};border-color: {{sonItem.activeClass=='active'?colorTheme:''}};border: solid 1px;" wx:if="{{addPriceStyle=='badge'&&tools.attachPrice(item.limit,sonItem)}}">
+                        <block wx:if="{{tools.attachPrice(item.limit,sonItem)>0}}">+</block>{{tools.attachPrice(item.limit,sonItem)}}</view>
+                    <block wx:if="{{sonItem.isRecommend&&renovationData.recommendStyleType==2&&sonItem.inventory&&sonItem.activeClass!='disable'}}">
+                        <view class="recommend-tip-item recommend-tip-right-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{( renovationData.recommendBadgeStyle==1||renovationData.recommendBadgeStyle==2&&tools.attachPrice(item.limit,sonItem) )&&!tools.attachPrice(item.limit,sonItem)}}">推荐<view class="recommend-tip-right-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                            <view class="recommend-tip-right-top-after _f2ee85c8 " style="border-right-color: {{colorTheme}}"></view>
+                        </view>
+                        <view class="recommend-tip-item recommend-tip-left-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{renovationData.recommendBadgeStyle==2&&!tools.attachPrice(item.limit,sonItem)||tools.attachPrice(item.limit,sonItem)}}">推荐<view class="recommend-tip-left-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                            <view class="recommend-tip-left-top-after _f2ee85c8 " style="border-left-color: {{colorTheme}}"></view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view bindtap="isOpenMoreAttach" class="food-sku_m-sku-item food-sku_m-specs _f2ee85c8 " data-index="{{index}}" data-isshowmore="{{item.isShowMore}}" style="color: {{colorTheme}};" wx:if="{{item.isFlod}}">更多<text class="iconfont {{item.isShowMore?'i-jiantou-shang':'i-jiantou-xia'}} _f2ee85c8 " style="margin: 0 0 0 6rpx;color: {{colorTheme}};"></text>
+            </view>
+        </view>
+        <view class="attach-selector-group-wrap5 _f2ee85c8 " wx:elif="{{item.attachType==5}}">
+            <view class="food-sku-attach-item-renovation-one _f2ee85c8 " wx:if="{{(sonIndex<3||sonIndex>2&&item.isShowMore)&&!(mutexHideAttach&&sonItem.activeClass=='disable')}}" wx:for="{{item.attaches}}" wx:for-index="sonIndex" wx:for-item="sonItem" wx:key="attachGoodsId">
+                <view class="attach-item-img-block _f2ee85c8 " wx:if="{{sonItem.pictureUrlList&&sonItem.pictureUrlList.length}}">
+                    <image catchtap="previewImage" class="attach-item-img _f2ee85c8 " data-img="{{sonItem.pictureUrlList[0]}}" data-name="{{sonItem.attachGoodsName}}" src="{{__oss__.s(mpxExt,sonItem.pictureUrlList[0],0)}}"></image>
+                </view>
+                <view class="attach-item-content _f2ee85c8 " style="height: 100rpx">
+                    <view class="attach-item-content-left _f2ee85c8 " style="height: 100rpx">
+                        <view class="attach-item-title-info _f2ee85c8 ">
+                            <view class="attach-item-title-wrapper _f2ee85c8 ">
+                                <block wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleStar&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">
+                                    <image class="subscript-icon-img _f2ee85c8 " lazyLoad="true" src="{{__oss__.s(mpxExt,renovationData.recommendStarIcon,0)}}" wx:if="{{renovationData.recommendStarIcon}}"></image>
+                                    <view class="iconfont i-star attach-icon-star _f2ee85c8 " style="color:{{sonItem.activeClass=='active'?textColor+'!important':''}}" wx:else></view>
+                                </block>
+                                <view class="atatch-item-name _f2ee85c8 " style="{{sonItem.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'?'flex: 1;':''}}">{{sonItem.attachGoodsName}}</view>
+                                <view class=" _f2ee85c8 " style="color:{{sonItem.activeClass=='active'?textColor+'!important':''}}" wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">（推荐）</view>
+                            </view>
+                            <view class="attach-item-desc _f2ee85c8 " wx:if="{{sonItem.desc}}">{{sonItem.desc}}</view>
+                        </view>
+                        <view class="attach-item-addprice _f2ee85c8 " wx:if="{{sonItem.attachGoodsPrice&&sonItem.attachGoodsPrice!=0}}">{{currencySymbol+sonItem.attachGoodsPrice}}</view>
+                    </view>
+                    <view class="attach-item-content-right _f2ee85c8 ">
+                        <view class="attach-item-sellout _f2ee85c8 " wx:if="{{!sonItem.inventory}}">{{_i3}}</view>
+                        <view class="flex items-center _f2ee85c8 " wx:else>
+                            <view bindtap="chargingChange" class="food-sku_m-sku-c-btn _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="cut" style="visibility: {{!!sonItem.count?'visible':'hidden'}}">
+                                <text class="iconfont i-minus-circle _f2ee85c8 " style="color:{{colorTheme}};color: {{sonItem.activeClass=='disable'?'#ccc':''}};font-size:36rpx"></text>
+                            </view>
+                            <view class="food-sku_m-sku-c-num flex1 _f2ee85c8 " style="visibility: {{!!sonItem.count?'visible':'hidden'}}">{{sonItem.count||0}}</view>
+                            <view bindtap="chargingChange" class="food-sku_m-sku-c-btn _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="add">
+                                <text class="iconfont i-plus-circle-fill _f2ee85c8 " style="color:{{colorTheme}};color: {{sonItem.activeClass=='disable'?'#ccc':''}};font-size:36rpx"></text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <block wx:if="{{sonItem.isRecommend&&renovationData.recommendStyleType==2&&sonItem.inventory&&sonItem.activeClass!='disable'}}">
+                    <view class="recommend-tip-item recommend-tip-right-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                        <view class="recommend-tip-right-top-after _f2ee85c8 " style="border-right-color: {{colorTheme}}"></view>
+                    </view>
+                    <view class="recommend-tip-item recommend-tip-left-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                        <view class="recommend-tip-left-top-after _f2ee85c8 " style="border-left-color: {{colorTheme}}"></view>
+                    </view>
+                </block>
+            </view>
+            <view class="food-sku_show-more _f2ee85c8 ">
+                <view bindtap="isOpenMoreAttach" class="food-sku_show-more-btn _f2ee85c8 " data-index="{{index}}" data-isshowmore="{{item.isShowMore}}" style="border: none; color: #666" wx:if="{{item.isFlod}}">展开<text class="iconfont {{item.isShowMore?'i-jiantou-shang':'i-jiantou-xia'}} _f2ee85c8 " style="margin: 0 0 0 6rpx; font-size: 24rpx; color: #959595"></text>
+                </view>
+            </view>
+        </view>
+        <view class="flex flex-wrap _f2ee85c8 " wx:elif="{{item.attachType==6}}">
+            <view class="food-sku-attach-item-renovation-two _f2ee85c8 " wx:if="{{(sonIndex<6||sonIndex>5&&item.isShowMore)&&!(mutexHideAttach&&sonItem.activeClass=='disable')}}" wx:for="{{item.attaches}}" wx:for-index="sonIndex" wx:for-item="sonItem" wx:key="attachGoodsId">
+                <view class="attach-item-img-block _f2ee85c8 " wx:if="{{sonItem.pictureUrlList&&sonItem.pictureUrlList.length}}">
+                    <image catchtap="previewImage" class="attach-item-img _f2ee85c8 " data-img="{{sonItem.pictureUrlList[0]}}" data-name="{{sonItem.attachGoodsName}}" src="{{__oss__.s(mpxExt,sonItem.pictureUrlList[0],0)}}"></image>
+                </view>
+                <view class="attach-item-content _f2ee85c8 " style="height: 100%">
+                    <view class="attach-item-content-left _f2ee85c8 " style="height: 100%">
+                        <view class="attach-item-title-info _f2ee85c8 ">
+                            <view class="attach-item-title-wrapper _f2ee85c8 ">
+                                <block wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleStar&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">
+                                    <image class="subscript-icon-img _f2ee85c8 " lazyLoad="true" src="{{__oss__.s(mpxExt,renovationData.recommendStarIcon,0)}}" wx:if="{{renovationData.recommendStarIcon}}"></image>
+                                    <view class="iconfont i-star attach-icon-star _f2ee85c8 " style="color:{{sonItem.activeClass=='active'?textColor+'!important':''}}" wx:else></view>
+                                </block>
+                                <view class="atatch-item-name _f2ee85c8 " style="{{sonItem.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'?'flex: 1;':''}}">{{sonItem.attachGoodsName}}</view>
+                                <view class=" _f2ee85c8 " style="color:{{sonItem.activeClass=='active'?textColor+'!important':''}}" wx:if="{{sonItem.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&sonItem.inventory&&sonItem.activeClass!='disable'}}">（推荐）</view>
+                            </view>
+                            <view class="attach-item-desc _f2ee85c8 " wx:if="{{sonItem.desc}}">{{sonItem.desc}}</view>
+                        </view>
+                        <view class="attach-item-bottom _f2ee85c8 ">
+                            <view class="attach-item-addprice _f2ee85c8 " style="visibility:{{sonItem.attachGoodsPrice&&sonItem.attachGoodsPrice!=0?'visible':'hidden'}}">{{currencySymbol+sonItem.attachGoodsPrice}}</view>
+                            <view class="attach-item-content-right _f2ee85c8 ">
+                                <view class="attach-item-sellout _f2ee85c8 " wx:if="{{!sonItem.inventory}}">{{_i4}}</view>
+                                <view class="flex items-center _f2ee85c8 " wx:else>
+                                    <view bindtap="chargingChange" class="food-sku_m-sku-c-btn _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="cut" style="visibility: {{!!sonItem.count?'visible':'hidden'}}">
+                                        <text class="iconfont i-minus-circle _f2ee85c8 " style="color:{{colorTheme}};color: {{sonItem.activeClass=='disable'?'#ccc':''}};font-size:36rpx"></text>
+                                    </view>
+                                    <view class="food-sku_m-sku-c-num flex1 _f2ee85c8 " style="visibility: {{!!sonItem.count?'visible':'hidden'}}">{{sonItem.count||0}}</view>
+                                    <view bindtap="chargingChange" class="food-sku_m-sku-c-btn _f2ee85c8 " data-groupid="{{item.id}}" data-item="{{sonItem}}" data-multiple="{{item.multiple}}" data-type="add">
+                                        <text class="iconfont i-plus-circle-fill _f2ee85c8 " style="color:{{colorTheme}};color: {{sonItem.activeClass=='disable'?'#ccc':''}};font-size:36rpx"></text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <block wx:if="{{sonItem.isRecommend&&renovationData.recommendStyleType==2&&sonItem.inventory&&sonItem.activeClass!='disable'}}">
+                    <view class="recommend-tip-item recommend-tip-right-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                        <view class="recommend-tip-right-top-after _f2ee85c8 " style="border-right-color: {{colorTheme}}"></view>
+                    </view>
+                    <view class="recommend-tip-item recommend-tip-left-top _f2ee85c8 " style="background:{{colorTheme}};" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _f2ee85c8 " wx:if="{{sonItem.activeClass=='active'}}"></view>
+                        <view class="recommend-tip-left-top-after _f2ee85c8 " style="border-left-color: {{colorTheme}}"></view>
+                    </view>
+                </block>
+            </view>
+            <view class="food-sku_show-more _f2ee85c8 ">
+                <view bindtap="isOpenMoreAttach" class="food-sku_show-more-btn _f2ee85c8 " data-index="{{index}}" data-isshowmore="{{item.isShowMore}}" style="border: none; color: #666" wx:if="{{item.isFlod}}">展开<text class="iconfont {{item.isShowMore?'i-jiantou-shang':'i-jiantou-xia'}} _f2ee85c8 " style="margin: 0 0 0 6rpx; font-size: 24rpx; color: #959595"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

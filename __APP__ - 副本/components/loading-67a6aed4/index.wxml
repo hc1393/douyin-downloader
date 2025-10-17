@@ -1,0 +1,14 @@
+<std-navigation-bar bindgetNavHeight="getNavHeight" wx:if="{{showNavigator&&status!='pending'}}"></std-navigation-bar>
+<view class="flex flex-col items-center justify-center fixed top-0 bottom-0 left-0 right-0 z-900" wx:if="{{status==='pending'}}">
+    <std-image lazyLoad height="200" src="{{loadingUrl}}" width="200"></std-image>
+</view>
+<view class="flex flex-col items-center justify-center fixed top-0 bottom-0 left-0 right-0 z-900 bg-_bl__h_fff_br_" style="{{paddingBottom}} {{topStyle}}" wx:elif="{{status==='error'}}">
+    <image class="w-300rpx h-300rpx" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,errorImageSrc,0)}}" style="{{errorImageStyle}}" wx:if="{{showErrorImage}}"></image>
+    <view class="text-center lh-54rpx text-_bl__h_606060_br_ mt-20rpx mb-40rpx" wx:if="{{errorMode==1}}">{{customText}}</view>
+    <button bindtap="tapRetryBtn" class="{{'w-320rpx h-80rpx text-32rpx lh-80rpx text-_bl__h_fff_br_ bg-_bl__h_000_br_ border-rd-80rpx '+(errorMode==2?'absolute mt-60rpx':'mt-0')}}" style="background: {{btnBgColor}}; {{errorButtonStyle}}" wx:if="{{refresh}}">{{loadingBtnText}}</button>
+</view>
+<view class="flex flex-col items-center justify-center fixed top-0 bottom-0 left-0 right-0 z-900 bg-_bl__h_fff_br_" style="{{retry_bg}}" wx:if="{{status==='retry'}}">
+    <image class="w-200rpx h-200rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,retryImageSrc,0)}}" style="{{retryImageStyle}}" wx:if="{{showErrorImage}}"></image>
+    <button class="w-320rpx h-80rpx text-32rpx lh-80rpx text-_bl__h_fff_br_ bg-_bl__h_000_br_ border-rd-80rpx" style="visibility: hidden;background: {{btnBgColor}}"></button>
+</view>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

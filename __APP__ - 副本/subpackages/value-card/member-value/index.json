@@ -1,0 +1,25 @@
+{
+  "navigationStyle": "custom",
+  "componentPlaceholder": {
+    "cart-control": "view",
+    "confirm": "view",
+    "custom-rich-text": "view",
+    "subscribe-mask": "view",
+    "empty-image": "view",
+    "open-subscription": "view",
+    "show-toast": "view",
+    "shop-selector": "view",
+    "stored-value-tag": "view",
+    "cell": "view",
+    "half-bowl": "view",
+    "love-dining": "view",
+    "love-donate": "view",
+    "material-cell": "view",
+    "merc-list": "view",
+    "plugin-demo": "view",
+    "pullNewList": "view",
+    "regift": "view",
+    "send-coupon": "view",
+    "studentVerify": "view"
+  }
+}

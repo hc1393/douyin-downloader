@@ -1,0 +1,43 @@
+<qm-popup bindr="__refEmit" class="ref_physicalCardPopup_1" closeOnClickOverlay="{{false}}" data-r=".ref_physicalCardPopup_1" position="bottom" show="{{show}}" zIndex="{{10002}}">
+    <view class="bg-_bl__h_f5f5f5_br_ border-rd-_bl_30rpx_30rpx_0rpx_0rpx_br_ overflow-hidden">
+        <view class="flex items-center justify-center w-100vw h-102rpx bg-_bl__h_ffffff_br_ relative">
+            <text>选择实体卡</text>
+            <text bindtap="close" class="text-30rpx text-_bl__h_b5b5b5_br_ p-30rpx absolute top-0 right-0 iconfont i-close"></text>
+        </view>
+        <scroll-view scrollY class="w-100vw h-452rpx box-border px-24rpx py-0">
+            <view class="px-0 py-1rpx">
+                <view bindtap="__invoke" class="bg-_bl__h_ffffff_br_ border-rd-20rpx px-24rpx py-28rpx mx-0 my-16rpx" data-eventconfigs="{{ tap:[ ['select',item] ] }}" wx:for="{{physicalCards}}" wx:key="cardNo">
+                    <view class="flex items-center">
+                        <image class="w-142rpx h-84rpx mr-24rpx" mode="aspectFill" src="{{__oss__.s(mpxExt,item.imageUrl,0)}}"></image>
+                        <view class="flex-1 flex flex-col w-0 pr-24rpx">
+                            <view class="truncate text-32rpx font-500 text-left lh-45rpx text-_bl__h_333333_br_">{{item.name}}</view>
+                            <view class="text-24rpx lh-33rpx text-_bl__h_333333_br_ text-left pt-8rpx">余额￥{{item.balance}}</view>
+                        </view>
+                        <view class="{{tools.includes(entityCardIds,item.cardNo)?'text-40rpx iconfont i-xuanze_xuanzhong':'w-40rpx h-40rpx box-border border-2rpx border-solid border-_bl__h_c5c5c5_br_ border-rd-_bl_50_p__br_'}}" style="color: {{tools.includes(entityCardIds,item.cardNo)?colorTheme:''}}"></view>
+                    </view>
+                </view>
+                <view class="mx-0 mt-32rpx mb-24rpx text-30rpx text-_bl__h_333333_br_ lh-42rpx text-left" wx:if="{{disabledCards.length}}">不可用（{{disabledCards.length}}张）</view>
+                <view bindtap="__invoke" class="bg-_bl__h_ffffff_br_ border-rd-20rpx px-24rpx py-28rpx mx-0 my-16rpx" data-eventconfigs="{{ tap:[ ['select',item] ] }}" wx:for="{{disabledCards}}" wx:key="cardNo">
+                    <view class="flex items-center">
+                        <image class="w-142rpx h-84rpx mr-24rpx" mode="aspectFill" src="{{__oss__.s(mpxExt,item.imageUrl,0)}}"></image>
+                        <view class="flex-1 flex flex-col w-0 pr-24rpx">
+                            <view class="truncate text-32rpx font-500 text-left lh-45rpx text-_bl__h_333333_br_">{{item.name}}</view>
+                            <view class="text-24rpx lh-33rpx text-_bl__h_333333_br_ text-left pt-8rpx">余额￥{{item.balance}}</view>
+                        </view>
+                    </view>
+                    <view class="mt-28rpx pt-24rpx border-t-1rpx border-t-solid border-t-_bl__h_eeeeee_br_">
+                        <view class="text-24rpx text-_bl__h_fc4930_br_ lh-33rpx text-left font-not-italic">不可用原因</view>
+                        <view class="text-24rpx text-_bl__h_333333_br_ lh-40rpx text-left font-not-italic">{{item.unUseText}}</view>
+                        <view class="text-24rpx text-_bl__h_333333_br_ lh-40rpx text-left font-not-italic">指定适用渠道：{{item.useChannelText}}</view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="px-0 pt-24rpx pb-0 bg-_bl__h_ffffff_br_">
+            <button bindtap="confirm" class="mx-auto my-0 w-682rpx h-88rpx lh-88rpx border-rd-44rpx text-32rpx text-_bl__h_ffffff_br_" style="background-color: {{colorTheme}};">确定</button>
+            <view class="w-100vw min-h-24rpx h-_bl_constant_pl_safe-area-inset-bottom_pr__br_ h-_bl_env_pl_safe-area-inset-bottom_pr__br_"></view>
+        </view>
+    </view>
+</qm-popup>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

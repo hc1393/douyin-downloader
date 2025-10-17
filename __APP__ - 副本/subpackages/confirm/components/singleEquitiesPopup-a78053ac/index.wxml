@@ -1,0 +1,12 @@
+<view style="{{!hidden?'':'display:none;'}}">
+    <view catchtap="hideModal" class="fixed top-0 right-0 bottom-0 left-0 z-999 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_"></view>
+    <view class="relative z-1000">
+        <view class="{{'absolute right-0 bottom-0 left-0 z-100 w-_bl_100_p__br_ h-378rpx overflow-hidden bg-_bl__h_ffffff_br_ border-rd-_bl_20px_20px_0px_0px_br_ transition-transform transition-ease-_bl_ease_br_ transition-duration-0_d_35s '+(isShow?'translate-y-0':'translate-y-100_p_')}}">
+            <view class="flex items-center justify-center pt-40rpx text-_bl__h_333333_br_ font-bold text-36rpx">{{_i1}}</view>
+            <view class="pt-64rpx pb-0 pl-36rpx pr-36rpx text-_bl__h_333333_br_ font-500 text-26rpx lh-48rpx">{{_i2}}</view>
+            <view bindtap="hideModal" class="absolute top-32rpx right-32rpx w-38rpx h-38rpx flex items-center justify-center">
+                <view class="i-guanbi2 text-_bl__h_bfbfbf_br_ text-24"></view>
+            </view>
+        </view>
+    </view>
+</view>

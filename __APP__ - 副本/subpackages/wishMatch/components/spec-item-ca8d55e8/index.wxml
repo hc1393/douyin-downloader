@@ -1,0 +1,9 @@
+<config-provider>
+    <view class="{{'flex flex-col items-center justify-center w-220 box-border p-24 gap-8 rounded-16 b-1 b-solid '+(active?'b-primary bg-primary-opacity-10':'b-_h_fff bg-_h_f5f5f5')}}">
+        <text class="text-28 font-500 leading-140_p_ c-_h_333 line-clamp-1">{{specName}}</text>
+        <view class="flex items-baseline" wx:if="{{saveMoney>0}}">
+            <text class="text-22 font-400 leading-140_p_ c-_h_999">比单买省</text>
+            <text class="text-24 font-400 leading-140_p_ c-_h_FC4930">{{currencySymbol+saveMoney}}</text>
+        </view>
+    </view>
+</config-provider>

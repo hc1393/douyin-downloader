@@ -1,0 +1,119 @@
+<block wx:if="{{actTotal>0}}">
+    <view class="border-rd-20rpx_i_ overflow-hidden" style="{{info?info.miniStyle:''}}" wx:if="{{info&&info.propsValue.list_type==7}}">
+        <scroll-view scrollX bindscrolltolower="scrolltolower" class="w-_bl_100_p__br_" style="background-color: {{info.propsValue.packageBgColor}};">
+            <view class="w-fit h-224rpx flex items-center box-border pt-24rpx">
+                <view bindtap="__invoke" class="flex items-center justify-center w-400rpx h-200rpx box-border px-24rpx py-0 ml-24rpx overflow-hidden border-rd-_bl_16rpx_16rpx_0_0_br_ relative bg-_bl_length_c_cover_br_ bg-center last-mr-24rpx" data-eventconfigs="{{ tap:[ ['jumpDetail',item.activityId] ] }}" style="background-color: {{colorTheme}};background-image: url({{item.detailInfo&&item.detailInfo.coverImg}});" wx:for="{{cardList}}" wx:key="activityId">
+                    <view class="flex items-center w-386rpx h-50rpx box-border px-12rpx py-0 bg-_bl__h_ffffff_br_ border-rd-10rpx absolute left-7rpx top-7rpx" wx:if="{{item.waitTakeCouponNum}}">
+                        <text class="text-22rpx text-_bl__h_ff8f0f_br_ i-notice"></text>
+                        <text class="flex-1 text-22rpx text-_bl__h_ff8f0f_br_">你有待领取礼品哦</text>
+                        <text class="text-22rpx text-_bl__h_ff8f0f_br_">立即领取</text>
+                        <text class="text-22rpx text-_bl__h_ff8f0f_br_ i-jiantou-you"></text>
+                    </view>
+                    <view class="text-48rpx font-500 text-_bl__h_ffffff_br_ text-center" wx:if="{{!(item.detailInfo&&item.detailInfo.coverImg)}}">{{item.activityName}}</view>
+                    <view class="w-_bl_100_p__br_ h-50rpx box-border px-16rpx py-0 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_3_pr__br_ backdrop-blur-10px absolute left-0 bottom-0 flex items-center">
+                        <view class="flex-1 w-0 whitespace-nowrap overflow-hidden text-ellipsis text-24rpx font-500 text-_bl__h_ffffff_br_">{{item.activityName}}</view>
+                        <image class="w-30rpx h-30rpx mx-6rpx my-0" src="{{__oss__.s(mpxExt,info.propsValue.packageIcon,0)}}"></image>
+                        <view>
+                            <text class="text-30rpx font-500 text-_bl__h_ffffff_br_">{{item.currentStarNum}}</text>
+                            <text class="text-24rpx text-_bl__h_ffffff_br_">/{{item.ruleGemNum}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="flex items-center w-_bl_100_p__br_ h-92rpx box-border px-24rpx py-0 bg-_bl__h_ffffff_br_">
+            <view class="w-0 flex-1 text-30rpx font-500 text-_bl__h_333333_br_ whitespace-nowrap overflow-hidden text-ellipsis">{{info.propsValue.packageName}}: {{actTotal}}张</view>
+            <view bindtap="jumpStarActList" class="flex items-center justify-center w-143rpx h-60rpx border-rd-30rpx border-1rpx border-solid text-24rpx" style="border-color: {{colorTheme}};color: {{colorTheme}};">查看更多</view>
+        </view>
+    </view>
+    <view class="mx-0 mt-24rpx mb-0" style="{{info?info.miniStyle:''}}" wx:elif="{{info&&info.propsValue.list_type==4}}">
+        <view bindtap="{{actTotal==1?'jumpDetail':'jumpStarActList'}}" class="absolute top-0 left-0 w-_bl_100_p__br_ h-242rpx" wx:if="{{!info.propsValue.backImg}}">
+            <text class="absolute right-50rpx bottom-0 text-250rpx lh-_bl_100_p__br_ i-collect-point-bg" style="color: {{colorTheme}};"></text>
+        </view>
+        <view bindtap="{{actTotal==1?'jumpDetail':'jumpStarActList'}}" class="flex flex-col justify-between box-border w-_bl_100_p__br_ h-242rpx p-24rpx bg-_bl__h_fff_br_ bg-no-repeat bg-center bg-_bl_length_c_cover_br_" style="background-image: url({{info.propsValue.backImg}}); border-radius: {{info.propsValue.borderRadius}}rpx;">
+            <view class="flex items-center text-_bl__h_000_br_ font-bold text-30rpx" style="color: {{info?info.propsValue.textColor:'#000000'}};">{{info.propsValue.name||treasure.activityName}}<text class="ml-10rpx px-10rpx py-0 text-_bl__h_f56c6c_br_ text-20rpx border-1px border-solid border-_bl__h_f56c6c_br_ border-rd-4rpx" wx:if="{{item&&treasure.currentStoreJoinFlag}}">当前活动</text>
+            </view>
+            <view>
+                <image class="w-50rpx h-50rpx" src="{{__oss__.s(mpxExt,info.propsValue.solidIcon,0)}}" wx:if="{{info.propsValue.solidIcon}}"></image>
+                <text class="text-40rpx i-jidian" style="color: {{info.propsValue.btnColor||colorTheme}};" wx:else></text>
+                <text class="px-4rpx py-0 text-_bl__h_333_br_ text-36rpx" style="color: {{info.propsValue.btnColor||colorTheme}};">{{treasure.currentStarNum||0}}</text>
+                <text class="text-_bl__h_333_br_ text-24rpx">/{{treasure.ruleGemNum}}</text>
+            </view>
+            <view class="text-_bl__h_999_br_ text-24rpx" wx:if="{{info.propsValue.text}}">{{info.propsValue.text}}</view>
+            <view class="text-_bl__h_999_br_ text-24rpx" wx:else>再集{{needStars}}{{treasure.customName}}可获得好礼</view>
+            <view class="w-320rpx h-12rpx bg-_bl__h_ededed_br_ border-rd-6rpx">
+                <view class="h-12rpx border-rd-6rpx transition-all transition-duration-0_d_3s" style="width: {{percentage}}%; background-color: {{info.propsValue.btnColor||colorTheme}};"></view>
+            </view>
+        </view>
+    </view>
+    <view style="{{info?info.miniStyle:''}}" wx:elif="{{info&&info.propsValue.list_type==5}}">
+        <view bindtap="{{actTotal==1?'jumpDetail':'jumpStarActList'}}" class="flex items-center box-border h-82rpx px-24rpx py-0 bg-_bl__h_fff_br_ bg-no-repeat bg-center bg-_bl_length_c_cover_br_" style="background-image: url({{info.propsValue.backImg}});border-radius: {{info.propsValue.borderRadius}}rpx;">
+            <text class="flex-1 text-_bl__h_000_br_ font-bold text-24rpx" style="color: {{info?info.propsValue.textColor:'#000000'}};" wx:if="{{info.propsValue.title}}">{{info.propsValue.title}}</text>
+            <text class="flex-1 text-_bl__h_000_br_ font-bold text-24rpx" style="color: {{info?info.propsValue.textColor:'#000000'}};" wx:else>集满{{treasure.ruleGemNum+treasure.customName}}送优惠券</text>
+            <view class="flex items-center justify-end box-border w-300rpx pr-10rpx">
+                <block wx:for="{{treasure.ruleGemNum}}" wx:key="*this">
+                    <block wx:if="{{info.propsValue.solidIcon&&info.propsValue.hollowIcon}}">
+                        <image class="mx-4rpx my-0" src="{{__oss__.s(mpxExt,info.propsValue.solidIcon,0)}}" style="{{treasure.ruleGemNum>6?'width: 20rpx;height: 20rpx;':'width: 38rpx;height: 38rpx;'}}" wx:if="{{index+1<=treasure.currentStarNum}}"></image>
+                        <image class="mx-4rpx my-0" src="{{__oss__.s(mpxExt,info.propsValue.hollowIcon,0)}}" style="{{treasure.ruleGemNum>6?'width: 20rpx;height: 20rpx;':'width: 38rpx;height: 38rpx;'}}" wx:else></image>
+                    </block>
+                    <block wx:else>
+                        <view class="box-border w-20rpx h-20rpx mx-4rpx my-0 bg-_bl__h_fff_br_ border-solid border-1px border-rd-_bl_50_p__br_" style="border-color: {{info.propsValue.btnColor}}; {{index+1<=treasure.currentStarNum?'background-color: '+info.propsValue.btnColor+';':''}}" wx:if="{{info.propsValue.btnColor}}"></view>
+                        <view class="box-border w-20rpx h-20rpx mx-4rpx my-0 bg-_bl__h_fff_br_ border-solid border-1px border-rd-_bl_50_p__br_" style="border-color: {{colorTheme}}; {{index+1<=treasure.currentStarNum?'background-color: '+colorTheme+';':''}}" wx:else></view>
+                    </block>
+                </block>
+            </view>
+            <view class="flex items-baseline">
+                <view class="pr-4rpx font-bold text-30rpx" style="color: {{info.propsValue.btnColor||colorTheme}};">{{treasure.currentStarNum||0}}</view>
+                <view class="text-_bl__h_333_br_ font-bold text-22rpx" style="color: {{info?info.propsValue.textColor:'#000000'}};">/{{treasure.ruleGemNum}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="collect-point-style6" style="{{info?info.miniStyle:''}}" wx:elif="{{info&&info.propsValue.list_type==6}}">
+        <view bindtap="{{actTotal==1?'jumpDetail':'jumpStarActList'}}" class="flex flex-col items-center justify-between box-border bg-white bg-no-repeat bg-center bg-_bl_length_c_cover_br_ border-rd-16rpx p-24rpx" style="{{info?'border-radius:'+info.propsValue.borderRadius+'rpx; background-image: url('+info.propsValue.backImg+'); min-height: 148rpx;':''}}">
+            <view class="flex items-center justify-between w-_bl_100_p__br_">
+                <view class="text-_bl__h_000_br_ font-bold text-26rpx" style="color: {{info.propsValue?info.propsValue.textColor:'#000000'}};">{{info.propsValue.name||treasure.activityName}}</view>
+                <view class="flex items-center justify-center">
+                    <text class="pr-10rpx text-_bl__h_666_br_ text-24rpx">{{info&&actTotal>1?'查看更多':'详情'}}</text>
+                    <image class="w-10rpx h-18rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2021/01/06/4c1b6518245b79bf.png',0)}}"></image>
+                </view>
+            </view>
+            <view class="flex items-center justify-between w-_bl_100_p__br_">
+                <view class="flex flex-1 items-center pr-10rpx">
+                    <image lazyLoad class="w-54rpx h-54rpx mr-1rpx" mode="aspectFit" src="{{__oss__.s(mpxExt,filter.starFilter(info.propsValue.list_type,pointsVal,info.propsValue.solidIcon,info.propsValue.hollowIcon),0)}}" style="{{treasure.ruleGemNum>8?'width: 42rpx;height: 42rpx;':''}}" wx:for="{{points}}" wx:for-item="pointsVal" wx:key="index"></image>
+                </view>
+                <view wx:if="{{from!='takefood'}}">
+                    <view catchtap="jumpOrder" class="h-54rpx px-14rpx py-0 text-22rpx lh-54rpx" style="background-color: {{info.propsValue.btnColor||colorTheme}}; color: {{info.propsValue.progressTextColor||'#fff'}};border-radius: {{info.propsValue.buttonRadius}}rpx;" wx:if="{{info.propsValue.buttonEnable}}">{{info.propsValue.defaultData.starName||'去集点'}}<block wx:if="{{info.propsValue.buttonProgress}}">({{treasure.currentStarNum||0}}<text class="text-inherit text-18rpx">/{{treasure.ruleGemNum}}</text>)</block>
+                    </view>
+                    <view class="text-24rpx" style="color: {{info.propsValue.progressTextColor||'#333'}};" wx:else>
+                        <text class="text-36rpx" style="color: {{colorTheme}};">{{treasure.currentStarNum||0}}</text>/{{treasure.ruleGemNum}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="{{info?'':'m-32rpx'}}" style="{{info?info.miniStyle:''}}" wx:else>
+        <view bindtap="{{actTotal==1?'jumpDetail':'jumpStarActList'}}" class="flex flex-col items-center justify-between box-border px-32rpx pt-24rpx pb-32rpx bg-white bg-no-repeat bg-center bg-_bl_length_c_cover_br_ border-rd-16rpx" style="{{info?'border-radius:'+info.propsValue.borderRadius+'rpx; background-image: url('+info.propsValue.backImg+'); min-height: 360rpx;':''}}">
+            <view class="flex items-center justify-between box-border w-_bl_100_p__br_">
+                <view class="flex items-center text-_bl__h_000_br_ font-bold text-30rpx" style="color: {{info?info.propsValue.textColor:'#000000'}};">{{info?info.propsValue.name||treasure.activityName:treasure.activityName}}<text class="ml-10rpx px-10rpx py-0 text-_bl__h_f56c6c_br_ text-20rpx border-1px border-solid border-_bl__h_f56c6c_br_ border-rd-4rpx" wx:if="{{item&&treasure.currentStoreJoinFlag}}">当前活动</text>
+                </view>
+                <view class="flex items-center justify-center">
+                    <text class="pr-10rpx text-_bl__h_666_br_ text-24rpx">{{info&&actTotal>1?'查看更多':'详情'}}</text>
+                    <image class="w-10rpx h-18rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2021/01/06/4c1b6518245b79bf.png',0)}}"></image>
+                </view>
+            </view>
+            <view class="flex flex-col items-center justify-center px-0 py-24rpx">
+                <view class="flex items-center min-h-64rpx">
+                    <block wx:if="{{info}}">
+                        <image class="w-64rpx h-64rpx" lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,filter.starFilter(info.propsValue.list_type,pointsVal,info.propsValue.solidIcon,info.propsValue.hollowIcon),0)}}" wx:for="{{points}}" wx:for-item="pointsVal" wx:key="index"></image>
+                    </block>
+                    <block wx:elif="{{item}}">
+                        <image class="w-64rpx h-64rpx" lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,filter.starFilter(treasure.styleType,pointsVal,treasure.solidIcon,treasure.hollowIcon),0)}}" wx:for="{{points}}" wx:for-item="pointsVal" wx:key="index"></image>
+                    </block>
+                </view>
+                <text class="pt-18rpx text-_bl__h_999_br_ text-24rpx" wx:if="{{font}}">{{font}}</text>
+            </view>
+            <view catchtap="jumpOrder" class="h-72rpx px-20rpx py-0 text-_bl__h_fff_br_ text-30rpx lh-72rpx text-center bg-_bl__h_00a47c_br_ border-rd-8rpx" style="background-color: {{info.propsValue.btnColor||colorTheme}};" wx:if="{{info&&from!='takefood'}}">{{info.propsValue.defaultData.starName||'去下单'}} (<text class="text-_bl__h_fff_br_ font-bold text-30rpx">{{treasure.currentStarNum||0}}</text>/<text class="text-_bl__h_fff_br_ font-normal text-24rpx">{{treasure.ruleGemNum}}</text>)</view>
+        </view>
+    </view>
+</block>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="filter" src="../../wxs/star08d9fdae.wxs"/>

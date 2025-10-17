@@ -1,0 +1,159 @@
+<view wx:for="{{goods}}" wx:key="userId">
+    <view class="w-_bl_100_p__br_ mx-0 my-30rpx text-_bl__h_999_br_ text-24rpx" wx:if="{{index==0}}">我的点单</view>
+    <view class="w-_bl_100_p__br_ mx-0 my-30rpx text-_bl__h_999_br_ text-24rpx" wx:elif="{{index==1}}">好友点单</view>
+    <view class="flex items-center px-0 py-24rpx">
+        <view class="w-48rpx h-48rpx mr-14rpx border-rd-_bl_50_p__br_ relative">
+            <image class="w-_bl_100_p__br_ h-_bl_100_p__br_ border-rd-_bl_50_p__br_" src="{{__oss__.s(mpxExt,item.avatar||defaultAvatar,0)}}"></image>
+            <view class="absolute right--22rpx top--14rpx w-46rpx h-26rpx text-_bl__h_fff_br_ border-rd-_bl_10rpx_10rpx_10rpx_3rpx_br_ text-18rpx flex items-center justify-center" style="background-color:{{colorTheme}}" wx:if="{{item.crowdSerialUserLevel==1}}">发起</view>
+        </view>
+        <block wx:if="{{splicingOrderPeople==2}}">
+            <text class="truncate inline-block max-w-300rpx text-_bl__h_222_br_ text-30rpx" wx:if="{{index==0}}">（我）</text>
+            <text class="truncate inline-block max-w-300rpx text-_bl__h_222_br_ text-30rpx">{{item.crowdSerialNo}}</text>
+        </block>
+        <block wx:else>
+            <text class="truncate inline-block max-w-300rpx text-_bl__h_222_br_ text-30rpx">{{item.name||'一位拼友'}}</text>
+            <text class="truncate inline-block max-w-300rpx text-_bl__h_222_br_ text-30rpx" wx:if="{{index==0}}">（我）</text>
+            <text class="truncate inline-block max-w-300rpx text-_bl__h_222_br_ text-30rpx" wx:if="{{!item.name}}">{{item.crowdSerialNo}}</text>
+        </block>
+    </view>
+    <view class="px-0 py-1rpx relative">
+        <view class="flex mx-0 my-30rpx" wx:for="{{item.goodsList}}" wx:for-item="goods" wx:key="goodsId">
+            <image class="w-100rpx h-100rpx mr-20rpx border-rd-5rpx" mode="aspectFill" src="{{__oss__.s(mpxExt,goods.image,0)}}"></image>
+            <view class="flex-1 box-border">
+                <view class="flex justify-between">
+                    <view class="text-_bl__h_000_br_ text-30rpx">{{goods.name}}</view>
+                    <view class="pl-24rpx text-_bl__h_222_br_ font-bold text-28rpx">￥{{goods.originAmount}}</view>
+                </view>
+                <view class="flex justify-between">
+                    <view class="text-_bl__h_666_br_ text-24rpx">
+                        <block wx:if="{{goods.energyText}}">
+                            <text style="color: {{colorTheme}};">{{goods.energyText}}</text>
+                            <text class="inline-block w-1px h-22rpx border-r-1rpx border-r-solid border-r-_bl__h_e1e1e1_br_ mx-12rpx my-0 v-text-bottom"></text>
+                        </block>
+                        <block wx:if="{{goods.species}}">{{goods.species}}</block>
+                        <block wx:if="{{goods.species&&goods.chargeGoodsText}}">,</block>
+                        <text style="color: {{colorTheme}};" wx:if="{{goods.chargeGoodsText}}">{{goods.chargeGoodsText}}</text>
+                        <view class="goods-discount flex items-center" wx:if="{{goods.discountList&&goods.discountList.length}}">
+                            <block wx:for="{{goods.discountList}}" wx:for-item="discount" wx:key="*this">
+                                <view class="font-size-18 flex items-center h-30" wx:if="{{activityDiyConfigBySellerMap[discount.discountType]}}">
+                                    <view class="lh-none box-border px-4 max-w-400 flex items-center content-center h-30 rounded-6 bg-no-repeat bg-full bg-center-center" style="background-image: url({{activityDiyConfigBySellerMap[discount.discountType].backGroundStr}});color:{{activityDiyConfigBySellerMap[discount.discountType].txtColor}}" wx:if="{{activityDiyConfigBySellerMap[discount.discountType].backGroundType==1}}">
+                                        <text wx:if="{{discount.discountName}}">{{discount.discountName}}</text>
+                                        <text wx:else>{{discount.extraMap&&discount.extraMap.cardName}}</text>
+                                    </view>
+                                    <view class="lh-none box-border px-4 max-w-400 flex items-center content-center h-30 rounded-6" style="{{activityDiyConfigBySellerMap[discount.discountType].backGroundStr?'background-color: '+activityDiyConfigBySellerMap[discount.discountType].backGroundStr:'border:1px solid;border-color:'+colorTheme}};color:{{activityDiyConfigBySellerMap[discount.discountType].txtColor||colorTheme}};" wx:else>
+                                        <view class="truncate">
+                                            <text wx:if="{{discount.discountName}}">{{discount.discountName}}</text>
+                                            <text wx:else>{{discount.extraMap&&discount.extraMap.cardName}}</text>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="text-size-24" style="color: {{goods.goodsDisabled?colorTheme:'#999'}};" wx:elif="{{discount.discountAmount&&discount.discountName}}">{{discount.discountName}}</view>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="pl-24rpx text-_bl__h_666_br_ text-24rpx">x{{goods.num}}</view>
+                </view>
+                <view wx:if="{{goods.combinedList}}">
+                    <view class="flex text-_bl__h_999_br_ text-22rpx lh-32rpx" wx:for="{{goods.combinedList}}" wx:for-item="combined" wx:key="{{skuId}}">
+                        <view class="inline-block w-6rpx h-6rpx mt-18rpx mr-20rpx bg-_bl__h_afafaf_br_ border-rd-6rpx"></view>
+                        <view class="max-w-_bl_100_p__br_">
+                            <view class="truncate first-text-_bl__h_000_br_ first-text-26rpx first-lh-40rpx">{{combined.itemName}}<text class="text-_bl__h_666_br_ text-24rpx" wx:if="{{combined.num}}">x{{combined.num}}</text>
+                            </view>
+                            <view class="first-text-_bl__h_000_br_ first-text-26rpx first-lh-40rpx" wx:if="{{combined.species||combined.itemSpec}}">({{combined.species||combined.itemSpec}})</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="absolute right-0 bottom-0 left-0 z-1 w-_bl_200_p__br_ h-1px bg-_bl__h_e7e7e7_br_ scale-50 origin-_bl_0_0_br_ origin-left-bottom"></view>
+    </view>
+    <view class="{{index+1!=goods.length?'relative':''}}">
+        <block wx:if="{{billShowArr&&billShowArr[index]}}">
+            <view class="flex items-center justify-between px-0 py-20rpx">
+                <text class="text-_bl__h_333_br_ text-28rpx">包装费</text>
+                <text class="text-_bl__h_333_br_ text-28rpx">￥{{item.packageAmount||0}}</text>
+            </view>
+            <view class="flex items-center justify-between px-0 py-20rpx" wx:if="{{orderType==2||orderType==3}}">
+                <text class="text-_bl__h_333_br_ text-28rpx">配送费</text>
+                <text class="text-_bl__h_333_br_ text-28rpx">￥{{item.freightAmount||0}}</text>
+            </view>
+            <view class="flex items-center justify-between px-0 py-20rpx">
+                <text class="text-_bl__h_333_br_ text-28rpx">优惠金额</text>
+                <text class="text-_bl__h_333_br_ text-28rpx">-￥{{item.discountAmount||0}}</text>
+            </view>
+        </block>
+        <view class="flex items-center justify-between px-0 py-30rpx" wx:if="{{crowdType!=2}}">
+            <view bindtap="showDialog" class="text-_bl__h_999_br_ text-26rpx decoration-underline">计算规则</view>
+            <view bindtap="toggleSubBill" class="flex items-center" data-index="{{index}}">
+                <text class="text-_bl__h_999_br_ text-26rpx">分账小计</text>
+                <text class="px-10rpx py-0 text-_bl__h_222_br_ font-bold text-40rpx">￥{{item.subtotal}}</text>
+                <text class="{{'text-_bl__h_333_br_ text-26rpx '+(billShowArr&&billShowArr[index]?'i-jiantou-shang':'i-jiantou-xia')}}"></text>
+            </view>
+        </view>
+        <view class="absolute right-0 bottom-0 left-0 z-1 w-_bl_200_p__br_ h-1px bg-_bl__h_e7e7e7_br_ scale-50 origin-_bl_0_0_br_ origin-left-bottom" wx:if="{{index+1!=goods.length}}"></view>
+    </view>
+</view>
+<view catchtouchmove="true" class="fixed top-0 left-0 z-9999 w-_bl_100_p__br_ h-_bl_100_p__br_ overflow-hidden text-_bl__h_fff_br_ bg-_bl_rgb_pl_0_2c_0_2c_0_pr__br_ op-50" wx:if="{{showRuleDialog}}"></view>
+<view class="fixed top-0 right-0 bottom-0 left-0 z-9999 box-border w-670rpx h-800rpx m-auto px-40rpx py-50rpx bg-_bl_rgb_pl_255_2c_255_2c_255_pr__br_ border-rd-15rpx" wx:if="{{showRuleDialog}}">
+    <view style="height: 700rpx; overflow: scroll" wx:if="{{customPinRuleText&&customPinRuleText.length}}">
+        <view class="mb-20rpx" wx:for="{{customPinRuleText}}" wx:key="index">
+            <view class="flex mb-10rpx text-_bl__h_707275_br_ text-24rpx lh-44rpx">
+                <text>{{item}}</text>
+            </view>
+        </view>
+    </view>
+    <view wx:else>
+        <view class="flex items-center mb-10rpx">
+            <view></view>
+            <view class="text-_bl__h_484b4d_br_ font-500 text-30rpx lh-42rpx">优惠分摊规则</view>
+        </view>
+        <view class="mb-20rpx">
+            <block wx:if="{{preferentialSharingRules==1}}">
+                <view class="flex mb-10rpx text-_bl__h_707275_br_ text-24rpx lh-44rpx">
+                    <view>1.</view>
+                    <text>订单优惠金额可在订单详情的分账小计中查看具体优惠明细。</text>
+                </view>
+                <view class="flex mb-10rpx text-_bl__h_707275_br_ text-24rpx lh-44rpx">
+                    <view>2.</view>
+                    <text>满减优惠金额、新客专享、会员折扣、减配送费、随机立减等，根据每位拼友选购的商品价格，按金额比例分摊给每位拼友。</text>
+                </view>
+                <view class="flex mb-10rpx text-_bl__h_707275_br_ text-24rpx lh-44rpx">
+                    <view>3.</view>
+                    <text>限时折扣、商品免单、第二份折扣等，根据先到先得规则，优先选购的拼友享受优惠。</text>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="flex mb-10rpx text-_bl__h_707275_br_ text-24rpx lh-44rpx">
+                    <view>1.</view>
+                    <text>订单优惠金额可在订单详情的分账小计中查看具体优惠明细</text>
+                </view>
+                <view class="flex mb-10rpx text-_bl__h_707275_br_ text-24rpx lh-44rpx">
+                    <view>2.</view>
+                    <text>根据每个拼友选购的商品原价小计金额占整单商品原价总金额比例，分摊整单的总优惠金额</text>
+                </view>
+            </block>
+        </view>
+        <view class="flex items-center mb-10rpx">
+            <view></view>
+            <view class="text-_bl__h_484b4d_br_ font-500 text-30rpx lh-42rpx">包装费分摊规则</view>
+        </view>
+        <view class="mb-20rpx">
+            <view class="flex mb-10rpx text-_bl__h_707275_br_ text-24rpx lh-44rpx">
+                <text>包装费根据每位拼友的选购商品分别进行计算，不会进行平均分配。</text>
+            </view>
+        </view>
+        <view class="flex items-center mb-10rpx">
+            <view></view>
+            <view class="text-_bl__h_484b4d_br_ font-500 text-30rpx lh-42rpx">配送费分摊规则</view>
+        </view>
+        <view class="mb-20rpx">
+            <view class="flex mb-10rpx text-_bl__h_707275_br_ text-24rpx lh-44rpx">
+                <text>配送费按单笔订单收取，根据每位拼友选购商品实付金额与整单实付金额比例，分摊到每位拼友。</text>
+            </view>
+        </view>
+    </view>
+    <view catchtap="closeDialog" class="absolute right-0 bottom--114rpx left-0 z-9999 w-68rpx h-68rpx m-auto">
+        <image binderror="" bindload="" class="w-68rpx h-68rpx" lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2019/07/09/1812ec9f5d1f0810.png',0)}}"></image>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

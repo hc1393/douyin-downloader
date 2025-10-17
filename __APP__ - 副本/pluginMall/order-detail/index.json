@@ -1,0 +1,32 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "",
+  "backgroundColor": "#f2f2f2",
+  "navigationBarBackgroundColor": "#f2f2f2",
+  "enablePullDownRefresh": true,
+  "componentPlaceholder": {
+    "std-goods-order-item": "view",
+    "std-goods-section": "view",
+    "std-delivery-address": "view",
+    "std-mall-header": "view",
+    "std-navigation-bar": "view",
+    "config-provider": "view",
+    "std-count-down": "view",
+    "std-cell": "view",
+    "std-steps": "view",
+    "std-fixed-bar": "view",
+    "std-after-sale-select": "view",
+    "cell": "view",
+    "half-bowl": "view",
+    "love-dining": "view",
+    "love-donate": "view",
+    "material-cell": "view",
+    "merc-list": "view",
+    "plugin-demo": "view",
+    "pullNewList": "view",
+    "regift": "view",
+    "send-coupon": "view",
+    "studentVerify": "view"
+  },
+  "navigationBarTextStyle": "black"
+}

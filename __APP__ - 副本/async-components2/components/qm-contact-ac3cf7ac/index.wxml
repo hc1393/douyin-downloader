@@ -1,0 +1,14 @@
+<view bind:touchstart="{{canDrag?'handleTouchStart':'noop'}}" catch:touchmove="{{canDrag?'handleTouchMove':'noop'}}" class="{{'JS-contact-wrap '+(info.propsValue.classType==1?'ty1 w-_bl_100_p__br_ bg-_bl__h_fff_br_ flex':'ty2 fixed z-999')+' _ac3cf7ac '}}" style="margin-top: {{info.commonStyle.marginTop}}rpx; margin-bottom: {{isIOS&&(info.commonStyle.marginBottom<30||!info.commonStyle.marginBottom)?30:info.commonStyle.marginBottom}}rpx; {{currStyle}}">
+    <block wx:for="{{info.propsValue.customerList}}" wx:key="type">
+        <view catchtap="phoneCall" class="qm-contact-item _ac3cf7ac " data-phone="{{item.text}}" wx:if="{{item.type=='tel'&&item.visible}}">
+            <image class="{{(info.propsValue.classType==1?'':'block w-_bl_100_p__br_ h-_bl_100_p__br_')+' _ac3cf7ac '}}" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,item.img?item.img:'https://images.qmai.cn/s16/images/2020/10/19/4e7dc1e770718120.png',0)}}"></image>
+        </view>
+        <button class="qm-contact-item button2 _ac3cf7ac " hoverClass="none" openType="contact" wx:if="{{'wx'==='wx'&&item.type=='wx'&&item.visible}}">
+            <image class="{{(info.propsValue.classType==1?'':'block w-_bl_100_p__br_ h-_bl_100_p__br_')+' _ac3cf7ac '}}" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,item.img?item.img:'https://images.qmai.cn/s16/images/2020/10/19/eba8c6c942127039.png',0)}}"></image>
+        </button>
+        <view catchtap="openCustomerServiceChat" class="qm-contact-item _ac3cf7ac " data-link="{{item.link}}" data-priseid="{{item.enterpriseId}}" wx:if="{{'wx'==='wx'&&item.type=='qw'&&item.visible}}">
+            <image class="{{(info.propsValue.classType==1?'':'block w-_bl_100_p__br_ h-_bl_100_p__br_')+' _ac3cf7ac '}}" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,item.img?item.img:'https://images.qmai.cn/resource/20210824210816/2023/04/23/20230423-161952.png',0)}}"></image>
+        </view>
+    </block>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

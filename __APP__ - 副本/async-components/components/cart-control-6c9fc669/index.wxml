@@ -1,0 +1,47 @@
+<view class="{{' bg-_bl__h_ffffff_br_ shadow-_bl_0_10rpx_10rpx_rgba_pl_255_2c_255_2c_255_2c_0_d_9_pr__br_ '+(hasSwiperStyle?'relative':'flex justify-start items-center')}}" style="justify-content:{{showNewStyle?'':spaceBetween}};background-color:{{bgColor?bgColor:'#FFF'}};{{transparentBg?transparentBgStyle:''}};{{customStyle}};{{hasImageTextStyle?'width:348rpx;':''}}">
+    <view class="{{'w-140 h-46 box-border px-14 py-0 bg-white shadow-_bl_0rpx_4rpx_10rpx_0rpx_rgba_pl_0_2c_0_2c_0_2c_0_d_2_pr__br_ rounded-88 absolute left-0 right-0 bottom--24 flex items-center z-11 '+(hasImageTextStyle?'left-auto right-12 bottom--6':'m-auto')}}" style="{{hasSwiperStyle?'bottom:30rpx;':''}};" wx:if="{{showNewStyle}}">
+        <view catchtap="decrease" class="text-28rpx text-_bl__h_666666_br_ relative i-jianhao font-bold" data-element-content="decrease" data-element-name="{{traceProductList}}" data-element-type="button" data-operation-type="移除购物车" data-product-id="{{traceProductId}}" data-product-list="{{traceProductList}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}">
+            <view class="w-_bl_100_p__br_ h-_bl_100_p__br_ p-20rpx absolute left--20rpx top--20rpx"></view>
+        </view>
+        <view class="flex-1 text-26rpx text-_bl__h_333333_br_ text-center">{{num}}</view>
+        <view catchtap="add" class="text-28rpx text-_bl__h_666666_br_ relative i-jiahao font-bold" data-element-content="add" data-element-name="{{traceProductList}}" data-element-type="button" data-operation-type="加入购物车" data-product-id="{{traceProductId}}" data-product-list="{{traceProductList}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}" style="color: {{colorTheme}};">
+            <view class="w-_bl_100_p__br_ h-_bl_100_p__br_ p-20rpx absolute left--20rpx top--20rpx"></view>
+        </view>
+    </view>
+    <block wx:else>
+        <view class="flex items-center w-168rpx h-52rpx border-1px border-solid border-_bl__h_dcdcdc_br_ border-rd-12rpx" wx:if="{{isShowLargeSingleBtn}}">
+            <view catchtap="{{num==1?'':'decrease'}}" class="relative w-52rpx flex justify-center items-center" data-element-content="add" data-element-name="{{traceProductList}}" data-element-type="button" data-operation-type="移除购物车" data-product-id="{{traceProductId}}" data-product-list="{{traceProductList}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}">
+                <view class="i-jianhao1" style="color: {{decreaseDisabled||num==1?'#C5C5C5':colorTheme}};"></view>
+                <view class="w-_bl_100_p__br_ h-_bl_100_p__br_ pt-20rpx pb-20rpx pl-30rpx pr-0 absolute right-0 top--20rpx"></view>
+            </view>
+            <input bindinput="bindNumInput" class="box-border w-64rpx h-52rpx text-center border-l-1rpx border-l-solid border-l-_bl__h_dcdcdc_br_ border-r-1rpx border-r-solid border-r-_bl__h_dcdcdc_br_ text-28rpx text-_bl__h_333333_br_" cursorSpacing="{{40}}" data-element-content="{{num||1}}" data-element-name="cart-control" data-element-type="input" data-largelist="{{true}}" data-operation-type="{{'变更'+traceScreenType}}" data-product-id="{{traceProductId}}" data-product-list="{{traceProductList}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}" disabled="{{addDisabled}}" maxlength="3" type="number" value="{{num||1}}"></input>
+            <view catchtap="add" class="relative w-52rpx flex justify-center items-center" data-element-content="add" data-element-name="{{traceProductList}}" data-element-type="button" data-operation-type="加入购物车" data-product-id="{{traceProductId}}" data-product-list="{{traceProductList}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}">
+                <view class="i-jiahao2" style="color: {{addDisabled?'#C5C5C5':colorTheme}};"></view>
+                <view class="w-_bl_100_p__br_ h-_bl_100_p__br_ pt-20rpx pb-20rpx pl-0 pr-30rpx absolute left-0 top--20rpx"></view>
+            </view>
+        </view>
+        <block wx:else>
+            <block wx:if="{{unitNum}}">
+                <view class="{{'w-70rpx text-center text-_bl__h_333333_br_ mr-10rpx w-auto '+(modeLarge=='large'?'text-38rpx':'text-30rpx')}}">{{unitNum}}{{unitText}}</view>
+                <view class="relative">
+                    <view class="{{'i-minus-circle text-_bl__h_bcbcbc_br_ '+(modeLarge=='large'?'text-56rpx':'text-44rpx')}}" style="color: {{decreaseDisabled?'#C5C5C5':colorTheme}};"></view>
+                    <view catchtap="decrease" class="absolute top--20rpx left--20rpx right--20rpx bottom--20rpx" data-element-content="decrease" data-element-name="{{traceProductList}}" data-element-type="button" data-operation-type="移除购物车" data-product-id="{{traceProductId}}" data-product-list="{{traceProductList}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}"></view>
+                </view>
+            </block>
+            <block wx:else>
+                <block wx:if="{{type=='normal'}}">
+                    <view class="relative" wx:if="{{num||showZero}}">
+                        <view class="{{'i-minus-circle text-_bl__h_bcbcbc_br_ '+(modeLarge=='large'?'text-56rpx':'text-44rpx')}}" style="color: {{num<=min||decreaseDisabled?'#C5C5C5':colorTheme}};font-size:{{btnFontSize}}"></view>
+                        <view catchtap="decrease" class="absolute top--20rpx left--20rpx right--20rpx bottom--20rpx" data-element-content="decrease" data-element-name="{{traceProductList}}" data-element-type="button" data-operation-type="移除购物车" data-product-id="{{traceProductId}}" data-product-list="{{traceProductList}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}"></view>
+                    </view>
+                    <view class="{{'w-70rpx text-center text-_bl__h_333333_br_ '+(modeLarge=='large'?'text-38rpx':'text-30rpx')}}" style="width:{{controlNumWidth}};font-size:{{controlNumFontSize}};" wx:if="{{num||showZero}}">{{num}}<text class="font-size-inherit text-_bl__h_999999_br_" wx:if="{{originNum>0}}">/{{originNum}}</text>
+                    </view>
+                </block>
+                <view class="relative" wx:if="{{addBtnIsShow}}">
+                    <view class="i-plus-circle-fill {{modeLarge=='large'?'text-56rpx':'text-44rpx'}}" style="color: {{addDisabled?'#C5C5C5':colorTheme}};font-size:{{btnFontSize}};"></view>
+                    <view catchtap="add" class="absolute top--20rpx left--20rpx right--20rpx bottom--20rpx" data-element-content="add" data-element-name="{{traceProductList}}" data-element-type="button" data-operation-type="加入购物车" data-product-id="{{traceProductId}}" data-product-list="{{traceProductList}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}"></view>
+                </view>
+            </block>
+        </block>
+    </block>
+</view>

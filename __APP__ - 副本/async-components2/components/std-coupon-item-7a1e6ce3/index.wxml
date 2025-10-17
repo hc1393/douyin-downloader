@@ -1,0 +1,22 @@
+<view bindtap="handleReceiveCoupon" class="std-reward relative flex items-center bg-_bl__h_ffffff_br_ rounded-_bl_16rpx_br_" style="width:{{couponNum>1?'580rpx':'calc(100%-24rpx)'}}">
+    <view class="std-reward__coupon flex grow-0 shrink-0 items-center justify-center box-border w-152rpx h-140rpx text-_bl__h_ff3e37_br_ font-bold text-28rpx rounded-tl-8px rounded-bl-8px" style="background-color: {{utils.hexToRgba(colorTheme,'0.1')}};color: {{colorTheme}};">
+        <view class="std-reward__text lh-54rpx flex items-baseline justify-center" wx:if="{{item.rewardShowExtra.type===1||item.rewardShowExtra.type===2}}">
+            <text class="std-reward__text-number text-54rpx"> {{item.rewardShowExtra.discountAmount}} </text>
+            <text>{{utils.getDiscountUnit(item.rewardShowExtra.discountUnit)}}</text>
+        </view>
+        <block wx:else>{{utils.getCouponTypeName(item)}}</block>
+    </view>
+    <view class="coupon-divider relative w-20rpx h-70px flex justify-center" style="background-color: {{utils.hexToRgba(colorTheme,'0.1')}}">
+        <view class="absolute top--10rpx left-0 w-20rpx h-20rpx bg-white rounded-_bl_50_p__br_"></view>
+        <view class="absolute bottom--10rpx left-0 w-20rpx h-20rpx bg-white rounded-_bl_50_p__br_"></view>
+        <view class="w-0 h-_bl_100_p__br_ border-l-1rpx border-l-dashed border-l-white"></view>
+    </view>
+    <view class="std-reward__right flex items-center justify-between flex-1 h-140rpx pl-16rpx box-border pr-24rpx rounded-tr-8px rounded-br-8px" style="background: linear-gradient(270deg, {{utils.hexToRgba(colorTheme,'0.05')}} 1.11%, {{utils.hexToRgba(colorTheme,'0.1')}} 100%);">
+        <view class="std-reward__right-content flex-1 flex flex-col justify-center items-start h-_bl_100_p__br_" style="max-width: {{couponNum>1?'280':'346'}}rpx;">
+            <view class="std-reward__name truncate text-_bl__h_333_br_ font-bold text-28rpx w-_bl_100_p__br_">{{rewardName}}</view>
+            <view class="std-reward__info truncate text-_bl__h_666_br_ text-24rpx w-_bl_100_p__br_" wx:if="{{item.rewardShowExtra&&item.rewardShowExtra.expiredDateStr}}">{{item.rewardShowExtra.expiredDateStr}}</view>
+        </view>
+        <view class="text-_bl__h_fff_br_ w-88rpx h-48rpx rounded-_bl_60rpx_br_ text-24rpx font-400 flex items-center justify-center" style="background-color: {{colorTheme}};">领取</view>
+    </view>
+</view>
+<wxs module="utils" src="../../wxs/utils1e0f50ed.wxs"/>

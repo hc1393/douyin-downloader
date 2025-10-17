@@ -1,0 +1,25 @@
+<view class="password-mask _63bc37a1 " wx:if="{{show}}"></view>
+<view class="password-layer _63bc37a1 " style="bottom: {{true}}px" wx:if="{{show}}">
+    <view class="password-content _63bc37a1 ">
+        <view catchtap="closeDialog" class="close _63bc37a1 ">
+            <view class="cha _63bc37a1 "></view>
+            <view class="password-text _63bc37a1 ">请输入支付密码</view>
+        </view>
+        <view class="password-address _63bc37a1 ">
+            <view class="address _63bc37a1 " wx:if="{{shopName}}">{{shopName}}</view>
+            <view class="cash _63bc37a1 ">
+                <text class="text1 _63bc37a1 ">¥</text>
+                <text class="text2 _63bc37a1 ">{{payTypeCheck!=1?0:useWallet}}</text>
+            </view>
+            <view class="border _63bc37a1 "></view>
+        </view>
+        <view class="paymain _63bc37a1 ">
+            <text class="left _63bc37a1 ">支付方式</text>
+            <image class="image _63bc37a1 " lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2018/11/07/e4b8611a78cf88fa.jpeg',0)}}"></image>
+            <text class="right _63bc37a1 ">余额支付</text>
+        </view>
+        <password bindpasswordConfirm="passwordConfirm" class=" _63bc37a1 " id="password" isPhonePsd="{{true}}"></password>
+        <view catchtap="rememberPsd" class="password-remeber _63bc37a1 ">忘记支付密码?</view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

@@ -1,0 +1,1 @@
+.movable-area{height:calc(100vh - 110rpx);height:calc(100vh - 110rpx - constant(safe-area-inset-bottom));height:calc(100vh - 110rpx - env(safe-area-inset-bottom));left:0;pointer-events:none;position:fixed;top:0;width:100vw;z-index:22}.movable-view{height:200rpx;pointer-events:all;width:160rpx;z-index:22}

@@ -1,0 +1,8 @@
+<std-base-dialog id="__std_baseDialog">
+    <view catchtap="noop" catchtouchmove="noop" class="w-80vw h-fit rd-30 overflow-hidden bg-_bl__h_FFF_br_ flex flex-col items-center py-48 box-border">
+        <text class="{{'text-center block _i_text-80 '+(isSuccess?'i-success text-_bl__h_00B42A_br_':'i-fail text-_bl__h_F53F3F_br_')}}"></text>
+        <view class="text-36 text-_bl__h_333_br_ font-medium lh-50 mt-32 flex justify-center" wx:if="{{isSuccess}}">{{_i1}}</view>
+        <view class="text-36 text-_bl__h_333_br_ font-medium lh-50 mt-32 flex justify-center" wx:if="{{isFail&&errMsg}}">{{errMsg}}</view>
+        <button bindtap="toRtnIndex" class="button flex w-full _i_bg-primary _i_w-_bl_70_p__br_ _i_text-_bl__h_FFF_br_ mt-48">{{_i2}}</button>
+    </view>
+</std-base-dialog>

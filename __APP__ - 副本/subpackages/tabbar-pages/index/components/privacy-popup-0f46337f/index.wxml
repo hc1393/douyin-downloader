@@ -1,0 +1,74 @@
+<view catchtouchmove="noop" class="fixed top-0 right-0 bottom-0 left-0 z-11000 flex items-center justify-center {{isShowPopup?'bg-hex-00000099':''}}" style="{{isShowGrayFilter?'filter: grayscale(100%)':''}}" wx:if="{{isShow&&popupShow}}">
+    <view class="absolute bottom-0 left-0 box-border w-full px-46 pb-24 overflow-hidden bg-hex-fff rd-tl-30 rd-tr-30 rd-bl-0 rd-br-0 animate-duration-300 animate-ease-in-out animate-fill-both {{isShowPopup?'animate-name-slide-in-bottom':'animate-slide-out-bottom'}}" style="padding-bottom:{{pagePaddingBottom}}">
+        <view class="flex justify-center c-hex-333 font-bold text-40 lh-54 text-center pt-50 pb-30 px-0">{{_i1}}</view>
+        <block wx:if="{{locale==='zh-HK'}}">
+            <scroll-view scrollY class="max-h-400px">
+                <view class="c-hex-333 text-26 lh-40 pb-20">親愛的用戶，歡迎使用 {{storeName}} 小程序！</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">我們依據相關法律法規制定了<text catchtap="toProtocol" data-id="{{protocol.id}}" style="color: {{colorTheme}}">《{{storeName}}用戶服務協議》</text>和<text catchtap="toProtocol" data-id="{{privacy.id}}" style="color: {{colorTheme}}">《{{storeName}}用戶隱私政策》</text>，請您在使用我們的產品前仔細閱讀並充分理解相關條款，以了解您的權利。</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*根據《常見類型移動互聯網應用程序必要個人信息範圍規定》， {{storeName}}
+            小程序屬於網上購物類，基本功能為“購買商品”，必要個人信息包括：註冊用戶移動電話號碼；收貨人姓名（名稱）、地址、聯系電話；支付時間、支付金額、支付渠道等支付信息。</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*我們嚴格遵循最小必要原則，在法律規定的必要信息範圍內及與實現業務相關聯的個人信息範國內處理個人信息。您可以通過《{{storeName}}用戶隱私政策》了解我們處理您個人信息的情況，以及您所享有的相關權利。如您是未成年人，請您和您的監護人仔細閱讀本政策，並在征得您的監護人授權同意的前提下使用我們的服務或向我們提供個人信息。</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*您同意《{{storeName}}用戶隱私政策》僅代表您已了解應用提供的功能，以及功能運行所需的必要個人信息，並不代表您己同意我們可以收集非必要個人信息，非必要個人信息會根據您使用過程中的授權情況單獨征求您的同意。</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*設備權限不會默認開啟。您在使用具體業務功能時，我們會彈窗申請相關設備權限，征得您的同意後開啟；權限開啟後，您可隨時關閉權限；您不同意開啟權限，將不會影響其他非相關業務功能的正常使用。</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">如您不同意《{{storeName}}用戶隱私政策》，我們為您提供了僅瀏覽的訪客模式。訪客模式下，您可瀏覽我們的商品與服務，但無法使用我們的完整功能。為了給您更優的用戶體驗，推薦您使用完整功能模式。</view>
+            </scroll-view>
+            <view class="flex justify-between pt-20 pb-0 px-16">
+                <button bindtap="hide" class="w-300 h-88 c-hex-40ba5a text-30 lh-88 text-center bg-transparent m-0 px-20 py-0 rd-44 b-2rpx b-solid b-hex-40ba5a" style="color: {{colorTheme}};border-color:{{colorTheme}}">拒絕</button>
+                <button bindagreeprivacyauthorization="handleAgreePrivacyAuthorization" bindtap="confirm" class="w-300 h-88 text-30 lh-88 text-center bg-transparent text-white m-0 px-20 py-0 rd-44 b-2rpx b-solid b-hex-40ba5a" openType="agreePrivacyAuthorization" style="background: {{colorTheme}};border-color:{{colorTheme}}">同意</button>
+            </view>
+        </block>
+        <block wx:elif="{{locale==='en-US'}}">
+            <scroll-view scrollY class="max-h-400px">
+                <view class="c-hex-333 text-26 lh-40 pb-20">Dear User, welcome to the {{storeName}} Mini Program!</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">We have established the<text catchtap="toProtocol" data-id="{{protocol.id}}" style="color: {{colorTheme}}">
+              "{{storeName}} User Service Agreement" </text>and<text catchtap="toProtocol" data-id="{{privacy.id}}" style="color: {{colorTheme}}">
+              "{{storeName}} User Privacy Policy"
+            </text>in accordance with relevant laws and regulations. Please read and fully understand the relevant terms before
+            using our products to understand your rights.</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*According to the "Regulations on the Scope of Necessary Personal Information for Common Types of Mobile
+            Internet Applications", {{storeName}}
+            belongs to the category of online shopping, and the basic skills can be used to "purchase goods". The
+            necessary personal information includes: mobile phone number of registered users; Name (s), address and
+            telephone number of the consignee; Payment time, payment amount, payment channel and other payment
+            information.</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*We strictly follow the principle of minimum necessity and process personal information within the scope of
+            necessary information prescribed by law and within the scope of personal information related to the
+            realization of our business. You can read the "{{storeName}} User Privacy Policy" to understand our
+            processing of your personal information, as well as your rights. If you are a minor, please read this policy
+            carefully and use our services or provide personal information to us with the authorization and consent of
+            your guardian.</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*You agree that the "{{storeName}} User Privacy Policy" only means that you have understood the functions
+            provided by the application and the necessary personal information required for the operation of the
+            functions, and does not mean that you have agreed that we can collect non-essential personal information,
+            non-essential personal information will be based on your authorization during the use of your consent.</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*Device permissions are not enabled by default. When you use the specific business function, we will pop up
+            to apply for the permission of the relevant device, and enable it after obtaining your consent; After the
+            permission is enabled, you can turn off the permission at any time; If you do not agree to enable the
+            permission, the normal use of other non-related services will not be affected.</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">If you do not agree with the "{{storeName}} User Privacy Policy", we provide you with a browse-only
+            visitor mode. In guest mode, you can browse our goods and services, but you cannot use our full features. In
+            order to give you a better user experience, we recommend you to use the full function mode.</view>
+            </scroll-view>
+            <view class="flex justify-between pt-20 pb-0 px-16">
+                <button bindtap="hide" class="w-300 h-88 c-hex-40ba5a text-30 lh-88 text-center bg-transparent m-0 px-20 py-0 rd-44 b-2rpx b-solid b-hex-40ba5a" style="color: {{colorTheme}};border-color:{{colorTheme}}">Reject</button>
+                <button bindagreeprivacyauthorization="handleAgreePrivacyAuthorization" bindtap="confirm" class="w-300 h-88 text-30 lh-88 text-center bg-transparent text-white m-0 px-20 py-0 rd-44 b-2rpx b-solid b-hex-40ba5a" openType="agreePrivacyAuthorization" style="background: {{colorTheme}};border-color:{{colorTheme}}">Agree</button>
+            </view>
+        </block>
+        <block wx:else>
+            <scroll-view scrollY class="max-h-400px">
+                <view class="c-hex-333 text-26 lh-40 pb-20">亲爱的用户，欢迎使用{{storeName}}小程序</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">我们依据相关法律法规制定了<text catchtap="toProtocol" data-id="{{protocol.id}}" style="color: {{colorTheme}}">《{{protocol.name}}》</text>和<text catchtap="toProtocol" data-id="{{privacy.id}}" style="color: {{colorTheme}}">《{{privacy.name}}》</text>，请您在使用我们的产品前仔细阅读并充分理解相关条款，以了解您的权利。</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*根据《常见类型移动互联网应用程序必要个人信息范围规定》，
+            {{storeName}} 小程序属于网上购物类，基本功能为“购买商品”，{{tempText}}</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*我们严格遵循最小必要原则，在法律规定的必要信息范围内及与实现业务相关联的个人信息范围内处理个人信息。您可以通过《{{storeName}}用户隐私政策》了解我们处理您个人信息的情况，以及您所享有的相关权利。如您是未成年人，请您和您的监护人仔细阅读本政策，并在征得您的监护人授权同意的前提下使用我们的服务或向我们提供个人信息。</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*您同意《{{storeName}}用户隐私政策》仅代表您已了解应用提供的功能，以及功能运行所需的必要个人信息，并不代表您己同意我们可以收集非必要个人信息，非必要个人信息会根据您使用过程中的授权情况单独征求您的同意。</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">*设备权限不会默认开启。您在使用具体业务功能时，我们会弹窗申请相关设备权限，征得您的同意后开启；权限开启后，您可随时关闭权限；您不同意开启权限，将不会影响其他非相关业务功能的正常使用。</view>
+                <view class="c-hex-333 text-26 lh-40 pb-20">如您不同意《{{storeName}}用户隐私政策》，我们为您提供了仅浏览的访客模式。访客模式下，您可浏览我们的商品与服务，但无法使用我们的完整功能。为了给您更优的用户体验，推荐您使用完整功能模式。</view>
+            </scroll-view>
+            <view class="flex justify-between pt-20 pb-0 px-16">
+                <button bindtap="hide" class="w-300 h-88 c-hex-40ba5a text-30 lh-88 text-center bg-transparent m-0 px-20 py-0 rd-44 b-2rpx b-solid b-hex-40ba5a" style="color: {{colorTheme}};border-color:{{colorTheme}}">拒绝</button>
+                <button bindagreeprivacyauthorization="handleAgreePrivacyAuthorization" bindtap="confirm" class="w-300 h-88 text-30 lh-88 text-center bg-transparent text-white m-0 px-20 py-0 rd-44 b-2rpx b-solid b-hex-40ba5a" openType="agreePrivacyAuthorization" style="background: {{colorTheme}};border-color:{{colorTheme}}">同意</button>
+            </view>
+        </block>
+    </view>
+</view>

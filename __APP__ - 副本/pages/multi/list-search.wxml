@@ -1,0 +1,44 @@
+<view class="main {{modeLarge=='large'?'multi_large':''}} _6a4ed236 mpx-app-scope">
+    <view class="multi-list-wrapper _6a4ed236 mpx-app-scope">
+        <view class="address-search-wrapper _6a4ed236 mpx-app-scope">
+            <view bindtap="selectOtherCity" class="address-search-city _6a4ed236 mpx-app-scope" data-qm_track-belong_event="Order_PickUpStoreSearch_BtnClick" data-qm_track-button_name="城市选择" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-key_word="{{nameOrAddress}}" data-qm_track-order_type="个人点单" wx:if="{{!hideMap}}">{{_i1}}<text class="iconfont i-jiantou-xia address-search-city-icon _6a4ed236 mpx-app-scope"></text>
+            </view>
+            <view class="address-line _6a4ed236 mpx-app-scope" wx:if="{{!hideMap}}"></view>
+            <input bindinput="inputKeyboard" class="search-input _6a4ed236 mpx-app-scope" confirmType="search" data-qm_track-belong_event="Order_PickUpStoreSearch_BtnClick" data-qm_track-button_name="搜索框" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-key_word="{{nameOrAddress}}" data-qm_track-order_type="个人点单" focus="true" placeholder="{{_i2}}" type="text" value="{{nameOrAddress}}"></input>
+            <view catchtap="clearNameOrAddress" class="search-cha-wrapper _6a4ed236 mpx-app-scope" wx:if="{{nameOrAddress}}">
+                <view class="search-cha _6a4ed236 mpx-app-scope">
+                    <view class="iconfont i-close search-cha-icon _6a4ed236 mpx-app-scope"></view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="backSpace" class="multi-list-cancel _6a4ed236 mpx-app-scope">{{_i3}}</view>
+    </view>
+    <view class="list _6a4ed236 mpx-app-scope" wx:if="{{loading}}">
+        <view class="safe-area-box _6a4ed236 mpx-app-scope" wx:if="{{shopList.length}}">
+            <view bindtap="selectMulti" class="multi-info-wrapper _6a4ed236 mpx-app-scope" data-item="{{item}}" data-qm_track-belong_event="Order_PickUpStoreSearch_BtnClick" data-qm_track-button_name="跳转门店详情" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-key_word="{{nameOrAddress}}" data-qm_track-order_type="个人点单" data-qm_track-store_distance="{{distance.formatDistance(item.shopDetail.distance)}}" data-qm_track-store_id="{{item.shopDetail.id}}" data-qm_track-store_name="{{item.shopDetail.name}}" data-qm_track-wait_cups="{{item.orderQueueMake.cupNum}}" wx:for="{{shopList}}" wx:key="index">
+                <store-list-item actType="{{_actType||''}}" class=" _6a4ed236 mpx-app-scope" curAddressCity="{{curAddressCity}}" curNameOrAddress="{{nameOrAddress}}" customStyle="{{selectMultiId==item.shopDetail.id?'border-color: '+colorTheme:''}}" eatType="1" fromPage="{{_fromPage}}" referenceType="search" storeInfo="{{item}}"></store-list-item>
+            </view>
+        </view>
+        <view class="search-no-result _6a4ed236 mpx-app-scope" wx:else>
+            <view class="search-no-img _6a4ed236 mpx-app-scope">
+                <image class="no-img _6a4ed236 mpx-app-scope" lazyLoad="true" src="{{__oss__.s(mpxExt,isHadSearch?'https://images.qmai.cn/resource/20210824210816/2023/09/18/list-search-no.png':'',0)}}"></image>
+            </view>
+            <view class="search-no-text _6a4ed236 mpx-app-scope">
+                <text class=" _6a4ed236 mpx-app-scope" wx:if="{{isHadSearch}}">{{_i4}}</text>
+            </view>
+            <view class="search-no-text _6a4ed236 mpx-app-scope">
+                <text class=" _6a4ed236 mpx-app-scope" wx:if="{{isHadSearch}}">{{_i5}}</text>
+            </view>
+        </view>
+    </view>
+    <zm-loading class=" _6a4ed236 mpx-app-scope" wx:else></zm-loading>
+</view>
+<pop-up bindclose="closeErrorPopup" class=" _6a4ed236 mpx-app-scope" show="{{!!errorPopup}}">
+    <view class="error-popup-wrap _6a4ed236 mpx-app-scope">
+        <image class="error-popup-pic _6a4ed236 mpx-app-scope" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/05/25/gpcoupon_error.png',0)}}"></image>
+        <view class="error-popup-font _6a4ed236 mpx-app-scope">{{errorPopupFont}}</view>
+        <view bindtap="closeErrorPopup" class="error-popup-btn _6a4ed236 mpx-app-scope" style="background-color: {{colorTheme}};">{{_i6}}</view>
+    </view>
+</pop-up>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>
+<wxs module="distance" src="wxs/trackUtilsbae1568c.wxs"/>

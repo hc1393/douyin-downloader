@@ -1,0 +1,40 @@
+<view class="container _16ce17d8 mpx-app-scope">
+    <view class="amount-view _16ce17d8 mpx-app-scope">
+        <view class="head-temp _16ce17d8 mpx-app-scope">
+            <view class="account-img circle _16ce17d8 mpx-app-scope">
+                <image class="block w-full h-full circle image _16ce17d8 mpx-app-scope" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2019/06/24/83e1cec439821fc8.png?x-oss-process=image/resize,w_100',0)}}"></image>
+            </view>
+            <view class="pay-account _16ce17d8 mpx-app-scope">￥{{detail.totalAmount}}</view>
+        </view>
+        <view class="partition-line _16ce17d8 mpx-app-scope"></view>
+        <view class="detaile _16ce17d8 mpx-app-scope">
+            <view class="section _16ce17d8 mpx-app-scope">
+                <view class="section-title _16ce17d8 mpx-app-scope">订单金额</view>
+                <view class="section-box _16ce17d8 mpx-app-scope">￥{{detail.actualAmount}}</view>
+            </view>
+            <view class="section _16ce17d8 mpx-app-scope" wx:for="{{detail.discountLists}}" wx:key="discountId">
+                <view class="section-title _16ce17d8 mpx-app-scope">{{item.discountName}}</view>
+                <view class="section-box _16ce17d8 mpx-app-scope">{{item.discountAmount?'-￥'+item.discountAmount:item.discountSummary}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="detaile-info white _16ce17d8 mpx-app-scope">
+        <view class="section _16ce17d8 mpx-app-scope">
+            <view class="section-title _16ce17d8 mpx-app-scope">付款方式</view>
+            <view class="section-box _16ce17d8 mpx-app-scope">{{detail.payTypeText}}</view>
+        </view>
+        <view class="section _16ce17d8 mpx-app-scope">
+            <view class="section-title _16ce17d8 mpx-app-scope">创建时间</view>
+            <view class="section-box _16ce17d8 mpx-app-scope">{{detail.orderAt}}</view>
+        </view>
+        <view class="section _16ce17d8 mpx-app-scope">
+            <view class="section-title _16ce17d8 mpx-app-scope">订单号</view>
+            <view class="section-box _16ce17d8 mpx-app-scope">{{detail.orderNo}}</view>
+        </view>
+        <view class="section _16ce17d8 mpx-app-scope" wx:if="{{detail.billNo}}">
+            <view class="section-title _16ce17d8 mpx-app-scope">账单号</view>
+            <view class="section-box _16ce17d8 mpx-app-scope">{{detail.billNo}}</view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

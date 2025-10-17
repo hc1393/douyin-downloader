@@ -1,0 +1,63 @@
+<view class="h-full flex flex-col">
+    <scroll-view scrollY class="flex-1 bg-_bl__h_FFF_br_ rd-tl-30 rd-tr-30 overflow-hidden box-border">
+        <view class="h-fit p-32">
+            <view wx:if="{{activeStep===0}}">
+                <view class="lh-50 text-36 text-_bl__h_3D3D3D_br_ font-500">{{_i1}}</view>
+                <view class="lh-40 text-26 text-_bl__h_666_br_ mt-16">{{_i2}}</view>
+                <view class="lh-40 text-26 text-_bl__h_666_br_ mt-16">{{_i3}}</view>
+                <view class="lh-50 text-36 text-_bl__h_3D3D3D_br_ font-500 mt-48 mb-24">{{_i4}}</view>
+                <bar-selector bindchange="onSelectMoveType" list="{{moveTypeList}}"></bar-selector>
+            </view>
+            <view wx:if="{{activeStep===1}}">
+                <assets-move-accounts-card class="mb-48" type="{{selectedMoveType}}"></assets-move-accounts-card>
+                <mobile-verify-code bindchange="onMobileVerifyCodeChange" id="__std_mobileVerifyCode" mobileText="{{mobileText}}" smsType="{{smsType}}"></mobile-verify-code>
+            </view>
+            <view wx:if="{{activeStep===2}}">
+                <view class="h-94 flex flex-col mb-24" wx:if="{{isMoveOut}}">
+                    <text class="text-_bl__h_3D3D3D_br_ text-36 font-500 lh-50">{{_i5}}</text>
+                    <text class="text-_bl__h_999_br_ text-26 lh-36 mt-8">{{_i6+'「'+mobile+'」\n            '}}</text>
+                </view>
+                <view class="h-94 flex flex-col mb-24" wx:else>
+                    <text class="text-_bl__h_3D3D3D_br_ text-36 font-500 lh-50">{{_i7+'「'+mobile+'」'+_i8+'\n            '}}</text>
+                    <text class="text-_bl__h_999_br_ text-26 lh-36 mt-8">{{_i9}}</text>
+                </view>
+                <bar-selector bindchange="onSelectAssets" list="{{assetList}}" mode="checkbox"></bar-selector>
+            </view>
+            <view wx:if="{{activeStep===3}}">
+                <view class="pt-184 px-32 flex flex-col items-center box-border">
+                    <text class="{{'text-center block _i_text-80 '+(isMoveSuccess?'i-success text-_bl__h_00B42A_br_':'i-fail text-_bl__h_F53F3F_br_')}}"></text>
+                    <view class="w-full text-center text-36 text-_bl__h_3D3D3D_br_ lh-50 mt-44 mb-24">
+                        <text wx:if="{{isMoveOut}}">{{_i10}}</text>
+                        <text wx:if="{{!isMoveOut}}">{{_i11}}</text>
+                        <text wx:if="{{isMoveSuccess}}">{{_i12}}</text>
+                        <text wx:if="{{!isMoveSuccess}}">{{_i13}}</text>
+                    </view>
+                    <view class="w-full text-center text-30 text-_bl__h_999_br_ lh-42" wx:if="{{isMoveOut}}">
+                        <text>{{_i14}}</text>
+                        <text>（{{nowAccount}}）</text>
+                        <text>{{_i15}}</text>
+                        <text class="text-primary">「{{assetsText}}」</text>
+                        <text>{{_i16}}</text>
+                        <text>（{{mobile}}）</text>
+                    </view>
+                    <view class="w-full text-center text-30 text-_bl__h_999_br_ lh-42" wx:else>
+                        <text>{{_i17}}</text>
+                        <text>（{{mobile}}）</text>
+                        <text>{{_i18}}</text>
+                        <text class="text-primary">「{{assetsText}}」</text>
+                        <text>{{_i19}}</text>
+                        <text>（{{nowAccount}}）</text>
+                    </view>
+                    <button bindtap="toRtnIndex" class="button flex w-full _i_bg-primary _i_text-_bl__h_FFF_br_ mt-100">{{_i20}}</button>
+                    <button bindtap="toRecord" class="button flex w-full bg-transparent border-none rd-0 w-full mt-16">{{_i21}}</button>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="px-24 pb-safe bg-_bl__h_FFF_br_">
+        <button bindtap="toNext" class="{{'button flex w-full _i_bg-primary _i_text-_bl__h_FFF_br_ '+(isNextDisabled?'button-disabled':'')}}" wx:if="{{activeStep===0||activeStep===1}}">{{nextText}}</button>
+        <button bindtap="toConfirm" class="{{'button flex w-full _i_bg-primary _i_text-_bl__h_FFF_br_ '+(isConfirmDisabled?'button-disabled':'')}}" wx:if="{{activeStep===2}}">{{_i22}}</button>
+        <button bindtap="toRecord" class="button flex w-full bg-transparent border-none rd-0 w-full mt-16" wx:if="{{activeStep!==3}}">{{_i23}}</button>
+    </view>
+    <assets-move-confirm-dialog bindok="onConfirm" id="__std_assetsMoveConfirmDialog"></assets-move-confirm-dialog>
+</view>

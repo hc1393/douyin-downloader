@@ -1,0 +1,931 @@
+{
+  "permission": {
+    "scope.userLocation": {
+      "desc": "位置信息将用于为你推荐附近门店"
+    }
+  },
+  "plugins": {
+    "sendCoupon": {
+      "version": "latest",
+      "provider": "wxf3f436ba9bd4be7b",
+      "subpackage": "/plugins/"
+    },
+    "plugin-demo": {
+      "version": "latest",
+      "provider": "wxfba7eea07c97d2d5",
+      "subpackage": "/plugins2/"
+    },
+    "studentVerify": {
+      "version": "latest",
+      "provider": "wxa16657d57059e0f0",
+      "subpackage": "/plugins2/"
+    }
+  },
+  "preloadRule": {
+    "pages/index/index": {
+      "network": "all",
+      "packages": [
+        "subpackages/tabbar-pages/takefood"
+      ]
+    },
+    "pages/takefood/index": {
+      "network": "all",
+      "packages": [
+        "subpackages/confirm",
+        "subpackages/address",
+        "subpackages/wishMatch"
+      ]
+    },
+    "pages/pay/index/index": {
+      "network": "all",
+      "packages": [
+        "subpackages/select-coupon"
+      ]
+    }
+  },
+  "embeddedAppIdList": [
+    "wx94057b049312ffec"
+  ],
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation",
+    "chooseAddress"
+  ],
+  "componentFramework": "glass-easel",
+  "tabBar": {
+    "backgroundColor": "#FFFFFF",
+    "selectedColor": "#070707",
+    "list": [
+      {
+        "iconPathOne": true,
+        "iconPathTwo": true,
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "code": ""
+      },
+      {
+        "iconPathOne": true,
+        "iconPathTwo": true,
+        "pagePath": "pages/takefood/index",
+        "text": "点单",
+        "code": ""
+      },
+      {
+        "pagePath": "pages/page/p3/index",
+        "text": "会员专区",
+        "code": "ZNVQ4VO6_3"
+      },
+      {
+        "iconPathOne": true,
+        "iconPathTwo": true,
+        "pagePath": "pages/order/list/index",
+        "text": "取茶",
+        "code": ""
+      },
+      {
+        "iconPathOne": true,
+        "iconPathTwo": true,
+        "pagePath": "pages/user/index",
+        "text": "我的",
+        "code": ""
+      }
+    ],
+    "color": "#7E7E7E",
+    "navTemplate": "1",
+    "customIcon": true,
+    "custom": true,
+    "borderStyle": "black"
+  },
+  "subPackages": [
+    {
+      "root": "pluginMall",
+      "pages": [
+        "error/index",
+        "webview/index",
+        "index/index",
+        "classify/index",
+        "detail/index",
+        "cart/index",
+        "order-confirm/index",
+        "order-detail/index",
+        "order-list/index",
+        "logistics-detail/index",
+        "logistics-form/index",
+        "after-sale-select/index",
+        "after-sale-form/index",
+        "after-sale-detail/index",
+        "address-list/index",
+        "address-edit/index",
+        "invoicing-detail/index",
+        "distribution-index/index",
+        "distribution-apply/index",
+        "distribution-invite/index",
+        "distribution-junior/index",
+        "distribution-withdraw/index",
+        "distribution-withdraw-record/index",
+        "distribution-order/index",
+        "distribution-goods/index",
+        "pay-result/index",
+        "order-change/index",
+        "store-select/index",
+        "city-select/index",
+        "goods-search/index"
+      ]
+    },
+    {
+      "root": "pluginPoint",
+      "pages": [
+        "index/index",
+        "record/index",
+        "rule/index",
+        "exchange-record/index",
+        "exchange-coupon/index",
+        "exchange-evaluate/index",
+        "exchange-success/index",
+        "exchange-order-confirm/index",
+        "exchange-confirm/index",
+        "entity-exchange-success/index",
+        "logistics/index",
+        "refund-apply/index",
+        "refund-list/index",
+        "refund-detail/index",
+        "pay-result/index",
+        "webview/index"
+      ]
+    },
+    {
+      "root": "pluginPages",
+      "pages": [
+        "login-guide/index",
+        "money-saving-calc/index",
+        "store-account/index",
+        "transaction-records/index",
+        "applicable-stores/index",
+        "mall-invoice-apply/index",
+        "mall-invoice-detail/index",
+        "goods-energy-calculation/index",
+        "apply-stores/index",
+        "apply-goods/index",
+        "apply-rights-cards/index",
+        "apply-gift-cards/index",
+        "custom-web-view/index",
+        "miniapp-bridge/index",
+        "privacy-policy/index",
+        "rich-text/index",
+        "student-certification/index"
+      ]
+    },
+    {
+      "root": "pluginDine",
+      "pages": [
+        "address-add/index",
+        "address-edit/index",
+        "address-select/index",
+        "location-select/index",
+        "goods-package-detail/index",
+        "goods-list/index",
+        "goods-search/index",
+        "goods-packing-fee-detail/index",
+        "order-confirm/index",
+        "order-detail/index",
+        "order-list/index",
+        "order-remark/index",
+        "refund-apply/index",
+        "refund-detail/index",
+        "refund-list/index",
+        "shop-select/index",
+        "shop-cert/service-qualification",
+        "shop-cert/food-safety-file",
+        "shop-activity/detail",
+        "invoice-detail/index",
+        "invoice-apply/index",
+        "invoice-select/index",
+        "invoice-add/index"
+      ]
+    },
+    {
+      "root": "pluginMedal",
+      "pages": [
+        "index/index",
+        "medal-detail/index",
+        "task/index",
+        "task-rewards/index"
+      ]
+    },
+    {
+      "root": "pluginUser",
+      "pages": [
+        "index",
+        "account-mgmt/index",
+        "account-switch/index",
+        "account-log-off/index",
+        "assets-move/index",
+        "log-off-agreement/index",
+        "assets-move-records/index"
+      ]
+    },
+    {
+      "root": "pluginQueue",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pluginFeedback",
+      "pages": [
+        "add/index",
+        "index/index"
+      ]
+    },
+    {
+      "root": "subpackages/tabbar-pages/takefood",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/tabbar-pages/order-list",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/tabbar-pages/pay",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "async-components",
+      "pages": [
+        "index",
+        "2/index"
+      ]
+    },
+    {
+      "root": "async-components2",
+      "pages": []
+    },
+    {
+      "root": "open",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/tabbar-pages/user",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/tabbar-pages/index",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/tabbar-pages/page",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pluginMarketing",
+      "pages": [
+        "common/reward-template-detail",
+        "common/web-view/index",
+        "common/my-reward/index",
+        "common/my-reward/coupon-package-detail",
+        "common/goods/index",
+        "common/goods/common-goods",
+        "common/store/index",
+        "common/source/index",
+        "overlord-meal/index",
+        "overlord-meal/share",
+        "identify-customer-code/index",
+        "decibel/index",
+        "puzzle/index",
+        "puzzle/give-record",
+        "puzzle/get-pieces",
+        "ladder-coupons/index",
+        "lottery/index/index",
+        "lottery/share/index",
+        "lottery/join/index",
+        "lottery/rule/index",
+        "lottery/equity/index",
+        "checkin/index/index",
+        "checkin/my-reward/index",
+        "receive/index/index",
+        "receive/list/index",
+        "receive/receive-result/index",
+        "receive/password-rule/index",
+        "partition-coupon/index/index",
+        "partition-coupon/team-record/index",
+        "point-exchange/index/index",
+        "point-exchange/detail/index",
+        "point-exchange/my-reward/index",
+        "point-exchange/goods/index",
+        "point-exchange/store/index",
+        "bridge/subscribe/index",
+        "bridge/navigate/index",
+        "bridge/crowd/index",
+        "bridge/authorization/index",
+        "collect-card/index/index",
+        "collect-card/get-card/index",
+        "collect-card/my-card/index",
+        "collect-card/give-record/index",
+        "nurture/index/index",
+        "invite/index/index",
+        "invite/share/index",
+        "invite/my-invite/index",
+        "guess/index/index",
+        "guess/record/index",
+        "guess/reward/index",
+        "exchange/index/index",
+        "activity-center/index/index",
+        "activity-center/detail/index",
+        "collect-img/index/index",
+        "collect-img/give-record/index",
+        "scratchcard/index/index",
+        "scratchcard/share/index",
+        "funny-synthesis/index/index",
+        "funny-synthesis/give-record/index"
+      ]
+    },
+    {
+      "root": "subpackages/bargain",
+      "pages": [
+        "list/index",
+        "equity-card/index",
+        "equity-order/index",
+        "activity/index",
+        "record/index"
+      ]
+    },
+    {
+      "root": "subpackages/old-bring-new",
+      "pages": [
+        "index/index",
+        "rule/index",
+        "help/index",
+        "reward/index",
+        "share/index"
+      ]
+    },
+    {
+      "root": "subpackages/invite-for-gift",
+      "pages": [
+        "index/index",
+        "help/index",
+        "rule/index",
+        "reward/index",
+        "share/index"
+      ]
+    },
+    {
+      "root": "subpackages/integralDraw",
+      "pages": [
+        "rule/index",
+        "index/index"
+      ]
+    },
+    {
+      "root": "subpackages/treasure",
+      "pages": [
+        "index/index",
+        "my-treasure/index",
+        "coupon-list/index",
+        "get-coupon/index",
+        "actList/index"
+      ]
+    },
+    {
+      "root": "subpackages/spellGroup",
+      "pages": [
+        "list/index",
+        "detail/index",
+        "groupTeamDetail/index"
+      ]
+    },
+    {
+      "root": "subpackages/questionAnswer",
+      "pages": [
+        "index",
+        "New/index"
+      ]
+    },
+    {
+      "root": "subpackages/questionAnswerNew",
+      "pages": []
+    },
+    {
+      "root": "subpackages/blindBoxLottery",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/spell-coupon",
+      "pages": [
+        "list/index",
+        "applicable/index",
+        "detail/index",
+        "group-detail/index",
+        "group-list/index",
+        "members/index",
+        "order/confirm/index",
+        "order/success/index",
+        "order/list/index",
+        "order/detail/index"
+      ]
+    },
+    {
+      "root": "subpackages/password-envelope",
+      "pages": [
+        "index/index",
+        "reward/index"
+      ]
+    },
+    {
+      "root": "subpackages/outbreak-card",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/split-coupons",
+      "pages": [
+        "list/index",
+        "detail/index",
+        "records/index"
+      ]
+    },
+    {
+      "root": "subpackages/queneUp",
+      "pages": [
+        "index",
+        "list",
+        "detail"
+      ]
+    },
+    {
+      "root": "pages/multi",
+      "pages": [
+        "list-instore",
+        "choice-multi",
+        "list",
+        "select-city",
+        "list-search",
+        "list-component",
+        "youdian/search"
+      ]
+    },
+    {
+      "root": "subpackages/protocol",
+      "pages": [
+        "index",
+        "list/index",
+        "privacy/recommend",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "subpackages/address",
+      "pages": [
+        "add/index",
+        "list/index"
+      ]
+    },
+    {
+      "root": "subpackages/user-equity",
+      "pages": [
+        "index",
+        "level/index",
+        "level-record/index",
+        "privilege-diff/index"
+      ]
+    },
+    {
+      "root": "subpackages/asset-merge",
+      "pages": [
+        "index",
+        "merge/index",
+        "unionid/index"
+      ]
+    },
+    {
+      "root": "subpackages/bgImage",
+      "pages": [
+        "change-theme/index",
+        "choose-way/index",
+        "my-theme/index"
+      ]
+    },
+    {
+      "root": "subpackages/gift-card",
+      "pages": [
+        "card/index",
+        "index/index",
+        "confirm/index",
+        "exchange/index",
+        "share-card/index",
+        "give/index",
+        "details/index",
+        "record/index",
+        "receive/index",
+        "history/index",
+        "notice/index",
+        "orderDetail/index",
+        "order-list/index",
+        "rightsInterestsCard/index",
+        "paySuccess/index",
+        "batchGiftsCard/index",
+        "balance-transfer/index",
+        "confirm-transfer/index",
+        "physical-card/list",
+        "physical-card/record",
+        "apply-gift-cards/index"
+      ]
+    },
+    {
+      "root": "subpackages/premium-membership",
+      "pages": [
+        "index/index",
+        "rich-text/index",
+        "buy-record/index",
+        "select-cards/index",
+        "cover/index",
+        "give/index",
+        "receive/index",
+        "exchange/index",
+        "collect/index",
+        "my-cards/index",
+        "student-certification/index",
+        "save-money-preview"
+      ]
+    },
+    {
+      "root": "subpackages/sign-in",
+      "pages": [
+        "index/index",
+        "rule/index"
+      ]
+    },
+    {
+      "root": "subpackages/value-card",
+      "pages": [
+        "agree-info/index",
+        "balance-donate/index",
+        "balance-receive/index",
+        "member-value/index",
+        "notice/index",
+        "record/index",
+        "pay-success/index",
+        "exchange/index",
+        "physical-card-recharge/index",
+        "manage/index"
+      ]
+    },
+    {
+      "root": "subpackages/refund",
+      "pages": [
+        "refund-apply/index",
+        "refund-detail/index",
+        "refund-list/index",
+        "refund-content/index"
+      ]
+    },
+    {
+      "root": "subpackages/wishMatch",
+      "pages": [
+        "wishMatch"
+      ]
+    },
+    {
+      "root": "subpackages/confirm",
+      "pages": [
+        "confirm"
+      ]
+    },
+    {
+      "root": "subpackages/detail",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/evaluate",
+      "pages": [
+        "index/index",
+        "list/index",
+        "detail/index",
+        "add/index"
+      ]
+    },
+    {
+      "root": "subpackages/select-coupon",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/coupon",
+      "pages": [
+        "promotion/index",
+        "voucher-coupon/index",
+        "exchange/index",
+        "get-coupon/index",
+        "get-activity/index",
+        "tourist-coupon/index",
+        "selected-goods/index",
+        "package/list/index",
+        "package/detail/index",
+        "package/record/index",
+        "package/paySuccess/index",
+        "package/agreeInfo/index",
+        "-goods-list/index",
+        "-goods-list/multi-list",
+        "-goods-list/list"
+      ]
+    },
+    {
+      "root": "subpackages/transform",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/exchange-coupon",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/pay/success",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/user/coupon",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/user/info",
+      "pages": [
+        "info"
+      ]
+    },
+    {
+      "root": "subpackages/user",
+      "pages": [
+        "cancellation-cause/index",
+        "cancellation-event/index",
+        "account-security/index",
+        "cancellation/index",
+        "agreement/index",
+        "certification/index",
+        "change-mobile/index",
+        "update-mobile/index",
+        "areaCodeMobile/index",
+        "change-language/index",
+        "-task-center/index/index",
+        "-task-center/record/index",
+        "-task-center/rule/index",
+        "-task-center/limitGoods/index"
+      ]
+    },
+    {
+      "root": "pages/coupon",
+      "pages": [
+        "coupon-receive/index",
+        "user-coupon-stale/index",
+        "user-giving-records/index",
+        "batch-coupons/index",
+        "customized-coupons/index"
+      ]
+    },
+    {
+      "root": "subpackages/invoice",
+      "pages": [
+        "index/index",
+        "apply/index",
+        "order-list/index",
+        "instructions/index"
+      ]
+    },
+    {
+      "root": "subpackages/pinDetails",
+      "pages": [
+        "pin-poster-edit",
+        "index",
+        "Share/index"
+      ]
+    },
+    {
+      "root": "subpackages/pinDetailsShare",
+      "pages": []
+    },
+    {
+      "root": "subpackages/suggestionFeedback",
+      "pages": [
+        "list/index",
+        "add/index"
+      ]
+    },
+    {
+      "root": "subpackages/marketing-detail",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/familyMemberCard",
+      "pages": [
+        "index/index",
+        "cartManager/index",
+        "addCard/index",
+        "cardSet/index"
+      ]
+    },
+    {
+      "root": "subpackages/third-equity",
+      "pages": [
+        "index/index",
+        "detail/index"
+      ]
+    },
+    {
+      "root": "subpackages/category-goods",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/user-task-center",
+      "pages": []
+    },
+    {
+      "root": "subpackages/exchange-goods",
+      "pages": [
+        "index",
+        "new-index"
+      ]
+    },
+    {
+      "root": "subpackages/group-restaurant",
+      "pages": [
+        "takefood/index",
+        "confirm/index",
+        "index/index",
+        "wishMatch/index",
+        "multi/choice-multi",
+        "multi/list",
+        "multi/list-instore",
+        "multi/list-search",
+        "address/list/index"
+      ]
+    },
+    {
+      "root": "subpackages/group-purchase-coupon",
+      "pages": [
+        "list/index",
+        "ali-list/index",
+        "detail/index",
+        "cancel-coupon-helper/index"
+      ]
+    },
+    {
+      "root": "subpackages/enterprise-wechat",
+      "pages": [
+        "customer/index",
+        "group-chat/index"
+      ]
+    },
+    {
+      "root": "subpackages/lottery-reward",
+      "pages": [
+        "index",
+        "redirect",
+        "draw-down"
+      ]
+    },
+    {
+      "root": "subpackages/middlePage",
+      "pages": [
+        "multiple-person-ordering"
+      ]
+    },
+    {
+      "root": "subpackages/login-auth",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/coupon-goods-list",
+      "pages": []
+    },
+    {
+      "root": "subpackages/site-pages",
+      "pages": [
+        "apply-goods/index",
+        "apply-stores/index",
+        "apply-rights-cards/index",
+        "search-goods/index",
+        "password-setting/index",
+        "shopQqualification/index",
+        "pay-success/index",
+        "member-card-activation/index",
+        "packaging-fee-detail/index",
+        "no-queuing-privilege/index",
+        "personalized-label/index",
+        "personalized-label/edit",
+        "shop-home/index",
+        "custom-web-view/index",
+        "pay/index",
+        "shop/other-sell-shop/index"
+      ]
+    },
+    {
+      "root": "subpackages/ai-order",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "subpackages/strongestDecibel",
+      "pages": [
+        "index/index"
+      ]
+    },
+    {
+      "root": "subpackages/live-player",
+      "pages": [
+        "list/index"
+      ]
+    },
+    {
+      "root": "plugins",
+      "pages": [
+        "index",
+        "2/index",
+        "2/__plugin__/wxfba7eea07c97d2d5/pages/ar-video/index",
+        "2/__plugin__/wxfba7eea07c97d2d5/pages/select-ar/index",
+        "2/__plugin__/wxfba7eea07c97d2d5/pages/review-video/review"
+      ]
+    },
+    {
+      "root": "plugins2",
+      "pages": []
+    },
+    {
+      "root": "subpackages/ar-cheers",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "__wx__",
+      "independent": true,
+      "pages": []
+    }
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "pages": [
+    "pages/index/index",
+    "subpackages/payment-code/index",
+    "subpackages/license/index",
+    "subpackages/webView/index",
+    "subpackages/privacyNumPage/index",
+    "subpackages/pay-gift-other-rights/index",
+    "subpackages/errorPage/index",
+    "subpackages/delivery-detail/index",
+    "pages/user/index",
+    "pages/takefood/index",
+    "pages/takeout/index",
+    "pages/page/page",
+    "pages/duibaPay/duibaPay",
+    "pages/duibaRedirect/duibaRedirect",
+    "pages/page/p1/index",
+    "pages/page/p2/index",
+    "pages/page/p3/index",
+    "pages/page/p4/index",
+    "pages/page/p5/index",
+    "pages/pluginMall/index",
+    "pages/webView/index",
+    "pages/user/qualification/index",
+    "pages/pay/index/index",
+    "pages/pay/record/index",
+    "pages/pay/detail/index",
+    "pages/order/list/index",
+    "pages/order/remark/index"
+  ]
+}

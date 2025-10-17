@@ -1,0 +1,4 @@
+<view class="{{'flex items-center justify-center '+(rightIcon?'pl-6':'px-6')+' py-0 whitespace-nowrap h-30rpx lh-10rpx border-1px border-solid border-_bl_var_pl_--theme_pr__br_ border-rd-3px text-20rpx box-border '+(bordered?'c-_bl_var_pl_--theme_pr__br_ bg-_h_fff':'c-_h_fff bg-_bl_var_pl_--theme_pr__br_')}}" style="--theme: {{theme}}; {{customStyle}}" wx:if="{{label}}">
+    <view class="inline">{{label}}</view>
+    <view class="{{'flex items-center justify-center i-kejicun ml-6 px-6 py-0 h-full '+(bordered?'c-_h_fff bg-_bl_var_pl_--theme_pr__br_':'c-_bl_var_pl_--theme_pr__br_ bg-_h_fff')}}" wx:if="{{rightIcon==='i-kejicun'}}"></view>
+</view>

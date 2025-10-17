@@ -1,0 +1,10 @@
+<view class="std-stepper {{theme==='border'?'std-stepper--border':''}} {{theme==='round'?'std-stepper--round':''}}">
+    <view bind:tap="onTap" bind:touchend="onTouchEnd" bind:touchstart="onTouchStart" class="minus-class i-jianhao std-stepper__minus {{disabled||disableMinus||currentValue<=min?' std-stepper__minus--disabled':''}}" data-type="minus" wx:if="{{showMinus}}">
+        <slot name="minus"></slot>
+    </view>
+    <input alwaysEmbed="{{alwaysEmbed}}" bind:blur="onBlur" bind:focus="onFocus" bindinput="onInput" class="{{__stringify__.stringifyClass( 'input-class std-stepper__input',{std_da_stepper__input_da__da_disabledMpxEscape:disabled||disableInput} )}}" disabled="{{disabled||disableInput}}" focus="{{focus}}" style="{{disabled||disableInput?inputDisabledStyle:''}}" type="{{integer?'number':'digit'}}" value="{{currentValue}}"></input>
+    <view bind:tap="onTap" bind:touchend="onTouchEnd" bind:touchstart="onTouchStart" class="plus-class i-jiahao std-stepper__plus {{disabled||disablePlus||currentValue>=max?' std-stepper__plus--disabled':''}}" data-type="plus" wx:if="{{showPlus}}">
+        <slot name="plus"></slot>
+    </view>
+</view>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>

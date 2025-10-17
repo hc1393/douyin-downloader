@@ -1,0 +1,40 @@
+<view catchtap="noop" class="qm-coupon-item {{customStyle==1?'qm-coupon-item-type_1':''}} {{customStyle==2?'qm-coupon-item-type_2':''}} {{customStyle==3?'qm-coupon-item-type_3':''}} {{customStyle==4?'qm-coupon-item-type_4':''}} _58065572 " style="border-radius: {{borderRadius}};">
+    <view class="qm-coupon-item__info _58065572 ">
+        <view class="line _58065572 " style="border-color:{{backgroundColor}}" wx:if="{{customStyle==3}}"></view>
+        <view class="qm-coupon-item__layout-l _58065572 ">
+            <coupon-sale class=" _58065572 " couponInfo="{{couponInfo}}"></coupon-sale>
+            <view class="qm-coupon-item__title _58065572 " wx:if="{{customStyle==3}}">{{couponInfo.name}}</view>
+            <view class="coupon-conditional {{customStyle==3?'coupon-conditional__limit':''}} _58065572 ">
+                <text class=" _58065572 " wx:if="{{couponInfo.type===14}}">兑换券</text>
+                <text class=" _58065572 " wx:elif="{{couponInfo.type===13}}">限线下使用</text>
+                <text class=" _58065572 " wx:elif="{{couponInfo.thresholdType===1}}">{{_i1}}</text>
+                <text class=" _58065572 " wx:else>满{{couponInfo.useThreshold||0}}{{couponInfo.thresholdType==2?'元':''}}{{couponInfo.thresholdType==3?'件':''}}{{couponInfo.thresholdType==4?'千克':''}}可用</text>
+            </view>
+        </view>
+        <view class="qm-coupon-item__middle _58065572 " wx:if="{{customStyle==1}}">
+            <view class="qm-coupon-item__middle__left _58065572 "></view>
+            <view class="qm-coupon-item__middle__line _58065572 "></view>
+            <view class="qm-coupon-item__middle__right _58065572 "></view>
+        </view>
+        <view class="qm-coupon-item__layout-r _58065572 " wx:if="{{customStyle!=3}}">
+            <view class="qm-coupon-item__title _58065572 ">{{couponInfo.name}}</view>
+            <view class="qm-coupon-item__valid-time _58065572 ">{{formatValidDate||couponInfo.validDateDesc}}</view>
+        </view>
+    </view>
+    <view class="qm-coupon-item__middle _58065572 " wx:if="{{customStyle!=1&&customStyle!=0}}">
+        <view class="qm-coupon-item__middle__left _58065572 " wx:if="{{customStyle!=3}}"></view>
+        <view class="qm-coupon-item__middle__line _58065572 " wx:if="{{customStyle==1||customStyle==4}}"></view>
+        <view class="qm-coupon-item__middle__line-circle _58065572 " wx:if="{{customStyle==2||customStyle==3}}">
+            <view class="circle _58065572 " style="background-color:{{customStyle==3?backgroundColor:''}}" wx:for="{{customStyle==3?10:7}}" wx:key="index"></view>
+        </view>
+        <view class="qm-coupon-item__middle__right _58065572 " wx:if="{{customStyle!=3}}"></view>
+    </view>
+    <view class="qm-coupon-item__action _58065572 " style="background-color:{{backgroundColor}}">
+        <view bindtap="goTakefood" class="qm-coupon-item__action-btn _58065572 " data-item="{{couponItem}}" style="background: {{customStyle==2?'#fff':colorTheme}};color:{{customStyle==2?colorTheme:'#fff'}};" wx:if="{{couponItem.isReceive}}">去使用</view>
+        <block wx:else>
+            <view bindtap="getCoupon" class="qm-coupon-item__action-btn _58065572 " data-item="{{couponItem}}" style="color: {{customStyle==2?colorTheme:'#fff'}};background: {{customStyle==2?'#fff':colorTheme}}" wx:if="{{!couponItem.status}}">领取</view>
+            <view class="qm-coupon-item__action-btn qm-coupon-item__action-btn--invalid _58065572 " wx:elif="{{couponItem.status==2||couponItem.status==3}}">已领上限</view>
+            <view class="qm-coupon-item__action-btn qm-coupon-item__action-btn--invalid _58065572 " wx:elif="{{couponItem.status==1||couponItem.status==4}}">已领完</view>
+        </block>
+    </view>
+</view>

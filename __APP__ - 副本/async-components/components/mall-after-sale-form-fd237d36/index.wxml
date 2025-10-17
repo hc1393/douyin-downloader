@@ -1,0 +1,76 @@
+<view>
+    <view class="rounded-24 m-24 mx-20 overflow-hidden" wx:if="{{isGoodsLevelRefund}}">
+        <view class="bg-hex-fff rounded-24">
+            <view class="text-hex-333 text-28 justify-between py-22 px-33 pb-11 items-center flex">
+                <view>退款商品</view>
+                <view bind:tap="onSelectApplyItemsOpen" class="items-center flex">{{afterSaleCountText}}<view class="i-arrow-r1 text-20 c-hex-333 ml8"></view>
+                </view>
+            </view>
+            <scroll-view scrollX="{{true}}" wx:if="{{afterSaleItemListSelected&&afterSaleItemListSelected.length}}">
+                <view class="items-center box-border flex">
+                    <image class="rounded-16 flex-none h-140 my-13 mx-8 mb-22 w-140 first-ml-22 last-mr-22" mode="aspectFill" src="{{__oss__.s(mpxExt,item.coverUrl,0)}}" wx:for="{{afterSaleItemListSelected}}" wx:key="itemId"></image>
+                </view>
+            </scroll-view>
+            <view class="text-hex-bbb px-20 pb-20 text-center" wx:else>请选择商品</view>
+        </view>
+    </view>
+    <view class="rounded-24 m-24 mx-20 overflow-hidden">
+        <view class="rounded-24 overflow-hidden m0">
+            <view bind:tap="onOpenApplyTypePopup" class="overflow-hidden text-30rpx flex items-center py-32 px-24 box-border bg-white" wx:if="{{applyTypeOptions&&applyTypeOptions.length}}">
+                <view class="text-hex-333">申请类型</view>
+                <view class="{{applyTypeText?'text-hex-333':'text-hex-bbb'}} flex-1 text-right">{{applyTypeText||'点击选择申请类型'}}</view>
+                <text class="i-arrow-r text-24rpx ml-8"></text>
+            </view>
+            <view bind:tap="onOpenReceiveTypePopupShow" class="overflow-hidden text-30rpx flex items-center py-32 px-24 box-border bg-white" wx:if="{{isShowReceiveType}}">
+                <view class="text-hex-333">收货状态</view>
+                <view class="{{receiveTypeText?'text-hex-333':'text-hex-bbb'}} flex-1 text-right">{{receiveTypeText||'点击选择收货状态'}}</view>
+                <text class="i-arrow-r text-24rpx ml-8"></text>
+            </view>
+            <view bind:tap="onShowReasonPopup" class="overflow-hidden text-30rpx flex items-center py-32 px-24 box-border bg-white">
+                <view class="text-hex-333">申请原因</view>
+                <view class="{{applyReason?'text-hex-333':'text-hex-bbb'}} flex-1 text-right">{{applyReason||'点击选择申请原因'}}</view>
+                <text class="i-arrow-r text-24rpx ml-8"></text>
+            </view>
+        </view>
+    </view>
+    <view class="rounded-24 m-24 mx-20 overflow-hidden">
+        <view class="relative flex box-border w-full py-32 px-24 text-hex-333 text-30 leading-42 bg-hex-fff flex-col">
+            <view class="flex justify-between items-center">申请金额<text class="c-_h_FF5A00" wx:if="{{initData.returnCashMoney>0}}">余额返回收¥{{initData.returnCashMoney}}</text>
+            </view>
+            <view class="mt24 flex items-center justify-start mt-24">
+                <view class="text-hex-333 text-70 font-700 leading-_bl_1_d_2_br_ mr-12">¥</view>
+                <view class="text-hex-333 text-70 font-700 h-_bl_1_d_2em_br_ leading-_bl_1_d_2_br_ text-left items-baseline flex flex-1" wx:if="{{curDisableEditAmount}}">{{applyAmountComputed.actualPrice}}<view class="text-hex-888 text-28 ml-46 line-through" wx:if="{{applyAmountComputed.actualPrice!==applyAmountComputed.salePrice}}">¥{{applyAmountComputed.salePrice}}</view>
+                </view>
+                <input bind:input="onApplyAmountInput" class="flex-1" placeholder="请填写申请金额" placeholderStyle="color: #bbb; font-size: 36rpx; font-weight: 400;" type="digit" value="{{applyAmount}}" wx:else></input>
+                <view class="i-bianji text-40 c-hex-979797 ml8" wx:if="{{!curDisableEditAmount}}"></view>
+                <view class="flex-none ml8 text-hex-333 items-baseline" wx:if="{{refundPoints}}">+ {{refundPoints}}{{customPointName}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="bg-hex-fff rounded-24 my-24 mx-20 overflow-hidden">
+        <view class="items-center flex justify-between px-24 pt-24 pb-0">
+            <view class="text-hex-333 text-30 font-400 leading-42">申请说明</view>
+            <view class="text-hex-999 text-24 font-400 leading-33">您还可以输入{{restCount}}字</view>
+        </view>
+        <view class="bg-hex-f8f8f8 rounded-16 m-24 p-30">
+            <textarea autoHeight bind:input="onApplyDescChange" class="{{'mb-_bl_1em_br_ min-h-_bl_3_d_2em_br_ '+(applyDesc?'h-auto':'h-_bl_3_d_2em_br_')}}" confirmType="done" maxlength="170" placeholder="必填，请您详细填写说明" placeholderStyle="color: #bbb; font-size: 28rpx; font-weight: 400;" showCount="{{false}}" value="{{applyDesc}}"></textarea>
+            <std-uploader multiple bind:after-read="onAfterRead" bind:delete="onDelete" fileList="{{fileList}}" maxCount="3" previewSize="114rpx"></std-uploader>
+        </view>
+    </view>
+    <view class="rounded-24 m-24 mx-20 overflow-hidden" wx:if="{{needMobile}}">
+        <view class="rounded-24 overflow-hidden text-30rpx flex items-center py-32 px-24 box-border bg-white">
+            <view class="text-hex-333">联系电话</view>
+            <input bind:input="onMobileInput" class="bg-transparent ml-auto w-8em" placeholder="点击填写联系电话" value="{{mobile}}"></input>
+        </view>
+    </view>
+</view>
+<std-fixed-bar customStyle="{{backgroundColor:'transparent'}}">
+    <view class="box-border p-20 px-24 w-full">
+        <button bindtap="onInitiateRefund" class="button button-primary rd-full flex">申请退款</button>
+    </view>
+</std-fixed-bar>
+<std-popup-radio bind:click-cell="onSelectReason" bind:close="onPopupClose" bind:confirm="onConfirmReason" options="{{reasonOptions}}" show="{{reasonPopupShow}}" title="选择申请原因" value="{{applyReasonTemp}}"></std-popup-radio>
+<std-popup-radio bind:click-cell="onSelectReceiveType" bind:close="onReceiveTypePopupClose" bind:confirm="onConfirmReceiveType" options="{{receiveTypeOptions}}" show="{{receiveTypePopupShow}}" title="选择收货状态" value="{{receiveTypeTemp}}"></std-popup-radio>
+<std-popup-radio bind:click-cell="onSelectApplyType" bind:close="onApplyTypePopupClose" bind:confirm="onConfirmApplyType" options="{{applyTypeOptions}}" show="{{applyTypePopupShow}}" title="选择申请类型" value="{{applyTypeTemp}}"></std-popup-radio>
+<std-after-sale-select allowChangeNum="{{allowChangeRefundNum}}" bind:close="onSelectApplyItemsClose" bind:confirm="onDispatchAfterSaleGoods" canRefundOnly="{{false}}" canReturnAndRefund="{{false}}" goodsLevel="{{isGoodsLevelRefund}}" itemList="{{afterSalePopupItemList}}" show="{{applyItemsPopupShow}}" title="选择退款商品"></std-after-sale-select>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

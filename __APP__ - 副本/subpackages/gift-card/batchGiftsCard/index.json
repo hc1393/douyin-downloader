@@ -1,0 +1,20 @@
+{
+  "navigationStyle": "default",
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": true,
+  "componentPlaceholder": {
+    "empty-image": "view",
+    "show-toast": "view",
+    "cell": "view",
+    "half-bowl": "view",
+    "love-dining": "view",
+    "love-donate": "view",
+    "material-cell": "view",
+    "merc-list": "view",
+    "plugin-demo": "view",
+    "pullNewList": "view",
+    "regift": "view",
+    "send-coupon": "view",
+    "studentVerify": "view"
+  }
+}

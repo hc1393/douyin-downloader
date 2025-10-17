@@ -1,0 +1,10 @@
+<view class="h-full fixed w-full z-800 mx-auto my-0 top-0 right-0 bottom-0 left-0" wx:if="{{isShow}}">
+    <view class="animate-_bl_fade-in-80_0_d_4s_ease_0_d_2s_normal_br_ bg-black h-full opacity-0 absolute w-full top-0" style="animation-fill-mode: forwards"></view>
+    <view bindtap="tapAd" class="animate-_bl_slide-in-from-top_0_d_4s_ease_0_d_2s_normal_br_ max-h-720 relative -translate-x-2_s_4 -translate-y-2_s_4 w-540 rd-24 left-2_s_4 -top-full" style="animation-fill-mode: forwards">
+        <image class="block h-720 max-h-720 w-full rd-24" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,tools.formatImage(isWebp,canvasData.imgUrl,900),0)}}"></image>
+        <view catchtap="hideBox" class="h-52 opacity-50 absolute w-52" style="{{__stringify__.stringifyStyle(' background: url(https://images.qmai.cn/s16/images/2018/05/25/519d27208a811784.png); background-size: 100% 100%; ',closeButtonStyle)}}"></view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>
+<wxs module="tools" src="../../wxs/index1182db05.wxs"/>

@@ -1,0 +1,11 @@
+<view class="modal-wrapper _20f43430 " wx:if="{{modalShow}}">
+    <view bindtap="onMaskTap" class="modal-mask _20f43430 "></view>
+    <view class="modal-container _20f43430 ">
+        <view class="modal-title _20f43430 ">{{title}}</view>
+        <view class="modal-content _20f43430 ">{{content}}</view>
+        <view class="modal-footer _20f43430 ">
+            <button bindtap="onCancelTap" class="modal-button _20f43430 " wx:if="{{showCancel}}">{{cancelText}}</button>
+            <button bindtap="onConfirmTap" class="modal-button modal-confirm _20f43430 ">{{confirmText}}</button>
+        </view>
+    </view>
+</view>

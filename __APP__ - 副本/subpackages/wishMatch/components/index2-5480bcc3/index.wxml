@@ -1,0 +1,64 @@
+<view bindtap="closeSlide" catchtouchmove="pop" class="food-sku_mask fixed {{isShow?'mask-show':'mask-hide'}} _5480bcc3 " style="{{maskIsShow?'':'display:none;'}}"></view>
+<view catchtouchmove="pop" class="food-sku_main fixed flex flex-col {{isShow?'active':''}} {{modeLarge=='large'?'mode_large':''}} _5480bcc3 ">
+    <view catchtap="closeSlide" class="absolute w-56 h-56 right-24 top-24 z-2 flex items-center justify-center rounded-full bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_2_pr__br_ _5480bcc3 ">
+        <view class="i-guanbi2 text-white text-24 _5480bcc3 "></view>
+    </view>
+    <view class="food-sku_main-scroll-wrap {{info.type!=10?'main-have-footer':''}} {{isIpx?'food-sku_main-ipx':''}} _5480bcc3 " id="mainScrollWrap">
+        <scroll-view scrollY bindscroll="onSkuContentScroll" class="food-sku_main-scroll _5480bcc3 ">
+            <view class="food-sku_content _5480bcc3 " wx:if="{{info}}">
+                <view class="food-sku_content_swiper_wrapper _5480bcc3 ">
+                    <swiper autoplay="{{autoplay}}" bindchange="foodSkuSwiperChange" class="food-sku_content_swiper _5480bcc3 " current="{{swiperCurrent}}">
+                        <swiper-item class=" _5480bcc3 " wx:for="{{info.pictureUrlList}}" wx:key="index">
+                            <image catchtap="previewImage" class="food-sku_m-img bl _5480bcc3 " lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item,0)}}"></image>
+                        </swiper-item>
+                        <swiper-item class=" _5480bcc3 " wx:if="{{info.videoUrl}}">
+                            <video showMuteBtn bindplay="play" class="goods-detail-video _5480bcc3 " id="goodsVideo" src="{{info.videoUrl}}"></video>
+                        </swiper-item>
+                    </swiper>
+                    <view class="food-sku_content_swiper_indicator _5480bcc3 " wx:if="{{info.pictureUrlList&&info.pictureUrlList.length>1||info.videoUrl}}">{{swiperCurrent+1}}/{{info.videoUrl?info.pictureUrlList.length+1:info.pictureUrlList.length}}</view>
+                </view>
+                <view class="food-sku_m-title _5480bcc3 ">{{info.name}}</view>
+                <view class="food-sku_m-subtitle _5480bcc3 " wx:if="{{info.detail&&!modeLarge}}">{{info.detail}}</view>
+                <view class="food-sku_m-sku _5480bcc3 " wx:if="{{attributesData&&attributesData.length}}">
+                    <block wx:for="{{attributesData}}" wx:key="id">
+                        <sku-selector bindchange="skuChange" class=" _5480bcc3 " groupData="{{item}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" wx:if="{{item.skuType==='property'}}"></sku-selector>
+                        <attach-selector bindattachImgShowChange="attachImgShowChange" bindchange="chargingChange" bindshowMore="chargingShowMore" class=" _5480bcc3 " groupAttach="{{item}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" wx:elif="{{item.skuType==='attach'}}"></attach-selector>
+                    </block>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="food-sku_footer box-border _5480bcc3 " style="padding-bottom:{{pagePaddingBottom}}" wx:if="{{info.type!=10}}">
+        <view class="food-sku_f-main-wrap flex items-center _5480bcc3 ">
+            <view class="food-sku_f-main flex1 _5480bcc3 ">
+                <view class="truncate _5480bcc3 ">
+                    <block wx:if="{{energyText&&energyText!=null}}">
+                        <text class=" _5480bcc3 " style="color:{{colorTheme}}">{{energyText}}</text>
+                        <view class="energy-line _5480bcc3 "></view>
+                    </block>{{skuSelectText}}</view>
+            </view>
+        </view>
+        <view class="food-sku_footer_wrapper _5480bcc3 ">
+            <text bindtap="resetDefaultData" class="food-sku_reset _5480bcc3 ">{{_i1}}</text>
+            <zm-button block round bindbtntap="addCartFun" class="flex1 _5480bcc3 " disabled="{{cartButton.isDisable||isErrorStatus||isExistNoSelect}}" size="large" textColor="{{textColor}}" traceOperationType="加入购物车" traceProductId="{{info.id}}" traceProductList="{{info.name}}" traceProductType="{{traceProductType}}" traceScreenType="{{traceScreenType}}">
+                <view class="food-sku_f-price _5480bcc3 " style="color:{{textColor}}" wx:if="{{amount}}">￥{{amount}}<text class=" _5480bcc3 " wx:if="{{amountOriginal>amount}}">￥{{amountOriginal}}</text>
+                </view>{{cartButton.text}}</zm-button>
+        </view>
+        <block wx:if="{{isShowScrollTip}}">
+            <view class="food-sku-scroll-tip-decoration _5480bcc3 " wx:if="{{renovationData&&renovationData.pullDownImg}}">
+                <image class="img _5480bcc3 " src="{{__oss__.s(mpxExt,renovationData.pullDownImg,0)}}"></image>
+            </view>
+            <view class="food-sku-scroll-tip _5480bcc3 " style="background-color:{{tools.hexToRgba('#000000',0.65)}}" wx:else>
+                <view class="scroll-tip-img-view _5480bcc3 ">
+                    <image class="scroll-tip-img _5480bcc3 " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/03/11/foodskumoreicon.gif',0)}}"></image>
+                </view>上滑调整口味</view>
+        </block>
+    </view>
+    <view class="food-sku_ipx-seat _5480bcc3 " wx:elif="{{isIpx}}"></view>
+</view>
+<view catchtap="attachImgShowChange" class="attach-img-view _5480bcc3 " wx:if="{{attachImgShow}}">
+    <image class="attach-img _5480bcc3 " src="{{__oss__.s(mpxExt,attachImg,0)}}"></image>
+    <view class="attach-name _5480bcc3 " style="background: {{tools.hexToRgba('#FFFFFF','0.15')}}">{{attachName}}</view>
+</view>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

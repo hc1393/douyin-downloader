@@ -1,0 +1,5 @@
+<view bindtap="bulletClick" class="{{'max-w-314rpx flex items-center h-46rpx border-rd-23rpx bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_ animate-duration-1s animate-fill-forwards op-0 '+(bulletClass==='fadeInDown'?'animate-_bl_fade-in-up_br_':'')+' '+(bulletClass==='fadeOutUp'?'animate-_bl_fade-out-up_br_':'')}}">
+    <image class="w-42rpx h-42rpx border-rd-_bl_50_p__br_ bg-_bl__h_cccccc_br_ ml-2rpx" src="{{__oss__.s(mpxExt,chatWords[currentIndex].userInfo.avatar||storeInfo.logo||'https://images.qmai.cn/s1001195/images/2021/04/07/453ae66bf1cc283f.png',0)}}"></image>
+    <text class="truncate flex-1 text-22rpx text-_bl__h_ffffff_br_ pl-10rpx pr-24rpx">{{chatWords[currentIndex].buyerRemarks}}</text>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

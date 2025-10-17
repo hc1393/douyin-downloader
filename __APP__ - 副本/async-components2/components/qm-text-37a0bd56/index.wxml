@@ -1,0 +1,26 @@
+<view catchtap="bindEvent" class="box-border" data-item="{{textData}}" style="{{textData&&textData.miniStyle}}" wx:if="{{textData&&textData.propsValue}}">
+    <block wx:if="{{textData.propsValue.bindingKey=='nickName'}}">
+        <text catchtap="linkUser" style="{{filter.styleFilter(textData.propsValue.noLogin)}}" wx:if="{{username}}">{{username}}</text>
+        <text catchtap="linkUser" style="{{filter.styleFilter(textData.propsValue.noLogin)}}" wx:else>{{textData.propsValue.noLogin.text}}</text>
+    </block>
+    <block wx:elif="{{textData.propsValue.bindingKey=='payMemberRights'&&isMemberPrime}}">权益有效期至：{{expireTimeText}}</block>
+    <block wx:elif="{{textData.propsValue.bindingKey&&textData.propsValue.bindingKey!='none'}}">
+        <text catchtap="linkAssets" data-type="{{textData.propsValue.bindingKey}}" style="{{filter.styleFilter(textData.propsValue.value)}}" wx:if="{{userAssets}}">
+            <block wx:if="{{textData.propsValue.bindingKey=='couponNumber'}}">{{userAssets.assets.coupon}}</block>
+            <block wx:elif="{{textData.propsValue.bindingKey=='integralNumber'}}">{{userAssets.assets.integral}}</block>
+            <block wx:elif="{{textData.propsValue.bindingKey=='balanceNumber'}}">{{userAssets.assets.balance}}</block>
+            <block wx:elif="{{textData.propsValue.bindingKey=='giftCardNumber'}}">{{userAssets.assets.giftCard}}</block>
+        </text>
+        <text catchtap="linkAssets" data-type="{{textData.propsValue.bindingKey}}" style="{{filter.styleFilter(textData.propsValue.value)}}" wx:else>***</text>
+        <text catchtap="linkAssets" data-type="{{textData.propsValue.bindingKey}}" style="{{filter.styleFilter(textData.propsValue.unit)}}">
+            <block wx:if="{{textData.propsValue.bindingKey=='couponNumber'}}">{{textData.propsValue.couponUnitText}}</block>
+            <block wx:elif="{{textData.propsValue.bindingKey=='integralNumber'}}">{{textData.propsValue.integralUnitText}}</block>
+            <block wx:elif="{{textData.propsValue.bindingKey=='balanceNumber'}}">{{textData.propsValue.balanceUnitText}}</block>
+            <block wx:elif="{{textData.propsValue.bindingKey=='giftCardNumber'}}">{{textData.propsValue.giftCardUnitText}}</block>
+            <block wx:elif="{{textData.propsValue.bindingKey=='payMemberRights'}}"></block>
+            <block wx:else>个</block>
+        </text>
+    </block>
+    <text wx:else>{{textData.propsValue.text}}</text>
+</view>
+<wxs module="filter" src="../../wxs/handleStyle3a7cce2a.wxs"/>

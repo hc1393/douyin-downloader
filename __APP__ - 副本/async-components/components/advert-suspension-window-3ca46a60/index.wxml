@@ -1,0 +1,25 @@
+<movable-area class="pointer-events-none w-100vw fixed z-25 _3ca46a60 " id="advert-movable-area-id" style="top: {{systemTitleHeight+'px'}}; height: calc(100vh - 240rpx); height: calc(100vh - (240rpx + constant(safe-area-inset-bottom))); height: calc(100vh - (240rpx + env(safe-area-inset-bottom)));" wx:if="{{pageType=='homePage'&&type!='affix'&&showCom}}">
+    <movable-view animation="true" bindchange="moveChange" bindtouchend="touchendView" bindtouchstart="touchStartView" class="w-80px h-80px z-25 pointer-events-all _3ca46a60 " direction="all" style="{{movableViewStyle}}" x="{{x}}px" y="{{y}}px">
+        <view class="{{' z-25 flex flex-col items-end w-80px '+(pageType=='homePage'?'bottom-_bl_calc_pl_120rpx_a_constant_pl_safe-area-inset-bottom_pr__pr__br_ bottom-_bl_calc_pl_120rpx_a_env_pl_safe-area-inset-bottom_pr__pr__br_ items-start_i_':'')+' '+(type=='affix'?'advert-suspension-affix':'')+' _3ca46a60 '}}" style="{{advertSuspensionBottom}}{{advertSuspensionStyle}}">
+            <view catchtap="hideBox" class="w-40rpx h-40rpx overflow-hidden border-rd-_bl_50_p__br_ flex items-center justify-center bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_4_pr__br_ _3ca46a60 " wx:if="{{type!='affix'}}">
+                <view class="i-guanbi2 text-white text-18 _3ca46a60 "></view>
+            </view>
+            <view catchtap="bindLink" class=" advert-suspension-img {{type==='square'?'square':''}} {{type==='rectangle'?'rectangle':''}} {{type==='affix'?'affix':''}} _3ca46a60 " data-element-name="{{advertInfo&&advertInfo.landingPageType==17?'选购商品':advertInfo.landingPageName}}" data-element-type="view" data-operation-type="点击悬浮球" data-screen-type="{{traceScreenType}}">
+                <view catchtap="hideBox" class="i-close _3ca46a60 " wx:if="{{type=='affix'}}"></view>
+                <std-image lazyLoad class=" _3ca46a60 " customStyle="border-radius: 8rpx;" height="100%" src="{{advertImgSrc}}" width="100%"></std-image>
+            </view>
+        </view>
+    </movable-view>
+</movable-area>
+<block wx:else>
+    <view class=" advert-suspension {{pageType=='userPage'||pageType=='orderDetail'?'advert-suspension-move-down advert-suspension-flex-start':''}} {{type=='affix'?'advert-suspension-affix':''}} _3ca46a60 " style="{{stowTransformStyle}}{{advertSuspensionBottom}}{{type!='affix'?locationStyle:''}}{{advertLeftFixedBottom}}" wx:if="{{showCom}}">
+        <view catchtap="hideBox" class="w-40rpx h-40rpx overflow-hidden border-rd-_bl_50_p__br_ flex items-center justify-center bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_4_pr__br_ _3ca46a60 " wx:if="{{type!='affix'}}">
+            <view class="i-guanbi2 text-white text-18 _3ca46a60 "></view>
+        </view>
+        <view catchtap="bindLink" class=" advert-suspension-img {{type==='square'?'square':''}} {{type==='rectangle'?'rectangle':''}} {{type==='affix'?'affix':''}} _3ca46a60 " data-element-name="{{advertInfo&&advertInfo.landingPageType==17?'选购商品':advertInfo.landingPageName}}" data-element-type="view" data-operation-type="点击悬浮球" data-screen-type="{{traceScreenType}}">
+            <view catchtap="hideBox" class="i-close _3ca46a60 " wx:if="{{type=='affix'}}"></view>
+            <std-image lazyLoad class=" _3ca46a60 " customStyle="border-radius: 8rpx;" height="100%" src="{{advertImgSrc}}" width="100%"></std-image>
+        </view>
+    </view>
+</block>
+<authorization class=" _3ca46a60 " id="authorization"></authorization>

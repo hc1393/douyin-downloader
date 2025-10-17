@@ -1,0 +1,19 @@
+<config-provider>
+    <view class="flex flex-col h-screen" wx:if="{{isLoaded}}">
+        <std-navigation-bar background="#F5F5F5" title="{{_i1}}"></std-navigation-bar>
+        <view class="pt-130 px-32 flex flex-col items-center box-border">
+            <image lazyLoad class="w-100 h-100 mb-40" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/08/05/std-pluginUser-nowAccount.png',0)}}"></image>
+            <view class="w-full text-center text-36 text-_bl__h_3D3D3D_br_ lh-50 mb-40">
+                <text>{{_i2}}</text>
+                <text>{{currentPhoneNumber}}</text>
+            </view>
+            <view class="w-full text-center text-26 text-_bl__h_666_br_ lh-36">
+                <text>{{_i3}}</text>
+            </view>
+            <button phoneNumberNoQuotaToast bindgetphonenumber="getPhoneNumber" class="button bg-primary flex w-full text-_bl__h_FFF_br_ mt-100" openType="getPhoneNumber">{{_i5}}</button>
+        </view>
+        <account-switch-result-dialog id="__std_accountSwitchResultDialog"></account-switch-result-dialog>
+    </view>
+    <std-design-mp-loading wx:else></std-design-mp-loading>
+</config-provider>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

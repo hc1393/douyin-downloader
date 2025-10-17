@@ -1,0 +1,135 @@
+<block wx:if="{{!isDefaultNav}}">
+    <std-navigation-bar bindgetNavHeight="getNavHeight" fixed="{{true}}" linearGradientBackground="{{linearGradientBackground}}" title="{{avigationBarTitle}}" titleColor="#333333" transparentBack="true" wx:if="{{loadStatus==='ok'}}">
+        <view class="flex items-center" slot="center">
+            <view bindtap="tabSwitch" class="px-20 text-36 {{tabActive==item.id?'font-bold':''}}" data-id="{{item.id}}" data-qm_track-belong_event="Order_PickUpStoreList_BtnClick" data-qm_track-button_name="{{item.name}}" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-first_category="切换tab" data-qm_track-order_type="个人点单" data-qm_track-tab_name="{{item.name}}" wx:if="{{!isShowCall}}" wx:for="{{tab}}" wx:key="index">
+                <view class="c-hex-333 relative" style="font-size: {{headTabTextFontSize}}rpx">{{item.name}}<view class="absolute w-66 h-12 z--1 rounded-_bl_8rpx_0_8rpx_0_br_ bottom-0" style="background-color: {{colorTheme}}" wx:if="{{tabActive==item.id}}"></view>
+                </view>
+            </view>
+        </view>
+    </std-navigation-bar>
+</block>
+<view class="pb-40 bg-transparent relative bg-hex-fff" style="{{mainPaddingTop}}">
+    <block wx:if="{{loadStatus==='ok'}}">
+        <view class="flex items-center fixed w-full z-2 bg-white" style="{{multiHeaderTopNotWeChat}}" wx:if="{{showTab}}">
+            <view bindtap="tabSwitch" class="px-32 h-98 lh-96 relative {{modeLarge=='large'?'text-40':'text-30'}}" data-id="{{item.id}}" data-qm_track-belong_event="Order_PickUpStoreList_BtnClick" data-qm_track-button_name="{{item.name}}" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-first_category="切换tab" data-qm_track-order_type="个人点单" data-qm_track-tab_name="{{item.name}}" style="color: {{tabActive==item.id?colorTheme:''}}" wx:for="{{tab}}" wx:key="index">
+                <view>{{item.name}}</view>
+                <view class="bottom-0 left-1_s_2 w-60 h-4 translate-x--1_s_2 rd-2 absolute" style="background: {{colorTheme}}" wx:if="{{tabActive==item.id}}"></view>
+            </view>
+            <view bindtap="selectCityTap" class="h-full flex items-center absolute right-24 top-0" wx:if="{{nearbyNotLocation}}">
+                <view class="flex items-center h-72 bg-hex-f5f5f5 box-border rd-34 px-30 text-24">
+                    <image class="w-27 h-27 flex-none mr-15" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2018/04/10/76436d5e550dae90.png',0)}}"></image>
+                    <view>{{_i1}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="z-1 mt-_bl_-50rpx_br_ bg-white sticky flex items-center pt-24 pb-0 px-24 rounded-_bl_30rpx_30rpx_0_0_br_ top-172" style="{{multiHeaderTopNotWeChat}}" wx:if="{{nearbyNotLocation}}">
+            <view class="w-702 h-72 bg-neutral-100 flex items-center rd-36">
+                <view bindtap="selectOtherCity" class="h-72 shrink-0 box-border lh-72 text-center text-26 font-bold px-24 py-0" style="{{!curAddressCity?'color:#999':''}}">{{_i2}}<text class="i-jiantou-xia ml-10 c-hex-959595 text-22"></text>
+                </view>
+                <view class="w-px h-38 bg-hex-e7e7e7"></view>
+                <input bindinput="inputKeyboard" class="w-full text-26 ml-22" confirmType="search" placeholder="{{_i3}}" type="text" value="{{nameOrAddress}}"></input>
+                <view catchtap="clearNameOrAddress" class="pl-10 pr-28 py-0" wx:if="{{nameOrAddress}}">
+                    <view class="w-36 h-36 flex items-center justify-center bg-hex-bbb shrink-0 rounded-_bl_50_p__br_">
+                        <view class="i-close c-white text-30"></view>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="clearNameOrAddress" class="text-30 shrink-0 ml-32" wx:if="{{nameOrAddress}}">{{_i4}}</view>
+        </view>
+        <block wx:if="{{isLocation&&tabActive==='nearbyList'&&!isShowCall}}">
+            <view class="z-1 overflow-hidden w-full h-820 sticky top-_bl_-624rpx_br_" wx:if="{{list.length&&!hideMap}}">
+                <map bindcallouttap="markertap" class="w-full h-820" latitude="{{map.latitude}}" longitude="{{map.longitude}}" markers="{{map.markers}}"></map>
+            </view>
+            <view class="z-1 mt-_bl_-50rpx_br_ bg-white sticky flex items-center pt-24 pb-0 px-24 rounded-_bl_30rpx_30rpx_0_0_br_ top-172" style="{{isWeChat?'':multiListNotWeChat+';'}}{{hideMap&&isWeChat?multiHeaderTopNotWeChat+';':''}}">
+                <view class="w-702 h-72 bg-neutral-100 flex items-center rd-36">
+                    <view bindtap="selectOtherCity" class="h-72 shrink-0 box-border lh-72 text-center text-26 font-bold px-24 py-0" data-qm_track-belong_event="Order_PickUpStoreList_BtnClick" data-qm_track-button_name="选择城市" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-first_category="搜索区" data-qm_track-order_type="个人点单" data-qm_track-tab_name="{{tabActive=='nearbyList'?'附近':'收藏'}}" style="{{!curAddressCity?'color:#999':''}}" wx:if="{{!isYongHeDaWangHK}}">{{_i5}}<text class="i-jiantou-xia ml-10 c-hex-959595 text-22"></text>
+                    </view>
+                    <view class="w-px h-38 bg-hex-e7e7e7" wx:if="{{!isYongHeDaWangHK}}"></view>
+                    <view bindtap="selectCityTap" class="w-full c-hex-666 text-26 max-w-500 overflow-hidden text-ellipsis whitespace-nowrap ml-22" data-qm_track-belong_event="Order_PickUpStoreList_BtnClick" data-qm_track-button_name="搜索门店" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-first_category="搜索区" data-qm_track-order_type="个人点单" data-qm_track-tab_name="{{tabActive=='nearbyList'?'附近':'收藏'}}">{{_i6}}</view>
+                </view>
+                <view bindtap="selectCityTapMap" class="h-72 w-72 bg-neutral-100 flex items-center justify-center shrink-0 ml-20 rounded-_bl_50_p__br_" data-qm_track-belong_event="Order_PickUpStoreList_BtnClick" data-qm_track-button_name="定位" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-first_category="搜索区" data-qm_track-order_type="个人点单" data-qm_track-tab_name="{{tabActive=='nearbyList'?'附近':'收藏'}}" wx:if="{{!isYongHeDaWangHK}}">
+                    <image class="w-36 h-36" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/11/03/map-icon.png',0)}}"></image>
+                </view>
+            </view>
+            <view class="text-26 mt-24 px-24 py-0" wx:if="{{curAddressStreet}}">“{{curAddressStreet}}”<text class="c-hex-999">附近门店</text>
+            </view>
+        </block>
+        <view class="z--1 px-24 py-0" style=" {{tabActive==='favoriteList'?favoriteListTop:''}} {{isShowCall?'margin-top: 296rpx;':''}} {{!isShowCall&&!isWeChat&&tabActive==='favoriteList'||!isLocation&&tabActive==='nearbyList'&&isWeChat||tabActive==='nearbyList'&&hideMap?listTopNotWeChat:''}} {{!isShowCall&&!isWeChat&&tabActive==='nearbyList'&&hideMap?listTopNoMap:''}}">
+            <block wx:if="{{list.length}}">
+                <view class="pb-_bl_calc_pl_80rpx__a__constant_pl_safe-area-inset-bottom_pr__pr__br_ pb-_bl_calc_pl_80rpx__a__env_pl_safe-area-inset-bottom_pr__pr__br_" wx:if="{{orderStoreNumber&&tabActive==='nearbyList'&&!selectCity}}">
+                    <view bindtap="selectMulti" class="relative mt-16 rd-16" data-item="{{item}}" data-qm_track-belong_event="Order_PickUpStoreList_BtnClick" data-qm_track-button_name="跳转门店详情" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-first_category="门店区" data-qm_track-order_type="个人点单" data-qm_track-store_distance="{{distance.formatDistance(item.shopDetail.distance)}}" data-qm_track-store_id="{{item.shopDetail.id}}" data-qm_track-store_name="{{item.shopDetail.name}}" data-qm_track-tab_name="{{tabActive=='nearbyList'?'附近':'收藏'}}" data-qm_track-wait_cups="{{item.orderQueueMake.cupNum}}" wx:for="{{orderStoreList}}" wx:key="index">
+                        <store-list-item actType="{{_actType||''}}" curAddressCity="{{curAddressCity}}" customStyle="{{selectMultiId==item.shopDetail.id?'border-color: '+colorTheme:''}};" eatType="1" fromPage="{{_fromPage}}" index="{{index}}" modeLarge="{{modeLarge}}" storeInfo="{{item}}" storeType="canOrder" tabActive="{{tabActive}}"></store-list-item>
+                    </view>
+                    <view bindtap="handleUnDeliveryList" class="w-702 h-66 bg-neutral-100 text-24 font-normal c-hex-666666 lh-60 text-center mt-16 mb-0 mx-0 rd-8" wx:if="{{notOrderStoreNumber}}">
+                        <block wx:if="{{showUnDeliveryList}}">
+                            <text>{{_i7}}</text>
+                            <text class="i-jiantou-shang c-hex-999 text-20 ml-20"></text>
+                        </block>
+                        <block wx:else>
+                            <text>{{_i8}}</text>
+                            <text class="i-jiantou-xia c-hex-999 text-20 ml-20"></text>
+                        </block>
+                    </view>
+                    <view animation="{{listAnimation}}" class="overflow-hidden h-0 mb-18">
+                        <view bindtap="selectMulti" class="relative mt-16 rd-16" data-item="{{item}}" wx:for="{{notOrderStoreList}}" wx:key="index">
+                            <store-list-item actType="{{_actType||''}}" customStyle="{{selectMultiId==item.shopDetail.id?'border-color: '+colorTheme:''}};" eatType="1" fromPage="{{_fromPage}}" index="{{index}}" modeLarge="{{modeLarge}}" storeInfo="{{item}}" storeType="doNotOrder"></store-list-item>
+                        </view>
+                    </view>
+                </view>
+                <view wx:else>
+                    <view bindtap="selectMulti" class="relative mt-16 rd-16" data-element-type="view" data-item="{{item}}" data-operation-type="选择门店" data-qm_track-belong_event="Order_PickUpStoreList_BtnClick" data-qm_track-button_name="跳转门店详情" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-first_category="门店区" data-qm_track-order_type="个人点单" data-qm_track-store_distance="{{distance.formatDistance(item.shopDetail.distance)}}" data-qm_track-store_id="{{item.shopDetail.id}}" data-qm_track-store_name="{{item.shopDetail.name}}" data-qm_track-tab_name="{{tabActive=='nearbyList'?'附近':'收藏'}}" data-qm_track-wait_cups="{{item.orderQueueMake.cupNum}}" data-screen-type="选择门店" wx:for="{{list}}" wx:key="index">
+                        <store-list-item actType="{{_actType||''}}" curAddressCity="{{curAddressCity}}" customStyle="{{selectMultiId==item.shopDetail.id?'border-color: '+colorTheme:''}};" eatType="1" fromPage="{{_fromPage}}" index="{{index}}" modeLarge="{{modeLarge}}" storeInfo="{{item}}" tabActive="{{tabActive}}"></store-list-item>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <view style="margin-top: 296rpx" wx:if="{{isLocation}}">
+                    <empty-image modeLarge="{{modeLarge}}" src="{{empty[tabActive].img}}" text="{{_i9}}"></empty-image>
+                    <view class="flex justify-center" wx:if="{{isShowCall||eatInShopListSwitch}}">
+                        <view bindtap="selectOtherCity" class="w-290 h-88 lh-88 text-center text-white rd-44" style="background-color: {{colorTheme}}">{{_i10}}</view>
+                    </view>
+                </view>
+                <view class="flex flex-col items-center pt-112" wx:elif="{{tabActive=='nearbyList'}}">
+                    <image class="w-312 h-312" lazyLoad="true" src="{{__oss__.s(mpxExt,curAddressCity?'https://images.qmai.cn/resource/20210824210816/2023/09/18/list-search-no.png':'https://images.qmai.cn/s16/images/2020/07/23/adc5016340ab1426.png',0)}}"></image>
+                    <view class="mt-_bl_-24rpx_br_ text-28 c-hex-999999 text-center px-80 py-0" wx:if="{{curAddressCity&&nameOrAddress}}">{{_i11}}</view>
+                    <view class="mt-_bl_-24rpx_br_ text-28 c-hex-999999 text-center px-80 py-0" wx:else>{{_i12}}</view>
+                    <block wx:if="{{!(curAddressCity&&nameOrAddress)}}">
+                        <view class="mt-66" wx:if="{{!locationSettingIsOpen}}">
+                            <view bindtap="authorizeLocation" class="w-290 h-88 text-30 text-white flex items-center justify-center rd-44" style="background-color: {{colorTheme}}">{{_i13}}</view>
+                        </view>
+                        <view class="{{!locationSettingIsOpen?'mt-30':'mt-66'}}" wx:if="{{locationSettingIsOpen&&!curAddressCity||!locationSettingIsOpen}}">
+                            <view bindtap="selectOtherCity" class="w-290 h-88 text-30 text-white flex items-center justify-center rd-44" style="{{!locationSettingIsOpen?'border: 1px solid '+colorTheme+';color: '+colorTheme:'background-color:'+colorTheme}};">{{_i14}}</view>
+                        </view>
+                    </block>
+                </view>
+                <empty-image modeLarge="{{modeLarge}}" src="{{empty[tabActive].img}}" style="margin-top: 296rpx" text="{{shopEmptyText}}" wx:else></empty-image>
+            </block>
+        </view>
+        <view class="w-40 h-40 mx-auto mt-20" style="{{bottomLoadMB}}" wx:if="{{bottomLoading}}">
+            <image class="w-full h-full" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/10/28/emptygiftloading.gif',0)}}"></image>
+        </view>
+    </block>
+    <view class="skeleton-screen-view" style="height: {{windowHeight+'px'}};width:{{windowWidth+'px'}};margin-top:{{systemTitleHeight+'px'}};" wx:elif="{{skeletonEnableShow&&loadStatus!='error'}}">
+        <image src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/04/02/storelist-gjp.gif',0)}}" style="width: 100%; height: 100%"></image>
+    </view>
+    <qm-loading bindreload="reload" loadStatus="{{loadStatus}}" loadStatusErrorDesc="{{loadStatusErrorDesc}}" loadErrorInfo="{{loadErrorInfo}}" wx:else></qm-loading>
+    <view class="fixed w-full bottom-_bl_calc_pl_120rpx__a__constant_pl_safe-area-inset-bottom_pr__pr__br_ bottom-_bl_calc_pl_120rpx__a__env_pl_safe-area-inset-bottom_pr__pr__br_ flex flex-col items-center" wx:if="{{isShowCall}}">
+        <view class="text-24 c-hex-999" wx:if="{{cityCallNum}}">{{_i15}}<text style="color: {{colorTheme}};">{{cityCallNum}}</text>{{_i16}}</view>
+        <view class="w-full flex justify-center mt-24">
+            <view bindtap="handleCall" class="w-150 h-60 lh-60 text-center text-24 bg-white rd-44 b-1rpx b-solid b-hex-cccccc" data-element-type="view" data-operation-type="召唤门店" data-screen-type="选择门店">{{_i17}}</view>
+            <view class="w-150 h-60 lh-60 text-center text-24 bg-white ml-24 rd-44 b-1rpx b-solid b-hex-cccccc" wx:if="{{joinAppletId}}">
+                <navigator appId="{{joinAppletId}}" openType="navigate" path="pages/index/index" target="miniProgram">{{_i18}}</navigator>
+            </view>
+        </view>
+    </view>
+    <qm-loading isShowNavigator="{{false}}" loadStatus="{{qmLoadingStatus}}"></qm-loading>
+</view>
+<pop-up bindclose="closeErrorPopup" show="{{!!errorPopup}}">
+    <view class="w-570 bg-white box-border flex items-center justify-center flex-col p-44 rd-16">
+        <image class="w-300 h-auto" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/05/25/gpcoupon_error.png',0)}}"></image>
+        <view class="text-30 c-hex-999999 text-center pt-10 pb-40 px-0">{{errorPopupFont}}</view>
+        <view bindtap="closeErrorPopup" class="flex items-center justify-center w-290 h-88 text-30 text-white rd-44" style="background-color: {{colorTheme}};">{{_i19}}</view>
+    </view>
+</pop-up>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>
+<wxs module="distance" src="wxs/trackUtilsbae1568c.wxs"/>

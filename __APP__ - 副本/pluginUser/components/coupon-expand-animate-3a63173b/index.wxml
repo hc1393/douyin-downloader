@@ -1,0 +1,12 @@
+<view style="{{sizeStyle}}">
+    <view class="rd-20 z-999" style="{{fixedStyle+expandStyle}}">
+        <slot></slot>
+    </view>
+</view>
+<block wx:if="{{expandStyle}}">
+    <view catchtouchmove="noop" class="w-screen h-screen fixed left-0 bottom-0 z-990 bg-_bl_rgba_pl_0_2c_0_2c_0_2c__d_75_pr__br_"></view>
+    <view class="coupon-shadow blur-100 scale-0_d_2 z-997" style="{{sizeStyle+fixedStyle+shadowStyle}}"></view>
+    <view class="blur-10 rd-_bl_100_p__br_ opacity-0 z-997 bg-_bl__h_FFF_br_ -translate-y-40 translate-x-10" style="{{fixedStyle+lightStyle}}"></view>
+    <view class="blur-5 rd-_bl_50_p__br_ opacity-0 z-997 border-10 border-solid border-_bl_rgba_pl_255_2c_233_2c_150_2c_0_d_3_pr__br_ origin-center" style="{{fixedStyle+circleStyle}}"></view>
+    <view class="{{'bg-_bl__h_F9D423_br_ rd-8 transition-all z-998 '+(item.className==='five-point-star'?'five-point-star':'')+' '+(item.className==='four-point-star'?'four-point-star':'')}}" style="{{starStyle}} {{item.style}}" wx:for="{{stars}}" wx:key="index"></view>
+</block>

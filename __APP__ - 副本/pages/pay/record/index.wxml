@@ -1,0 +1,21 @@
+<view class="container _17c76fd8 mpx-app-scope">
+    <view class="white _17c76fd8 mpx-app-scope" wx:if="{{recordList.length>0}}">
+        <navigator class="record-list space-between {{index!=0?' line-top':''}} _17c76fd8 mpx-app-scope" url="/pages/pay/detail/index?orderNo={{item.orderNo}}" wx:for="{{recordList}}" wx:key="{{index}}">
+            <view class="record-box flex-1 _17c76fd8 mpx-app-scope">
+                <view class="record-store _17c76fd8 mpx-app-scope">{{item.shopName||item.sellerName}}</view>
+                <view class="record-text _17c76fd8 mpx-app-scope">{{item.orderAt}}</view>
+            </view>
+            <view class="record-item _17c76fd8 mpx-app-scope">
+                <view class="record-price _17c76fd8 mpx-app-scope">-￥{{item.actualAmount}}</view>
+                <view class="record-text _17c76fd8 mpx-app-scope">交易成功</view>
+            </view>
+        </navigator>
+    </view>
+    <view class="px-30 py-60 overflow-hidden text-center _17c76fd8 mpx-app-scope" wx:else>
+        <view class="w-380 h-380 mx-auto _17c76fd8 mpx-app-scope">
+            <image class="block w-full h-full _17c76fd8 mpx-app-scope" lazyLoad="true" src="{{__oss__.s(mpxExt,isYiHeTang?'https://images.qmai.cn/s16/images/2021/04/22/3c251a5c0edc2015.png':'https://images.qmai.cn/s16/images/2020/07/23/068bb297b37fcd03.png',0)}}"></image>
+        </view>
+        <view class="c-hex-666 text-28 mt10 _17c76fd8 mpx-app-scope">您暂时还没有买单记录哦~</view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

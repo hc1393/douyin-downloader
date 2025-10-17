@@ -1,0 +1,19 @@
+<view style="{{info?info.miniStyle:''}}">
+    <view class="px-32rpx py-0 bg-_bl__h_fff_br_">
+        <view class="live-title pt-20rpx pb-20rpx pl-10rpx pr-0 flex justify-between items-center relative">
+            <view class="text-34rpx font-bold text-_bl__h_333_br_">{{info.propsValue.head_text}}</view>
+            <navigator class="text-24rpx text-_bl__h_999_br_ flex items-center" hoverClass="none" url="/subpackages/live-player/list/index">
+                <text>更多直播</text>
+                <image class="w-15rpx h-25rpx pl-10rpx" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/weimg/imags/arrows.png',0)}}"></image>
+            </navigator>
+        </view>
+        <view class="flex pb-20rpx">
+            <view bindtap="goRoom" class="relative w-220rpx h-220rpx mr-25rpx border-rd-10rpx overflow-hidden last-mr-0" data-live_status="{{item.live_status}}" data-roomid="{{item.roomid}}" wx:for="{{info.propsValue.imgs}}" wx:key="roomid">
+                <image class="w-220rpx h-220rpx" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item.share_img,0)}}"></image>
+                <view class="absolute left-0 bottom-0 z-1 w-_bl_100_p__br_ h-75rpx bg-gradient-linear bg-gradient-_bl_0deg_2c_rgb_pl_3_2c_0_2c_0_pr__0_p__2c_rgba_pl_0_2c_0_2c_0_2c_0_pr__100_p__br_ op-50 border-rd-10rpx"></view>
+                <view class="absolute left-0 bottom-0 z-2 w-_bl_100_p__br_ h-40rpx px-14rpx py-0 text-24rpx text-_bl__h_fff_br_ overflow-hidden text-ellipsis whitespace-nowrap box-border">{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

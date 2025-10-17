@@ -1,0 +1,6 @@
+<view class="album__item {{disabled?'is-disabled':''}} _b85d9c34 " style="{{itemStyle}}">
+    <image class="album__img _b85d9c34 " mode="aspectFill" src="{{__oss__.s(mpxExt,cardInfo.materialImg,0)}}" style="{{imgStyle}}"></image>
+    <view class="album__badge _b85d9c34 " wx:if="{{cardInfo.materialNum>1}}">{{cardInfo.materialNum}}</view>
+    <button catch:tap="noop" class="album__btn _b85d9c34 " data-action="give" data-material-id="{{cardInfo.materialId}}" openType="share" style="{{btnStyle}}" wx:if="{{cardInfo.materialNum>0&&showShare}}">转赠</button>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

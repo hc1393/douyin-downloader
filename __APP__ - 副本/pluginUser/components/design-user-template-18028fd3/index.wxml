@@ -1,0 +1,26 @@
+<view class="{{' fixed top-0 left-0 w-screen '+(navTemplate==='normal-one'?'bottom_a_safe-98':'')+' '+(navTemplate==='main-pic'?'bottom_a_safe-98':'')+' '+(navTemplate==='normal-two'?'bottom-0':'')+' '+(navTemplate==='concave'?'bottom_a_safe-98':'')+' '+(navTemplate==='concave-top-round'?'bottom_a_safe-98':'')+' '}}">
+    <scroll-view scrollY bindscroll="onDesignTemplateScroll" class="w-screen h-full" style="{{pageBg}}">
+        <view class="relative z-1" style="{{pageBg}}">
+            <view class="relative z-2 w-screen" style="{{topStyle}}" wx:if="{{isEnable}}">
+                <image lazyLoad class="absolute top-0 left-1_s_2 -translate-x-1_s_2 h-full" mode="heightFix" src="{{__oss__.s(mpxExt,topConfig.userBgImg,0)}}" wx:if="{{topConfig.userBgImg}}"></image>
+            </view>
+            <view class="relative z-3 w-screen h-fit min-h-full box-border flex flex-col" style="{{compContentStyle}}">
+                <block wx:for="{{designCompList}}" wx:key="id">
+                    <block wx:if="{{item.component!=='other-component'}}">
+                        <design-user-personal-info designData="{{item}}" wx:if="{{item.component==='design-user-personal-info'}}"></design-user-personal-info>
+                        <design-user-member-equity designData="{{item}}" wx:if="{{item.component==='design-user-member-equity'}}"></design-user-member-equity>
+                        <design-user-paid-member-card designData="{{item}}" wx:if="{{item.component==='design-user-paid-member-card'}}"></design-user-paid-member-card>
+                        <design-user-assets designData="{{item}}" wx:if="{{item.component==='design-user-assets'}}"></design-user-assets>
+                        <design-user-my-ability designData="{{item}}" wx:if="{{item.component==='design-user-my-ability'}}"></design-user-my-ability>
+                        <design-user-my-order designData="{{item}}" wx:if="{{item.component==='design-user-my-order'}}"></design-user-my-order>
+                        <design-user-medal designData="{{item}}" wx:if="{{item.component==='design-user-medal'}}"></design-user-medal>
+                    </block>
+                    <v-custom-page bindopenPinDialog="openPinDialog" bindrunAuthorization="runAuthorization" designData="{{[item]}}" traceScreenType="个人中心" wx:else></v-custom-page>
+                </block>
+            </view>
+        </view>
+        <design-footer logo="{{pageConfig.brandLogo}}"></design-footer>
+    </scroll-view>
+</view>
+<v-pin-index-dialog id="__std_pinIndexDialog" traceScreenType="{{screenType}}"></v-pin-index-dialog>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

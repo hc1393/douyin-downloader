@@ -1,0 +1,31 @@
+<view catchtap="bindEvent" class="design-text _590e91e5 " data-item="{{designData}}" style="{{__stringify__.stringifyStyle('',designDataStyle)}}" wx:if="{{designData&&designData.props}}">
+    <block wx:if="{{designData.props.bindingKey=='nickName'}}">
+        <text catchtap="linkUser" class=" _590e91e5 " style="{{__stringify__.stringifyStyle( '',filter.styleFilter(designData.props.noLogin) )}}" wx:if="{{userInfo&&userInfo.nickname}}">
+          {{userInfo.nickname}}
+        </text>
+        <text catchtap="linkUser" class=" _590e91e5 " style="{{__stringify__.stringifyStyle( '',filter.styleFilter(designData.props.noLogin) )}}" wx:else>
+          {{designData.props.noLogin.text}}
+        </text>
+    </block>
+    <block wx:elif="{{designData.props.bindingKey&&designData.props.bindingKey!='none'}}">
+        <text catchtap="linkAssets" class=" _590e91e5 " data-type="{{designData.props.bindingKey}}" style="{{__stringify__.stringifyStyle( '',filter.styleFilter(designData.props.value) )}}" wx:if="{{userAssets}}">
+            <block wx:if="{{designData.props.bindingKey=='couponNumber'}}">{{userAssets.coupon}}</block>
+            <block wx:elif="{{designData.props.bindingKey=='integralNumber'}}">{{userAssets.integral}}</block>
+            <block wx:elif="{{designData.props.bindingKey=='balanceNumber'}}">{{userAssets.balance}}</block>
+            <block wx:elif="{{designData.props.bindingKey=='giftCardNumber'}}">{{userAssets.giftCard}}</block>
+        </text>
+        <text catchtap="linkAssets" class=" _590e91e5 " data-type="{{designData.props.bindingKey}}" style="{{__stringify__.stringifyStyle( '',filter.styleFilter(designData.props.value) )}}" wx:else>
+          ***
+        </text>
+        <text catchtap="linkAssets" class=" _590e91e5 " data-type="{{designData.props.bindingKey}}" style="{{__stringify__.stringifyStyle( '',filter.styleFilter(designData.props.unit) )}}">
+            <block wx:if="{{designData.props.bindingKey=='couponNumber'}}">{{designData.props.couponUnitText}}</block>
+            <block wx:elif="{{designData.props.bindingKey=='integralNumber'}}">{{designData.props.integralUnitText}}</block>
+            <block wx:elif="{{designData.props.bindingKey=='balanceNumber'}}">{{designData.props.balanceUnitText}}</block>
+            <block wx:elif="{{designData.props.bindingKey=='giftCardNumber'}}">{{designData.props.giftCardUnitText}}</block>
+            <block wx:else>个</block>
+        </text>
+    </block>
+    <text class=" _590e91e5 " wx:else>{{designData.props.text}}</text>
+</view>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>
+<wxs module="filter" src="../../wxs/index590eb862.wxs"/>

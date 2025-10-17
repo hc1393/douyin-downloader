@@ -1,0 +1,22 @@
+<scroll-view enhanced scrollWithAnimation scrollX class="w-_bl_100_p__br_ whitespace-nowrap overflow-visible" id="stored-scroll-view" scrollLeft="{{scrollLeft}}" showScrollbar="{{false}}">
+    <view class="{{fromPayChoose?showNumOperate?'pt-24 pb-48':'py-24':'pt-28 pb-36'}}" wx:if="{{list&&list.length}}">
+        <view bindtap="onSselect" class=" relative box-border w-260rpx h-160rpx p-16rpx mr-20rpx border-1rpx border-solid border-rd-16rpx relative v-middle {{noFontDsc?'inline-flex flex-col justify-center':'inline-block'}} " data-id="{{item.id}}" data-index="{{index}}" id="tab{{item.id}}" style="background-color: {{tools.hexToRgba(colorTheme,selectedItem.id==item.id?'0.1':'0.05')}};border-color: {{tools.hexToRgba(colorTheme,selectedItem.id==item.id?'1':'0.1')}};" wx:for="{{list}}" wx:key="id">
+            <stored-value-tag mark="{{item.activityMark||''}}" picIcon="{{item.activityMarkPicture||''}}"></stored-value-tag>
+            <view class="text-24rpx lh-34rpx text-_bl__h_999999_br_ overflow-hidden whitespace-nowrap text-ellipsis">{{item.activityName}}</view>
+            <view class="{{'text-34rpx font-500 text-_bl__h_333333_br_ lh-34rpx mx-0 mt-14rpx '+(noFontDsc?'mb-0':'mb-10rpx')}}">
+                <text class="text-24rpx text-_bl__h_333333_br_">{{currencySymbol}}</text>{{item.sellPrice||item.sell_price}}</view>
+            <view catchtap="showGiftsInfo" class="flex items-center text-22rpx lh-26rpx" data-index="{{index}}" style="color: {{colorTheme}};" wx:if="{{item.benefitInfo.fontDsc}}">{{item.benefitInfo.fontDsc}}<text class="text-22rpx i-jiantou-you" wx:if="{{item.benefitInfo.couponNum>0}}"></text>
+            </view>
+            <view class="w-140rpx h-46rpx box-border px-14rpx py-0 bg-_bl__h_ffffff_br_ shadow-_bl_0rpx_4rpx_10rpx_0rpx_rgba_pl_0_2c_0_2c_0_2c_0_d_2_pr__br_ border-rd-_bl_88rpx_88rpx_88rpx_88rpx_br_ absolute left-0 right-0 bottom--32rpx m-auto flex items-center" wx:if="{{item.detailInfo.orderMaxNum>1&&selectedItem.id==item.id}}">
+                <view catchtap="numChange" class="text-28rpx text-_bl__h_666666_br_ relative i-jianhao" data-id="{{item.id}}" data-type="decrease">
+                    <view class="w-_bl_100_p__br_ h-_bl_100_p__br_ p-20rpx absolute left--20rpx top--20rpx"></view>
+                </view>
+                <view class="flex-1 text-26rpx text-_bl__h_333333_br_ text-center">{{item.num}}</view>
+                <view catchtap="numChange" class="text-28rpx text-_bl__h_666666_br_ relative i-jiahao" data-id="{{item.id}}" data-type="add" style="color: {{colorTheme}};">
+                    <view class="w-_bl_100_p__br_ h-_bl_100_p__br_ p-20rpx absolute left--20rpx top--20rpx"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

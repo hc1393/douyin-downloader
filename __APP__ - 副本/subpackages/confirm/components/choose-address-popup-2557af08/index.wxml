@@ -1,0 +1,11 @@
+<pop-up bindclose="close" position="bottom" show="{{show}}" zIndex="{{1000}}">
+    <view catchtap="noop" class="bg-neutral-100 overflow-hidden text-left rounded-_bl_30rpx_30rpx_0_0_br_">
+        <view class="h-100 relative">
+            <view class="text-36 font-medium text-center lh-100 c-hex-333333">选择收货地址</view>
+            <view catchtap="close" class="i-close text-40 c-hex-999999 absolute p-24 right-0 top-0"></view>
+        </view>
+        <scroll-view scrollY class="h-900">
+            <address-list bindr="__refEmit" class="ref_addressList_1" data-r=".ref_addressList_1"></address-list>
+        </scroll-view>
+    </view>
+</pop-up>

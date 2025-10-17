@@ -1,0 +1,11 @@
+<view bindtap="toToggleCheck" class="flex items-center py-12 mb-12 {{isShake?'shake':''}}" wx:if="{{agreement&&agreement.length}}">
+    <text class="text-32 i-radio text-primary" wx:if="{{checked}}"></text>
+    <view class="w-32 h-32 rd-full bg-_bl__h_FFF_br_ border-1 border-solid border-_bl__h_C5C5C5_br_ box-border" wx:else></view>
+    <view class="h-36 flex items-center text-26 ml-12">
+        <text class="text-_bl__h_999_br_">{{_i1}}</text>
+        <view catchtap="toSeeAgreement" catchtouchmove="noop" class="extend-click" data-url="{{item.url}}" wx:for="{{agreement}}" wx:key="*this">
+            <text class="text-primary">{{item.label}}</text>
+            <text wx:if="{{agreement.length&&index!==agreement.length-1}}">、</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,76 @@
+<view class="px-24 pt-110 box-border">
+    <view class="relative box-border">
+        <image lazyLoad class="w-full h-fit -mb-12" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2025/03/05/pluginUser-avatar-bg.png',0)}}"></image>
+        <button bindchooseavatar="onChooseAvatar" bindtap="onHandleAvatar" class="choose-avatar-btn" openType="chooseAvatar">
+            <view class="absolute top-0 left-_bl_50_p__br_ z-10 w-140 h-140 -mt-70 -ml-70 rd-full shadow-md">
+                <image lazyLoad class="w-140 h-140 rd-full overflow-hidden" mode="aspectFill" src="{{__oss__.s(mpxExt,avatar||defaultAvatar,0)}}"></image>
+                <view class="w-36 h-36 bg-_bl__h_FFF_br_ rd-full overflow-hidden absolute right-0 bottom-0 flex justify-center items-center">
+                    <text class="i-avatar-choose text-primary"></text>
+                </view>
+            </view>
+        </button>
+        <view class="bg-_bl__h_FFF_br_ pt-12 px-24 rd-b-16 overflow-visible box-border">
+            <view class="relative flex justify-between items-center py-32 border border-b-solid border-_bl__h_eee_br_ box-border">
+                <view class="text-30 text-_bl__h_333_br_">{{formItem.nickName.label}}</view>
+                <view class="flex items-center">
+                    <input bindinput="onNicknameInput" class="w-300 text-_bl__h_333_br_ text-30 text-right" placeholder="{{formItem.nickName.placeholder}}" placeholderClass="c-hex-999 text-30" type="{{'wx'==='wx'?'nickname':''}}" value="{{nickName}}"></input>
+                </view>
+            </view>
+            <view class="relative flex justify-between items-center py-32 border border-b-solid border-_bl__h_eee_br_ box-border">
+                <view class="text-30 text-_bl__h_333_br_">{{formItem.gender.label}}</view>
+                <view class="flex items-center">
+                    <gender-switch bindchange="onGenderChange" value="{{gender}}"></gender-switch>
+                </view>
+            </view>
+            <view class="relative flex justify-between items-center py-32 border border-b-solid border-_bl__h_eee_br_ box-border">
+                <view class="text-30 text-_bl__h_333_br_">{{formItem.phone.label}}</view>
+                <view wx:if="{{isAuth}}">
+                    <view class="flex justify-end items-center">
+                        <text class="text-30 text-_bl__h_333_br_ lh-48">{{mobilePhone}}</text>
+                        <button bindtap="onChangeMobile" class="button bg-white min-w-120 h-48 px-16 text-24 rd-8 _i_text-primary _i_border-primary ml-16" wx:if="{{isShowChangeMobile}}">{{_i1}}</button>
+                    </view>
+                    <text class="text-24 text-_bl__h_999_br_ lh-34" wx:if="{{mobileChangeTips}}">{{mobileChangeTips}}</text>
+                </view>
+                <view class="flex items-center" wx:else>
+                    <button bindtap="onAuth" class="button bg-white min-w-120 h-48 px-16 text-24 rd-8 _i_text-primary _i_border-primary" wx:if="{{'wx'==='wx'&&!isThirdMemberSystem}}">{{_i2}}</button>
+                </view>
+            </view>
+            <view class="{{'relative flex justify-between items-center py-32 box-border '+(!!formItem.address.show||isShowCustomFields?'border border-b-solid border-_bl__h_eee_br_':'')}}">
+                <view class="flex flex-col justify-center">
+                    <text class="text-30 text-_bl__h_333_br_ lh-52">{{formItem.birthday.label}}</text>
+                    <text class="text-24 text-_bl__h_999_br_ lh-34">{{formItem.birthday.tips}}</text>
+                </view>
+                <picker bindchange="onBirthdayChange" disabled="{{!isAllowModBirthday&&!isFirstFillBirthday}}" end="{{endYear}}" mode="date" start="{{startYear}}" value="{{currentDate}}">
+                    <view wx:if="{{birthday}}">
+                        <text class="text-30 text-_bl__h_333_br_ lh-48">{{birthday}}</text>
+                    </view>
+                    <view wx:else>
+                        <view class="flex items-center px-16 py-12 bg-primary-opacity-10 rd-8" wx:if="{{isShowBirthdayPrivileges}}">
+                            <text class="text-24 text-primary lh-_bl_1_br_">{{_i3}}</text>
+                            <text class="i-arrow-r _i_text-22 _i_text-primary ml-8"></text>
+                        </view>
+                        <view class="flex items-center" wx:else>
+                            <text class="text-30 text-_bl__h_999_br_">{{formItem.birthday.placeholder}}</text>
+                            <text class="i-arrow-r _i_text-24 _i_text-_bl__h_999_br_ ml-16"></text>
+                        </view>
+                    </view>
+                </picker>
+            </view>
+            <view bindtap="onAddressChange" class="{{'relative flex justify-between items-center py-32 box-border '+(isShowCustomFields?'border border-b-solid border-_bl__h_eee_br_':'')}}" wx:if="{{!!formItem.address.show}}">
+                <view class="text-30 text-_bl__h_333_br_">{{formItem.address.label}}</view>
+                <view class="flex items-center max-w-_bl_70_p__br_">
+                    <text class="text-30 text-_bl__h_333_br_ text-right line-clamp-2" wx:if="{{addressText}}">{{addressText}}</text>
+                    <text class="text-30 text-_bl__h_999_br_" wx:else>{{formItem.address.placeholder}}</text>
+                    <text class="i-arrow-r _i_text-24 _i_text-_bl__h_999_br_ ml-16"></text>
+                </view>
+            </view>
+            <view class="{{'relative flex justify-between items-center py-32 box-border '+(index===customOtherFields.length-1?'':'border border-b-solid border-_bl__h_eee_br_')}}" wx:for="{{customOtherFields}}" wx:key="id">
+                <view class="text-30 text-_bl__h_333_br_">{{item.dataDesc}}</view>
+                <view class="flex items-center">
+                    <input bindinput="onCustomFieldInput" class="w-300 text-_bl__h_333_br_ text-30 text-right" data-index="{{index}}" placeholder="{{item.dataTips}}" placeholderClass="c-hex-999 text-30" type="{{item.dataFormat===DATA_FORMAT_NUMBER?'number':'text'}}" value="{{item.dataValue}}"></input>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

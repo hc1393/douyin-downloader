@@ -1,0 +1,4 @@
+<template name="qm-flat-button">
+    <image catchtap="bindEvent" data-item="{{data}}" src="{{__oss__.s(mpxExt,data.propsValue.src,0)}}" style="{{data.propsValue.style}};position:fixed;z-index:10000;"></image>
+</template>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

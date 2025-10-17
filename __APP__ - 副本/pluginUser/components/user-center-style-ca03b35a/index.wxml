@@ -1,0 +1,58 @@
+<view class="flex flex-col justify-between mx-24rpx mt-0 mb-16rpx bg-_bl__h_fff_br_ border-rd-20rpx">
+    <view class="relative w-_bl_100_p__br_ h-300rpx border-rd-20rpx">
+        <view class="{{'absolute top-0 left-0 z-1 w-_bl_100_p__br_ h-_bl_100_p__br_ bg-no-repeat bg-_bl_50_p__br_ bg-_bl_length_c_cover_br_ border-rd-20rpx '+(customData.userInfoBgImg?'':'op-10')}}" style="background-image: url({{customData.userInfoBgImg}});{{customData.userInfoBgImg?'':'background-color:'+colorTheme}}"></view>
+        <view class="absolute top-0 left-0 z-2 box-border w-_bl_100_p__br_ h-_bl_100_p__br_ pt-24rpx pb-24rpx pl-308rpx pr-24rpx">
+            <image class="absolute bottom-24rpx left-24rpx w-260rpx h-350rpx border-rd-8rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,teaBoyImgUrl||customData.brandIcon||'https://images.qmai.cn/resource/20210824210816/2021/12/28/qm-image.png',0)}}"></image>
+            <view class="flex flex-col justify-between h-_bl_100_p__br_">
+                <view class="flex w-_bl_100_p__br_">
+                    <view class="flex-1">
+                        <view bindtap="goUpdateUserInfo" class="flex items-center pb-10rpx text-_bl__h_333_br_ font-bold text-36rpx">HI,<view class="text-_bl__h_333_br_ font-bold text-36rpx line-clamp-1">{{username}}</view>
+                        </view>
+                        <view class="flex items-center">
+                            <image bindtap="linkBadgeUrl" class="w-70 h-70 mr-10" lazyLoad="true" src="{{__oss__.s(mpxExt,userAsset.litMinorIcon,0)}}" wx:if="{{customData.medal&&userAsset.litMinorIcon&&userAsset.litBadgeNum}}"></image>
+                            <view class="inline-flex items-center justify-center h-40rpx px-20rpx py-0 text-_bl__h_fff_br_ text-22rpx border-rd-20rpx" style="background-color: {{colorTheme}};" wx:if="{{isShowLevel&&userInfoData.cardName}}">{{userInfoData.cardName}}</view>
+                        </view>
+                    </view>
+                    <text bindtap="goToPaymentCode" class="text-_bl__h_0c0c0c_br_ text-92rpx iconfont i-qr-code" data-operation-type="查看会员码" data-screen-type="个人中心" wx:if="{{customData.membership_code}}"></text>
+                </view>
+                <view class="flex w-_bl_100_p__br_">
+                    <view bindtap="linkPointsMall" class="{{' flex flex-1 flex-col items-center justify-center h-_bl_100_p__br_ border-l-1px border-l-solid border-l-_bl__h_e5e5e5_br_ first-border-none '+(customData.balance||customData.medal?'relative lh-_bl_1_d_6_br_ border-none_i_ before-absolute before-top-10rpx before-left-0rpx before-w-1rpx before-h-82rpx before-bg-_bl__h_e5e5e5_br_ before-content-empty first-before-hidden':'')+' '}}">
+                        <text class="{{'text-_bl__h_00a47c_br_ font-bold '+(customData.balance||customData.medal?'text-34rpx':'text-50rpx')}}" style="color: {{customData.brandTextColor||colorTheme}};">{{isAuth&&show?userAsset.integral||(userAsset.integral===0?0:'***'):'***'}}</text>
+                        <text class="text-_bl__h_333_br_ text-26rpx">{{pointName}}</text>
+                    </view>
+                    <view bindtap="linkMyCoupon" class="{{' flex flex-1 flex-col items-center justify-center h-_bl_100_p__br_ border-l-1px border-l-solid border-l-_bl__h_e5e5e5_br_ first-border-none '+(customData.balance||customData.medal?'relative lh-_bl_1_d_6_br_ border-none_i_ before-absolute before-top-10rpx before-left-0rpx before-w-1rpx before-h-82rpx before-bg-_bl__h_e5e5e5_br_ before-content-empty first-before-hidden':'')+' '}}">
+                        <text class="{{'text-_bl__h_00a47c_br_ font-bold '+(customData.balance||customData.medal?'text-34rpx':'text-50rpx')}}" style="color: {{customData.brandTextColor||colorTheme}};">{{isAuth&&show?userAsset.coupon||(userAsset.coupon===0?0:'***'):'***'}}</text>
+                        <text class="text-_bl__h_333_br_ text-26rpx">{{couponName}}</text>
+                    </view>
+                    <view bindtap="linkMyBalance" class="{{' flex flex-1 flex-col items-center justify-center h-_bl_100_p__br_ border-l-1px border-l-solid border-l-_bl__h_e5e5e5_br_ first-border-none '+(customData.balance?'relative lh-_bl_1_d_6_br_ border-none_i_ before-absolute before-top-10rpx before-left-0rpx before-w-1rpx before-h-82rpx before-bg-_bl__h_e5e5e5_br_ before-content-empty first-before-hidden':'')+' '}}" wx:if="{{customData.balance}}">
+                        <text class="{{'text-_bl__h_00a47c_br_ font-bold '+(customData.balance?'text-34rpx':'text-50rpx')}}" style="color: {{customData.brandTextColor||colorTheme}};">{{isAuth&&show?userAsset.balance||(userAsset.balance===0?0:'***'):'***'}}</text>
+                        <text class="text-_bl__h_333_br_ text-26rpx">{{balanceName}}</text>
+                    </view>
+                    <view bindtap="linkMyBadge" class="{{' flex flex-1 flex-col items-center justify-center h-_bl_100_p__br_ border-l-1px border-l-solid border-l-_bl__h_e5e5e5_br_ first-border-none '+(customData.medal?'relative lh-_bl_1_d_6_br_ border-none_i_ before-absolute before-top-10rpx before-left-0rpx before-w-1rpx before-h-82rpx before-bg-_bl__h_e5e5e5_br_ before-content-empty first-before-hidden':'')+' '}}" wx:if="{{customData.medal}}">
+                        <text class="{{'text-_bl__h_00a47c_br_ font-bold '+(customData.medal?'text-34rpx':'text-50rpx')}}" style="color: {{customData.brandTextColor||colorTheme}};">{{isAuth&&show?userAsset.litBadgeNum||(userAsset.litBadgeNum===0?0:'***'):'***'}}</text>
+                        <text class="text-_bl__h_333_br_ text-26rpx">勋章</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="jumpUserEquity" class="p-30rpx" style="{{birthdayPrivilegeInfo.isOpen?'padding: 30rpx 30rpx 16rpx 30rpx':''}}" wx:if="{{isShowLevel&&isAuth&&show}}">
+        <view class="text-_bl__h_333_br_ text-26rpx">当前{{userInfoData.experienceName}}<text class="pl-20rpx font-bold text-30rpx" style="color: {{customData.brandTextColor||colorTheme}};">{{userInfoData.currentValue}}</text>
+            <text class="text-24rpx" style="color: {{customData.brandTextColor||colorTheme}};">/{{userInfoData.nextConditionValue}}</text>
+        </view>
+        <view class="flex items-center pt-10rpx">
+            <view class="relative flex-1 h-16rpx border-rd-8rpx">
+                <view class="absolute top-0 left-0 z-1 w-_bl_100_p__br_ h-_bl_100_p__br_ bg-no-repeat bg-_bl_50_p__br_ bg-_bl_length_c_cover_br_ border-rd-20rpx op-10" style="background-color: {{colorTheme}}; border-radius: 8rpx;"></view>
+                <view class="absolute top-0 left-0 z-2 max-w-_bl_100_p__br_ h-16rpx border-rd-8rpx transition-all transition-duration-0_d_3s" style="width: {{userInfoData.percent}}%;background-color: {{customData.brandTextColor||colorTheme}};"></view>
+            </view>
+            <text class="pl-30rpx text-26rpx" style="color: {{customData.brandTextColor||colorTheme}};">Max</text>
+        </view>
+    </view>
+    <view class="flex items-center justify-between h-72rpx border-rd-16rpx mb-16rpx w-_bl_100_p__br_ bg-_bl__h_fff_br_" wx:if="{{birthdayPrivilegeInfo.isOpen}}">
+        <view class="text-28rpx lh-72rpx ml-30rpx" style="color: {{colorTheme}}">{{birthdayPrivilegeInfo.benefitsName}}</view>
+        <view bindtap="goUpdateUserInfo" class="text-_bl__h_fff_br_ w-120rpx h-56rpx bg-_bl__h_00a47c_br_ border-rd-28rpx text-24rpx mr-30rpx text-center lh-56rpx" style="background-color: {{colorTheme}}">去完善</view>
+    </view>
+    <qm-design-member-rights isShow="{{customData.member_rights}}" memberEquity="{{customData.member_rights_data}}" wx:if="{{customData.member_rights}}"></qm-design-member-rights>
+</view>
+<authorization bindcomplete="authorize" id="authorization"></authorization>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

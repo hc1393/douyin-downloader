@@ -1,0 +1,29 @@
+<view class="box-border pb-_bl_calc_pl_150rpx_a_constant_pl_safe-area-inset-bottom_pr__pr__br_ pb-_bl_calc_pl_150rpx_a_env_pl_safe-area-inset-bottom_pr__pr__br_ bg-_bl__h_f5f5f5_br_" style="min-height: calc(100vh - {{systemTitleHeight}}px);">
+    <steps bindswitchSpecs="switchSpecs" cartButton="{{cartButton}}" designConfig="{{mealDetail.detailDesignConfig}}" goodsSkuList="{{mealDetail.goodsSkuList}}" navbarHeight="{{systemTitleHeight}}" selectedSpecName="{{selectedSpecName}}" selectedSpecValueId="{{selectedSpecValueId}}" step="{{step}}" steps="{{steps}}"></steps>
+    <spell-goods baseGoodsIndex="{{step-1}}" bindgetSpellGoodsDone="getDone" bindupdateSpellGoods="updateSpellGoods" designConfig="{{mealDetail.detailDesignConfig}}" goodsId="{{mealDetail.id}}" spellGoodsData="{{steps[step-1]}}" wx:if="{{steps[step-1].type==='spellGoods'}}"></spell-goods>
+    <practice-item bindchange="stepsChange" bindcheckSaleTime="checkSaleTime" bindclick="stepsClick" bindcustom="handleCustom" bindgetdone="getDone" combExp="{{mealDetail.combExp||false}}" designConfig="{{mealDetail.detailDesignConfig}}" freeGoodsIndex="{{step-1-spellGoodsCount-baseGoodsCount}}" isMultiSpecs="{{isMultiSpecs}}" proper="{{steps[step-1]}}" wx:else></practice-item>
+    <view class="mx-0 my-30rpx px-24rpx py-0" wx:if="{{step==1&&mealDetail.sortedPracticeList}}">
+        <view wx:for="{{mealDetail.sortedPracticeList}}" wx:key="id">
+            <view class="px-0 pt-28rpx pb-4rpx text-_bl__h_666_br_ text-24rpx">{{item.practiceName}}</view>
+            <view class="flex flex-wrap">
+                <view bindtap="switchProperty" class="{{'min-w-80rpx h-58rpx mt-20rpx mb-0 ml-0 mr-20rpx px-24rpx py-0 text-24rpx lh-58rpx text-center bg-_bl__h_f8f8f8_br_ border-rd-8rpx '+(sonItem.activeClass=='active'?'text-white':'text-_bl__h_666_br_')}}" data-checkbox="{{item.moreChoiceValue}}" data-index="{{index}}" data-sonindex="{{sonIndex}}" style="background-color: {{sonItem.activeClass=='active'?colorTheme:''}};" wx:for="{{item.practiceValueList}}" wx:for-index="sonIndex" wx:for-item="sonItem" wx:key="id">{{sonItem.practiceValue}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="fixed bottom-0 left-0 flex items-center justify-center box-content w-_bl_100_p__br_ h-134rpx bg-white shadow-_bl_0_-5rpx_20rpx_0_rgba_pl_37_2c_37_2c_37_2c_0_d_1_pr__br_" style="padding-bottom: constant(safe-area-inset-bottom); padding-bottom: env(safe-area-inset-bottom)">
+        <button bindtap="prevEvent" class="w-240rpx h-88rpx mt-0 mb-0 ml-0 mr-24rpx text-_bl__h_333333_br_ font-500 text-30rpx lh-88rpx bg-_bl__h_ffffff_br_ border-1px border-solid border-_bl__h_dcdcdc_br_ border-rd-44rpx" wx:if="{{step>1}}">上一步</button>
+        <button class="flex items-center justify-center h-88rpx m-0 text-_bl__h_ffffff_br_ font-400 text-30rpx border-rd-44rpx w-702rpx bg-_bl__h_cccccc_br__i_" wx:if="{{cartButton.isDisable}}">{{cartButton.text}}</button>
+        <block wx:else>
+            <button bindtap="nextEvent" class="{{' flex items-center justify-center h-88rpx m-0 text-_bl__h_ffffff_br_ font-400 text-30rpx border-rd-44rpx w-422rpx '+(done?'':'bg-_bl__h_cccccc_br__i_')+' '}}" style="background-color: {{colorTheme}};" wx:if="{{step>1}}">
+                <view class="flex flex-col items-center justify-center text-_bl__h_ffffff_br_ font-400 text-26rpx lh-normal">{{step==steps.length?'加入购物车':'下一步'}}<text class="text-_bl__h_ffffff_br_ font-bold text-24rpx">
+                        <block wx:if="{{mealDetail.pointsInfo}}">{{mealDetail.pointsInfo.points}}{{pointName}}+</block>￥{{mealPrice}}<text class="ml-10rpx text-_bl__h_999_br_ text-24rpx font-normal decoration-line-through" wx:if="{{totalMealPriceO&&totalMealPriceO>mealPrice}}">{{totalMealPriceO}}</text>
+                    </text>
+                </view>
+            </button>
+            <button bindtap="nextEvent" class="{{' flex items-center justify-center h-88rpx m-0 text-_bl__h_ffffff_br_ font-400 text-30rpx border-rd-44rpx w-702rpx '+(done?'':'bg-_bl__h_cccccc_br__i_')+' '}}" style="background-color: {{colorTheme}};" wx:else>
+                <text class="text-_bl__h_ffffff_br_ font-bold text-30rpx">
+                    <block wx:if="{{mealDetail.pointsInfo}}">{{mealDetail.pointsInfo.points}}{{pointName}}+</block>￥{{mealPrice}}<text class="ml-10rpx text-_bl__h_999_br_ text-24rpx font-normal decoration-line-through" wx:if="{{totalMealPriceO&&totalMealPriceO>mealPrice}}">{{totalMealPriceO}}</text>
+                </text>{{step==steps.length?'加入购物车':'下一步'}}</button>
+        </block>
+    </view>
+</view>

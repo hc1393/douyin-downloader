@@ -1,0 +1,2 @@
+<zm-loading wx:if="{{!componentMounted}}"></zm-loading>
+<tab-order-list bindr="__refEmit" class="ref_index_1" data-r=".ref_index_1"></tab-order-list>

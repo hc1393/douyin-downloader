@@ -1,0 +1,9 @@
+<view class="fixed top-0 right-0 bottom-0 left-0 z-1000 flex items-center justify-center bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_4_pr__br_" wx:if="{{show}}">
+    <view class="box-border w-640rpx pt-50rpx overflow-hidden bg-_bl__h_ffffff_br_ border-rd-20rpx">
+        <view class="flex flex-col items-center">
+            <text class="text-_bl__h_111111_br_ font-bold text-36rpx" wx:for="{{goods}}" wx:key="index">{{item.goods.name}}</text>
+        </view>
+        <view class="px-0 pt-40rpx pb-50rpx text-_bl__h_777777_br_ text-34rpx text-center">去定制您钟爱的做法</view>
+        <view bindtap="onBtnTap" class="flex items-center justify-center w-_bl_100_p__br_ h-110rpx font-bold text-34rpx border-t-1px border-t-solid border-t-_bl__h_e5e5e5_br_" style="color: {{colorTheme}};">{{goods.length==1?'去定制':'我知道了'}}</view>
+    </view>
+</view>

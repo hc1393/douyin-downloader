@@ -1,0 +1,41 @@
+<config-provider>
+    <std-design-mp-loading wx:if="{{isLoading}}"></std-design-mp-loading>
+    <view class="relative flex flex-col h-screen bg-_bl__h_F5F5F5_br_" wx:else>
+        <std-navigation-bar background="transparent" title=""></std-navigation-bar>
+        <block wx:if="{{imageList&&__oc__.g( imageList,['length'] )}}">
+            <image lazyLoad class="fixed top-0 left-0 w-screen h-660 blur-80 z-0" mode="aspectFill" src="{{__oss__.s(mpxExt,currentCover,0)}}"></image>
+            <view class="relative flex justify-center pt-24 pb-40 z-2">
+                <text class="text-28 text-_bl__h_333_br_ lh-40">{{_i1}}</text>
+            </view>
+            <view class="relative w-full h-320 z-3">
+                <swiper bindchange="onSwiperChange" class="w-full h-full" current="{{current}}" easingFunction="easeInOutCubic" nextMargin="100rpx" previousMargin="100rpx">
+                    <swiper-item wx:for="{{imageList}}" wx:key="levelId">
+                        <view class="h-full rd-16 overflow-hidden box-border transition-all duration-250 {{item.active?'scale-100':'scale-80'}}">
+                            <image class="w-full h-full" mode="aspectFill" src="{{__oss__.s(mpxExt,item.img,0)}}"></image>
+                        </view>
+                    </swiper-item>
+                </swiper>
+            </view>
+        </block>
+        <view class="absolute top-620 left-0 bottom-0 w-screen justify-between flex flex-col z-4">
+            <view class="flex-1 flex flex-col rd-t-24 bg-gradient-to-b from-_bl__h_FFF_br_ to-_bl__h_F5F5F5_br_ overflow-hidden" wx:if="{{notesList&&notesList.length}}">
+                <view class="flex justify-center py-32">
+                    <text class="text-28 text-_bl__h_666_br_ lh-40">{{_i2}}</text>
+                </view>
+                <scroll-view scrollY class="flex-1 overflow-hidden">
+                    <view class="h-fit flex flex-col items-center pb-32">
+                        <view bindtap="toSelect" class="{{'w-_bl_calc_pl_100_p_-80rpx_pr__br_ h-88 flex justify-center items-center rd-8 overflow-hidden shadow-_bl_0_4rpx_8rpx_0_rgba_pl_0_2c_0_2c_0_2c_0_d_05_pr__br_ box-border border border-solid '+(item.checked?'border-primary bg-primary-opacity-10':'border-transparent bg-_bl__h_FFF_br_')+' '+(index===notesList.length-1?'':'mb-32')}}" data-index="{{index}}" wx:for="{{notesList}}" wx:key="{{ index }}">
+                            <text class="{{'text-28 lh-28 font-500 '+(item.checked?'text-primary':'text-_bl__h_333_br_')}}">{{item.text}}
+                </text>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view class="flex-none h-fit px-24 pt-24 pb_a_safe-24 bg-_bl__h_FFF_br_ flex justify-between items-center shadow-_bl_0_0_20rpx_0_rgba_pl_0_2c_0_2c_0_2c__d_08_pr__br_">
+                <button class="button button-primary w-full rd-full {{isSelected?'':'button-disabled'}}" openType="share">{{_i3}}</button>
+            </view>
+        </view>
+    </view>
+</config-provider>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="__oc__" src="../../../wxs/oc71f5331b.wxs"/>

@@ -1,0 +1,8 @@
+<view class="px-34 pl-92" style="{{utils.positionStyle(navbarHeight)}}">
+    <view class="text-hex-111 text-46 font-700" style="{{utils.titleStyle(navbarHeight)}}">{{title}}</view>
+    <view class="text-hex-666 text-26 font-400 leading-37">
+        <slot></slot>
+    </view>
+    <view class="text-hex-666 text-26 font-400 leading-37">{{desc}}</view>
+</view>
+<wxs module="utils" src="../../wxs/indexc5d05354.wxs"/>

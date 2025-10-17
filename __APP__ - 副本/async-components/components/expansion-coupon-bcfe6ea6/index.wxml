@@ -1,0 +1,14 @@
+<root-portal enable="{{!!expandStyle}}">
+    <view style="{{sizeStyle}} {{marginStyle}}">
+        <view class="bg-_h_fff rounded-20 z-10803" style="{{fixedStyle+expandStyle}}">
+            <slot></slot>
+        </view>
+    </view>
+    <block wx:if="{{expandStyle}}">
+        <view class="coupon-shadow blur-100 scale-0_d_2 z-10802" style="{{sizeStyle+fixedStyle+shadowStyle}}"></view>
+        <view class="blur-10 rounded-100_p_ opacity-0 z-10802 bg-_h_fff -translate-y-40 translate-x-10" style="{{fixedStyle+lightStyle}}"></view>
+        <view class="blur-5 rounded-50_p_ opacity-0 z-10802 border-10rpx border-solid border-_bl_rgba_pl_255_2c_233_2c_150_2c_0_d_3_pr__br_ origin-center" style="{{fixedStyle+circleStyle}}"></view>
+        <view class="{{'bg-_h_f9d423 rounded-8 transition-all z-10802 '+(item.className==='five-point-star'?'five-point-star':'')+' '+(item.className==='four-point-star'?'four-point-star':'')}}" style="{{starStyle}}{{item.style}}" wx:for="{{stars}}" wx:key="index"></view>
+        <view catchtouchmove="noop" class="w-100vw h-100vh fixed left-0 bottom-0 z-10801 bg-_h_000 bg-opacity-75"></view>
+    </block>
+</root-portal>

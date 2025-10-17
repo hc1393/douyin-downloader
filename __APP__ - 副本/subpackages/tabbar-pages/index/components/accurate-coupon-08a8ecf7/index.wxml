@@ -1,0 +1,58 @@
+<view wx:if="{{isOpen&&popupShow}}">
+    <view catchtap="closeWindow" class="fixed top-0 left-0 z-999 w-_bl_100_p__br_ h-_bl_100_p__br_ overflow-hidden text-_bl__h_fff_br_ bg-_bl__h_000_br_ op-60"></view>
+    <view class="fixed top-_bl_50_p__br_ left-_bl_50_p__br_ z-999 w-600rpx text-center" style="transform: translate(-50%, -50%)">
+        <view class="w-_bl_100_p__br_ px-0 pt-40rpx pb-30rpx bg-no-repeat bg-_bl_length_c_100_p__auto_br_ border-rd-20rpx" style="background-image:url({{showInfo.bgImg}})">
+            <view class="relative block px-0 py-25rpx text-_bl__h_fff_br_ font-bold text-46rpx lh-54rpx">
+                <text wx:if="{{showInfo.title}}">{{showInfo.title}}</text>
+            </view>
+            <scroll-view scrollY class="relative w-535rpx max-h-500rpx mx-auto my-0">
+                <view class="relative flex w-_bl_100_p__br_ h-135rpx mt-15rpx overflow-hidden border-rd-6rpx first-mt-0" wx:for="{{showInfo.coupons}}" wx:key="{{item.templateId}}">
+                    <image class="absolute w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2019/06/04/71f7fb96ada8a7b2.png',0)}}"></image>
+                    <view class="relative flex flex-col flex-wrap items-center justify-center w-164rpx h-_bl_100_p__br_">
+                        <view class="w-_bl_100_p__br_ text-_bl__h_eb5a53_br_ font-bold text-40rpx lh-70rpx">
+                            <block wx:if="{{item.couponTemplate.type===1||item.couponTemplate.type===2||item.couponTemplate.type===3}}">
+                                <text class="font-bold text-54rpx">{{item.couponTemplate.discountAmount}}</text>
+                                <text class="font-500 text-26rpx ml-10rpx">{{item.couponTemplate.discountUnit==2?'折':'元'}}</text>
+                            </block>
+                            <block wx:elif="{{item.couponTemplate.type===4}}">
+                                <block wx:if="{{item.couponTemplate.discountAmount}}">
+                                    <text class="font-bold text-54rpx">{{item.couponTemplate.discountAmount}}</text>
+                                    <text class="font-500 text-26rpx ml-10rpx">{{item.couponTemplate.discountUnit==2?'折':'元'}}</text>
+                                </block>
+                                <block wx:else>
+                                    <text class="font-500 text-26rpx mr-10rpx">免</text>
+                                    <text class="font-bold text-54rpx">{{item.couponTemplate.giveCount}}</text>
+                                    <text class="font-500 text-26rpx ml-10rpx">件</text>
+                                </block>
+                            </block>
+                            <block wx:elif="{{item.couponTemplate.type===5}}">
+                                <text class="font-500 text-26rpx mr-10rpx">免</text>
+                                <text class="font-bold text-54rpx">{{item.couponTemplate.discountGoodsCount}}</text>
+                                <text class="font-500 text-26rpx ml-10rpx">件</text>
+                            </block>
+                            <text class="font-500 text-26rpx" wx:elif="{{item.couponTemplate.type===6}}">免运费</text>
+                        </view>
+                        <view class="w-_bl_100_p__br_ h-20rpx overflow-hidden text-_bl_rgb_pl_153_2c_153_2c_153_pr__br_ text-20rpx lh-20rpx whitespace-nowrap text-ellipsis">
+                            <text>{{item.couponTemplate.thresholdTypeDesc}}</text>
+                        </view>
+                    </view>
+                    <view class="relative flex flex-col flex-wrap items-center justify-center box-border w-367rpx h-_bl_100_p__br_ pl-30rpx text-left">
+                        <view class="absolute left-0 w-4rpx h-100rpx border-l-2rpx border-l-dashed border-l-_bl__h_cbcbcb_br_"></view>
+                        <view class="absolute top-23rpx right-16rpx h-36rpx px-14rpx py-0 text-_bl__h_fff_br_ text-24rpx lh-36rpx bg-_bl__h_eb5a53_br_ border-rd-18rpx" style="color: {{colorFont}};background: {{colorTheme}}">
+                            <text>X{{item.couponNum}}</text>
+                        </view>
+                        <view class="w-_bl_100_p__br_ text-_bl__h_000_br_ font-bold text-30rpx lh-70rpx">
+                            <text>{{item.couponTitle}}</text>
+                        </view>
+                        <view class="w-_bl_100_p__br_ h-20rpx overflow-hidden text-_bl_rgb_pl_153_2c_153_2c_153_pr__br_ text-20rpx lh-20rpx whitespace-nowrap text-ellipsis text-left">
+                            <text>{{item.couponTemplate.couponWhereText}}</text>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <button catchtap="confirm" class="w-535rpx h-88rpx mx-auto mt-30rpx mb-0 text-_bl__h_ff742a_br_ font-bold lh-88rpx bg-_bl__h_ffffff_br_ border-rd-44rpx op-60" style=" color: {{colorFont}};background: {{colorTheme}}">立即使用</button>
+        </view>
+        <image catchtap="closeWindow" class="block w-68rpx h-68rpx mx-auto my-50rpx" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2019/06/04/046c63cc3b568864.png',0)}}"></image>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../../../wxs/oss28ac43a0.wxs"/>

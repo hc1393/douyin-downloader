@@ -1,0 +1,278 @@
+<block wx:if="{{!isAuth}}">
+    <view bindtap="toLogin" class="relative w-full _i_h-fit box-border overflow-hidden _i_px-24" style="{{config.style}}" wx:if="{{mode===1||mode===2}}">
+        <view class="w-full min-h-158 h-fit flex justify-between items-center gap-24 rd-16 box-border bg-_bl__h_FFF_br_ px-24 rd-inherit overflow-hidden" wx:if="{{noLogin.type===1}}">
+            <image lazyLoad class="w-110 h-110 rd-full overflow-hidden" mode="aspectFill" src="{{__oss__.s(mpxExt,defaultAvatar,0)}}"></image>
+            <view class="flex-1 h-full flex flex-col justify-center">
+                <text class="text-30 text-_bl__h_333_br_ lh-42 font-500">{{mainTitleText}}</text>
+                <text class="text-24 text-_bl__h_7C7C7C_br_ lh-32 mt-8">{{subTitleText}}</text>
+            </view>
+            <button class="button min-w-140 h-60 px-16 py-0 text-26 rd-full _i_min-w-120 _i_text-_bl__h_FFF_br_ _i_bg-primary _i_m-0 _i_border-none">{{_i1}}</button>
+        </view>
+        <view class="rd-inherit overflow-hidden" wx:if="{{noLogin.type===2}}">
+            <image lazyLoad class="w-full" mode="aspectFit" src="{{__oss__.s(mpxExt,noLogin.bgImg,0)}}" wx:if="{{noLogin.bgImg}}"></image>
+        </view>
+    </view>
+    <view class="relative w-full box-border overflow-visible h-750" style="{{config.style}}" wx:if="{{mode===3}}">
+        <view class="fixed left-20 flex justify-start items-center z-20" style="{{navigationBarStyle}}" wx:if="{{showMemberCode}}">
+            <view bindtap="toMemberCodePage" class="w-fit h-62 px-24 bg-_bl_rgba_pl_255_2c_255_2c_255_2c_0_d_6_pr__br_ flex justify-center items-center box-border rd-full border border-solid border-_bl__h_E5E5E5_br_ overflow-hidden">
+                <text class="flex-none i-qr-code2 _i_text-32 _i_text-_bl__h_333_br_ mr-11"></text>
+                <text class="text-26 text-_bl__h_3D3D3D_br_">{{_i2}}</text>
+            </view>
+        </view>
+        <view class="absolute w-750 h-750 top-0 left-0 z-8" style="background-color: {{style3NoLoginBg.bgColor}}">
+            <image lazyLoad class="w-full h-full" mode="scaleToFill" src="{{__oss__.s(mpxExt,style3NoLoginBg.bgImg,0)}}" wx:if="{{style3NoLoginBg.bgImg}}"></image>
+        </view>
+        <view class="absolute top-0 left-0 w-full h-full z-10">
+            <view bindtap="toLogin" class="relative w-full h-full pl-42 box-border z-99" style="{{safeTopStyle}}">
+                <image lazyLoad class="w-100 h-100 rd-full overflow-hidden" mode="aspectFill" src="{{__oss__.s(mpxExt,defaultAvatar,0)}}"></image>
+                <view class="mt-24 h-82 flex flex-col justify-between">
+                    <text class="text-30 text-_bl__h_333_br_ lh-42 font-500">{{mainTitleText}}</text>
+                    <text class="text-24 text-_bl__h_7C7C7C_br_ lh-32 mt-8">{{subTitleText}}</text>
+                </view>
+                <button class="button min-w-140 h-60 px-16 py-0 text-26 rd-full _i_min-w-120 _i_text-_bl__h_FFF_br_ _i_bg-primary _i_mt-24 _i_border-none">{{_i3}}</button>
+                <view class="absolute z-10 flex justify-center items-center" style="{{ipImgStyle}}" wx:if="{{style3NoLoginIpImg}}">
+                    <image lazyLoad class="w-full" mode="widthFix" src="{{__oss__.s(mpxExt,style3NoLoginIpImg,0)}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="relative w-full _i_pt-250 box-border overflow-visible bg-_bl__h_F6F6F6_br_" style="{{config.style}}" wx:if="{{mode===4}}">
+        <view class="relative w-full h-fit flex flex-col items-center rd-t-32 bg-_bl__h_FFF_br_ pt-84 pb-48">
+            <image lazyLoad bindtap="toLogin" class="absolute -top-57 left-1_s_2 -translate-x-1_s_2 z-2 w-110 h-110 rd-full overflow-hidden shadow-_bl_0_10rpx_16rpx_0_rgba_pl_0_2c_0_2c_0_2c_0_d_1_pr__br_ border-2 border-solid border-_bl__h_FFF_br_" mode="aspectFill" src="{{__oss__.s(mpxExt,defaultAvatar,0)}}"></image>
+            <view bindtap="toLogin" class="h-52 flex justify-center items-center">
+                <text class="text-36 text-_bl__h_000_br_ lh-36 font-500" style="{{usernameStyle}}">用户昵称</text>
+                <text class="i-arrow-r text-24 text-_bl__h_666_br_ lh-36 ml-8"></text>
+            </view>
+            <button bindtap="toLogin" class="button w-240 h-80 px-40 py-20 text-30 rd-full text-_bl__h_FFF_br_ bg-primary mt-40">{{_i4}}</button>
+            <view class="w-full pt-48 flex justify-between items-center box-border" wx:if="{{isShowAssets}}">
+                <view bindtap="toAssetsPage" class="h-110 flex flex-col justify-between items-center" data-item="{{item}}" style="{{assetsWidthStyle}}" wx:for="{{assetsList}}" wx:key="index">
+                    <view class="h-36 lh-36 text-26 text-_bl__h_666_br_" style="{{assetsLabelStyle}}">{{item.label}}</view>
+                    <view class="h-50 lh-50 text-36 font-500 text-_bl__h_000_br_" style="{{assetsValueStyle}}">{{isAuth?item.value:'**'}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</block>
+<block wx:else>
+    <view class="w-full _i_min-h-170 _i_h-fit box-border _i_px-24 overflow-hidden" style="{{config.style}}" wx:if="{{mode===1}}">
+        <view class="min-h-full h-fit rd-16 rd-inherit overflow-hidden box-border" style="{{bgStyle}}">
+            <view class="h-fit flex justify-between items-center {{isHasBg?'p-24':'px-8 pb-24'}}">
+                <view bindtap="toPersonalDataPage" class="relative flex-none w-114 h-114">
+                    <image lazyLoad class="{{'w-114 h-114 rd-full overflow-hidden box-border '+(isComb||isCustomBorder?'':'border-2 border-solid border-_bl__h_FFF_br_')}}" mode="aspectFill" src="{{__oss__.s(mpxExt,avatarUrl,0)}}"></image>
+                    <view class="{{' absolute top-1_s_2 left-1_s_2 w-138 h-138 -translate-x-1_s_2 -translate-y-1_s_2 flex justify-center items-center '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1fuben5_gai155'?'i-a-touxiudengjizuizhong_huaban1fuben5_gai155':'')+' '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1fuben6gai155'?'i-a-touxiudengjizuizhong_huaban1fuben6gai155':'')+' '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1fuben2_gai155'?'i-a-touxiudengjizuizhong_huaban1fuben2_gai155':'')+' '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1fuben3gai155'?'i-a-touxiudengjizuizhong_huaban1fuben3gai155':'')+' '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1fuben7gai155'?'i-a-touxiudengjizuizhong_huaban1fuben7gai155':'')+' '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1fuben4_gai155'?'i-a-touxiudengjizuizhong_huaban1fuben4_gai155':'')+' '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1fuben8gai155'?'i-a-touxiudengjizuizhong_huaban1fuben8gai155':'')+' '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1gai155'?'i-a-touxiudengjizuizhong_huaban1gai155':'')+' '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1fubengai155'?'i-a-touxiudengjizuizhong_huaban1fubengai155':'')+' '+(avatarBorderUrl==='icon-a-touxiudengjizuizhong_huaban1fuben9gai155'?'i-a-touxiudengjizuizhong_huaban1fuben9gai155':'')+' _i_text-158 _i_text-primary'}}" wx:if="{{isComb}}"></view>
+                    <image lazyLoad class="absolute top-1_s_2 left-1_s_2 -translate-x-1_s_2 -translate-y-1_s_2 w-138 h-138 z-9" mode="aspectFill" src="{{__oss__.s(mpxExt,avatarBorderUrl,0)}}" wx:if="{{isCustomBorder}}"></image>
+                </view>
+                <view class="grow w-_bl_calc_pl_100_p_-150px_pr__br_ h-fit flex flex-col px-24">
+                    <view class="h-full flex flex-col justify-between" wx:if="{{onlyShowNameAndLevel}}">
+                        <text bindtap="toPersonalDataPage" class="text-36 font-500 lh-50 mr-16 truncate extend-click" style="{{usernameStyle}}" wx:if="{{username}}">{{username}}
+              </text>
+                        <view class="min-h-30 flex justify-start items-center {{username?'mt-8':''}}">
+                            <image lazyLoad class="w-70 h-70 rd-full mr-8" mode="aspectFill" src="{{__oss__.s(mpxExt,medalUrl,0)}}" wx:if="{{medalUrl}}"></image>
+                            <tag background="primary" bindtap="toMemberEquity" color="#FFF" content="{{currentLevelName}}" wx:if="{{showLevel}}"></tag>
+                            <tag background="linear-gradient(to right, #3E4164, #292C4D)" color="#F1CC98" content="{{paidMemberText}}" wx:if="{{showPaidMember}}"></tag>
+                        </view>
+                    </view>
+                    <view class="h-50 flex justify-start items-center" wx:else>
+                        <text bindtap="toPersonalDataPage" class="shrink text-36 font-500 lh-50 mr-16 truncate extend-click" style="{{usernameStyle}}" wx:if="{{username}}">{{username}}
+              </text>
+                        <image lazyLoad class="w-44 h-44 rd-full mr-8" mode="aspectFill" src="{{__oss__.s(mpxExt,medalUrl,0)}}" wx:if="{{medalUrl}}"></image>
+                        <tag background="primary" bindtap="toMemberEquity" class="flex-none" color="#FFF" content="{{currentLevelName}}" wx:if="{{showLevel}}"></tag>
+                        <tag background="linear-gradient(to right, #3E4164, #292C4D)" class="flex-none" color="#F1CC98" content="{{paidMemberText}}" wx:if="{{showPaidMember}}"></tag>
+                    </view>
+                    <view bindtap="toMemberEquity" class="w-4_s_5" wx:if="{{showExp}}">
+                        <progress percent="{{percent}}">
+                            <view class="flex items-center text-24 ml-16">
+                                <text class="text-primary">{{currentExp}}</text>
+                                <text class="text-_bl__h_999_br_" wx:if="{{nextLevelExp}}">/</text>
+                                <text class="text-_bl__h_999_br_" wx:if="{{nextLevelExp}}">{{nextLevelExp}}</text>
+                            </view>
+                        </progress>
+                    </view>
+                    <design-user-upgrade-info emphasize bindtap="toMemberEquity" relativeExp="{{nextLevelExp}}" relativeLevel="{{nextLevel}}" relativeLevelName="{{nextLevelName}}" wx:if="{{showUpgrade}}"></design-user-upgrade-info>
+                    <view bindtap="toPersonalDataPage" class="{{'w-fit h-36 rd-full rd-bl-0 pl-18 pr-10 overflow-hidden flex items-center '+(showUpgrade?'mt-6':'mt-16')+' '+(isHasBg?'bg-_bl__h_FDF4E6_br_':'bg-_bl__h_F7F7F7_br_')}}" wx:if="{{isShowPrivileges}}">
+                        <text class="text-24 text-_bl__h_FF8800_br_ lh-none">{{_i5}}</text>
+                        <text class="i-arrow-r _i_text-20 text-_bl__h_FF8800_br_ ml-6 lh-none"></text>
+                    </view>
+                </view>
+                <text bindtap="toMemberCodePage" class="flex-none i-qr-code2 _i_text-44 extend-click" style="{{memberCodeStyle}}" wx:if="{{showMemberCode}}"></text>
+            </view>
+            <view class="rd-16 overflow-hidden" wx:if="{{isShowAssets}}">
+                <view class="py-24 rd-16 flex justify-between items-center box-border" style="{{assetsBgStyle}}">
+                    <view bindtap="toAssetsPage" class="h-92 flex flex-col justify-between items-center" data-item="{{item}}" style="{{assetsWidthStyle}}" wx:for="{{assetsList}}" wx:key="index">
+                        <view class="h-50 lh-50 text-36 font-500" style="{{assetsValueStyle}}">{{isAuth?item.value:'**'}}</view>
+                        <view class="h-34 lh-34 text-24" style="{{assetsLabelStyle}}">{{item.label?item.label:item.defaultLabel}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <design-user-assets-expired-tips bgColor="{{expiredTipsBgColor}}" marginTop="{{expiredReminderTop}}" textColor="{{expiredTipsTextColor}}" wx:if="{{showExpiredReminder}}"></design-user-assets-expired-tips>
+    </view>
+    <view class="w-full box-border _i_px-24 overflow-visible" style="{{config.style}}" wx:if="{{mode===2}}">
+        <view class="relative min-h-full h-fit bg-_bl__h_FFF_br_ rd-16 rd-inherit overflow-visible box-border z-8">
+            <view class="absolute -top-68 right-30 w-80 h-80">
+                <image lazyLoad bindtap="toPetIconLink" class="w-100_p_ h-100_p_" src="{{__oss__.s(mpxExt,petIconSrc,0)}}" wx:if="{{isShowPetIcon}}"></image>
+            </view>
+            <view class="w-full min-h-288 h-fit pt-24 pr-24 pb-24 pl-300 box-border rd-16 overflow-visible" style="{{bgStyle}}">
+                <image lazyLoad binderror="teaBoyImgOnError" bindload="teaBoyImgOnLoad" bindtap="toPersonalDataPage" class="absolute -top-50 left-30 w-230 h-322" src="{{__oss__.s(mpxExt,teaBoyImgUrl,0)}}" wx:if="{{showDoll&&teaBoyImgUrl&&teaBoyImgUrl.length}}"></image>
+                <image lazyLoad bindtap="toPersonalDataPage" class="absolute -top-50 left-30 w-230 h-322" src="{{__oss__.s(mpxExt,brandLogo,0)}}" wx:else></image>
+                <view class="w-full h-fit flex flex-col justify-between box-border">
+                    <view class="flex justify-between items-center">
+                        <view class="flex-1 h-fit flex flex-col">
+                            <view bindtap="toPersonalDataPage" class="w-290 text-36 font-500 lh-50 mr-16 truncate extend-click" style="{{usernameStyle}}" wx:if="{{username}}">{{username}}</view>
+                            <view class="min-h-30 flex justify-start items-center mt-8" wx:if="{{showLevel||showPaidMember}}">
+                                <image lazyLoad bindtap="toAssetsPage" class="w-70 h-70 rd-full mr-8" data-item="{{medalText}}" mode="aspectFill" src="{{__oss__.s(mpxExt,medalUrl,0)}}" wx:if="{{medalUrl}}"></image>
+                                <tag background="primary" bindtap="toMemberEquity" color="#FFF" content="{{currentLevelName}}" wx:if="{{showLevel}}"></tag>
+                                <tag background="linear-gradient(to right, #3E4164, #292C4D)" color="#F1CC98" content="{{paidMemberText}}" wx:if="{{showPaidMember}}"></tag>
+                            </view>
+                            <view bindtap="toPersonalDataPage" class="{{'w-fit h-36 rd-full rd-bl-0 pl-18 pr-10 overflow-hidden flex items-center mt-16 '+(isHasBg?'bg-_bl__h_FDF4E6_br_':'bg-_bl__h_F7F7F7_br_')}}" wx:if="{{isShowPrivileges}}">
+                                <text class="text-24 text-_bl__h_FF8800_br_ lh-none">{{_i6}}</text>
+                                <text class="i-arrow-r _i_text-20 text-_bl__h_FF8800_br_ ml-6 lh-none"></text>
+                            </view>
+                        </view>
+                        <text bindtap="toMemberCodePage" class="flex-none i-qr-code2 _i_text-66" style="{{memberCodeStyle}}" wx:if="{{showMemberCode}}"></text>
+                    </view>
+                    <view class="mt-24 rd-16 overflow-hidden" wx:if="{{isShowAssets}}">
+                        <view class="py-12 rd-16 flex justify-between items-center box-border" style="{{assetsBgStyle}}">
+                            <view bindtap="toAssetsPage" class="h-92 flex flex-col justify-between items-center" data-item="{{item}}" style="{{assetsWidthStyle}}" wx:for="{{assetsList}}" wx:key="index">
+                                <view class="h-50 lh-50 text-36 font-500" style="{{assetsValueStyle}}">{{isAuth?item.value:'**'}}</view>
+                                <view class="h-34 lh-34 text-24" style="{{assetsLabelStyle}}">{{item.label?item.label:item.defaultLabel}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="toMemberEquity" class="px-24 py-12" wx:if="{{showExp||showUpgrade}}">
+                <progress percent="{{percent}}" wx:if="{{showExp}}"></progress>
+                <view class="h-fit flex items-center {{showExp?'pt-8':''}} {{showUpgrade?'justify-between':'justify-end'}}">
+                    <design-user-upgrade-info emphasize relativeExp="{{nextLevelExp}}" relativeLevel="{{nextLevel}}" relativeLevelName="{{nextLevelName}}" wx:if="{{showUpgrade}}"></design-user-upgrade-info>
+                    <view class="flex items-center text-24" wx:if="{{showExp}}">
+                        <text class="text-primary">{{currentExp}}</text>
+                        <text class="text-_bl__h_999_br_" wx:if="{{nextLevelExp}}">/</text>
+                        <text class="text-_bl__h_999_br_" wx:if="{{nextLevelExp}}">{{nextLevelExp}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <design-user-assets-expired-tips bgColor="{{expiredTipsBgColor}}" marginTop="{{expiredReminderTop}}" textColor="{{expiredTipsTextColor}}" wx:if="{{showExpiredReminder}}"></design-user-assets-expired-tips>
+    </view>
+    <view class="{{'relative w-full box-border overflow-visible '+(isShowMemberEquity?'_i_h-902':'_i_h-750')}}" style="{{config.style}}" wx:if="{{mode===3}}">
+        <view class="fixed left-20 flex justify-start items-center z-20" style="{{navigationBarStyle}}" wx:if="{{showMemberCode}}">
+            <view catchtap="toMemberCodePage" class="w-fit h-62 px-24 bg-_bl_rgba_pl_255_2c_255_2c_255_2c_0_d_6_pr__br_ flex justify-center items-center box-border rd-full border border-solid border-_bl__h_E5E5E5_br_ overflow-hidden">
+                <text class="flex-none i-qr-code2 _i_text-32 _i_text-_bl__h_333_br_ mr-11"></text>
+                <text class="text-26 text-_bl__h_3D3D3D_br_">{{_i7}}</text>
+            </view>
+        </view>
+        <view class="absolute w-750 h-750 top-0 left-0 z-8">
+            <view class="absolute w-full h-full top-0 left-0 z-9 ease-in-out duration-1000 opacity-0 {{current3===index?'opacity-100':''}}" style="background-color: {{item.bgColor}}" wx:for="{{style3BgList}}" wx:key="level">
+                <image lazyLoad class="w-full h-full" mode="scaleToFill" src="{{__oss__.s(mpxExt,item.bgImg,0)}}" wx:if="{{item.bgImg}}"></image>
+            </view>
+        </view>
+        <swiper bindchange="onMode3SwiperChange" class="absolute top-0 left-0 w-full h-full z-10" current="{{currentLevel-1}}" easingFunction="easeInOutCubic">
+            <swiper-item wx:for="{{levelList}}" wx:key="levelId">
+                <view bindtap="go" class="relative w-full h-full pl-42 box-border z-99" data-index="{{index}}" style="{{safeTopStyle}}">
+                    <view catchtap="toPersonalDataPage" class="flex justify-start items-center max-w-500 truncate">
+                        <image lazyLoad class="w-60 h-60 rd-full overflow-hidden box-border border-2 border-solid border-_bl__h_FFF_br_" mode="aspectFill" src="{{__oss__.s(mpxExt,avatarUrl,0)}}" wx:if="{{showAvatar}}"></image>
+                        <view class="text-_bl__h_333_br_ text-36 font-500 lh-50 ml-16" style="{{usernameStyle}}">Hi，{{username}}</view>
+                        <image lazyLoad class="w-50 h-50 rd-full ml-16" mode="aspectFill" src="{{__oss__.s(mpxExt,medalUrl,0)}}" wx:if="{{medalUrl}}"></image>
+                    </view>
+                    <view class="max-w-686 h-142 pt-156">
+                        <view class="text-_bl__h_333_br_ text-48 font-500 lh-58 align-baseline" style="color: {{item.levelColor}}">{{item.cardName}}</view>
+                        <progress activeColor="{{item.themeColor}}" class="w-343" percent="{{item.percent}}">
+                            <view class="flex items-center text-24 ml-16">
+                                <text class="text-primary" style="color: {{item.themeColor}}">{{currentExp}}</text>
+                                <text class="text-_bl__h_999_br_" wx:if="{{item.nextLevelExp}}">/</text>
+                                <text class="text-_bl__h_999_br_" wx:if="{{item.nextLevelExp}}">{{item.nextLevelExp}}</text>
+                            </view>
+                        </progress>
+                        <design-user-upgrade-info emphasize customColor="{{item.themeColor}}" relativeExp="{{item.nextLevelExp}}" relativeLevel="{{item.nextLevel}}" relativeLevelName="{{item.nextLevelName}}"></design-user-upgrade-info>
+                    </view>
+                    <view class="absolute z-10 flex justify-center items-center" style="{{ipImgStyle}}" wx:if="{{item.ipImg}}">
+                        <image lazyLoad class="w-full" mode="widthFix" src="{{__oss__.s(mpxExt,item.ipImg,0)}}"></image>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class="{{'absolute left-1_s_2 -translate-x-1_s_2 max-w-3_s_5 min-w-1_s_3 flex justify-center items-center gap-8 z-11 '+(isShowMemberEquity?'bottom-274':'bottom-24')}}">
+            <view class="{{'w-60 h-2 '+(current3===index?'':'_i_bg-_bl_rgba_pl_204_2c_204_2c_204_2c_0_d_5_pr__br_')}}" style="{{swiperDotStyle}}" wx:for="{{levelList}}" wx:key="*this"></view>
+        </view>
+        <view bindtap="go" class="absolute left-24 right-24 bottom-0 h-250 py-30 box-border flex flex-col bg-_bl__h_FFF_br_ rd-16 overflow-hidden transition-all ease-in-out z-10" data-index="{{index}}" wx:if="{{isShowMemberEquity}}">
+            <view class="h-42 flex justify-between items-center px-24">
+                <view class="w-fit h-full flex items-center">
+                    <view class="flex justify-start items-center">
+                        <text class="text-30 font-500 text-_bl__h_333_br_ lh-42" wx:if="{{activeLevel.level>currentLevel}}">{{_i8+'\n              '}}</text>
+                        <text class="text-30 font-500 text-_bl__h_333_br_ lh-42" wx:else>{{_i9}}</text>
+                        <text class="text-30 font-500 text-_bl__h_333_br_ lh-42">{{activeLevel.benefitsNum}}</text>
+                        <text class="text-30 font-500 text-_bl__h_333_br_ lh-42">{{_i10}}</text>
+                    </view>
+                </view>
+                <view class="w-120 h-24 flex justify-between items-center">
+                    <text class="text-_bl__h_999_br_ text-24">{{_i11}}</text>
+                    <text class="i-arrow-r _i_text-22 _i_text-_bl__h_999_br_"></text>
+                </view>
+            </view>
+            <view class="pt-24 flex-1">
+                <scroll-view>
+                    <view class="w-full flex flex-nowrap px-12 box-border">
+                        <view class="w-1_s_4 flex justify-center items-center" wx:for="{{activeLevel.benefitsList}}" wx:for-item="child" wx:key="index">
+                            <design-user-equity-icon badge="{{child.num}}" equityType="{{child.benefitsType}}" iconColor="{{activeThemeColor}}" isDesignCustom="{{activeLevel.isDesignCustomEquity}}" isLocked="{{activeLevel.level>currentLevel}}" label="{{child.title||child.benefitsLabel}}" labelColor="#666" src="{{child.img||child.benefitsIcon}}"></design-user-equity-icon>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+    <view class="{{'relative w-full box-border overflow-visible bg-_bl__h_F6F6F6_br_ transition-all duration-300 '+(isExpand?'_i_pt-660':teaBoyLevelList&&teaBoyLevelList.length?'_i_pt-440':'_i_pt-250')}}" style="{{config.style}}" wx:if="{{mode===4}}">
+        <view class="absolute left-20 flex justify-start items-center z-20" style="{{navigationBarStyle}}" wx:if="{{currentTeaBoyName}}">
+            <view catchtap="toCutePetPark" class="w-fit h-62 px-24 flex justify-center items-center box-border rd-full">
+                <text class="text-36 text-_bl__h_000_br_ lh-50 font-500">{{currentTeaBoyName}}</text>
+                <view class="w-60 h-30 ml-8 flex justify-center rd-6 box-border border border-solid border-primary">
+                    <text class="text-primary text-22 lh-28">当前</text>
+                </view>
+                <text class="i-arrow-r text-24 text-_bl__h_666_br_ lh-36 ml-8"></text>
+            </view>
+        </view>
+        <swiper bindchange="onMode4SwiperChange" class="absolute top-200 left-0 w-screen h-360 z-1" current="{{currentTeaBoyLevel-1}}" easingFunction="easeInOutCubic" nextMargin="60rpx" previousMargin="60rpx" wx:if="{{teaBoyLevelList&&teaBoyLevelList.length}}">
+            <swiper-item bindtap="toFold" class="flex justify-center items-center" wx:for="{{teaBoyLevelList}}" wx:key="*this">
+                <view class="relative w-584 h-330 mt-30 box-border z-2">
+                    <image lazyLoad class="relative w-full h-full rd-30 overflow-hidden z-3" mode="aspectFill" src="{{__oss__.s(mpxExt,item.cardBackground,0)}}"></image>
+                    <image lazyLoad class="absolute -top-30 -right-20 w-280 h-320 z-4" mode="aspectFill" src="{{__oss__.s(mpxExt,item.petImgUrl,0)}}"></image>
+                    <view catchtap="toCutePetPark" class="absolute bottom-30 left-30 w-296 h-82 z-4">
+                        <image lazyLoad class="w-full h-full" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2025/05/22/20250522-175035.png',0)}}"></image>
+                        <view class="absolute bottom-40 left-78 w-fit h-30 flex justify-between items-center">
+                            <text class="text-22 text-primary lh-22">{{item.reGetText}}</text>
+                            <text class="i-arrow-r text-20 text-primary lh-22 ml-4"></text>
+                        </view>
+                        <view class="absolute bottom-10 left-78 h-30 flex justify-between items-center" wx:if="{{currentTeaBoyLevel<=index+1}}">
+                            <text class="text-22 text-primary lh-22">{{item.upgradeText}}</text>
+                        </view>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class="relative w-full h-fit flex flex-col items-center rd-t-32 bg-_bl__h_FFF_br_ pt-84 pb-48 z-10">
+            <image lazyLoad bindtap="toPersonalDataPage" class="absolute -top-57 left-1_s_2 -translate-x-1_s_2 z-2 w-110 h-110 rd-full overflow-hidden shadow-_bl_0_10rpx_16rpx_0_rgba_pl_0_2c_0_2c_0_2c_0_d_1_pr__br_ border-2 border-solid border-_bl__h_FFF_br_" mode="aspectFill" src="{{__oss__.s(mpxExt,avatarUrl,0)}}"></image>
+            <view bindtap="toFold" class="absolute top-16 right-16 w-64 h-64 text-center transition-transform transition-duration-300 {{isExpand?'':'rotate-x-180'}}" wx:if="{{teaBoyLevelList&&teaBoyLevelList.length}}">
+                <text class="text-24 lh-24 i-fold text-_bl__h_999_br_"></text>
+            </view>
+            <view bindtap="toPersonalDataPage" class="h-52 flex justify-center items-center">
+                <text class="text-36 text-_bl__h_000_br_ lh-36 font-500" style="{{usernameStyle}}">{{username}}</text>
+                <text class="i-arrow-r text-24 text-_bl__h_686866_br_ lh-24 ml-8"></text>
+            </view>
+            <view class="w-120 h-42 flex justify-between items-center mt-16" wx:if="{{teaBoyUnlockCount>0}}">
+                <view class="w-64 h-full flex justify-between items-center" wx:if="{{teaBoyAleadyInfo.icon}}">
+                    <image lazyLoad class="w-32 h-32" src="{{__oss__.s(mpxExt,teaBoyAleadyInfo.icon,0)}}"></image>
+                    <text class="text-30 lh-32 text-primary ml-2">x{{teaBoyAleadyInfo.num}}</text>
+                </view>
+                <image lazyLoad class="w-32 h-32" src="{{__oss__.s(mpxExt,teaBoyDevelopInfo.icon,0)}}" wx:if="{{teaBoyDevelopInfo.icon}}"></image>
+            </view>
+            <view class="w-full pt-48 flex justify-between items-center box-border" wx:if="{{isShowAssets}}">
+                <view bindtap="toAssetsPage" class="{{'h-110 flex flex-col justify-between items-center '+(index!==assetsList.length-1?'border-r border-_bl__h_E1E1E1_br_':'')}}" data-item="{{item}}" style="{{assetsWidthStyle}}" wx:for="{{assetsList}}" wx:key="index">
+                    <view class="h-36 lh-36 text-26 text-_bl__h_666_br_" style="{{assetsLabelStyle}}">{{item.label}}</view>
+                    <view class="h-50 lh-50 text-36 font-500 text-_bl__h_000_br_" style="{{assetsValueStyle}}">{{isAuth?item.value:'**'}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</block>
+<std-design-jump-help id="std-design-jump-help"></std-design-jump-help>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

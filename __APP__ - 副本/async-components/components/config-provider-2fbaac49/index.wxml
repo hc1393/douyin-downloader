@@ -1,0 +1,4 @@
+<view style="{{utils.mapThemeVarsToCSSVars(themeVars)}}">
+    <slot></slot>
+</view>
+<wxs module="utils" src="../../wxs/index2fbad2c6.wxs"/>

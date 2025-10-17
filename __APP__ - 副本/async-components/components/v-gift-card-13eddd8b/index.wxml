@@ -1,0 +1,107 @@
+<view class="gift-card-content _13eddd8b " wx:if="{{isShow}}">
+    <view bindtap="hide" catchtouchmove="noop" class="bottom-tier _13eddd8b "></view>
+    <view catchtouchmove="noop" class="main-con {{isShowAction?'action-sheet-up':''}} _13eddd8b ">
+        <view class="main-tit _13eddd8b ">
+            <text class="main-tit-font _13eddd8b ">选择礼品卡</text>
+            <text catchtap="hide" class="main-tit-icon iconfont i-close _13eddd8b "></text>
+        </view>
+        <scroll-view scrollY class="gift-card_main _13eddd8b " scrollTop="{{scrollTop}}">
+            <view class="gift-card_main_wrap _13eddd8b ">
+                <view bindtap="chooseCard" class="gift-card_main__item flex justify-between items-center _13eddd8b " data-id="{{item.cardNo}}" data-is-deposit-card="{{item.isDepositCard}}" wx:for="{{copyGiftList}}" wx:key="cardNo">
+                    <view class="gift-card-item-info _13eddd8b ">
+                        <view class="gift-card-item-info__left _13eddd8b ">
+                            <view class="giftcard-info-top flex justify-between items-center _13eddd8b ">
+                                <view class="giftcard-info-top__left flex items-center justify-center _13eddd8b ">
+                                    <image class="item-gift-cardimg _13eddd8b " lazyLoad="true" src="{{__oss__.s(mpxExt,item.imageUrl||'https://images.qmai.cn/resource/20210824210816/2021/12/16/chuzhi.png?x-oss-process=image',0)}}"></image>
+                                    <text class="giftcard-info-top__left-name truncate _13eddd8b ">{{item.name}}</text>
+                                    <view class="title-tag-different _13eddd8b " wx:if="{{configCenterByKeys['GiftCard.Type.Hidden']!=='not'}}">{{cardTypeName[item.cardType]}}</view>
+                                </view>
+                            </view>
+                            <view class="giftcard-info-bottom flex flex-col _13eddd8b ">
+                                <view class=" _13eddd8b " wx:if="{{item.cardType==5}}">
+                                    <text class="money _13eddd8b ">面值：{{item.balance}}{{cardTypeUnit[item.cardType]}}</text>
+                                    <text class="tip _13eddd8b ">本卡只能使用1次</text>
+                                </view>
+                                <text class="money _13eddd8b " wx:else>余额：{{item.balance}}{{cardTypeUnit[item.cardType]}}</text>
+                                <view class="card-limit _13eddd8b " wx:if="{{item.cardType==2&&(item.dailyUseLimit||item.orderUseLimit)}}">
+                                    <text class="money _13eddd8b ">限制：</text>
+                                    <view class="card-limit-cont _13eddd8b ">
+                                        <view class="card-limit-cont__info _13eddd8b " wx:if="{{item.dailyUseLimit}}">今日剩<text class=" _13eddd8b " style="color:{{colorTheme}};">{{item.residualUseNum}}</text>/{{item.dailyUseLimit}}次</view>
+                                        <view class="card-limit-cont__info _13eddd8b " wx:if="{{item.orderUseLimit}}">本单可用<text class=" _13eddd8b " style="color:{{colorTheme}};">{{item.orderUseLimit}}</text>次</view>
+                                    </view>
+                                </view>
+                                <text class="time _13eddd8b ">有效期：{{item.expireDesc}}</text>
+                            </view>
+                        </view>
+                        <view class="giftcard-info-checekbox _13eddd8b ">
+                            <view class="detault-text _13eddd8b " wx:if="{{item.freeChooseSelected}}">默认</view>
+                            <view class="checkbox-container {{item.isSelected?'checkbox-container__checked':''}} _13eddd8b " style="background-color:{{item.isSelected?colorTheme:'#fff'}}">
+                                <text class="iconfont i-duihao _13eddd8b "></text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="free-choose-warp _13eddd8b " wx:if="{{item.cardType===1}}">
+                        <view class="tip-msg _13eddd8b ">下次支付时自动选中</view>
+                        <view catchtap="tapFreeChoose" class="switch {{item.freeChooseSelected?'switch_checked':''}} _13eddd8b " data-card="{{item}}" data-id="{{item.cardNo}}" data-is-deposit-card="{{item.isDepositCard}}" style="background-color:{{item.freeChooseSelected?colorTheme:'#ccc'}};border-color:{{item.freeChooseSelected?colorTheme:'#ccc'}};">
+                            <view class="switch-circle _13eddd8b "></view>
+                        </view>
+                    </view>
+                    <view class="not-share-font _13eddd8b " wx:if="{{item.share===0}}">该卡与本单已享优惠不可同享</view>
+                </view>
+                <view class="card-list-title _13eddd8b " wx:if="{{unAvailableGiftList&&unAvailableGiftList.length}}">不可用礼品卡（{{unAvailableGiftList.length}}张）</view>
+                <view class="gift-card_main__item flex justify-between items-center _13eddd8b " wx:for="{{unAvailableGiftList}}" wx:key="cardNo">
+                    <view class="gift-card-item-info _13eddd8b ">
+                        <view class="gift-card-item-info__left _13eddd8b ">
+                            <view class="giftcard-info-top flex justify-between items-center _13eddd8b ">
+                                <view class="giftcard-info-top__left flex items-center justify-center _13eddd8b ">
+                                    <image class="item-gift-cardimg _13eddd8b " lazyLoad="true" src="{{__oss__.s(mpxExt,item.imageUrl||'https://images.qmai.cn/resource/20210824210816/2021/12/16/chuzhi.png?x-oss-process=image',0)}}"></image>
+                                    <text class="giftcard-info-top__left-name truncate gray-font _13eddd8b ">{{item.name}}</text>
+                                    <view class="title-tag-different _13eddd8b " wx:if="{{configCenterByKeys['GiftCard.Type.Hidden']!=='not'}}">{{cardTypeName[item.cardType]}}</view>
+                                </view>
+                            </view>
+                            <view class="giftcard-info-bottom flex flex-col _13eddd8b ">
+                                <view class=" _13eddd8b " wx:if="{{item.cardType==5}}">
+                                    <text class="money _13eddd8b ">面值：{{item.balance}}{{cardTypeUnit[item.cardType]}}</text>
+                                    <text class="tip _13eddd8b ">本卡只能使用1次</text>
+                                </view>
+                                <text class="money _13eddd8b " wx:else>余额：{{item.balance}}{{cardTypeUnit[item.cardType]}}</text>
+                                <text class="time _13eddd8b ">有效期：{{item.expireDesc}}</text>
+                                <view class="not-available-text _13eddd8b " wx:if="{{item.unUseText}}">{{item.unUseText}}</view>
+                                <view class="not-available__desc _13eddd8b ">
+                                    <text class=" _13eddd8b ">适用门店：</text>
+                                    <view bindtap="handleApplyJump" class="not-available__view _13eddd8b " data-item="{{item}}" data-type="store">
+                                        <text class=" _13eddd8b " style="color: {{colorTheme}}">查看门店</text>
+                                        <text class="iconfont i-jiantou-you _13eddd8b " style="color: {{colorTheme}}"></text>
+                                    </view>
+                                </view>
+                                <view class="not-available__desc _13eddd8b " wx:if="{{item.applyGoodsType!=1}}">
+                                    <text class="desc-title _13eddd8b ">{{item.cardType==1&&item.applyGoodsType!=1?'指定商品可用':item.applyGoodsText}}</text>
+                                    <view bindtap="handleApplyJump" class="not-available__view _13eddd8b " data-item="{{item}}" data-type="goods">
+                                        <text class=" _13eddd8b " style="color: {{colorTheme}}">查看商品</text>
+                                        <text class="iconfont i-jiantou-you _13eddd8b " style="color: {{colorTheme}}"></text>
+                                    </view>
+                                </view>
+                                <view class="not-available__desc _13eddd8b " wx:if="{{item&&item.fixedTimeScopes&&item.fixedTimeScopes.length}}">
+                                    <text class="desc-title _13eddd8b ">指定使用时段</text>
+                                    <view class="not-available__view available__time _13eddd8b " style="display: flex">
+                                        <text class=" _13eddd8b " wx:for="{{item.fixedTimeScopes}}" wx:for-item="time" wx:key="index">{{time}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="no-data _13eddd8b " wx:if="{{(!copyGiftList||copyGiftList.length===0)&&(!unAvailableGiftList||unAvailableGiftList.length===0)}}">
+                    <image class="no-data-image _13eddd8b " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/01/11/c1214fe339279c49.png',0)}}"></image>
+                    <view class="no-data-text _13eddd8b " style="color: {{colorTheme}}">您暂时还没有{{giftCardName}}哦~</view>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="btn-con _13eddd8b ">
+            <view bindtap="moreCard" class="note _13eddd8b " style="color: {{colorTheme}}">更多{{giftCardName}}，快去兑换<text class="iconfont i-jiantou-you _13eddd8b "></text>
+            </view>
+            <button bindtap="hide" class="sure-btn _13eddd8b " style="background-color: {{colorTheme}}">确定</button>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

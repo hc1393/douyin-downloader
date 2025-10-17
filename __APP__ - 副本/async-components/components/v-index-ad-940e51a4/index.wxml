@@ -1,0 +1,30 @@
+<view class="fixed z-10001 w-full h-full mx-auto my-0 top-0 right-0 bottom-0 left-0" wx:if="{{isShow&&popupShow}}">
+    <view class="absolute w-full h-full bg-black opacity-0 animate-name-fade-in-80 animate-duration-400 animate-delay-200 top-0 animate-fill-forwards"></view>
+    <view class="relative max-h-720 -translate-x-2_s_4 -translate-y-2_s_4 animate-name-slide-in-from-top animate-duration-400 animate-delay-200 w-screen rd-24 left-2_s_4 -top-full animate-fill-forwards" wx:if="{{advertInfoArr.length}}">
+        <swiper class="h-720" displayMultipleItems="{{1}}" nextMargin="30px" previousMargin="48rpx">
+            <swiper-item wx:for="{{advertInfoArr}}" wx:key="index">
+                <view bindtap="adLink" class="w-540 h-720" data-advert-info="{{item}}">
+                    <image class="block w-full h-720 max-h-720 rd-24" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,item.landingPageImg,900)}}" width="900"></image>
+                    <view class="absolute z-999999 flex items-end justify-center w-600 h-234 bg-no-repeat bg-full rd-tl-0 rd-tr-0 rd-br-24 rd-bl-24 bottom-0" style="background-image: url('https://images.qmai.cn/s16/images/2020/08/24/aa663e3c49ad3642.png')" wx:if="{{text}}">
+                        <text class="c-white text-30 pb-20">{{text}}</text>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view catchtap="hideBox" class="absolute w-52 h-52 flex items-center justify-center right-0 bottom--80 left-0 m-auto">
+            <view class="i-guanbi4 text-white text-60 opacity-50"></view>
+        </view>
+    </view>
+    <view bindtap="adLink" class="relative w-540 max-h-720 -translate-x-2_s_4 -translate-y-2_s_4 animate-name-slide-in-from-top animate-duration-400 animate-delay-200 rd-24 left-2_s_4 -top-full animate-fill-forwards" wx:else>
+        <image class="block w-full h-720 max-h-720 rd-24" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,advertInfo.landingPageImg,900)}}" width="900"></image>
+        <view class="absolute z-999999 flex items-end justify-center w-600 h-234 bg-no-repeat bg-full rd-tl-0 rd-tr-0 rd-br-24 rd-bl-24 bottom-0" style="background-image: url('https://images.qmai.cn/s16/images/2020/08/24/aa663e3c49ad3642.png')" wx:if="{{text}}">
+            <text class="c-white text-30 pb-20">{{text}}</text>
+        </view>
+        <view catchtap="hideBox" class="absolute w-52 h-52 flex items-center justify-center" style="{{__stringify__.stringifyStyle('',closeButtonStyle)}}">
+            <view class="i-guanbi4 text-white text-60 opacity-50"></view>
+        </view>
+    </view>
+</view>
+<authorization bindcomplete="authorize" bindsuccess="authorizeSuccess" force="{{true}}" id="authorization"></authorization>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>

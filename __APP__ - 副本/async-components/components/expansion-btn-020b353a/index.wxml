@@ -1,0 +1,15 @@
+<view catchtap="expand" class="relative" style="--theme-color: {{colorTheme}};">
+    <view class="box-border min-w-138 w-fit h-48 px-20 rounded-24 relative bg-_bl_var_pl_--theme-color_pr__br_ overflow-y-hidden">
+        <view class="animate-_bl_rise-step_br_ animate-duration-8s animate-delay-1s animate-count-infinite">
+            <view class="w-full h-full text-center text-24 leading-48 text-hex-ffffff whitespace-nowrap">免费膨胀</view>
+            <view class="w-full h-full text-center text-24 leading-48 text-hex-ffffff whitespace-nowrap">最高{{maxInflateAmount}}</view>
+            <view class="w-full h-full text-center text-24 leading-48 text-hex-ffffff whitespace-nowrap">免费膨胀</view>
+            <view class="w-full h-full text-center text-24 leading-48 text-hex-ffffff whitespace-nowrap">最高{{maxInflateAmount}}</view>
+        </view>
+        <view class="w-_bl_100_p__br_ h-_bl_100_p__br_ translate-x--100_p_ absolute top-0 left-0 animate-_bl_flash-across_br_ animate-duration-4s animate-delay-1s animate-count-infinite bg-gradient-linear bg-gradient-_bl_90deg_2c__h_ffffff00_0_p__2c__h_ffffff80_50_p__br_"></view>
+    </view>
+    <view class="w-40 h-40 absolute -bottom-3 left-_bl_calc_pl_100_p_-28rpx_pr__br_ scale-0 animate-_bl_pop-in_br_ animate-duration-4s animate-delay-1s animate-count-infinite animate-ease-_bl_cubic-bezier_pl_0_d_68_2c_-0_d_55_2c_0_d_27_2c_1_d_55_pr__br_ origin-left-bottom">
+        <text class="i-pengzhangda1 absolute left-0 top-0 text-40_i_ leading-100_p_ text-hex-ffffff"></text>
+        <text class="i-pengzhangxiao2 absolute left-0 top-0 text-40_i_ leading-100_p_ text-_bl_var_pl_--theme-color_pr__br_"></text>
+    </view>
+</view>

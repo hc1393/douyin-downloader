@@ -1,0 +1,5 @@
+<view catchtap="bindEvent" class="design-video _b22235d2 " data-item="{{designData}}" style="{{__stringify__.stringifyStyle('',designDataStyle)}}" wx:if="{{designData&&(designData.props.src||designData.props.poster)}}">
+    <video controls showMuteBtn autoplay="{{designData&&designData.props&&designData.props.autoplay}}" class="video _b22235d2 " loop="{{designData&&designData.props&&designData.props.loop}}" poster="{{__oss__.s(mpxExt,designData.props.poster?designData.props.poster:designData.props.coverImg?designData.props.coverImg+'?x-oss-process=image/resize,w_1200':'',0)}}" src="{{designData.props.src}}"></video>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>

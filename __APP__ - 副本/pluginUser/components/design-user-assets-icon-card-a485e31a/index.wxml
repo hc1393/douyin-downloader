@@ -1,0 +1,14 @@
+<view class="grid gap-16 {{row===2?'grid-cols-2':'grid-cols-3'}}">
+    <view bindtap="to" class="relative h-146 rd-12 overflow-hidden bg-primary-opacity-10" data-item="{{item}}" wx:for="{{list}}" wx:key="type">
+        <view class="absolute top-16 left-24 z-9 w-_bl_calc_pl_100_p_-24rpx_pr__br_ truncate">
+            <text class="text-40 lh-48 font-500" style="{{valueStyle}}">{{isAuth?item.value:'**'}}</text>
+            <text class="text-24 lh-34 ml-8 -mb-14 text-_bl__h_333_br_" wx:if="{{item.unit}}">{{item.unit}}</text>
+        </view>
+        <view class="absolute bottom-16 left-24 text-24 lh-34 z-9" style="{{labelStyle}}">{{item.label}}</view>
+        <image lazyLoad class="absolute -bottom-16 -right-21 w-80 h-80" mode="scaleToFill" src="{{__oss__.s(mpxExt,item.img,0)}}" wx:if="{{item.isCustomImg}}"></image>
+        <view class="absolute -bottom-24 -right-32 w-100 h-100 rd-full overflow-hidden flex justify-center items-center bg-gradient-to-br from-primary-opacity-10 to-primary-opacity-20 z-9" wx:else>
+            <text class="{{' _i_text-68 text-primary-opacity-50 '+(item.icon==='i-coupon3'?'i-coupon3':'')+' '+(item.icon==='i-balance'?'i-balance':'')+' '+(item.icon==='i-integral2'?'i-integral2':'')+' '+(item.icon==='i-gift-card'?'i-gift-card':'')+' '+(item.icon==='i-physical-card'?'i-physical-card':'')+' '+(item.icon==='i-equity-card'?'i-equity-card':'')+' '+(item.icon==='i-stored-value-Card'?'i-stored-value-Card':'')+' '+(item.icon==='i-medal'?'i-medal':'')+' '}}"></text>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

@@ -1,0 +1,12 @@
+<view class="w-_bl_100_p__br_ h-350rpx relative" wx:if="{{list.length}}">
+    <image bindtap="previewImage" class="w-_bl_100_p__br_ h-_bl_100_p__br_" data-index="{{0}}" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,list[0],0)}}" wx:if="{{list.length==1}}"></image>
+    <swiper autoplay circular bindchange="onSwiperChange" class="h-_bl_100_p__br_" wx:else>
+        <swiper-item wx:for="{{list}}" wx:key="index">
+            <image bindtap="previewImage" class="w-_bl_100_p__br_ h-_bl_100_p__br_" data-index="{{index}}" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item,0)}}"></image>
+        </swiper-item>
+    </swiper>
+    <view class="indicator-dot" style="{{dotStyle}}" wx:if="{{list.length>1&&isFrom!='couponPackage'}}">
+        <view class="indicator-dot__item {{current===index?'indicator-dot__item--active':''}}" wx:for="{{list}}" wx:key="index"></view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

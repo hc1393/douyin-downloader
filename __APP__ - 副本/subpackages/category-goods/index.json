@@ -1,0 +1,19 @@
+{
+  "navigationStyle": "default",
+  "navigationBarTitleText": "适用商品",
+  "componentPlaceholder": {
+    "empty-image": "view",
+    "apply-goods": "view",
+    "cell": "view",
+    "half-bowl": "view",
+    "love-dining": "view",
+    "love-donate": "view",
+    "material-cell": "view",
+    "merc-list": "view",
+    "plugin-demo": "view",
+    "pullNewList": "view",
+    "regift": "view",
+    "send-coupon": "view",
+    "studentVerify": "view"
+  }
+}

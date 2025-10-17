@@ -1,0 +1,404 @@
+<import src="/async-components/template/member-vip-tag4b8b9f89.wxml"></import>
+<view bindtap="closeSlide" catchtouchmove="{{canIUsePageContainer?'':'pop'}}" class="food-sku_mask fixed {{isShow?'mask-show':'mask-hide'}}" data-element-name="{{info.name}}" data-element-type="view" data-operation-type="关闭商品详情页" data-product-id="{{info.id}}" data-product-list="{{info.name}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}" style="{{maskIsShow?'':'display:none;'}}" wx:if="{{!isSeriesGoods&&!canIUsePageContainer}}"></view>
+<view catchtouchmove="{{!isSeriesGoods&&!canIUsePageContainer?'pop':''}}" class="{{__stringify__.stringifyClass( '',[ !isSeriesGoods?canIUsePageContainer?'food-sku_main':'food-sku_main fixed':'food-sku-series-main','flex','flex-col',{transition:!canIUsePageContainer,active:isShow&&!isSeriesGoods,mode_large:modeLarge=='large'} ] )}}" style="{{__stringify__.stringifyStyle('',wrapperStyle)}}">
+    <view class="food-sku_header-title" style="opacity: {{headerTitleOpacity}}">
+        <view class="food-sku_header-title-text">{{info.name}}</view>
+        <view class="food-sku-health-level-img-head" style="margin-right:{{info.type!=10&&hasShare?'164rpx':'88rpx'}}" wx:if="{{isHasHealth}}">
+            <image class="img-head" src="{{__oss__.s(mpxExt,healthLevelSingleImg,0)}}"></image>
+        </view>
+    </view>
+    <view class="food-sku_header-btn-group">
+        <view class="food-sku_btn-close flex items-center justify-center" wx:if="{{info.type!=10&&hasShare}}">
+            <button class="food-sku_btn-close-share" data-element-content="分享" data-element-name="" data-element-type="button" data-is-series-goods="{{isSeriesGoods}}" data-operation-type="商品分享" data-product-id="{{info.id}}" data-product-list="{{info.name}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}" data-series-goods-index="{{seriesGoodsIndex}}" data-type="goods" hoverClass="none" openType="share" style="background-color: transparent" wx:if="{{isHasHealth||!isHasHealth&&headerTitleOpacity==1||!isHasHealth&&renovationData.sharePosition==1}}">
+                <view class="food-sku_btn-share-img flex items-center justify-center rounded-full bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_2_pr__br_">
+                    <view class="i-Union text-white text-26"></view>
+                </view>
+            </button>
+        </view>
+        <view bindtap="closeSlide" class="food-sku_btn-close flex items-center justify-center rounded-full bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_2_pr__br_" data-element-name="{{info.name}}" data-element-type="button" data-operation-type="关闭商品详情页" data-product-id="{{info.id}}" data-product-list="{{info.name}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}">
+            <view class="i-guanbi2 text-white text-24"></view>
+        </view>
+    </view>
+    <scroll-view scrollY bindscroll="onSkuContentScroll" bounces="{{false}}" class="food-sku_main-scroll-wrap {{info.type!=10?'main-have-footer':''}} {{isIpx?'food-sku_main-ipx':''}} {{!isSeriesGoods?'food-sku_main_scroll':'food-sku-series-main-scroll-wrap'}}" enhanced="{{true}}" id="mainScrollWrap" scrollIntoView="{{moveTopView}}" scrollTop="{{scrollTop}}" style="{{isRect?'padding-top: 0':''}}">
+        <view class="food-sku-scroll-content">
+            <view class="food-sku_content_swiper_wrapper {{isRect?'cover':''}}">
+                <swiper autoplay="{{autoplay}}" bindchange="foodSkuSwiperChange" class="food-sku_content_swiper" current="{{swiperCurrent}}" interval="3000">
+                    <swiper-item wx:for="{{curPictureUrlList}}" wx:key="index">
+                        <std-image lazyLoad catchtap="previewImage" customStyle="border-radius: 6rpx;{{isRect?'margin: 0':'margin: 0 auto 40rpx;'}}" data-index="{{index}}" height="{{isRect?'100%':300}}" mode="{{isDaJiaLeStore?'heightFix':'aspectFill'}}" src="{{item}}" width="{{isRect?'100%':300}}"></std-image>
+                    </swiper-item>
+                    <swiper-item wx:if="{{info.videoUrl}}">
+                        <video showMuteBtn bindplay="play" class="goods-detail-video" id="goodsVideo" referrerPolicy="origin" src="{{info.videoUrl}}"></video>
+                    </swiper-item>
+                </swiper>
+                <view class="img-swiper-indicator-wrapper" wx:if="{{curPictureUrlList&&curPictureUrlList.length>1||info.videoUrl}}">
+                    <view class="img-swiper-indicator" style="{{swiperCurrent==indicatorIndex?'opacity:1;background-color:'+colorTheme:''}}" wx:for="{{curPictureUrlList}}" wx:for-index="indicatorIndex" wx:key="indicatorIndex"></view>
+                </view>
+                <view class="bullet-chat-box" wx:if="{{showBulletChat&&evaluationList.length}}">
+                    <bullet-chat bindclick="bulletClick" chatWords="{{evaluationList}}"></bullet-chat>
+                </view>
+            </view>
+            <view class="food-sku_m-title {{packageFee?'':'food-sku_center'}}">
+                <view class="food-sku-title-block">
+                    <view class="food-sku_m-title_text {{isHasHealth?'food-sku-title-wrap':''}}" style="font-size:{{renovationData.goodsTitleFontSize}}">{{info.name}}</view>
+                    <view class="food-sku-share-block" wx:if="{{!isHasHealth&&headerTitleOpacity!=1&&info.type!=10&&hasShare&&renovationData.sharePosition==2}}">
+                        <button class="food-sku-share" data-element-content="分享" data-element-name="" data-element-type="button" data-is-series-goods="{{isSeriesGoods}}" data-operation-type="商品分享" data-product-id="{{info.id}}" data-product-list="{{info.name}}" data-product-type="{{traceProductType}}" data-screen-type="{{traceScreenType}}" data-series-goods-index="{{seriesGoodsIndex}}" data-type="goods" hoverClass="none" openType="share">
+                            <view class="iconfont i-fenxiang1 food-sku-share-icon" style="color:{{colorTheme}}"></view>
+                        </button>
+                    </view>
+                </view>
+                <view class="food-sku-packageFee" wx:if="{{packageFee}}">{{_i1}}</view>
+                <view bindtap="openHealthDescDialog" class="food-sku-health-level-img" wx:if="{{headerTitleOpacity!=1&&isHasHealth}}">
+                    <image class="health-img" src="{{__oss__.s(mpxExt,healthLevelImgs,0)}}"></image>
+                </view>
+            </view>
+            <view id="order-same-anchor"></view>
+            <view class="food-sku_content" style="{{!orderConfirmBuyMembercard&&isShowPromotionEntry&&productDetailLeadTitle?'padding-bottom:88rpx':''}}" wx:if="{{info}}">
+                <view class="secommend-card-wrapper flex items-center justify-between" wx:if="{{!info.goodsCouponsInfo&&isShowRecommendCardBtn&&info.memberPrice&&!info.couponPackageLabel}}">
+                    <view class="food-sku_member-price">
+                        <image class="pay-member-price-label-img" lazyLoad="true" mode="heightFix" src="{{__oss__.s(mpxExt,payMemberPriceLabelImg,0)}}" wx:if="{{payMemberPriceLabelImg}}"></image>
+                        <template is="member-vip-tag" data="{{info:info,currencySymbol:currencySymbol,mpxExt:mpxExt}}" wx:elif="{{!newCustomStyle||newCustomStyle.diyConfigSwitch!==1}}"></template>
+                        <view class="qm-price-label-config" wx:else>
+                            <block wx:if="{{newCustomStyle.backGroundType==1}}">
+                                <view class="qm-price-label-left qm-price-label-left-img" style="background-image: url({{newCustomStyle.backGroundStr}});color:{{newCustomStyle.txtColor}}">
+                                    <view class="truncate">
+                                        <text wx:if="{{salesLabel}}">{{salesLabel}}</text>
+                                        <text wx:elif="{{newCustomStyle.labelsType==2&&newCustomStyle.customerBenefitsLeverName}}">{{newCustomStyle.customerBenefitsLeverName}}</text>
+                                        <text wx:elif="{{newCustomStyle.labelsType==1&&newCustomStyle.configGoodsLabels}}">{{newCustomStyle.configGoodsLabels}}</text>
+                                        <text wx:else>{{_i2}}</text>
+                                    </view>
+                                </view>
+                                <view class="qm-price-label-right qm-price-label-right-img" style="background-image: url({{newCustomStyle.rightBackGroundStr}});color:{{newCustomStyle.rightTxtColor}}">
+                                    <view class="truncate">
+                                        <text class="food-money-price-unit food-price-bold">{{currencySymbol}}</text>
+                                        <text class="food-money-price-num food-price-bold">{{info.memberPrice}}</text>
+                                        <text class="food-money-price-qi" wx:if="{{info.isAdd}}">{{_i3}}</text>
+                                        <text class="food-money-price-xian" wx:if="{{info.memberRuleVo&&info.memberRuleVo.limitNum}}">{{_i4+_i5+info.memberRuleVo.limitNum+_i6}}</text>
+                                    </view>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view class="qm-price-label-left" style="background-color: {{newCustomStyle.backGroundStr}};color:{{newCustomStyle.txtColor}};border-radius: 6rpx 0 0 6rpx;">
+                                    <view class="truncate">
+                                        <text wx:if="{{salesLabel}}">{{salesLabel}}</text>
+                                        <text wx:elif="{{newCustomStyle.labelsType==2&&newCustomStyle.customerBenefitsLeverName}}">{{newCustomStyle.customerBenefitsLeverName}}</text>
+                                        <text wx:elif="{{newCustomStyle.labelsType==1&&newCustomStyle.configGoodsLabels}}">{{newCustomStyle.configGoodsLabels}}</text>
+                                        <text wx:else>{{_i7}}</text>
+                                    </view>
+                                </view>
+                                <view class="qm-price-label-right" style="background-color: {{newCustomStyle.rightBackGroundStr}};color:{{newCustomStyle.rightTxtColor}};border-radius: 0 6rpx 6rpx 0;">
+                                    <view class="truncate">
+                                        <text class="food-money-price-unit food-price-bold">{{currencySymbol}}</text>
+                                        <text class="food-money-price-num food-price-bold">{{info.memberPrice}}</text>
+                                        <text class="food-money-price-qi" wx:if="{{info.isAdd}}">{{_i8}}</text>
+                                        <text class="food-money-price-xian" wx:if="{{info.memberRuleVo&&info.memberRuleVo.limitNum}}">{{_i9+_i10+info.memberRuleVo.limitNum+_i11}}</text>
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                    <view bindtap="viewBenefits" class="food-sku-paidCardName" data-id="{{skuFoodInfo.recommendPaidCardId}}" style="color:{{orderData.tieInSalesEntryColor||'#f4c27a'}};">查看“{{recommendPaidCardName}}”权益<text class="iconfont i-jiantou-you"></text>
+                    </view>
+                </view>
+                <view class="food-label-wrapper">
+                    <coupon-bundle-label controlType="{{controlType}}" couponPackPrice="{{info.couponPackageLabel.price}}" currencySymbol="{{currencySymbol}}" customStyle="margin-right:8rpx;margin-bottom:8rpx;" wx:if="{{isShowRecommendCouponPackBtn&&info.couponPackageLabel.price!==undefined}}"></coupon-bundle-label>
+                    <block wx:if="{{!isCoupon&&(info.activityText||info.minBuyNum||info.memberPrice)}}">
+                        <block wx:if="{{info.activityText&&info.activityText.length}}">
+                            <qm-label customStyle="margin-right:8rpx;margin-bottom:8rpx;" label="{{item.text}}" rightIcon="{{item.rightIcon}}" theme="{{colorTheme}}" wx:if="{{tools.isShowTag(item.type,appletEngineConfig,prePrice>-1)}}" wx:for="{{info.activityText}}" wx:key="index"></qm-label>
+                        </block>
+                        <view class="food-sku_member-price" style="margin-right: 8rpx; margin-bottom: 8rpx;{{newCustomStyle?'border-radius:0;':''}}" wx:elif="{{tools.isShowTag(info.memberPriceType===3?'75':info.memberPriceType===2?'4':'88',appletEngineConfig,prePrice>-1)&&info.memberPrice!==null&&!isShowRecommendPaidCard&&orderData['memberPrice']}}">
+                            <image class="pay-member-price-label-img" lazyLoad="true" mode="heightFix" src="{{__oss__.s(mpxExt,payMemberPriceLabelImg,0)}}" wx:if="{{payMemberPriceLabelImg}}"></image>
+                            <block wx:elif="{{!newCustomStyle||newCustomStyle.diyConfigSwitch!==1}}">
+                                <template is="member-vip-tag" data="{{info:info,currencySymbol:currencySymbol,mpxExt:mpxExt}}" wx:if="{{info.memberPriceName}}"></template>
+                                <block wx:else>
+                                    <view class="food-sku_food-money-price">{{_i12}}<text wx:if="{{info.memberRuleVo&&info.memberRuleVo.limitNum}}">{{', '+_i13+info.memberRuleVo.limitNum+_i14}}</text>
+                                    </view>
+                                    <view class="food-sku_member-price-tip">{{_i15}}</view>
+                                </block>
+                            </block>
+                            <view class="qm-price-label-config" wx:else>
+                                <block wx:if="{{newCustomStyle.backGroundType==1}}">
+                                    <view class="qm-price-label-left qm-price-label-left-img" style="background-image: url({{newCustomStyle.backGroundStr}});color:{{newCustomStyle.txtColor}}">
+                                        <view class="truncate">
+                                            <text wx:if="{{salesLabel}}">{{salesLabel}}</text>
+                                            <text wx:elif="{{newCustomStyle.labelsType==2&&newCustomStyle.customerBenefitsLeverName}}">{{newCustomStyle.customerBenefitsLeverName}}</text>
+                                            <text wx:elif="{{newCustomStyle.labelsType==1&&newCustomStyle.configGoodsLabels}}">{{newCustomStyle.configGoodsLabels}}</text>
+                                            <text wx:else>{{_i16}}</text>
+                                        </view>
+                                    </view>
+                                    <view class="qm-price-label-right qm-price-label-right-img" style="background-image: url({{newCustomStyle.rightBackGroundStr}});color:{{newCustomStyle.rightTxtColor}}">
+                                        <view class="truncate">
+                                            <text class="food-money-price-unit food-price-bold">{{currencySymbol}}</text>
+                                            <text class="food-money-price-num food-price-bold">{{info.memberPrice}}</text>
+                                            <text class="food-money-price-qi" wx:if="{{info.isAdd}}">{{_i17}}</text>
+                                            <text class="food-money-price-xian" wx:if="{{info.memberRuleVo&&info.memberRuleVo.limitNum}}">{{_i18+_i19+info.memberRuleVo.limitNum+_i20}}</text>
+                                        </view>
+                                    </view>
+                                </block>
+                                <block wx:else>
+                                    <view class="qm-price-label-left" style="background-color: {{newCustomStyle.backGroundStr}};color:{{newCustomStyle.txtColor}};border-radius: 6rpx 0 0 6rpx;">
+                                        <view class="truncate">
+                                            <text wx:if="{{salesLabel}}">{{salesLabel}}</text>
+                                            <text wx:elif="{{newCustomStyle.labelsType==2&&newCustomStyle.customerBenefitsLeverName}}">{{newCustomStyle.customerBenefitsLeverName}}</text>
+                                            <text wx:elif="{{newCustomStyle.labelsType==1&&newCustomStyle.configGoodsLabels}}">{{newCustomStyle.configGoodsLabels}}</text>
+                                            <text wx:else>{{_i21}}</text>
+                                        </view>
+                                    </view>
+                                    <view class="qm-price-label-right" style="background-color: {{newCustomStyle.rightBackGroundStr}};color:{{newCustomStyle.rightTxtColor}};border-radius: 0 6rpx 6rpx 0;">
+                                        <view class="truncate">
+                                            <text class="food-money-price-unit food-price-bold">{{currencySymbol}}</text>
+                                            <text class="food-money-price-num food-price-bold">{{info.memberPrice}}</text>
+                                            <text class="food-money-price-qi" wx:if="{{info.isAdd}}">{{_i22}}</text>
+                                            <text class="food-money-price-xian" wx:if="{{info.memberRuleVo&&info.memberRuleVo.limitNum}}">{{_i23+_i24+info.memberRuleVo.limitNum+_i25}}</text>
+                                        </view>
+                                    </view>
+                                </block>
+                            </view>
+                        </view>
+                    </block>
+                    <qm-label customStyle="margin-right:8rpx;margin-bottom:8rpx;" label="{{cashBackLabel.goodsLabel}}" wx:if="{{cashBackLabel}}"></qm-label>
+                    <qm-label customStyle="margin-right:8rpx;margin-bottom:8rpx;" label="{{info.goodsLimit.minBuyDesc}}" wx:if="{{info.goodsLimit&&info.goodsLimit.minBuyDesc}}"></qm-label>
+                    <qm-label customStyle="margin-right:8rpx;margin-bottom:8rpx;" label="{{info.goodsLimit.maxBuyDesc}}" wx:if="{{info.goodsLimit&&info.goodsLimit.maxBuyDesc}}"></qm-label>
+                    <qm-label customStyle="margin-right:8rpx;margin-bottom:8rpx;" label="{{_i26}}" theme="{{colorTheme}}" wx:if="{{info.nextLevelName&&info.nextLevelName.length&&info.nextMemberPrice}}"></qm-label>
+                    <qm-price-label customStyle="margin-right:8rpx;margin-bottom:8rpx;" label="{{info.enterpriseActivityRuleVo.goodsLabel||'企业购'}}" price="{{info.enterpriseActivityRuleVo.enterprisePrice}}" wx:if="{{tools.isShowTag('37',appletEngineConfig,prePrice>-1)&&info.enterpriseActivityRuleVo!=null}}"></qm-price-label>
+                    <block wx:if="{{info.labelList&&info.labelList.length}}">
+                        <block wx:if="{{index<3}}" wx:for="{{info.labelList}}" wx:key="index">
+                            <view class="food-label" style="background-color:{{item.background}};color:{{item.font}}" wx:if="{{item.type==1}}">{{item.text}}</view>
+                            <image class="food-label-img" mode="heightFix" src="{{__oss__.s(mpxExt,item.image,0)}}" wx:if="{{item.type==2}}"></image>
+                        </block>
+                    </block>
+                </view>
+                <view bindtap="toEnergyPage" class="food-sku-energy-page" wx:if="{{info.ingredientSwitch&&goodsNutritionalComponents}}">
+                    <image class="food-sku-energy-page-img" src="{{__oss__.s(mpxExt,energyStyleData.energyImg,0)}}" wx:if="{{energyStyleData&&energyStyleData.energyStyle==2&&energyStyleData.energyImg}}"></image>
+                    <view class="food-sku-energy-block flex items-center justify-between" style="background-color:{{tools.hexToRgba(colorTheme,0.1)}}" wx:else>
+                        <view class="flex items-center">
+                            <view class="iconfont i-energy" style="font-size:32rpx;color:{{colorTheme}}"></view>
+                            <view class="food-sku-energy-new-text">{{energyStyleData.energyText||'配方揭秘：装修配置文案'}}</view>
+                        </view>
+                        <view class="food-sku-energy-see flex items-center justify-center" style="background-color:{{colorTheme}}">
+                            <text>查看</text>
+                            <text class="iconfont i-jiantou-you" style="font-size: 24rpx; color: #fff"></text>
+                        </view>
+                    </view>
+                </view>
+                <view class="food-sku-desc" style="color: #999; font-size: 12px; {{skuDescDisplayHeight?'height:'+skuDescDisplayHeight+'px':''}};{{isShowSkuDescSwitcher?'':'margin-bottom:24rpx;'}}" wx:if="{{info.richTextDetail}}">
+                    <rich-text id="food-sku-richtext" nodes="{{info.richTextDetail}}"></rich-text>
+                </view>
+                <view class="food-sku-desc-mask" wx:if="{{isShowSkuDescSwitcher&&isSkuDescCollapsed}}"></view>
+                <view bindtap="skuDescDisplayToggle" class="food-sku-desc-toggle" wx:if="{{isShowSkuDescSwitcher}}">{{_i27}}<text class="iconfont {{isSkuDescCollapsed?'i-jiantou-xia':'i-jiantou-shang'}}"></text>
+                </view>
+                <view class="line-block line-bot" style="{{!info.richTextDetail?'margin-top:16rpx;':''}}" wx:if="{{attributesData&&attributesData.length}}"></view>
+                <block wx:if="{{goodsDetailData.collectionStyle==2&&(skuArr.length||attachGoodsList.length)}}">
+                    <view class="taste-switch-wrapper" style="background: #fff">
+                        <view bindtap="tasteTabSwitchFn" class="taste-switch-item {{tasteTabSwitch==1?'taste-switch-active':''}}" data-tab="1">{{goodsDetailData.systemCollectionText}}<view class="taste-switch-border" style="background-color: {{colorTheme}}" wx:if="{{tasteTabSwitch==1}}"></view>
+                        </view>
+                        <view bindtap="tasteTabSwitchFn" class="taste-switch-item collect-taste-switch {{tasteTabSwitch==2?'taste-switch-active':''}}" data-tab="2">{{goodsDetailData.tabCollectionText}}<view class="taste-switch-border" style="background-color: {{colorTheme}}" wx:if="{{tasteTabSwitch==2}}"></view>
+                        </view>
+                    </view>
+                    <view class="taste-switch-desc" style="color: {{colorTheme}}">
+                        <view class="iconfont i-dianzan-m1 taste-switch-icon" style="color: {{colorTheme}}"></view>
+                        <view wx:if="{{tasteTabSwitch==1}}">{{_i28}}</view>
+                        <view wx:if="{{tasteTabSwitch==2&&!isCanCollect}}">{{_i29}}</view>
+                        <view wx:if="{{tasteTabSwitch==2&&isCanCollect&&isCollect}}">{{_i30}}</view>
+                        <view wx:if="{{tasteTabSwitch==2&&isCanCollect&&!isCollect}}">{{_i31}}</view>
+                    </view>
+                </block>
+                <view class="self-cup self-cup-selector" wx:if="{{info&&info.selfCup&&isShowSelfCup}}">
+                    <view class="self-cup_title food-sku_m-sku-title {{goodsDetailData.specTitleBold?'bold':''}}" style="font-size:{{goodsDetailData.specTitleFontSize}}rpx;">
+                        <image mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/03/08/huanbao-3@2x.png',0)}}"></image>{{_i32}}<tips-popup fontSize="{{goodsDetailData.specTitleFontSize}}" isType="selfCup" tipsFont="{{selfCupTipsText}}" wx:if="{{!info.selfCup.shareable}}"></tips-popup>
+                    </view>
+                    <view class="self-cup_specs food-sku_m-specs-wrap flex flex-wrap" id="self-cup_specs">
+                        <view bindtap="selfCupSwitch" class="self-cup_specs-item food-sku_m-sku-item food-sku_m-specs {{info.selfCup&&info.selfCup.active?'active':''}}" id="self-cup_specs-item" style="background-color: {{info.selfCup&&info.selfCup.active?tools.hexToRgba(colorTheme,goodsDetailData.skuSelectBgColorAlpha):''}};color: {{info.selfCup&&info.selfCup.active&&skuSelectStyle!=2?textColor+'!important;':''}};{{skuSelectStyle==2&&info.selfCup.active?'border:1px solid '+colorTheme+';color:'+colorTheme+'!important;':''}}">{{info.selfCup&&info.selfCup.title}}<view class="self-cup_specs-item-reduction" style="color: {{colorTheme}};background-color:#fff;border-color: {{colorTheme}};" wx:if="{{info.selfCup&&info.selfCup.reduce&&info.selfCup.reduce>0}}">{{_i33}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="food-sku_m-sku" wx:if="{{attributesData&&attributesData.length||info.unit_type}}">
+                    <block wx:for="{{attributesData}}" wx:key="id">
+                        <block wx:if="{{item.skuType==='specs'&&!goodsEntityId}}">
+                            <view class="anchor-point-view" id="anchor-point-{{item.id}}"></view>
+                            <sku-selector bindchange="skuChange" entity="{{entity}}" groupData="{{item}}" isSingleSku="{{isSingleSku}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" usableSpecs="{{usableSpecs}}"></sku-selector>
+                        </block>
+                        <block wx:elif="{{item.skuType==='property'}}">
+                            <view class="anchor-point-view" id="anchor-point-{{item.id}}"></view>
+                            <sku-selector bindchange="skuChange" groupData="{{item}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}"></sku-selector>
+                        </block>
+                        <block wx:elif="{{item.skuType==='attach'&&!isCrossDirectionAttach}}">
+                            <view class="anchor-point-view" id="anchor-point-{{item.id}}"></view>
+                            <attach-selector bindattachImgShowChange="attachImgShowChange" bindchange="chargingChange" bindshowMore="chargingShowMore" groupAttach="{{item}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" wx:if="{{isShowAttach}}"></attach-selector>
+                        </block>
+                    </block>
+                    <view class="attach-selector-line line-bot" wx:if="{{isHaveAttach&&isCrossDirectionAttach}}"></view>
+                    <view class="attach-selector-transverse" wx:if="{{isHaveAttach&&isCrossDirectionAttach}}">
+                        <scroll-view>
+                            <view class="flex items-center">
+                                <view bindtap="attachGroupSelected" class="attach-title flex flex-col items-center justify-center {{attachItem.selected?'is-selected':''}} {{isShiQiJia?'is-shiQiJia':''}}" data-attach-index="{{attachItem.idIndex}}" style="background:{{attachItem.selected?colorTheme:'#F8F8F8'}};color:{{attachItem.selected?'#fff':'#333'}}" wx:if="{{attachItem.skuType==='attach'&&attachItem.isShow}}" wx:for="{{attributesData}}" wx:for-index="attachIndex" wx:for-item="attachItem" wx:key="attachIndex">
+                                    <view class="attach-first-title">{{attachItem.name}}</view>
+                                    <view class="attach-second-title truncate" style="color:{{attachItem.selected?'#fff':'#999'}}" wx:if="{{attachItem.desc}}">{{attachItem.desc}}</view>
+                                </view>
+                            </view>
+                        </scroll-view>
+                        <view style="{{attachItem.selected?'':'display:none;'}}" wx:if="{{attachItem.skuType==='attach'}}" wx:for="{{attributesData}}" wx:for-index="attachIndex" wx:for-item="attachItem" wx:key="attachIndex">
+                            <attach-selector bindattachImgShowChange="attachImgShowChange" bindchange="chargingChange" bindshowMore="chargingShowMore" groupAttach="{{attachItem}}" showType="transverse" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" wx:if="{{isShowAttach}}"></attach-selector>
+                        </view>
+                    </view>
+                    <block wx:if="{{info.unit_type}}">
+                        <view class="food-sku_m-sku-title">{{_i34}}</view>
+                        <view class="food-sku_m-unit flex items-center">
+                            <input bindinput="bindUnitInput" class="food-sku_m-unit-input" type="digit" value="{{unitNum||''}}"></input>
+                            <text>{{info.unitText}}</text>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <std-match-goods binddetail="matchGoodsDetail" bindminus="matchGoodsMinus" bindplus="matchGoodsPlus" chooseGoods="{{chooseMatchGoods}}" from="FoodSkuPopup" goodsLayout="column" matchGoods="{{matchGoods}}" traceProductType="{{traceProductType}}" traceScreenType="{{traceScreenType}}" wx:if="{{'wx'!=='tt'&&showMatchGoods}}"></std-match-goods>
+            <evaluation-list bindr="__refEmit" bindsamekind="clickSameKind" class="ref_evaluationList_1" data-r=".ref_evaluationList_1" list="{{evaluationList}}" wx:if="{{showEvaluationList&&evaluationList.length}}"></evaluation-list>
+            <view class="food-sku_botom-img-wrapper" wx:if="{{info.underPic}}">
+                <image class="food-sku_botom-img" mode="widthFix" src="{{__oss__.s(mpxExt,info.underPic,0)}}"></image>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="{{!isSeriesGoods?'food-sku_footer':'food-sku-series-footer'}} food-sku-bottom box-border" style="padding-bottom:{{pagePaddingBottom}};{{isShowPromotionEntry?'position:relative':''}}" wx:if="{{info.type!=10}}">
+        <view class="food-sku_f-main-wrap flex items-center">
+            <premium-member bindopen="viewBenefits" btnText="{{_i35}}" data-id="{{info.crmPaidCardDetail&&info.crmPaidCardDetail.paidCardId}}" promotionLeadTitle="{{productDetailLeadTitle}}" type="goods" wx:if="{{!orderConfirmBuyMembercard&&isShowPromotionEntry&&productDetailLeadTitle}}"></premium-member>
+            <view class="food-sku_f-main flex1">
+                <view class="food-sku_f-price-box" wx:if="{{!isHidePrice}}">
+                    <view class="food-sku_f-price" wx:if="{{isIntegralGoods}}">{{currentPoints}}<view class="food-sku_f-price_grey_font">{{pointName}}</view>
+                        <block wx:if="{{currentPointsPrice}}">
+                            <view class="food-sku_f-price_grey_font">+</view>
+                            <text class="food-sku-currency-symbol" style="margin-left: 0">{{currencySymbol}}</text>{{currentPointsPrice}}</block>
+                    </view>
+                    <view wx:elif="{{redAmount&&amountOriginal>amount}}">
+                        <text class="text-24 c-_h_FC4930">{{currencySymbol}}</text>
+                        <text class="text-36 c-_h_FC4930">{{amount}}</text>
+                        <text class="pl-10 text-24 c-_h_999 line-through">{{currencySymbol+amountOriginal}}</text>
+                    </view>
+                    <view class="food-sku_f-price" wx:else>
+                        <text class="food-sku-currency-symbol" style="margin-left: 0">{{currencySymbol}}</text>{{amount}}<text class="food-sku-amount-origin" wx:if="{{amountOriginal>amount}}">
+                            <text class="food-sku-currency-symbol">{{currencySymbol}}</text>{{amountOriginal}}</text>
+                    </view>
+                    <pre-price currencySymbol="{{currencySymbol}}" customStyle="margin-left: 10rpx;" position="top" prePrice="{{prePrice}}" wx:if="{{prePrice>=0&&num<=1}}"></pre-price>
+                </view>
+                <view class="food-sku-text-wrapper">
+                    <text bindtap="collect" class="food-sku_btn-collected iconfont {{isCollect?'i-xihuanlike':'i-xihuan'}}" style="color: {{isCollect?colorTheme:'#7e7e7e'}};" wx:if="{{(skuArr&&skuArr.length||attachGoodsList&&attachGoodsList.length)&&(loadingGoodsText||skuSelectText)}}"></text>
+                    <view class="food-sku-text">
+                        <block wx:if="{{energyText&&energyText!=null}}">
+                            <text class="food-sku-energy-text" style="color: {{colorTheme}}">{{energyText}}</text>
+                            <view class="food-sku-energy-line"></view>
+                        </block>
+                        <block wx:if="{{loadingGoodsText&&skuSelectText}}">[</block>{{skuSelectText}}<block wx:if="{{loadingGoodsText&&skuSelectText}}">]</block>
+                        <text style="color: {{colorTheme}};" wx:if="{{loadingGoodsText}}">
+                            <block wx:if="{{skuSelectText}}">,</block>{{loadingGoodsText}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="food-sku_f-num">
+                <view wx:if="{{info.unit_type&&unitNum}}">{{unitNum}}{{info.unitText}}</view>
+                <cart-control addDisabled="{{cartGoodsAddDisabled}}" bindbigOrder="bigOrder" bindchange="goodsNumChange" binddisabled="tapDisabled" decreaseDisabled="{{cartGoodsDecreaseDisabled}}" isShowLargeSingleBtn="{{true}}" min="1" num="{{num}}" traceOperationType="{{traceOperationType}}" traceProductId="{{info.id}}" traceProductList="{{info.name}}" traceProductType="{{traceProductType}}" traceScreenType="{{traceScreenType}}" wx:if="{{!info.unit_type}}"></cart-control>
+            </view>
+        </view>
+        <view class="food-sku_buynow-btn" wx:if="{{!info.totalInventory}}">
+            <view bindtap="{{showNearbyStores&&!isUStore?'chooseOtherSellShop':''}}" class="food-sku-sell-out-btn" style="background:{{colorTheme}};{{!showNearbyStores||isUStore?'background-color:#999;color:#fff;':''}}">{{_i36}}</view>
+        </view>
+        <view bindtap="subscribeSaleTime" class="subscribable-sale-time-btn" data-category-ids="{{info.categoryIdList}}" data-goods-id="{{info.id}}" data-subscribable="{{info.subscribable}}" style="background-color: {{colorTheme}};" wx:elif="{{'wx'==='wx'&&!info.isSaleTime&&info.subscribable}}">
+            <text class="strong-font">
+                <text wx:if="{{info.subscribable==1}}">{{_i37}}</text>
+                <text wx:if="{{info.subscribable==2}}">{{_i38}}</text>
+            </text>
+            <text class="support-font" wx:if="{{info.saleTimeText}}">开售时间：{{info.saleTimeText}}</text>
+        </view>
+        <block wx:else>
+            <view class="food-sku_buynow-btn" wx:if="{{curSkuUnusable}}">
+                <view class="food-sku_buynow-btn-fill">
+                    <zm-button block disabled round bindbtntap="addCartFun" isImmediately="1" size="large" textColor="{{textColor}}" traceOperationType="确认订单信息" traceProductId="{{info.id}}" traceProductList="{{info.name}}" traceProductType="{{traceProductType}}" traceScreenType="{{traceScreenType}}">{{_i39}}</zm-button>
+                </view>
+            </view>
+            <view class="food-sku_buynow-btn" wx:elif="{{editObj.entityId||info.exchangeGoodsInfo||info.goodsCouponsInfo}}">
+                <view class="food-sku_buynow-btn-fill">
+                    <zm-button block round bindbtntap="addCartFun" disabled="{{cartButton.isDisable||isErrorStatus||isExistNoSelect}}" isImmediately="{{showOrderBtn?1:0}}" size="large" textColor="{{textColor}}" traceOperationType="{{showOrderBtn?'确认订单信息':'加入购物车'}}" traceProductId="{{info.id}}" traceProductList="{{info.name}}" traceProductType="{{traceProductType}}" traceScreenType="{{traceScreenType}}">{{_i40}}</zm-button>
+                </view>
+            </view>
+            <view class="food-sku_buynow-btn" wx:else>
+                <view class="food-sku_buynow-btn-fill" wx:if="{{(isShowRecommendCouponPackBtn||isShowRecommendCardBtn)&&!(cartButton.isDisable||isErrorStatus||isExistNoSelect)}}">
+                    <zm-button block plain round bindbtntap="addCartFun" size="large">
+                        <view class="food-sku-button_price">
+                            <view class="food-sku_f-price" style="color:{{colorTheme}}">
+                                <text class="food-sku-currency-symbol">{{currencySymbol}}</text>{{amount}}</view>{{_i41}}</view>
+                    </zm-button>
+                </view>
+                <block wx:else>
+                    <view class="food-sku_buynow-btn-fill" wx:if="{{showBuyRightNowBtn}}">
+                        <zm-button block plain round bindbtntap="addCartFun" disabled="{{cartButton.isDisable||isErrorStatus||isExistNoSelect}}" isImmediately="1" size="large" traceOperationType="确认订单信息" traceProductId="{{info.id}}" traceProductList="{{info.name}}" traceProductType="{{traceProductType}}" traceScreenType="{{traceScreenType}}">{{_i42}}</zm-button>
+                    </view>
+                </block>
+                <view class="food-sku_buynow-btn-fill">
+                    <zm-button block round bindbtntap="addCartFunCheck" size="large" traceOperationType="加入购物车" traceProductId="{{info.id}}" traceProductList="{{info.name}}" traceProductType="{{traceProductType}}" traceScreenType="{{traceScreenType}}" wx:if="{{isShowRecommendCouponPackBtn&&!(cartButton.isDisable||isErrorStatus||isExistNoSelect)}}">
+                        <view class="recommend-paid-card-wrap">
+                            <view class="recommend-paid-card-price">¥<text>{{couponPackTruePrice}}</text>
+                            </view>
+                            <view class="recommend-paid-card-info">
+                                <text>{{_i43}}</text>
+                                <text>{{_i44}}</text>
+                            </view>
+                        </view>
+                    </zm-button>
+                    <zm-button block round bindbtntap="addCartFunCheck" isRecommendPaidCard="{{isShowRecommendCardBtn}}" recommendPaidCardBtnColor="{{isShowRecommendCardBtn&&orderData.tieInSalesBtnBgColor}}" size="large" traceOperationType="加入购物车" traceProductId="{{info.id}}" traceProductList="{{info.name}}" traceProductType="{{traceProductType}}" traceScreenType="{{traceScreenType}}" wx:elif="{{isShowRecommendCardBtn&&!(cartButton.isDisable||isErrorStatus||isExistNoSelect)}}">
+                        <view class="recommend-paid-card-wrap" style="color:{{isShowRecommendCardBtn&&orderData.tieInSalesBtnColor?orderData.tieInSalesBtnColor:'#f4c27a'}};">
+                            <view class="recommend-paid-card-price">¥<text>{{currentEntityMemberPrice}}</text>
+                            </view>
+                            <view class="recommend-paid-card-info">
+                                <block wx:if="{{info.memberRuleVo}}">
+                                    <text wx:if="{{info.memberRuleVo.goodsLabel}}">{{info.memberRuleVo.goodsLabel}}</text>
+                                    <text wx:else>{{info.memberRuleVo.payMemberCardName}}</text>
+                                </block>
+                                <text>{{_i45}}</text>
+                            </view>
+                        </view>
+                    </zm-button>
+                    <zm-button block round bindbtntap="addCartFunCheck" disabled="{{cartButton.isDisable||isErrorStatus||isExistNoSelect}}" isRecommendPaidCard="{{isShowRecommendCardBtn}}" size="large" textColor="{{textColor}}" traceOperationType="加入购物车" traceProductId="{{info.id}}" traceProductList="{{info.name}}" traceProductType="{{traceProductType}}" traceScreenType="{{traceScreenType}}" wx:else>{{_i46}}</zm-button>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{isShowScrollTip}}">
+            <view class="food-sku-scroll-tip-decoration" wx:if="{{renovationData&&renovationData.pullDownImg}}">
+                <image class="img" src="{{__oss__.s(mpxExt,renovationData.pullDownImg,0)}}"></image>
+            </view>
+            <view class="food-sku-scroll-tip" style="background-color:{{tools.hexToRgba('#000000',0.65)}}" wx:else>
+                <view class="scroll-tip-img-view">
+                    <image class="scroll-tip-img" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/03/11/foodskumoreicon.gif',0)}}"></image>
+                </view>上滑调整口味</view>
+        </block>
+    </view>
+    <view class="food-sku_ipx-seat" wx:elif="{{isIpx}}"></view>
+</view>
+<view catchtap="hideSelfCupTip" class="self-cup-mask" wx:if="{{isShowSelfCupMask}}">
+    <view class="self-cup-station food-sku_m-specs-wrap flex flex-wrap" style="top:{{selfCupItemTop}}px; left:{{selfCupItemLeft}}px">
+        <view class="self-cup_specs-item food-sku_m-sku-item food-sku_m-specs" style="background-color: {{colorTheme}};color:{{textColor}}">{{info.selfCup&&info.selfCup.title}}<view class="self-cup_specs-item-reduction" style="color: {{colorTheme}};background-color:#fff;border-color: {{colorTheme}};" wx:if="{{info.selfCup&&info.selfCup.reduce&&info.selfCup.reduce>0}}">{{_i47}}</view>
+        </view>
+        <view class="self-cup-tips">
+            <view class="self-cup-tips_left">
+                <image src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/03/15/编组@2x.png',0)}}"></image>
+                <view class="self-cup-tips_left--text">
+                    <view>{{_i48}}</view>
+                    <text>{{_i49}}</text>
+                </view>
+            </view>
+            <view class="self-cup-tips_button" style="background-color: {{colorTheme}};">{{_i50}}</view>
+        </view>
+        <view class="self-cup-tips_triangle"></view>
+    </view>
+</view>
+<authorization id="authorization"></authorization>
+<view catchtap="attachImgShowChange" class="attach-img-view" wx:if="{{attachImgShow}}">
+    <image class="attach-img" src="{{__oss__.s(mpxExt,attachImg,0)}}"></image>
+    <view class="attach-name" style="background: {{tools.hexToRgba('#FFFFFF','0.15')}}">{{attachName}}</view>
+</view>
+<pop-up bindclose="closePicker" position="bottom" show="{{showPicker}}" zIndex="{{10011}}">
+    <view class="health-desc-wrapper">
+        <view bindtap="closePicker" class="health-desc-close iconfont i-close"></view>
+        <view class="health-desc-title">健康度说明</view>
+        <view class="health-desc-content">{{gradingInstructions}}</view>
+    </view>
+</pop-up>
+<food-sku activityDiyConfigBySellerMap="{{activityDiyConfigBySellerMap}}" bindchooseMatchGoods="onChooseMatchGoods" bindr="__refEmit" class="ref_foodSkuRef_2" confirmText="{{_i51}}" data-r=".ref_foodSkuRef_2" eatType="{{eatType}}" goodsSkuId="{{matchGoodsSkuId}}" isErrorStatus="{{isErrorStatus}}" optionsSort="{{optionsSort}}" skuFoodInfo="{{matchGoodsInfo}}" traceProductType="{{traceProductType}}" traceScreenType="商品详情" userIntegral="{{userIntegral}}" wx:if="{{'wx'!=='tt'&&showMatchGoods}}"></food-sku>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

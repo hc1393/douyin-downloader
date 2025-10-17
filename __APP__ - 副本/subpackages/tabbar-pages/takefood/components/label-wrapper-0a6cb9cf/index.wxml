@@ -1,0 +1,8 @@
+<view catchtap="toggle" class="JS-lw-container relative h-42rpx transition-all transition-duration-0_d_3s">
+    <scroll-view class="{{'absolute left-0 bottom-0 max-h-42rpx border-rd-8rpx transition-all transition-duration-0_d_3s bg-_bl__h_ffffff_br_ '+(spread?'box-border max-h-1000px shadow-_bl_0_2rpx_10rpx_0_rgba_pl_0_2c_0_2c_0_2c_0_d_17_pr__br_':'')}}" scrollTop="{{scrollTop}}" scrollY="{{spread}}" style="max-height: {{maxHeight}};">
+        <view class="JS-lw-block-content flex flex-wrap items-center text-22rpx pt-6rpx pb-0 pl-6rpx pr-0">
+            <slot></slot>
+        </view>
+    </scroll-view>
+    <view class="text-22rpx text-_bl__h_959595_br_ lh-42rpx absolute right-6rpx bottom-0 i-jiantou-shang" wx:if="{{height>30}}"></view>
+</view>

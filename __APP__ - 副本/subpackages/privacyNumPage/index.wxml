@@ -1,0 +1,32 @@
+<view class="privacy-num-page _29397f40 mpx-app-scope">
+    <view class="privacy-num-img _29397f40 mpx-app-scope"></view>
+    <view class="privacy-num-bottom _29397f40 mpx-app-scope">
+        <view class="privacy-num-title _29397f40 mpx-app-scope">服务介绍</view>
+        <view class="privacy-num-content-wrapper _29397f40 mpx-app-scope">
+            <view class="privacy-num-second-point _29397f40 mpx-app-scope">•</view>
+            <view class="privacy-num-second-title _29397f40 mpx-app-scope">隐藏手机号，保护隐私</view>
+        </view>
+        <view class="privacy-num-content-wrapper _29397f40 mpx-app-scope">
+            <view class="privacy-num-second-point hide _29397f40 mpx-app-scope">•</view>
+            <view class="privacy-num-content _29397f40 mpx-app-scope" style="margin-bottom: 38rpx">对骑手隐藏您的真实手机号，保护您的隐私安全。外卖 单据、通信过程、骑手的APP等，不会暴露您的真实手 机号。</view>
+        </view>
+        <view class="privacy-num-content-wrapper _29397f40 mpx-app-scope">
+            <view class="privacy-num-second-point _29397f40 mpx-app-scope">•</view>
+            <view class="privacy-num-second-title _29397f40 mpx-app-scope">通话录音</view>
+        </view>
+        <view class="privacy-num-content-wrapper _29397f40 mpx-app-scope">
+            <view class="privacy-num-second-point hide _29397f40 mpx-app-scope">•</view>
+            <view class="privacy-num-content _29397f40 mpx-app-scope">使用隐私号码保护的订单，在接听和拨打电话过程中都 可能会被录音，在发送和接受短信的通信过程中都可能
+          会被存储相关内容，若您不希</view>
+        </view>
+        <view class="privacy-num-title _29397f40 mpx-app-scope">使用说明</view>
+        <view class="privacy-num-content-wrapper _29397f40 mpx-app-scope">
+            <view class="privacy-num-second-point _29397f40 mpx-app-scope">•</view>
+            <view class="privacy-num-second-title _29397f40 mpx-app-scope">号码保护服务不会向您额外收费，费用由商家承 担</view>
+        </view>
+        <view class="privacy-num-content-wrapper _29397f40 mpx-app-scope">
+            <view class="privacy-num-second-point _29397f40 mpx-app-scope">•</view>
+            <view class="privacy-num-second-title _29397f40 mpx-app-scope">当号码保护服务出现服务器故障时，您的真实手 机号将展示给骑手，以确保骑手能为您送餐</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,20 @@
+<view class="flex justify-between items-center box-border">
+    <view class="flex-none w-268 h-163 bg-_bl__h_F5F5F5_br_ rd-16 overflow-hidden flex flex-col justify-evenly items-center">
+        <view class="text-_bl__h_333_br_ text-28 lh-40 font-500">
+            <text wx:if="{{isMoveOut}}">{{_i1}}</text>
+            <text wx:else>{{_i2}}</text>
+        </view>
+        <view class="text-_bl__h_9F9F9F_br_ text-24 lh-34">{{account}}</view>
+    </view>
+    <view class="grow flex flex-col justify-center items-center px-16">
+        <text class="text-primary text-28 lh-34">{{centerText}}</text>
+        <text class="{{'_i_text-16 _i_text-primary '+(isMoveOut?'i-right-half':'i-left-half')}}"></text>
+    </view>
+    <view class="flex-none w-268 h-163 bg-_bl__h_F5F5F5_br_ rd-16 overflow-hidden flex flex-col justify-evenly items-center">
+        <view class="text-_bl__h_333_br_ text-28 lh-40 font-500">
+            <text wx:if="{{isMoveOut}}">{{_i3}}</text>
+            <text wx:else>{{_i4}}</text>
+        </view>
+        <view class="text-_bl__h_9F9F9F_br_ text-24 lh-34">{{_i5}}</view>
+    </view>
+</view>

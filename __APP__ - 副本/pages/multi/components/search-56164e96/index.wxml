@@ -1,0 +1,14 @@
+<view class="multi-list-wrapper z-1 bg-white sticky flex items-center _56164e96 " style="{{multiHeaderTopNotWeChat}}">
+    <view class="address-search-wrapper h-72rpx bg-hex-f5f5f5 flex items-center _56164e96 ">
+        <view bindtap="selectOtherCity" class="address-search-city h-72rpx flex-shrink-0 box-border text-26rpx flex items-center justify-center _56164e96 " style="{{!curAddressCity?'color:#999':''}}">{{curAddressCity||'请选择城市'}}<text class="iconfont i-jiantou-xia address-search-city-icon ml10 text-20rpx _56164e96 "></text>
+        </view>
+        <view class="address-line _56164e96 "></view>
+        <input bindinput="inputKeyboard" class="search-input w-full text-26rpx _56164e96 " confirmType="search" placeholder="{{_i1}}" type="text" value="{{nameOrAddress}}"></input>
+        <view catchtap="clearNameOrAddress" class="search-cha-wrapper _56164e96 " wx:if="{{nameOrAddress}}">
+            <view class="search-cha w-36rpx h-36rpx flex items-center justify-center flex-shrink-0 _56164e96 ">
+                <view class="iconfont i-close text-30rpx c-white _56164e96 "></view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="clearNameOrAddress" class="multi-list-cancel text-30rpx flex-shrink-0 _56164e96 " wx:if="{{nameOrAddress}}">{{_i2}}</view>
+</view>

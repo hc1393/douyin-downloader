@@ -1,0 +1,4 @@
+<view class="flex flex-wrap justify-between p-30" wx:if="{{license&&license.length}}">
+    <image bindtap="previewImage" class="w-330 h-330 mb-30 block" data-src="{{item}}" lazyLoad="true" src="{{__oss__.s(mpxExt,item+'?x-oss-process=image/resize,w_180',0)}}" wx:for="{{license}}" wx:key="*this"></image>
+</view>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

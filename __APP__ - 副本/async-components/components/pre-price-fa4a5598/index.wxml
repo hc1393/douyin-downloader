@@ -1,0 +1,20 @@
+<view catchtap="toastPrePrice" class="relative flex items-center w-fit" style="{{customStyle}}" wx:if="{{newPrePrice!==null}}">
+    <view class="flex h-30rpx mr-4rpx bg-_bl__h_fc4930_br_ border-rd-6rpx">
+        <view class="flex items-center justify-center box-border h-_bl_100_p__br_ px-6rpx py-0 text-_bl__h_fc4930_br_ text-20rpx lh-none bg-_bl__h_fff_br_ border-1px border-solid border-_bl__h_fc4930_br_ border-r-none border-rd-_bl_6rpx_0_12rpx_6rpx_br_">预估到手</view>
+        <view class="relative box-border w-8rpx h-_bl_100_p__br_ bg-_bl__h_fff_br_ border-t-1px border-t-solid border-t-_bl__h_fc4930_br_ border-r-none border-b-none border-l-none">
+            <view class="absolute bottom-0 left-0 w-10rpx h-_bl_100_p__br_ bg-_bl__h_fc4930_br_ border-rd-_bl_8rpx_0_0_br_"></view>
+        </view>
+        <view class="flex items-center justify-center h-_bl_100_p__br_ pt-0 pb-0 pl-0 pr-6rpx border-rd-6rpx">
+            <text class="text-_bl__h_fff_br_ text-26rpx lh-none">{{currencySymbol}}{{newPrePrice}}</text>
+        </view>
+    </view>
+    <block wx:if="{{!hideToast}}">
+        <text class="i-md-information-circle-outline text-_bl__h_999_br_ text-30rpx"></text>
+        <view class="JS-pre-price-toast-font absolute right--100rpx z-10000 w-300rpx p-16rpx bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_8_pr__br_ border-rd-8rpx transition-all transition-duration-0_d_3s pointer-events-none" style="opacity: {{show}};{{positionStyle}}">
+            <text class="text-_bl__h_fff_br_ text-24rpx">根据该商品当前享受的优惠活动以及优惠券进行单件最低折扣预估（不包含配送费，包装费用），最终以实付金额为准。</text>
+            <view class="absolute top--20rpx right-105rpx w-0 h-0 border-r-10rpx border-r-solid border-r-transparent border-b-20rpx border-b-solid border-b-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_8_pr__br_ border-l-10rpx border-l-solid border-l-transparent" wx:if="{{position=='bottom'}}"></view>
+            <view class="absolute right-105rpx bottom--20rpx w-0 h-0 border-t-20rpx border-t-solid border-t-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_8_pr__br_ border-r-10rpx border-r-solid border-r-transparent border-l-10rpx border-l-solid border-l-transparent" wx:elif="{{position=='top'}}"></view>
+        </view>
+        <view catchtap="toastPrePrice" class="fixed top-0 left-0 z-10001 w-100vw h-100vh" wx:if="{{show==1}}"></view>
+    </block>
+</view>

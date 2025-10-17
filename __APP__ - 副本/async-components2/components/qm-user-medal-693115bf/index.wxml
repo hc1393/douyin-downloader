@@ -1,0 +1,21 @@
+<view bindtap="goMedal" class="bg-white overflow-hidden p-24 box-border ml-24 mr-24 rounded-16">
+    <view class="flex items-center justify-between h-46 mb-24">
+        <view class="flex-1 font-500 text-32 color-hex-333333 leading-46">我的勋章</view>
+        <view class="flex items-center justify-center">
+            <view class="flex items-baseline font-400 text-24 color-hex-999999 leading-40">查看全部</view>
+            <view class="text-24rpx i-jiantou-you color-hex-666666 ml-6"></view>
+        </view>
+    </view>
+    <view class="h-144 pt-16 box-border">
+        <scroll-view enableFlex scrollX bind:scrolltolower="scrolltolower" class="w-full whitespace-nowrap" lowerThreshold="24">
+            <view class="inline-block" data-id="{{item.id}}" style="transition: all ease 0.25s" wx:for="{{badgeList}}" wx:key="id">
+                <view class="mr-24">
+                    <view class="w-120 h-120">
+                        <image class="w-120 h-120 rounded-120" src="{{__oss__.s(mpxExt,item.litStatus?item.litMinorIcon:item.unlitMinorIcon,0)}}"></image>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

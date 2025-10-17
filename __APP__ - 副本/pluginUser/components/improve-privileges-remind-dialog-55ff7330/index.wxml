@@ -1,0 +1,26 @@
+<std-base-dialog id="__std_baseDialog" zIndex="11001">
+    <view catchtap="noop" catchtouchmove="noop" class="relative w-80vw flex flex-col">
+        <view class="relative z-9">
+            <image class="w-full block" lazyLoad="{{true}}" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2025/03/04/privileges-remind.png',0)}}"></image>
+            <view class="h-fit rd-30 overflow-hidden bg-_bl__h_FFF_br_">
+                <view class="h-fit p-24 box-border bg-gradient-to-b from-primary-opacity-20 to-_bl__h_FFF_br_ rd-30 overflow-hidden">
+                    <scroll-view class="max-h-50vh py-24" scrollY="{{true}}">
+                        <view class="h-fit">
+                            <block wx:for="{{privilegesInfo}}" wx:key="index">
+                                <privileges-coupon-item desc="{{item.desc}}" num="{{item.num}}" title="{{item.title}}" wx:if="{{item.type==='coupon'}}"></privileges-coupon-item>
+                                <privileges-integral-item desc="{{item.desc}}" num="{{item.num}}" title="{{item.title}}" wx:if="{{item.type==='integral'}}"></privileges-integral-item>
+                            </block>
+                        </view>
+                    </scroll-view>
+                    <view class="flex justify-between items-center">
+                        <button bindtap="toPersonalData" class="button rd-full _i_bg-primary _i_text-_bl__h_FFF_br_ w-full">去完善资料</button>
+                    </view>
+                </view>
+            </view>
+            <view class="w-full h-104 flex justify-center items-end">
+                <text catchtap="hide" class="i-close2 text-_bl__h_FFF_br_ _i_text-56 extend-click"></text>
+            </view>
+        </view>
+    </view>
+</std-base-dialog>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

@@ -1,0 +1,30 @@
+<view bindtap="handelDetail" class="flex items-center justify-between box-border h-50rpx px-24rpx py-0 text-_bl__h_999999_br_ text-24rpx lh-30rpx" data-element-type="view" data-operation-type="查看优惠活动" data-screen-type="商品列表">
+    <view class="flex flex-1 overflow-hidden" style="color:{{activityBriefly&&activityBriefly.color?activityBriefly.color:'#999999'}}">
+        <block wx:if="{{tagName=='storeNotice'}}">
+            <image class="w-32rpx h-32rpx mr-8rpx" src="{{__oss__.s(mpxExt,activityBriefly.storeNoticeIconSrc,0)}}" wx:if="{{activityBriefly&&activityBriefly.storeNoticeIconSrc}}"></image>
+            <text class="i-tongzhi text-32 mr-8" style="color: {{colorTheme}};line-height: 1;" wx:else></text>
+        </block>
+        <view class="{{'truncate '+(tagName=='discountActivity'?'max-w-_bl_98_p__br_ text-align-initial':'max-w-_bl_90_p__br_')}}">
+            <text wx:if="{{!activityList.length&&tagName=='storeInfo'}}">{{_i1}}</text>
+            <block wx:elif="{{tagName=='storeNotice'}}">
+                <block wx:if="{{activityBriefly.showType==1}}">
+                    <block wx:if="{{storeNoticeList&&storeNoticeList.length}}">{{noticeText}}</block>
+                    <block wx:elif="{{currentShop.notices&&currentShop.notices[0]}}">{{currentShop.notices[0]}}</block>
+                </block>
+                <block wx:else>{{noticeText||''}}</block>
+            </block>
+            <block wx:if="{{tagName=='discountActivity'&&activityList.length}}">
+                <view catchtap="linkLogin" class="inline-block box-border h-34rpx mr-10rpx px-15rpx py-0 text-_bl__h_ffffff_br_ font-500 text-22rpx lh-34rpx v-top border-rd-4rpx" style="background-color: {{colorTheme}};" wx:if="{{!isAuth&&activityBriefly.showType==1}}">{{_i2}}</view>
+                <view class="inline-block mr-10rpx last-mr-0" wx:for="{{activityList}}" wx:for-item="activity" wx:key="id">
+                    <qm-label label="{{activity.name}}" rightIcon="{{activity.activityExtraInfo&&activity.activityExtraInfo.depositCouponSwitch===1?'i-kejicun':''}}" theme="{{colorTheme}}"></qm-label>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="flex h-_bl_100_p__br_">
+        <view class="absolute right-_bl_20_p__br_ w-60rpx h-50rpx bg-gradient-to-r from-_bl_rgba_pl_255_2c_255_2c_255_2c_0_d_1_pr__br_ to-_h_fff" wx:if="{{!( headImg&&!(activityBriefly&&activityBriefly.backgroundColor&&activityBriefly.backgroundColor!=='transparent') )}}"></view>
+        <view class="text-_bl__h_999_br_ lh-50rpx text-24rpx" style="color:{{activityBriefly&&activityBriefly.color?activityBriefly.color:'#999999'}}">{{_i3}}<text class="ml-8rpx text-22rpx i-jiantou-xia"></text>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

@@ -1,0 +1,15 @@
+<view catchtap="onPopupOpen" class="flex flex-col items-center justify-center" data-element-type="view" data-item="{{proper}}" data-screen-type="{{traceScreenType}}" style="{{proper.miniStyle}}" wx:if="{{proper}}">
+    <view class="relative inline-block w-_bl_100_p__br_ h-_bl_100_p__br_ overflow-hidden">
+        <image binderror="imageError" class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" mode="scaleToFill" src="{{__oss__.s(mpxExt,proper.propsValue&&proper.propsValue.src,0)}}"></image>
+    </view>
+</view>
+<qm-popup bindclose="onPopupClose" position="bottom" show="{{showDialog}}">
+    <view catchtap class="relative box-border w-750rpx px-24rpx pt-28rpx pb-0 bg-_bl__h_ffffff_br_ border-rd-_bl_30rpx_30rpx_0_0_br_">
+        <view bindtap="onPopupClose" class="absolute top-6rpx right-6rpx p-20rpx text-_bl__h_999_br_ text-38rpx iconfont i-close"></view>
+        <view class="box-border w-_bl_100_p__br_ px-40rpx py-0 overflow-hidden font-bold text-36rpx whitespace-nowrap text-center text-ellipsis">{{proper.propsValue&&proper.propsValue.dialogTitle}}</view>
+        <scroll-view scrollY class="w-_bl_100_p__br_ min-h-568rpx max-h-70vh mt-32rpx overflow-scroll" style=" padding-bottom: calc(24rpx + constant(safe-area-inset-bottom)); padding-bottom: calc(24rpx + env(safe-area-inset-bottom)); ">
+            <image binderror="imageError" class="block w-_bl_100_p__br_" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,proper.propsValue&&proper.propsValue.dialogImage,0)}}"></image>
+        </scroll-view>
+    </view>
+</qm-popup>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

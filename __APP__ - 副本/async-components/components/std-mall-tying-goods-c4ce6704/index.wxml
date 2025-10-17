@@ -1,0 +1,14 @@
+<view class="tying-goods" style="{{__stringify__.stringifyStyle('',colorVars)}}" wx:if="{{giftList&&giftList.length}}">
+    <view class="tying-goods-header">
+        <view class="tying-goods-header__icon">赠</view>
+        <view class="tying-goods-header__title">商品发货后，您将获得<text class="color-highlight">{{totalCount}}张优惠券</text>
+        </view>
+    </view>
+    <view class="tying-goods-content">
+        <view class="tying-goods-content__item" wx:for="{{giftList}}" wx:key="id">
+            <view class="tying-goods-content__item-name">{{item.name}}</view>
+            <view class="tying-goods-content__item-label">{{item.num}}张</view>
+        </view>
+    </view>
+</view>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>

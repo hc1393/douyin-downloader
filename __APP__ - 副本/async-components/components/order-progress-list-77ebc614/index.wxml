@@ -1,0 +1,8 @@
+<view class="w-full pb-28 pt-32" style="{{takeoutType?'padding-top:0;':''}}">
+    <view class="flex items-center justify-center color-_h_dcd8d8 text-26">
+        <view class="relative flex flex-col items-center justify-center not-last-mr-80rpx not-last-after-absolute not-last-after-top-25rpx not-last-after-left-_bl_100_p__br_ not-last-after-w-80rpx not-last-after-border-b-1px not-last-after-border-b-dashed not-last-after-border-b-_bl__h_ddd_br_ not-last-after-content-_bl__q___q__br_" wx:for="{{list}}" wx:key="index">
+            <text class=" block c-hex-dcd8d8 w-50 h-50 mb-20 text-50 {{item.icon==='icon-dingdan'?'i-dingdan':''}} {{item.icon==='icon-zhizuo'?'i-zhizuo':''}} {{item.icon==='icon-peisong'?'i-peisong':''}} {{item.icon==='icon-wancheng'?'i-wancheng':''}} " style="{{item.active?'color:'+colorTheme:''}}"></text>
+            <text class="block c-hex-dcd8d8 text-26" style="{{item.active?'color:'+colorTheme:''}}">{{item.text}}</text>
+        </view>
+    </view>
+</view>

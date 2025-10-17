@@ -1,0 +1,175 @@
+<view class=" _69c51737 " style="{{isShowPayCom?'':'display:none;'}}">
+    <view catchtap="hideModel" class="fixed top-0 right-0 bottom-0 left-0 z-800 bg-hex-00000099 {{showMask?'payChoose__mask--show':'payChoose__mask--hide'}} _69c51737 " data-close="1"></view>
+    <view class="payChoose__wrapper {{showShade?'payChoose__wrapper--show':'payChoose__wrapper--hide'}} _69c51737 " style="{{paddingBottom}}">
+        <view class="payChoose__head _69c51737 ">
+            <view class="payChoose__title _69c51737 ">
+                <text class=" _69c51737 ">{{_i1}}</text>
+                <text bindtap="hideModel" class="payChoose__icon_close _69c51737 " data-close="1"></text>
+            </view>
+        </view>
+        <view class="payChoose__body _69c51737 ">
+            <view catchtap="selectPayType" class="payChoose__row _69c51737 " data-paytypecheck="6" wx:if="{{physicalCards&&physicalCards.length}}">
+                <view class="payChoose__row_wrap _69c51737 ">
+                    <view class="payChoose__row_l payChoose__row_center _69c51737 ">
+                        <image class="payChoose__icon_pay _69c51737 " lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/08/23/physical-card-pay-icon.png',0)}}"></image>
+                        <view class="row_content _69c51737 ">
+                            <view class="content_value _69c51737 ">
+                                <view class=" _69c51737 " style="padding-right: 10rpx">{{_i2}}</view>
+                                <view class="{{physicalCardBalance>999?'limit-text':''}} _69c51737 " style="color: #999">{{'('+_i3+currencySymbol+physicalCardBalance+')'}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="payChoose__row_r _69c51737 ">
+                        <view class="physical-card-payInfo _69c51737 ">
+                            <text class="font _69c51737 " wx:if="{{entityCardIds&&entityCardIds.length}}">{{_i4+entityCardIds.length+_i5}}</text>
+                            <text class="font _69c51737 " wx:else>{{_i6}}</text>
+                            <text class="arrow iconfont i-jiantou-you _69c51737 "></text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view catchtap="selectPayType" class="payChoose__row _69c51737 " data-paytypecheck="1" wx:if="{{balance>0&&canUseBalance}}">
+                <view class="payChoose__row_wrap _69c51737 ">
+                    <view class="payChoose__row_l _69c51737 ">
+                        <image class="payChoose__icon_pay _69c51737 " lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/10/12/41d1cab760117b09.png',0)}}"></image>
+                        <view class="row_content _69c51737 ">
+                            <view class="content_value _69c51737 ">
+                                <view class=" _69c51737 " style="padding-right: 4rpx; width: 80rpx">{{_i7}}</view>
+                                <view class="{{balance>999?'limit-text':''}} _69c51737 " style="color: #999" wx:if="{{balanceEnabled}}">{{'('+_i8}}<text class=" _69c51737 " style="color: {{colorTheme}};">{{currencySymbol+balance}}</text>)</view>
+                                <view class="{{balance>999?'limit-text':''}} _69c51737 " style="color: #999" wx:else>{{'('+_i9}}<text class=" _69c51737 " style="color: {{colorTheme}};">{{currencySymbol+balance}}</text>{{accountStatus==1?'':'，'+notUseReason}})</view>
+                            </view>
+                            <view class="content_desc _69c51737 " wx:if="{{removeDepositPay||disableDepositPay}}">{{_i10}}</view>
+                        </view>
+                    </view>
+                    <view class="payChoose__row_r _69c51737 ">
+                        <text catchtap="settingPsd" class="payChoose__set_btn _69c51737 " wx:if="{{!isSetPassword&&passwordSwitch}}">{{_i11}}</text>
+                        <radio-group class="payChoose__radio_group _69c51737 " wx:elif="{{disableDepositPay}}">
+                            <radio disabled checked="{{false}}" class=" _69c51737 " color="{{colorTheme}}" name="payWay"></radio>
+                        </radio-group>
+                        <block wx:elif="{{balanceEnabled}}">
+                            <text class="payChoose__frozen _69c51737 " wx:if="{{accountStatus==1}}">{{_i12}}</text>
+                            <block wx:else>
+                                <block wx:if="{{payTypeCheck==1}}">
+                                    <text class="payChoose__amount _69c51737 " wx:if="{{deductBalance>0}}">-{{currencySymbol}}{{deductBalance}}</text>
+                                    <block wx:elif="{{exitDepositDiscount}}">
+                                        <text class="payChoose__amount _69c51737 ">-{{currencySymbol}}{{depositDiscountInfo.afterAmount}}</text>
+                                        <text class="payChoose-amount-disable _69c51737 ">-{{currencySymbol}}{{useWallet}}</text>
+                                    </block>
+                                </block>
+                            </block>
+                            <radio-group class="payChoose__radio_group _69c51737 " wx:if="{{accountStatus==1}}">
+                                <radio disabled checked="{{payTypeCheck==1&&isCanChecked}}" class=" _69c51737 " color="{{colorTheme}}" name="payWay"></radio>
+                            </radio-group>
+                            <radio-group class="payChoose__radio_group _69c51737 " wx:else>
+                                <radio checked="{{payTypeCheck==1&&isCanChecked||payTypeCheck==5||payTypeCheck==2}}" class=" _69c51737 " color="{{colorTheme}}" disabled="{{balance>0&&remainingPayTotal>balance&&!payMixin}}" name="payWay"></radio>
+                            </radio-group>
+                        </block>
+                    </view>
+                </view>
+                <view catchtap="subMessage" class="balance_message _69c51737 " wx:if="{{payTypeCheck==1&&isOpenSubMessage}}">{{_i13}}<image class="image _69c51737 " role="img" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/12/17/3644e526f3cb0f11.png',0)}}"></image>
+                </view>
+            </view>
+            <view class="flex items-center px-30 pb-10 _69c51737 " wx:if="{{item.discountType===56}}" wx:for="{{discountList}}" wx:key="discountId">
+                <view class="flex items-center justify-center text-22 c-hex-fff bg-hex-ff8f0f w-30 h-30 rounded-4 _69c51737 ">惠</view>
+                <text class="text-24 c-hex-333 px-8 _69c51737 ">{{item.discountName}}</text>
+                <text class="text-30 c-hex-ff8f0f flex-1 text-right _69c51737 ">-{{item.discountAmount}}</text>
+            </view>
+            <view class="storedValue__wrap _69c51737 " wx:if="{{recommendList&&recommendList.length&&balanceEnabled&&accountStatus!=1}}">
+                <view class="storedValue__title _69c51737 " wx:if="{{balance<=0&&depositDiscountInfo&&depositDiscountInfo.discountAmount}}">
+                    <text class="stored-value-text _69c51737 " style="color:{{accountStatus==1?'#CBCBCB':'#FF0000'}};padding-left: 0;">
+                        <block wx:if="{{depositDiscountInfo.discountThreshold}}">{{_i14}}</block>
+                        <text class=" _69c51737 " wx:if="{{depositDiscountInfo.amountThreshold==1}}">{{_i15}}</text>{{_i16}}</text>
+                </view>
+                <view class="storedValue__title _69c51737 ">{{recommendCopyText}}</view>
+                <view class="storedValue__title_supfont _69c51737 " style="color:{{accountStatus==1?'#CBCBCB':'#FF0000'}};" wx:if="{{presentDiscountPrice}}">{{_i17}}</view>
+                <view class="storedValue__scroll_wrap _69c51737 ">
+                    <stored-value-scroll bindchange="numChange" bindr="__refEmit" bindselect="selectRecommend" bindshowGiftsInfo="showGiftsInfo" class=" _69c51737 ref_storedValueScrollRef_1" data-r=".ref_storedValueScrollRef_1" list="{{recommendList}}" selectedItem="{{storeValueItem}}" source="payChoose"></stored-value-scroll>
+                </view>
+                <view catchtap="checkboxChange" class="storedValue__agree _69c51737 " wx:if="{{protocolSwitch==1}}">
+                    <radio-group class="storedValue__radio_group _69c51737 ">
+                        <radio checked="{{agreeOpen}}" class=" _69c51737 " color="#fe5445" name="payWay"></radio>
+                    </radio-group>
+                    <text class="storedValue__vm _69c51737 ">{{agreeOpen?'我已阅读并同意':'查看'}}</text>
+                    <text catchtap="goInfo" class="storedValue__vm protocol-name _69c51737 ">《{{protocolTitle}}》</text>
+                </view>
+            </view>
+            <view class="no-balance _69c51737 " wx:if="{{balance>0&&remainingPayTotal>balance&&!payMixin}}">{{_i18}}</view>
+            <view class="pay-item-line _69c51737 "></view>
+            <view catchtap="selectPayType" class="payChoose__row _69c51737 " data-paytypecheck="3" wx:if="{{showNativePay}}">
+                <view class="payChoose__row_wrap _69c51737 ">
+                    <view class="payChoose__row_l _69c51737 ">
+                        <image class="payChoose__icon_pay _69c51737 " lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2018/11/07/b008e7ba74c826fb.png',0)}}"></image>
+                        <text class=" _69c51737 ">{{_i19}}</text>
+                    </view>
+                    <view class="payChoose__row_r _69c51737 ">
+                        <radio-group class="payChoose__radio_group _69c51737 ">
+                            <block wx:if="{{balanceEnabled}}">
+                                <radio checked="{{(needOfficialPaymentPrice>0||depositDiscountInfo.afterAmount>balance||payTypeCheck==2||payTypeCheck==3)&&payTypeCheck!=4&&payTypeCheck!=5&&payTypeCheck!=8&&!vrToken}}" class=" _69c51737 " color="{{colorTheme}}" name="payWay" wx:if="{{depositDiscountInfo&&depositDiscountInfo.isDiscountThreshold}}"></radio>
+                                <radio checked="{{(needOfficialPaymentPrice>0||remainingPayTotal>balance||payTypeCheck==2||payTypeCheck==3)&&payTypeCheck!=4&&payTypeCheck!=5&&payTypeCheck!=8&&!vrToken}}" class=" _69c51737 " color="{{colorTheme}}" name="payWay" wx:else></radio>
+                            </block>
+                            <radio checked="{{true}}" class=" _69c51737 " color="{{colorTheme}}" name="payWay" wx:else></radio>
+                        </radio-group>
+                    </view>
+                </view>
+            </view>
+            <view catchtap="selectPayType" class="payChoose__row _69c51737 " data-paytypecheck="4" wx:if="{{configCenterByKeys.yiwangtongzhifukaiguan==='1'&&!showCampusCardPay}}">
+                <view class="payChoose__row_wrap _69c51737 ">
+                    <view class="payChoose__row_l payChoose__row_center _69c51737 ">
+                        <image class="payChoose__icon_pay _69c51737 " lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2022/07/12/zhaohangicon.png',0)}}"></image>
+                        <text class=" _69c51737 ">招行一网通支付</text>
+                        <view class="payChoose__row_hd_bg _69c51737 " wx:if="{{configCenterByKeys.yiwangtongzhifuhuodong}}">{{configCenterByKeys.yiwangtongzhifuhuodong}}</view>
+                    </view>
+                    <view class="payChoose__row_r _69c51737 ">
+                        <radio-group class="payChoose__radio_group _69c51737 ">
+                            <radio checked="{{payTypeCheck==4||payTypeCheck==5}}" class=" _69c51737 " color="{{colorTheme}}" name="payWay"></radio>
+                        </radio-group>
+                    </view>
+                </view>
+            </view>
+            <view catchtap="selectPayType" class="payChoose__row _69c51737 " data-paytypecheck="8" wx:if="{{showCampusCardPay}}">
+                <view class="payChoose__row_wrap _69c51737 ">
+                    <view class="payChoose__row_l _69c51737 ">
+                        <image class="payChoose__icon_pay _69c51737 " lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2025/03/17/Frame 41.png',0)}}"></image>
+                        <view class="row_content _69c51737 ">
+                            <view class="content_value _69c51737 ">校园一卡通支付</view>
+                            <view class="text-24 font-400 c-_h_F80 leading-140_p_ _69c51737 ">到店取餐时，需刷卡支付</view>
+                        </view>
+                    </view>
+                    <view class="payChoose__row_r _69c51737 ">
+                        <radio-group class="payChoose__radio_group _69c51737 ">
+                            <radio checked="{{payTypeCheck==8}}" class=" _69c51737 " color="{{colorTheme}}" name="payWay"></radio>
+                        </radio-group>
+                    </view>
+                </view>
+            </view>
+            <view class="payChoose__row _69c51737 " wx:if="{{showVirtualRmb}}">
+                <virtual-rmb-selector bindchange="selectPayType" bindr="__refEmit" class=" _69c51737 ref_virtualRmbRef_2" data-paytypecheck="7" data-r=".ref_virtualRmbRef_2"></virtual-rmb-selector>
+            </view>
+        </view>
+        <view class="payChoose__foot _69c51737 ">
+            <button catchtap="authMobileSuccess" class="payChoose__payment_btn _69c51737 " disabled="{{!isCanChecked&&payTypeCheck==1}}" style="background-color: {{colorTheme}};" type="primary">{{payBtnText}}</button>
+        </view>
+    </view>
+</view>
+<popup-password bindcloseDialog="closeDialog" bindpasswordConfirm="passwordConfirm" bindrememberPsd="rememberPsd" class=" _69c51737 " clearValue="{{shouldClearPasswordValue}}" isSetPassword="{{isSetPassword}}" payTypeCheck="{{payTypeCheck}}" show="{{showPasswordDialog}}" useWallet="{{deductBalance}}"></popup-password>
+<view class="freeze-dsc-bar _69c51737 " wx:if="{{showFreezeDsc}}">
+    <view class="freeze-dsc-bar-wrap _69c51737 ">
+        <image catchtap="closeFreezeDsc" class="freeze-dsc-bar-icon _69c51737 " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2019/06/04/c9c6e40ec74c8bad.png',0)}}"></image>
+        <text class="freeze-dsc-bar-title _69c51737 ">{{_i23}}</text>
+        <view class="freeze-dsc-bar-content _69c51737 ">
+            <text class="freeze-dsc-bar-font _69c51737 ">{{freezeDsc}}</text>
+        </view>
+        <button catchtap="closeFreezeDsc" class="freeze-dsc-bar-btn _69c51737 ">{{_i24}}</button>
+    </view>
+</view>
+<confirm bindcancel="cancel" bindconfirm="confirm" class=" _69c51737 " isShow="{{isShow}}" zIndex="{{20000}}">
+    <view class="protocol _69c51737 ">
+        <text class=" _69c51737 ">{{_i25}}</text>
+        <text catchtap="goInfo" class="protocol-name _69c51737 ">《{{protocolTitle}}》</text>
+    </view>
+</confirm>
+<authorization bindsuccess="authorize" class=" _69c51737 " force="{{force}}" id="authorization"></authorization>
+<zm-loading class=" _69c51737 " wx:if="{{isLoading}}"></zm-loading>
+<show-toast class=" _69c51737 " id="showToast"></show-toast>
+<subscribe-mask class=" _69c51737 " show="{{isSubscribeMaskShow}}"></subscribe-mask>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

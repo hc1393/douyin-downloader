@@ -1,0 +1,1 @@
+.top-left{left:-60rpx;top:-60rpx}.top-right{right:-60rpx;top:-60rpx}.bottom-left{bottom:-66rpx;left:-60rpx}.bottom-right{bottom:-66rpx;right:-60rpx}.bottom-center{bottom:-100rpx;left:50%;transform:translateX(-50%)}

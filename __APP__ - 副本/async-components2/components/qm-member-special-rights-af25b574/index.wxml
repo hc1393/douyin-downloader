@@ -1,0 +1,28 @@
+<view class="box-border p-0rpx_i_" style="{{info&&info.miniStyle}};">
+    <view class="flex flex-col items-center box-border px-24rpx pt-0 pb-10rpx">
+        <view class="w-_bl_100_p__br_ flex justify-between items-center lh-50rpx">
+            <view class="text-_bl__h_fff_br_ text-36rpx" style="color:{{benefiteProps.titleColor}};">{{benefiteProps.title}}</view>
+            <viw bindtap="toPrivilegeComparison" class="text-_bl__h_999_br_ text-24rpx" data-img="{{benefiteProps.rightsCompareImg}}" wx:if="{{benefiteProps.enableRightsCompare}}">特权对比<text class="text-24rpx ml-6rpx i-jiantou-you"></text>
+            </viw>
+        </view>
+        <view class="flex flex-wrap justify-between" wx:if="{{benefiteProps.list&&benefiteProps.list.length}}">
+            <view bindtap="showPrivilegeImg" class="w-_bl_25_p__br_ flex justify-center items-center flex-col mt-32rpx" data-detail="{{item.detail}}" wx:for="{{benefiteProps.list}}" wx:key="index">
+                <view class="w-80rpx h-80rpx mb-6rpx">
+                    <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,item.icon,0)}}"></image>
+                </view>
+                <view class="w-_bl_100_p__br_ text-24rpx text-_bl__h_fff_br_ lh-30rpx text-center" style="color: {{benefiteProps.rightsColor}};" wx:if="{{benefiteProps.type==2}}">{{item.title}}</view>
+            </view>
+        </view>
+    </view>
+    <pop-up bindclose="hideBox" position="center" show="{{showDialog}}" zIndex="{{1001}}">
+        <view catchtap="noop">
+            <view class="w-600rpx h-800rpx">
+                <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,currentPrivilegeImg,0)}}"></image>
+            </view>
+            <view catchtap="hideBox" class="absolute w-52rpx h-52rpx right-0 bottom--80rpx left-0 m-auto flex items-center justify-center">
+                <view class="i-guanbi4 text-white text-60 opacity-50"></view>
+            </view>
+        </view>
+    </pop-up>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

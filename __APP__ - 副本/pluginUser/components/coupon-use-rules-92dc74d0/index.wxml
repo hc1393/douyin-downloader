@@ -1,0 +1,102 @@
+<view class="w-full px-24 box-border overflow-hidden {{show?'h-fit':'h-0'}}">
+    <view class="flex mb-20" wx:if="{{isShowId}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i1+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{couponId}}</text>
+        <view bindtap="onCopy" class="ml-6 text-_bl__h_666_br_ text-24 text-primary extend-click">{{_i2}}</view>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowBrand}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i3+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{applyBrandText}}</text>
+    </view>
+    <view class="flex items-center mb-20" wx:if="{{isShowCard}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i4+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{applyCardText}}</text>
+        <view bindtap="onSeeCard" class="ml-6 text-_bl__h_666_br_ text-24 text-primary extend-click" wx:if="{{isShowSeeCard}}">
+            <text class="text-24 text-primary">{{_i5}}</text>
+            <text class="i-arrow-r _i_text-20 _i_text-primary"></text>
+        </view>
+    </view>
+    <view class="flex items-center mb-20" wx:if="{{isShowGiftCard}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i6+'：\n      '}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{applyGiftCardText}}</text>
+        <view bindtap="onSeeGiftCard" class="ml-6 text-_bl__h_666_br_ text-24 text-primary extend-click" wx:if="{{isShowSeeGiftCard}}">
+            <text class="text-24 text-primary">{{_i7}}</text>
+            <text class="i-arrow-r _i_text-20 _i_text-primary"></text>
+        </view>
+    </view>
+    <view class="flex items-center mb-20" wx:if="{{isShowStore}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i8+'：'}}</text>
+        <view bindtap="onSeeStore" class="ml-6 text-_bl__h_666_br_ text-24 text-primary extend-click">
+            <text class="text-24 text-primary">{{_i9}}</text>
+            <text class="i-arrow-r _i_text-20 _i_text-primary"></text>
+        </view>
+    </view>
+    <view class="flex items-center mb-20" wx:if="{{isShowStoreGoods}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i10+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24" wx:if="{{isDynamicGoods}}">{{applyDynamicGoodsText}}</text>
+        <view bindtap="onSeeGoods" class="ml-6 text-_bl__h_666_br_ text-24 text-primary extend-click" wx:else>
+            <text class="text-24 text-primary">{{_i11}}</text>
+            <text class="i-arrow-r _i_text-20 _i_text-primary"></text>
+        </view>
+    </view>
+    <view class="flex items-center mb-20" wx:if="{{isShowMallGoods}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i12+'：'}}</text>
+        <view bindtap="onSeeMallGoods" class="ml-6 text-_bl__h_666_br_ text-24 text-primary extend-click">
+            <text class="text-24 text-primary">{{_i13}}</text>
+            <text class="i-arrow-r _i_text-20 _i_text-primary"></text>
+        </view>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowUseChannel}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i14+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{useChannelText}}</text>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowUseScene}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i15+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{useSceneText}}</text>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowValidityPeriod}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i16+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{validityPeriod}}</text>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowUsePeriod}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i17+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{usePeriod}}</text>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowDisabledTimes}}">
+        <view class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i18+'：'}}</view>
+        <view class="text-_bl__h_666_br_ font-500 text-24 whitespace-pre-line">{{disabledTimes}}</view>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowAdditionalGoods}}">
+        <view class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i19+'：'}}</view>
+        <view class="text-_bl__h_666_br_ font-500 text-24 whitespace-pre-line">{{additionalGoods}}</view>
+    </view>
+    <view class="flex mb-20" wx:if="{{restrictedPayText}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i20+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{restrictedPayText}}</text>
+    </view>
+    <view class="flex mb-20" wx:if="{{needToPayText}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i21+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{needToPayText}}</text>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowCouponSource}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i22+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{couponSource}}</text>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowCouponDesc}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i23+'：'}}</text>
+        <text class="w-520 text-_bl__h_666_br_ font-500 text-24 whitespace-pre-wrap break-words">{{couponDesc}}</text>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowUsableCount}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i24+'：'}}</text>
+        <text class="text-_bl__h_666_br_ font-500 text-24">{{usableCountText}}</text>
+    </view>
+    <view class="flex mb-20" wx:if="{{isShowWriteOffInfo}}">
+        <text class="text-_bl__h_666_br_ font-500 text-24 whitespace-nowrap">{{_i25+'：'}}</text>
+        <view class="flex flex-col ml-6">
+            <text class="text-24 text-primary" wx:if="{{__oc__.g( verifyData,['sellerName'] )}}">{{'\n          '+_i26+'：'+verifyData.sellerName+'\n        '}}</text>
+            <text class="text-24 text-primary" wx:if="{{__oc__.g( verifyData,['multiStoreName'] )}}">{{'\n          '+_i27+'：'+verifyData.multiStoreName+'\n        '}}</text>
+            <text class="text-24 text-primary" wx:if="{{__oc__.g( verifyData,['orderNo'] )}}">{{'\n          '+_i28+'：'+verifyData.orderNo+'\n        '}}</text>
+        </view>
+    </view>
+</view>
+<wxs module="__oc__" src="../../../wxs/oc71f5331b.wxs"/>

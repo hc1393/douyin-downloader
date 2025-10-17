@@ -1,0 +1,14 @@
+<std-base-dialog id="__std_baseDialog" maskClosable="{{false}}" openDelay="200">
+    <view catchtap="noop" catchtouchmove="noop" class="relative w-600rpx h-720rpx flex flex-col rd-24rpx p-t-40rpx box-border" wx:if="{{medalInfo}}">
+        <view class="absolute top-0 left-0 w-full h-full rd-24rpx overflow-hidden z--1 bg-_h_fff">
+            <image lazyLoad class="w-full block" mode="widthFix" src="{{__oss__.s(mpxExt,medalInfo.popBackgroundImage,0)}}" wx:if="{{medalInfo.popBackgroundImage}}"></image>
+            <image lazyLoad class="w-full block mt--72rpx" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2025/06/12/reward-sunshine-bg.png',0)}}"></image>
+        </view>
+        <image lazyLoad class="w-360rpx h-360rpx block mx-auto mb-32rpx rd-50_p_ overflow-hidden z-100" src="{{__oss__.s(mpxExt,medalInfo.litMajorIcon,0)}}"></image>
+        <view class="text-_bl__h_333_br_ text-center text-40rpx font-500 lh-normal px-10rpx mb-80rpx truncate">{{medalInfo.badgeName}}</view>
+        <view catchtap="bindMedalLight" class="w-280rpx h-96rpx m-x-auto rd-48rpx bg-_bl__h_F47B24_br_ c-_h_fff text-32rpx flex justify-center items-center" style="background: {{primaryColor}};" wx:if="{{medalInfo.badgeStatus===0}}">立即点亮</view>
+        <view catchtap="bindLink" class="w-280rpx h-96rpx m-x-auto rd-48rpx border-1rpx border-solid border-_bl__h_F47B24_br_ box-border c-_bl__h_F47B24_br_ text-32rpx flex justify-center items-center" style="border-color: {{primaryColor}}; color: {{primaryColor}};" wx:else>查看</view>
+        <text catchtap="hide" class="_i_absolute i-close2 text-_bl__h_FFF_br_ _i_text-56 extend-click bottom--100rpx left-_bl_50_p__br_ translate-x--50_p_"></text>
+    </view>
+</std-base-dialog>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

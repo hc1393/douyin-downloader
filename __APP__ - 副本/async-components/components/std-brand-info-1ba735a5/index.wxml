@@ -1,0 +1,5 @@
+<view class="items-center flex justify-start">
+    <image lazyLoad class="bg-hex-eee rounded-full h-34 mr-16 w-34" src="{{__oss__.s(mpxExt,brandLogo,0)}}"></image>
+    <view class="text-hex-333 text-30 font-700 leading-42">{{brandName}}</view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

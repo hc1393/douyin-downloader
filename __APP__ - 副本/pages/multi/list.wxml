@@ -1,0 +1,93 @@
+<std-navigation-bar class=" _0cd1dd2d mpx-app-scope" linearGradientBackground="background:#fff" title="{{_i1}}" titleColor="#333333" transparentBack="true" wx:if="{{!isDefaultNav}}"></std-navigation-bar>
+<view class="page {{modeLarge=='large'?'multi_large':''}} _0cd1dd2d mpx-app-scope">
+    <view class=" _0cd1dd2d mpx-app-scope" id="fixed-header" style="top: {{topHeight}}px;">
+        <view bindtap="jumpChoice" class="multi-hader-wrapper _0cd1dd2d mpx-app-scope" data-qm_track-belong_event="Order_DeliveryStoreList_BtnClick" data-qm_track-button_name="选择收货地址" data-qm_track-city_name="{{curAddressCity}}" data-qm_track-first_category="选择收货地址" data-qm_track-order_type="个人点单" wx:if="{{isShow&&loadStatus==='ok'&&isOpenLocation&&choiceObj.street}}">
+            <view class="address_sup-font _0cd1dd2d mpx-app-scope">{{_i2}}</view>
+            <view class="multi_address_index _0cd1dd2d mpx-app-scope">
+                <view class="address_index_title _0cd1dd2d mpx-app-scope">{{choiceObj.name||choiceObj.street}}</view>
+                <view class="address_index_rigth flex items-center justify-center _0cd1dd2d mpx-app-scope">
+                    <view class="i-chaidanjiantou-you text-black text-30 _0cd1dd2d mpx-app-scope"></view>
+                </view>
+            </view>
+            <view class="address_sup-font _0cd1dd2d mpx-app-scope" wx:if="{{showNameLine}}">
+                <text class=" _0cd1dd2d mpx-app-scope">{{choiceObj.acceptName}} </text>
+                <text class=" _0cd1dd2d mpx-app-scope" wx:if="{{choiceObj.sexName}}">({{choiceObj.sexName}}) </text>
+                <text class=" _0cd1dd2d mpx-app-scope">{{choiceObj.mobile}}</text>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{isShow}}">
+        <view class="safe-area-box _0cd1dd2d mpx-app-scope" wx:if="{{loadStatus==='ok'}}">
+            <view class="storelist-wrap _0cd1dd2d mpx-app-scope">
+                <block wx:if="{{storeList.length}}">
+                    <block wx:if="{{takeawayShopListSwitch&&!selectCity}}">
+                        <block wx:if="{{canOrderList.length>0}}">
+                            <view class="online-order-title _0cd1dd2d mpx-app-scope" wx:if="{{canOrderList.length}}">{{_i3}}</view>
+                            <store-list-cart bindselectMulti="selectMulti" class=" _0cd1dd2d mpx-app-scope" selectMultiId="{{selectMultiId}}" storeList="{{canOrderList}}" storeType="canOrder"></store-list-cart>
+                        </block>
+                        <block wx:if="{{doNotOrderList.length>0}}">
+                            <view bindtap="handleUnDeliveryList" class="undelivery-order-title _0cd1dd2d mpx-app-scope">
+                                <text class=" _0cd1dd2d mpx-app-scope">{{_i4}}</text>
+                                <text class="iconfont i-jiantou-shang undelivery-order-title-icon _0cd1dd2d mpx-app-scope" wx:if="{{!isDoNotOrderStore}}"></text>
+                                <text class="iconfont i-jiantou-xia undelivery-order-title-icon _0cd1dd2d mpx-app-scope" wx:else></text>
+                            </view>
+                            <view animation="listAnimation" class=" _0cd1dd2d mpx-app-scope" style="overflow: hidden;{{isDoNotOrderStore?'height:0':'height:auto'}}">
+                                <store-list-cart bindselectMulti="selectMulti" class=" _0cd1dd2d mpx-app-scope" selectMultiId="{{selectMultiId}}" storeList="{{doNotOrderList}}" storeType="doNotOrder"></store-list-cart>
+                            </view>
+                        </block>
+                    </block>
+                    <block wx:else>
+                        <view class="online-order-title _0cd1dd2d mpx-app-scope" wx:if="{{deliveryList.length}}">{{_i5}}</view>
+                        <store-list-cart bindselectMulti="selectMulti" class=" _0cd1dd2d mpx-app-scope" selectMultiId="{{selectMultiId}}" storeList="{{deliveryList}}"></store-list-cart>
+                    </block>
+                    <view class="un-delivery-list _0cd1dd2d mpx-app-scope" wx:if="{{unDeliveryList.length}}">
+                        <store-list-cart bindselectMulti="selectMulti" class=" _0cd1dd2d mpx-app-scope" selectMultiId="{{selectMultiId}}" storeList="{{unDeliveryList}}"></store-list-cart>
+                    </view>
+                </block>
+                <block wx:else>
+                    <block wx:if="{{isOpenLocation}}">
+                        <empty-image class=" _0cd1dd2d mpx-app-scope" src="{{defaultGraph1.customImg||defaultGraph1.defaultImg}}" text="{{defaultGraph1.text}}"></empty-image>
+                        <view class="select-other-city-wrapper _0cd1dd2d mpx-app-scope" wx:if="{{isShowCall}}">
+                            <view bindtap="selectOtherCity" class="select-other-city-btn _0cd1dd2d mpx-app-scope" style="background-color: {{colorTheme}}">{{_i6}}</view>
+                        </view>
+                    </block>
+                    <view class="no-anthorize-location-wrapper _0cd1dd2d mpx-app-scope" wx:else>
+                        <image class="no-anthorize-location-image _0cd1dd2d mpx-app-scope" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/07/23/adc5016340ab1426.png',0)}}"></image>
+                        <view class="no-anthorize-location-text _0cd1dd2d mpx-app-scope">{{_i7}}</view>
+                        <view class="no-anthorize-location-btn-wrapper _0cd1dd2d mpx-app-scope">
+                            <block wx:if="{{!locationSettingIsOpen}}">
+                                <view bindtap="authorizeLocation" class="no-anthorize-location-btn _0cd1dd2d mpx-app-scope" style="background-color: {{colorTheme}}">{{_i8}}</view>
+                                <view bindtap="toSelectAddress" class="no-anthorize-location-btn no-anthorize-location-btn-normal _0cd1dd2d mpx-app-scope" style="border-color: {{colorTheme}};color:{{colorTheme}};">{{_i9}}</view>
+                            </block>
+                            <view bindtap="toSelectAddress" class="no-anthorize-location-btn _0cd1dd2d mpx-app-scope" style="background-color: {{colorTheme}}" wx:else>{{_i10}}</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <view class="w-40 h-40 mx-auto mt-20 _0cd1dd2d mpx-app-scope" style="{{bottomLoadMB}}" wx:if="{{bottomLoading}}">
+                <image class="w-full h-full _0cd1dd2d mpx-app-scope" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/10/28/emptygiftloading.gif',0)}}"></image>
+            </view>
+        </view>
+        <view class="skeleton-screen-view _0cd1dd2d mpx-app-scope" style="height: {{windowHeight+'px'}};width:{{windowWidth+'px'}};" wx:elif="{{skeletonEnableShow&&loadStatus!='error'}}">
+            <image class=" _0cd1dd2d mpx-app-scope" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/04/02/storelist-gjp.gif',0)}}" style="width: 100%; height: 100%"></image>
+        </view>
+        <qm-loading bindreload="reload" class=" _0cd1dd2d mpx-app-scope" loadStatus="{{loadStatus}}" loadStatusErrorDesc="{{loadStatusErrorDesc}}" loadErrorInfo="{{loadErrorInfo}}" wx:else></qm-loading>
+        <view class="store-called _0cd1dd2d mpx-app-scope" wx:if="{{isShowCall}}">
+            <view class="called-num _0cd1dd2d mpx-app-scope" wx:if="{{cityCallNum}}">{{_i11}}<text class=" _0cd1dd2d mpx-app-scope" style="color: {{colorTheme}};">{{cityCallNum}}</text>{{_i12}}</view>
+            <view class="called-btn _0cd1dd2d mpx-app-scope">
+                <view bindtap="handleCall" class="called-btn-item _0cd1dd2d mpx-app-scope" data-element-type="view" data-operation-type="召唤门店">{{_i13}}</view>
+                <view class="called-btn-item called-btn-ml _0cd1dd2d mpx-app-scope" wx:if="{{joinAppletId}}">
+                    <navigator appId="{{joinAppletId}}" class=" _0cd1dd2d mpx-app-scope" openType="navigate" path="pages/index/index" target="miniProgram">{{_i14}}</navigator>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<pop-up bindclose="closeErrorPopup" class=" _0cd1dd2d mpx-app-scope" show="{{!!errorPopup}}">
+    <view class="error-popup-wrap _0cd1dd2d mpx-app-scope">
+        <image class="error-popup-pic _0cd1dd2d mpx-app-scope" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/05/25/gpcoupon_error.png',0)}}"></image>
+        <view class="error-popup-font _0cd1dd2d mpx-app-scope">{{errorPopupFont}}</view>
+        <view bindtap="closeErrorPopup" class="error-popup-btn _0cd1dd2d mpx-app-scope" style="background-color: {{colorTheme}};">{{_i15}}</view>
+    </view>
+</pop-up>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

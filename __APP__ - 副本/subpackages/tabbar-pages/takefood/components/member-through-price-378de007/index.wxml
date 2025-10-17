@@ -1,0 +1,6 @@
+<view class="flex items-baseline">
+    <text class="text-24 c-_h_FC4930 font-500 leading-120_p_">{{currencySymbol}}</text>
+    <text class="text-36 c-_h_FC4930 font-500 leading-140_p_">{{memberPrice}}</text>
+    <text class="text-24 c-_h_FC4930 font-500 leading-120_p_" wx:if="{{isAdd===1}}">起</text>
+    <text class="pl-4 text-22 c-_h_999 font-400 leading-140_p_ line-through">{{currencySymbol+showPriceLow}}</text>
+</view>

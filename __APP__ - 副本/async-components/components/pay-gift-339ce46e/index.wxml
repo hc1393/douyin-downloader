@@ -1,0 +1,74 @@
+<view class="gift" wx:if="{{isShowPayGift}}">
+    <view catchtap="closePopup" catchtouchmove="noop" class="fixed top-0 left-0 z-999 w-_bl_100_p__br_ h-_bl_100_p__br_ bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_"></view>
+    <view class="fixed top-_bl_50_p__br_ left-_bl_50_p__br_ z-1000" style="transform: translate(-50%, -50%)">
+        <view class="w-_bl_100_p__br_" style="{{background?'margin-bottom: 30rpx;':''}}" wx:if="{{!orderNo}}">
+            <view class="font-400 text-48rpx text-_bl__h_ffffff_br_ lh-67rpx text-center font-not-italic normal-case">消费有礼</view>
+            <view class="mt-8rpx font-400 text-26rpx text-_bl__h_dbdbdb_br_ lh-36rpx text-center font-not-italic normal-case">完成下单后将获得下方礼品</view>
+        </view>
+        <image class="w-600rpx h-256rpx mb--72rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/01/04/gift-popbox-top@2x.png',0)}}" wx:if="{{!background}}"></image>
+        <view catchtouchmove="noop" class="box-border px-30rpx pt-0 pb-28rpx w-600rpx bg-gradient-linear bg-gradient-_bl_214deg_2c__h_ff5d63_0_p__2c__h_fc1e34_100_p__br_ bg-no-repeat bg-_bl_length_c_contain_br_ bg-center border-rd-40rpx flex flex-col" style="{{background?' background-image:url('+background+'); height: 800rpx;':''}}">
+            <scroll-view scrollY class="mt-100rpx {{background?'flex-1 h-0':'max-h-800rpx'}}">
+                <view class="pb-60rpx relative">
+                    <view class="relative flex mt-16rpx pt-26rpx pb-26rpx pl-22rpx pr-45rpx bg-_bl__h_f5f5f5_br_ border-rd-10rpx first-mt-0" wx:if="{{hasOtherRights}}">
+                        <image class="flex-_bl_0_0_auto_br_ w-100rpx h-100rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,payGift.benefitImage||'https://images.qmai.cn/resource/20210824210816/2022/02/17/default-picture.png',0)}}"></image>
+                        <view class="flex flex-col ml-24rpx {{isShowBtn?'justify-between':'justify-center'}}">
+                            <view class="text-_bl__h_333333_br_ font-bold text-30rpx line-clamp-2">{{payGift.benefitName}}</view>
+                            <block wx:if="{{isShowBtn}}">
+                                <view bindtap="lookEquity" class="flex items-center box-border w-128rpx h-42rpx text-_bl__h_f93a4a_br_ text-24rpx" data-type="2" wx:if="{{hasOtherRights&&exchange&&payGift.benefitLink}}">查看<view class="iconfont i-jiantou-you text-22rpx"></view>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view class="pt-10rpx text-_bl__h_999999_br_ text-24rpx" wx:if="{{payGift.benefitDescription}}">{{payGift.benefitDescription}}</view>
+                            </block>
+                        </view>
+                    </view>
+                    <block wx:if="{{hasCoupon}}">
+                        <view class="relative flex mt-16rpx pt-26rpx pb-26rpx pl-22rpx pr-45rpx bg-_bl__h_f5f5f5_br_ border-rd-10rpx first-mt-0" wx:for="{{coupons}}" wx:key="couponTemplateId">
+                            <view class="flex">
+                                <view class="w-150rpx h-120rpx flex flex-col items-center justify-center shrink-0" wx:if="{{item.templateInfo}}">
+                                    <coupon-sale couponInfo="{{item.templateInfo}}"></coupon-sale>
+                                    <view class="font-400 text-22rpx text-_bl__h_666666_br_ lh-31rpx text-center font-not-italic normal-case" wx:if="{{item.templateInfo.type===14}}">兑换券</view>
+                                    <view class="font-400 text-22rpx text-_bl__h_666666_br_ lh-31rpx text-center font-not-italic normal-case" wx:elif="{{item.templateInfo.type===13&&item.templateInfo.useChannel.length==1&&item.templateInfo.useChannel[0]==2}}">限线下使用</view>
+                                    <view class="font-400 text-22rpx text-_bl__h_666666_br_ lh-31rpx text-center font-not-italic normal-case" wx:elif="{{item.templateInfo.thresholdType===1}}">{{_i1}}</view>
+                                    <view class="font-400 text-22rpx text-_bl__h_666666_br_ lh-31rpx text-center font-not-italic normal-case" wx:else>满{{item.templateInfo.useThreshold||0}}{{item.templateInfo.thresholdType==2?'元':''}}{{item.templateInfo.thresholdType==3?'件':''}}{{item.templateInfo.thresholdType==4?'千克':''}}可用</view>
+                                </view>
+                                <view class="flex items-center justify-center flex-_bl_0_0_auto_br_ w-100rpx h-100rpx" wx:else>
+                                    <text class="text-58rpx iconfont i-paygift-sanfangquanyi" style="color: {{colorTheme}}"></text>
+                                </view>
+                                <view class="flex flex-col ml-24rpx {{isShowBtn?'justify-between':'justify-center'}}">
+                                    <view class="text-_bl__h_333333_br_ font-bold text-30rpx line-clamp-2">{{item.couponName}}</view>
+                                    <view bindtap="lookEquity" class="{{'flex items-center box-border h-42rpx text-_bl__h_f93a4a_br_ text-24rpx '+(item.benefitsType===1?'w-154rpx':'w-128rpx')}}" data-type="{{item.benefitsType}}" wx:if="{{isShowBtn}}">查看<view class="iconfont i-jiantou-you text-22rpx"></view>
+                                    </view>
+                                    <block wx:else>
+                                        <view class="pt-10rpx text-_bl__h_999999_br_ text-24rpx" wx:if="{{item.expireTime}}">有效期：{{item.expireTime}}</view>
+                                    </block>
+                                </view>
+                            </view>
+                            <view class="absolute top-0 right-0 w-45rpx h-26rpx text-_bl__h_ffffff_br_ font-500 text-18rpx lh-26rpx text-center bg-_bl__h_f95731_br_ border-rd-_bl_0px_8rpx_0px_8rpx_br_">{{item.couponNum}}{{item.benefitsType===1?'张':'份'}}</view>
+                        </view>
+                    </block>
+                    <block wx:if="{{points.length>0}}">
+                        <view class="relative flex mt-16rpx pt-26rpx pb-26rpx pl-22rpx pr-45rpx bg-_bl__h_f5f5f5_br_ border-rd-10rpx first-mt-0" wx:for="{{points}}" wx:key="index">
+                            <view class="flex">
+                                <view class="flex items-center justify-center flex-_bl_0_0_auto_br_ w-100rpx h-100rpx">
+                                    <text class="text-58rpx iconfont i-paygift-jifen" style="color: {{colorTheme}}"></text>
+                                </view>
+                                <view class="flex flex-col justify-center ml-24rpx">
+                                    <view class="text-_bl__h_333333_br_ font-bold text-30rpx line-clamp-2">{{item.giveIntegral}}积分</view>
+                                    <view class="pt-10rpx text-_bl__h_999999_br_ text-24rpx">积分可兑换好礼</view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+            <view class="w-600rpx bg-gradient-linear bg-gradient-_bl_180deg_2c__h_fe373f_0_p__2c__h_ff0a23_100_p__br_ shadow-_bl_inset_0rpx_0rpx_55rpx_0rpx_rgba_pl_255_2c_255_2c_255_2c_0_d_5_pr__br_ border-rd-_bl_0_0_40rpx_40rpx_br_ px-30rpx py-0 box-border ml--30rpx flex flex-col justify-end items-center relative z-2" style="{{background?' background: none; box-shadow: none;':''}}">
+                <image class="absolute left-0 bottom-0 w-600rpx h-120rpx z-0" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/01/04/gift-pop-footer-bg@2x.png',0)}}" wx:if="{{!background}}"></image>
+                <view class="mt-24rpx text-_bl__h_666666_br_ text-24rpx z-1 text-center" style="{{!background?'color: #ffffff;':''}}">赠送礼品数量有限，具体以实际发放为准</view>
+                <view catchtap="linkTakeFood" class="{{!background?'w-540rpx h-88rpx mt-16rpx bg-gradient-linear bg-gradient-_bl_180deg_2c__h_ffeed9_0_p__2c__h_fecd95_100_p__br_ shadow-_bl_inset_0rpx_6rpx_5rpx_0rpx__h_fff4de_2c_inset_0rpx_-8rpx_6rpx_0rpx__h_f7bf8b_br_ border-rd-44rpx flex justify-center items-center text-30rpx font-bold text-_bl__h_ff3441_br_ z-1':'w-540rpx h-88rpx mt-16rpx border-rd-44rpx flex justify-center items-center text-30rpx font-bold text-_bl__h_ffffff_br_ z-1'}}" style="background-color: {{colorTheme}};" wx:if="{{orderNo&&exitCoupons}}">去使用</view>
+            </view>
+        </view>
+        <view catchtap="hidePopup" class="flex items-center justify-center w-80rpx h-80rpx text-56rpx text-_bl__h_ffffff_br_ rotate-45 mx-auto mt-20rpx mb-0 iconfont i-add-circle"></view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

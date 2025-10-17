@@ -1,0 +1,18 @@
+<template name="qm-image-nav">
+    <view catchtap="bindEvent" data-item="{{data}}" style="{{data&&data.miniStyle}}" wx:if="{{data.propsValue.imgs&&data.propsValue.imgs.length}}">
+        <scroll-view class="flex items-center w-_bl_100_p__br_ whitespace-nowrap" scrollX="{{true}}" wx:if="{{data.propsValue.type==2}}">
+            <view class="inline-flex">
+                <view catchtap="bindLink" class="w-180rpx h-180rpx" data-item="{{item}}" data-qm_track-belong_event="Common_Home_BtnClick, Common_MySelf_BtnClick, Campaign_FriendZone_BtnClick" data-qm_track-button_name="{{item.title||item.linkText}}" data-qm_track-first_category="金刚位,会员尊享权益,会友卡" data-qm_track-material_id="{{item.img}}" data-qm_track-material_name="{{item.title||item.linkText}}" style="margin-right: {{data.propsValue.gutter}}rpx;height: {{data.commonStyle.height}}px;;width: {{data.commonStyle.height}}px;" wx:for="{{data.propsValue.imgs}}" wx:key="index">
+                    <image class="block w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,item.img,0)}}"></image>
+                </view>
+            </view>
+        </scroll-view>
+        <view class="flex items-center h-_bl_100_p__br_" wx:else>
+            <view catchtap="bindLink" class="flex-1 h-_bl_100_p__br_" data-item="{{item}}" data-qm_track-belong_event="Common_Home_BtnClick, Common_MySelf_BtnClick, Campaign_FriendZone_BtnClick" data-qm_track-button_name="{{item.title||item.linkText}}" data-qm_track-first_category="金刚位,会员尊享权益,会友卡" data-qm_track-material_id="{{item.img}}" data-qm_track-material_name="{{item.title||item.linkText}}" wx:for="{{data.propsValue.imgs}}" wx:key="index">
+                <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,item.img,0)}}" style="height: {{data.propsValue&&data.propsValue.isShowTitle?'calc(100% - 30px)':'100%'}}"></image>
+                <view class="w-_bl_100_p__br_ h-60 leading-60" wx:if="{{data.propsValue&&data.propsValue.isShowTitle}}">{{item.title}}</view>
+            </view>
+        </view>
+    </view>
+</template>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

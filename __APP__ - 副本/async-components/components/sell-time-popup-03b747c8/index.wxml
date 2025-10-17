@@ -1,0 +1,13 @@
+<view catchtap="close" class="fixed top-0 right-0 bottom-0 left-0 z-1000 flex items-center justify-center bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_ animate-_bl_fade-in_br_ animate-duration-0_d_3s" wx:if="{{visible}}">
+    <view catchtap class="w-570rpx overflow-hidden bg-white border-rd-16rpx">
+        <view class="flex flex-col items-center mx-0 my-40rpx" wx:if="{{goodsSaleDate}}">
+            <text class="pb-8rpx text-_bl__h_333333_br_ text-30rpx font-500">{{_i1}}</text>
+            <text class="text-_bl__h_666666_br_ text-26rpx lh-42rpx text-center">{{goodsSaleDate}}</text>
+        </view>
+        <view class="flex flex-col items-center mx-0 my-40rpx" wx:if="{{goodsSaleTimeArr&&goodsSaleTimeArr.length}}">
+            <text class="pb-8rpx text-_bl__h_333333_br_ text-30rpx font-500">{{_i2}}</text>
+            <text class="text-_bl__h_666666_br_ text-26rpx lh-42rpx text-center" wx:for="{{goodsSaleTimeArr}}">{{item}}</text>
+        </view>
+        <view catchtap="close" class="flex items-center justify-center w-_bl_100_p__br_ h-100rpx text-30rpx border-t-1px border-t-solid border-t-_bl__h_eee_br_" hoverClass="bg-hex-eee" style="color: {{colorTheme}};">{{_i3}}</view>
+    </view>
+</view>

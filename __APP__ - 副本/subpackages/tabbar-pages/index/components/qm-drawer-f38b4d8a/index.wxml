@@ -1,0 +1,8 @@
+<view class="fixed w-screen h-screen opacity-0 transition-all duration-_bl_0_d_3s_br_" style="background-color: {{drawerData.propsValue.maskBgBlackColor?'#fff':'#000'}};opacity: {{show?'0.8':'0'}};" wx:if="{{showMengban}}"></view>
+<view class="relative top-_bl_calc_pl_100vh_-_496rpx_pr__br_ z-19 box-border left-0">
+    <image class="fixed top-_bl_calc_pl_100vh_-_640rpx_pr__br_ w-40 h-40 m-auto inset-x-0" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2022/10/09/drawer-arrow-up.gif',0)}}" wx:if="{{drawerData.propsValue.showDropDownArrow}}"></image>
+    <view class="transition-all duration-_bl_0_d_3s_br_" style="{{drawerData.miniStyle}};{{show?changeStyle:''}}{{paddingBottom}};">
+        <component-tree bindclick="bindLink" bindrunAuthorization="runAuthorization" bindsetShowCartIconEvent="setShowCartIcon" bindskuEvent="handleShowSKU" bindtapEvent="bindEvent" designData="{{drawerData.subs}}" traceScreenType="{{traceScreenType}}"></component-tree>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../../../wxs/oss28ac43a0.wxs"/>

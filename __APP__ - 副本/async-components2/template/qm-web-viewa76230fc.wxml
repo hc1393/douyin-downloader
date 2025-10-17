@@ -1,0 +1,3 @@
+<template name="qm-web-view">
+    <web-view bindmessage="eventHandler" class="v-qm-web-view" src="{{data.propsValue.url}}" style="{{data&&data.miniStyle}};" wx:if="{{data.propsValue.url}}"></web-view>
+</template>

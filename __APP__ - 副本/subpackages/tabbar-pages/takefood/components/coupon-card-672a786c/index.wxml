@@ -1,0 +1,31 @@
+<view class="{{'w-100_p_ bg-_h_fff rounded-20 '+(mode!=='simple'?'coupon':'')+' '+(themeBg?'bg-primary-opacity-20':'')+' _672a786c '}}" style="--theme-color: {{colorTheme}};">
+    <view class="flex items-center box-border py-24 {{mode!=='simple'?'h-140 pb-10':'min-h-160'}} _672a786c ">
+        <view class="px-8 _672a786c " wx:if="{{coupon.templateDto}}">
+            <coupon-besides class=" _672a786c " couponInfo="{{couponTools.couponInfoFilter(coupon)}}" disabled="{{disabled}}"></coupon-besides>
+        </view>
+        <view class="flex-1 flex flex-col justify-center items-start _672a786c ">
+            <text class="text-32 font-500 leading-45 c-_h_111 text-left _672a786c ">{{coupon.templateDto.name}}</text>
+            <text class="text-24 font-400 leading-34 c-_h_666 pt-8 text-left _672a786c " wx:if="{{isGet}}">{{coupon.expireDesc||''}}</text>
+            <text class="text-24 font-400 leading-34 c-_h_666 pt-8 text-left _672a786c " wx:else>{{coupon.templateDto.validDateExplain||''}}</text>
+        </view>
+        <view class="{{'flex items-center justify-center w-148 h-48 rounded-48 mr-24 '+(themeBg?'bg-_bl_rgba_pl_255_2c_255_2c_255_2c_0_d_5_pr__br_':'bg-primary-opacity-10')+' _672a786c '}}" wx:if="{{unLocked}}">
+            <text class="i-Frame text-24 font-400 leading-34 c-primary _672a786c "></text>
+            <text class="text-24 font-400 leading-34 c-primary pl-10 _672a786c ">待解锁</text>
+        </view>
+        <image class="w-100 h-100 mr-24 _672a786c " src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/12/03/used.png',0)}}" wx:if="{{used}}"></image>
+    </view>
+    <block wx:if="{{mode!=='simple'}}">
+        <view class="flex items-center h-70 pt-10 px-24 b-0 b-t-1 b-dashed b-_h_eee _672a786c ">
+            <view catchtap="toggle" class="flex-1 flex items-center _672a786c ">
+                <text class="text-24 font-400 leading-34 c-_h_999999 mr-10 c-_bl_var_pl_--theme-color_pr__br_ _672a786c ">使用规则</text>
+                <text class="i-jiantou-xia text-24 font-400 leading-34 c-_h_999999 _672a786c "></text>
+            </view>
+            <view catchtap="toUse" class="flex items-center justify-center h-48 px-20 rounded-48 text-24 leading-34 font-400 box-border button-primary _672a786c ">去使用</view>
+        </view>
+        <view class="w-100_p_ box-border px-20 pb-24 text-left _672a786c " wx:if="{{coupon.ruleOpen}}">
+            <coupon-desc class=" _672a786c " couponInfo="{{couponTools.couponInfoFilter(coupon)}}" verifyData="{{null}}"></coupon-desc>
+        </view>
+    </block>
+</view>
+<wxs module="__oss__" src="../../../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="couponTools" src="../../wxs/coupon263e628c.wxs"/>

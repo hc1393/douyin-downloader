@@ -1,0 +1,13 @@
+<view catchtap="onBindEvent" class="design-image-hot _fda16712 " data-item="{{designData}}" style="{{__stringify__.stringifyStyle('',styleFromDesign)}}" wx:if="{{showImageHot}}">
+    <view class="design-image-hot__thumb _fda16712 ">
+        <view class="thumb _fda16712 ">
+            <image lazyLoad class="image _fda16712 " mode="widthFix" src="{{__oss__.s(mpxExt,hotImage,0)}}"></image>
+            <block wx:if="{{hotList&&hotList.length}}">
+                <view catchtap="onBindLink" class="hot-area _fda16712 " data-content="{{item.link}}" data-item="{{item}}" data-name="{{item.linkText}}" style="{{__stringify__.stringifyStyle( '',utils.currentHotAreaStyle(item) )}}" wx:for="{{hotList}}" wx:key="index"></view>
+            </block>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>
+<wxs module="utils" src="../../wxs/indexfda11a18.wxs"/>

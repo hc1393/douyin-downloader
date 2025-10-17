@@ -1,0 +1,9 @@
+<view class="fixed top-0 right-0 bottom-0 left-0 z-10009 w-_bl_100_p__br_ h-_bl_100_p__br_ mx-auto my-_bl_0_p__br_" wx:if="{{isShow&&popupShow}}">
+    <view class="absolute top-0 w-_bl_100_p__br_ h-_bl_100_p__br_ bg-_bl__h_000_br_ op-0 animate-_bl_fade-in-50_0_d_4s_0_d_2s_ease_normal_br_ animate-forwards"></view>
+    <view class="relative top-_bl_-100_p__br_ left-_bl_50_p__br_ w-640rpx border-rd-24rpx bg-_bl__h_ffffff_br_ animate-_bl_slide-in-from-top_0_d_4s_0_d_2s_ease_normal_br_ animate-forwards p-20rpx" style="transform: translate(-50%, -50%)">
+        <view class="min-h-200rpx flex justify-center items-center">{{mealSectionInfo.warnName}}距离结束还剩{{mealSectionInfo.time}}分钟</view>
+        <view class="btn-area">
+            <button bindtap="hideBox" class="w-480rpx text-_bl__h_fff_br_ border-rd-46rpx" style="background-color: {{colorTheme}}">知道了</button>
+        </view>
+    </view>
+</view>

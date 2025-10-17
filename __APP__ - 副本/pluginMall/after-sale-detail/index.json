@@ -1,0 +1,23 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "",
+  "backgroundColor": "#f2f2f2",
+  "navigationBarBackgroundColor": "#f2f2f2",
+  "enablePullDownRefresh": true,
+  "componentPlaceholder": {
+    "config-provider": "view",
+    "mall-after-sale-detail": "view",
+    "cell": "view",
+    "half-bowl": "view",
+    "love-dining": "view",
+    "love-donate": "view",
+    "material-cell": "view",
+    "merc-list": "view",
+    "plugin-demo": "view",
+    "pullNewList": "view",
+    "regift": "view",
+    "send-coupon": "view",
+    "studentVerify": "view"
+  },
+  "navigationBarTextStyle": "black"
+}

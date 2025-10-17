@@ -1,0 +1,11 @@
+<view class="w-full h-fit bg-_bl__h_FFF_br_ rd-16 overflow-hidden box-border mt-40">
+    <view class="w-full h-106 flex justify-between items-center px-24 border-b border-b-solid border-_bl__h_E5E5E5_br_ box-border">
+        <text class="block w-180 h-42 text-30 lh-42 text-_bl__h_333_br_">{{mobileText}}</text>
+        <input bindinput="onMobileInput" class="flex-1" placeholder="{{_i1}}" placeholderClass="text-30 text-_bl__h_999_br_" type="number" value="{{mobile}}"></input>
+    </view>
+    <view class="w-full h-112 flex justify-between items-center px-24 box-border">
+        <text class="block w-180 h-42 text-30 lh-42 text-_bl__h_333_br_">{{_i2}}</text>
+        <input autoFocus="{{autoFocus}}" bindinput="onVerifyCodeInput" class="flex-1" placeholder="{{_i3}}" placeholderClass="text-30 text-_bl__h_999_br_" type="number" value="{{verifyCode}}"></input>
+        <button bindtap="getVerifyCode" class="{{'button bg-white min-w-120 h-48 px-16 text-24 rd-8 _i_text-primary _i_border-primary '+(isGetCodeBtnDisable?'button-disabled':'')}}">{{verifyCodeText}}</button>
+    </view>
+</view>

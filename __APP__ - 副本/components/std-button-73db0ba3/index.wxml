@@ -1,0 +1,9 @@
+<button bind:tap="{{disabled||loading?'':'onClick'}}" class="std-button {{type==='primary'?'std-button--primary':''}} {{type==='danger'?'std-button--danger':''}} {{type==='warning'?'std-button--warning':''}} {{type==='default'?'std-button--default':''}} {{size==='large'?'std-button--large':''}} {{size==='normal'?'std-button--normal':''}} {{size==='small'?'std-button--small':''}} {{size==='mini'?'std-button--mini':''}} {{block?'std-button--block':''}} {{round?'std-button--round':''}} {{plain?'std-button--plain':''}} {{square?'std-button--square':''}} {{loading?'std-button--loading':''}} {{disabled?'std-button--disabled':''}} {{hairline?'std-button--hairline':''}} {{disabled||loading?'std-button--unclickable':''}} {{hairline?'std-hairline--surround':''}}" data-detail="{{dataDetail}}" hoverClass="none" style="{{computed.rootStyle( {plain:plain,color:color,customStyle:customStyle} )}}">
+    <block wx:if="{{loading}}">
+        <view class="std-button__loading-text" wx:if="{{loadingText}}">{{loadingText}}</view>
+    </block>
+    <view class="std-button__text" wx:else>
+        <slot></slot>
+    </view>
+</button>
+<wxs module="computed" src="../../wxs/index73db3220.wxs"/>

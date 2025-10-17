@@ -1,0 +1,6 @@
+<view catchtouchmove="noop" class=" _c0909866 ">
+    <view bindtap="handleMaskClick" class="{{'fixed top-0 left-0 right-0 bottom-0 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_6_pr__br_ transition-all duration-300 ease-in-out '+(visible?'block visible opacity-100':'invisible opacity-0')+' _c0909866 '}}" style="z-index: {{maskZIndex}}" wx:if="{{mask}}"></view>
+    <view class=" drawer-container {{mode==='left'?'drawer-container_left':''}} {{mode==='right'?'drawer-container_right':''}} {{mode==='top'?'drawer-container_top':''}} {{mode==='bottom'?'drawer-container_bottom':''}} {{visible&&mode==='left'?'drawer-left__show':''}} {{visible&&mode==='right'?'drawer-right__show':''}} {{visible&&mode==='top'?'drawer-top__show':''}} {{visible&&mode==='bottom'?'drawer-bottom__show':''}} _c0909866 " style="z-index: {{zIndex}}; background-color: {{backgroundColor}}">
+        <slot class=" _c0909866 "></slot>
+    </view>
+</view>

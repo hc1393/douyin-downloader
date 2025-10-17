@@ -1,0 +1,6 @@
+<view>
+    <view bindtap="selectMulti" class="mt-16rpx border-rd-16rpx relative" data-item="{{item}}" data-qm_track-belong_event="Order_DeliveryStoreList_BtnClick" data-qm_track-button_name="跳转门店详情" data-qm_track-city_name="" data-qm_track-first_category="选择门店" data-qm_track-order_type="个人点单" data-qm_track-store_distance="{{distance.formatDistance(item.shopDetail.distance)}}" data-qm_track-store_id="{{item.shopDetail.id}}" data-qm_track-store_name="{{item.shopDetail.name}}" data-qm_track-wait_cups="{{item.orderQueueMake.cupNum}}" wx:for="{{storeList}}" wx:key="index">
+        <store-list-item customStyle="{{selectMultiId==item.shopDetail.id?'border-color: '+colorTheme:''}}{{isAllSelected?'border-color: '+colorTheme:''}}" eatType="3" index="{{index}}" notShowLabel="{{notShowLabel}}" storeInfo="{{item}}"></store-list-item>
+    </view>
+</view>
+<wxs module="distance" src="../../wxs/trackUtilsbae1568c.wxs"/>

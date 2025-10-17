@@ -1,0 +1,5 @@
+<movable-area class="fixed left-0 h-_bl_calc_pl_100vh-_pl_240rpx_a_constant_pl_safe-area-inset-bottom_pr__pr__pr__br_ h-_bl_calc_pl_100vh-_pl_240rpx_a_env_pl_safe-area-inset-bottom_pr__pr__pr__br_ w-_bl_100_p__br_ pointer-events-none z-1111111" style="{{zIndex?'z-index:'+zIndex+';':''}}top: {{top}}px" wx:if="{{isLoad}}">
+    <movable-view bindchange="moveChange" bindtouchend="touchEnd" class="pointer-events-auto h-auto w-auto" direction="{{direction}}" x="{{x}}" y="{{y}}">
+        <slot></slot>
+    </movable-view>
+</movable-area>

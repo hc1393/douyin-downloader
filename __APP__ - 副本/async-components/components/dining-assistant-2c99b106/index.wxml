@@ -1,0 +1,35 @@
+<view class="{{' z-25 transition-transform transition-duration-0_d_4s transition-ease-_bl_linear_br_ w-164rpx h-164rpx bg-_bl__h_fff_br_ border-rd-_bl_50_p__br_ shadow-_bl_0rpx_16rpx_40rpx_0rpx_rgba_pl_0_2c_0_2c_0_2c_0_d_1_pr__br_ animate-duration-0_d_1s animate-ease-_bl_linear_br_ animate-fill-both fixed flex justify-center items-center '+(moreOrderAnimalType==='more'?'animate-name-_bl_order-expand_br_':'')+' '+(moreOrderAnimalType==='singl'?'animate-name-_bl_order-collapse_br_':'')+' '}}" style="{{stowTransformStyle}}{{diningLeft}}{{diningLeftFixedBottom}}" wx:if="{{assistantDataLength&&assistantDatas.length}}">
+    <view class="{{' w-148rpx h-148rpx border-rd-_bl_50_p__br_ animate-duration-0_d_1s animate-ease-_bl_linear_br_ animate-fill-both flex flex-col justify-center items-center '+(moreOrderAnimalType==='more'?'animate-name-_bl_order-expand-2_br_':'')+' '+(moreOrderAnimalType==='singl'?'animate-name-_bl_order-collapse-2_br_':'')+' '}}" style="background-color:{{colorTheme}}">
+        <view bindtap="diningAssistantOpen" class="flex flex-col justify-center items-center text-white" data-orderno="{{item.orderNo}}" wx:if="{{index==0||index==1&&isShowMoreOrder}}" wx:for="{{assistantDatas}}" wx:key="index">
+            <block wx:if="{{item.orderState==='unpay'}}">
+                <view class="{{item.isFontSizeThrity?'text-30':'text-36'}} font-500">{{item.countdownTime}}</view>
+                <view class="text-24 font-400 h-34">{{item.assistantDataTitle}}</view>
+            </block>
+            <block wx:elif="{{item.orderState==='hadpay'&&(item.orderType==3||item.orderType==4)||item.orderState==='delivery'}}">
+                <view class="text-30 font-500 h-42">{{item.assistantDataTitle}}</view>
+                <view class="h-34" wx:if="{{item.sendTimeText&&item.deliveryStatus!=6}}">
+                    <text class="text-18 font-400">约</text>
+                    <text class="text-24 font-400">{{item.sendTimeText}}</text>
+                    <text class="text-18 font-400">送达</text>
+                </view>
+            </block>
+            <block wx:elif="{{item.orderState==='hadpay'||item.orderState==='waitorder'||'mealpre'||item.orderState==='pickup'||item.orderState==='refunding'}}">
+                <block wx:if="{{item.selfCupContent}}">
+                    <view class="text-30 font-500 lh-42">待核销</view>
+                    <view class="text-20 font-400 lh-28 h-28 mt-4">请至门店核销</view>
+                </block>
+                <block wx:else>
+                    <view class="{{item.storeOrderNo&&index==0&&assistantDataLength>1?'h-8 w-full':''}}"></view>
+                    <view class="text-36 font-500 lh-42 h-48" wx:if="{{item.storeOrderNo}}">{{item.storeOrderNo}}</view>
+                    <view class="{{item.storeOrderNo?'text-24 font-400 lh-28 h-34':'text-30 font-500 lh-36 h-42'}}">{{item.assistantDataTitle}}</view>
+                </block>
+            </block>
+            <view class="w-88rpx mx-0 my-16rpx relative" wx:if="{{isShowMoreOrder&&index==0}}">
+                <view class="absolute top-0 left-0 box-border w-_bl_200_p__br_ h-_bl_200_p__br_ scale-50 origin-_bl_0_0_br_ pointer-events-none border-b-1px border-b-solid border-b-_bl__h_fff_br_"></view>
+            </view>
+        </view>
+        <view catchtap="showMoreOrder" class="flex justify-center items-center w-_bl_100_p__br_" wx:if="{{assistantDataLength>1}}">
+            <view class="iconfont lh-18 {{isShowMoreOrder?'i-jiantou-shang mt-16':'i-jiantou-xia mt8'}} text-white text-24rpx"></view>
+        </view>
+    </view>
+</view>

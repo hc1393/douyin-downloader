@@ -1,0 +1,17 @@
+<view catchtap="onBindEvent" class="design-image-nav _53586466 " data-item="{{data}}" style="{{__stringify__.stringifyStyle('',styleFromDesign)}}">
+    <view class="design-image-nav__container _53586466 " wx:if="{{currentProps.type===2}}">
+        <scroll-view class="design-image-nav__swiper _53586466 " scrollX="true" showScrollbar="false" style="height:{{currentStyleObj.height}}" wx:if="{{currentProps.imgs}}">
+            <view catchtap="onBindLink" class="design-image-nav__swiper__item _53586466 " data-item="{{item}}" style="width: {{currentStyleObj.height}};height:{{currentStyleObj.height}};margin-right:{{index===currentProps.imgs.length-1?0:(currentProps.gutter||30)+'rpx'}}" wx:for="{{currentProps.imgs}}" wx:key="index">
+                <image class="image _53586466 " lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item.img,0)}}"></image>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="design-image-nav__list _53586466 " wx:else>
+        <view catchtap="onBindLink" class="design-image-nav__list__item _53586466 " data-item="{{item}}" wx:for="{{currentProps.imgs}}" wx:key="index">
+            <image class="image _53586466 " lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,item.img,0)}}"></image>
+            <text class="title _53586466 " style="color: {{currentStyleObj.color}}; font-weight: {{currentStyleObj['font-weight']}}" wx:if="{{currentProps.isShowTitle}}">{{item.title||''}}</text>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>

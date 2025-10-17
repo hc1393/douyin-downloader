@@ -1,0 +1,26 @@
+<block wx:if="{{isShow}}">
+    <view catchtap="openChannelsLive" class="flex items-center relative overflow-hidden bg-_bl__h_fff_br_" style="{{videoInfo.style}};border-radius: {{videoInfo.borderRadius}}rpx" wx:if="{{liveInfo}}">
+        <image class="w-160rpx h-160rpx flex-none" mode="aspectFill" src="{{__oss__.s(mpxExt,videoInfo.living.coverImg||liveInfo.headUrl,0)}}"></image>
+        <view class="h-160rpx flex flex-1 flex-nowrap items-center w-542rpx bg-no-repeat bg-center bg-_bl_length_c_100_p__br_" style="background-color: {{videoInfo.living.bgColor}};background-image: url({{videoInfo.living.bgImg}});">
+            <view class="pl-28rpx flex-1">
+                <view class="text-_bl__h_111_br_ text-36rpx lh-50rpx font-bold whitespace-nowrap text-ellipsis overflow-hidden max-w-290rpx" style="color:{{videoInfo.living.titleColor}}">{{liveInfo.description||liveInfo.nickname}}</view>
+                <view class="inline-flex items-center h-36rpx lh-36rpx border-rd-4rpx text-24rpx px-4rpx py-0 mt-10rpx text-_bl__h_fff_br_" style="background-color: {{colorTheme}};">
+                    <image class="w-30rpx h-30rpx" mode="aspectFill" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2022/05/11/live.gif',0)}}"></image>
+                    <text>直播中</text>
+                </view>
+            </view>
+            <view class="flex justify-center items-center text-28rpx w-172rpx h-56rpx border-1px border-solid border-_bl__h_ffffff_br_ border-rd-28rpx mx-28rpx my-0 bg-_bl__h_ffffff_br_ flex-none" style="background-color: {{videoInfo.living.btnBgColor}};border-color: {{videoInfo.living.btnBorderColor||colorTheme}};color: {{videoInfo.living.btnTextColor||colorTheme}}">观看直播</view>
+        </view>
+    </view>
+    <view catchtap="reserveChannelsLive" class="flex items-center relative overflow-hidden bg-_bl__h_fff_br_" style="{{videoInfo.style}};background-color: {{videoInfo.reservation.bgColor}};background-image: url({{videoInfo.reservation.bgImg}});border-radius: {{videoInfo.borderRadius}}rpx" wx:elif="{{noticeInfo}}">
+        <image class="w-160rpx h-160rpx flex-none" mode="aspectFill" src="{{__oss__.s(mpxExt,videoInfo.reservation.coverImg||noticeInfo.headUrl,0)}}"></image>
+        <view class="h-160rpx flex flex-1 flex-nowrap items-center w-542rpx bg-no-repeat bg-center bg-_bl_length_c_100_p__br_" style="background-color: {{videoInfo.reservation.bgColor}};background-image: url({{videoInfo.reservation.bgImg}});">
+            <view class="pl-28rpx flex-1">
+                <view class="text-_bl__h_111_br_ text-36rpx lh-50rpx font-bold whitespace-nowrap text-ellipsis overflow-hidden max-w-290rpx" style="color:{{videoInfo.reservation.titleColor}}">{{noticeInfo.nickname}}</view>
+                <view class="inline-flex items-center h-36rpx lh-36rpx border-rd-4rpx text-24rpx px-4rpx py-0 mt-10rpx text-_bl__h_fff_br_" style="color: {{videoInfo.reservation.timeColor||colorTheme}}">{{noticeInfo.startTimeText}} 开播</view>
+            </view>
+            <view class="flex justify-center items-center text-28rpx w-172rpx h-56rpx border-1px border-solid border-_bl__h_ffffff_br_ border-rd-28rpx mx-28rpx my-0 bg-_bl__h_ffffff_br_ flex-none" style="background-color: {{videoInfo.reservation.btnBgColor}};border-color: {{videoInfo.reservation.btnBorderColor||colorTheme}};color: {{videoInfo.reservation.btnTextColor||colorTheme}}">预约直播</view>
+        </view>
+    </view>
+</block>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

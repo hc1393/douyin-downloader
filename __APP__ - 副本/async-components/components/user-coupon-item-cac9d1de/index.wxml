@@ -1,0 +1,66 @@
+<expansion-coupon bindr="__refEmit" class="ref_expansionCouponRef_1" data-r=".ref_expansionCouponRef_1">
+    <view class="{{'bg-_bl__h_ffffff_br_ border-rd-20rpx relative '+(couponInfo.couponsNum&&couponInfo.couponsNum>1?'z-3 shadow-_bl_0rpx_2rpx_4rpx_0rpx_rgba_pl_0_2c_0_2c_0_2c_0_d_1_pr__br_':'')}}" id="coupon-item-{{couponInfo.id}}" style="{{!error&&couponInfo.inflateStatus>0?'background-color:'+tools.hexToRgba(colorTheme,0.08):''}};">
+        <view class="w-80rpx h-30rpx border-rd-_bl_20rpx_0rpx_20rpx_0rpx_br_ absolute top-0 left-0 text-20rpx text-center lh-30rpx text-_bl__h_fff_br_ z-11" style="background:{{colorTheme}}" wx:if="{{!expanding&&couponInfo.couponsNum&&couponInfo.couponsNum>1}}">共{{couponInfo.couponsNum}}张</view>
+        <view class="{{'pt-30rpx pb-30rpx pl-0 pr-0 relative bg-no-repeat bg-_bl_length_c_100_p__100_p__br_ '+(isCouponLarge?'p-0rpx':'')}}" style="{{isSpecialCoupon?'background-image: url(https://images.qmai.cn/resource/20210824210816/2024/05/10/bw-coupons-new.png);':''}}">
+            <view class="absolute left-0 top-0 w-80rpx h-30rpx border-rd-_bl_20rpx_0_20rpx_0_br_ text-20rpx text-_bl__h_ffffff_br_ text-center" style="background: {{colorTheme}}" wx:if="{{couponInfo.couponNum}}">{{couponInfo.couponNum>1?'共':'剩'}}{{couponInfo.couponNum}}张</view>
+            <block wx:if="{{couponDesignConfig.showQrCode&&( couponDesignConfig.style==1||couponDesignConfig.style==2&&(couponDesignConfig.couponType==1||couponDesignConfig.couponType==3&&!couponInfo.bigImageUrl) )}}">
+                <image catchtap="openCode" class="w-40rpx h-40rpx absolute right-20rpx top-20rpx z-1" data-cardid="{{couponInfo.cardId}}" data-element-type="image" data-operation-type="查看优惠券二维码" data-screen-type="优惠券列表" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/08/19/5e4d3a636f784bfb.png',0)}}" wx:if="{{couponInfo.showCode}}"></image>
+            </block>
+            <view class="flex flex-col" wx:if="{{isCouponLarge}}">
+                <view class="w-702rpx h-200rpx">
+                    <image class="w-702rpx h-200rpx border-rd-_bl_20rpx_20rpx_0_0_br_ m-0rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,couponInfo.bigImageUrl||'https://images.qmai.cn/resource/20210824210816/2022/07/06/组 36 拷贝 (2).png',0)}}"></image>
+                </view>
+                <view class=" flex justify-between items-center px-24rpx py-10rpx box-border {{couponDesignConfig.showCouponTitleWithBigImgModel?'h-120rpx':'h-80rpx'}}">
+                    <view class="flex-1">
+                        <view class="{{'truncate text-_bl__h_333333_br_ text-32rpx font-bold w-_bl_100_p__br_ box-border pr-40rpx '+(couponDesignConfig.showQrCode?'max-w-590rpx':'max-w-650rpx')}}" wx:if="{{couponDesignConfig.showCouponTitleWithBigImgModel}}">{{couponInfo.title}}</view>
+                        <block wx:if="{{couponDesignConfig.showCouponValidityPeriod}}">
+                            <view class="lh-normal">
+                                <view class="text-_bl__h_999999_br_ text-24rpx font-500 flex items-center box-border">{{couponInfo.expireDescValidity}}</view>
+                            </view>
+                            <view class="lh-normal" wx:if="{{couponInfo.validityType===2&&!isHistoryCoupon}}">
+                                <view class="text-_bl__h_999999_br_ text-24rpx font-500 flex items-center box-border" style="color: {{couponInfo.validityType===2&&!isHistoryCoupon?colorTheme:''}}">{{couponInfo.validity}}</view>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="w-40rpx h-40rpx" wx:if="{{couponDesignConfig.showQrCode}}">
+                        <image catchtap="openCode" class="w-40rpx h-40rpx" data-cardid="{{couponInfo.cardId}}" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/08/19/5e4d3a636f784bfb.png',0)}}" wx:if="{{couponInfo.showCode}}"></image>
+                    </view>
+                </view>
+            </view>
+            <coupon-info-item couponInfo="{{couponInfo}}" error="{{error}}" isHistoryCoupon="{{isHistoryCoupon}}" isSpecialCoupon="{{isSpecialCoupon}}" wx:else></coupon-info-item>
+        </view>
+        <view class="mx-0 my--10rpx h-20rpx flex items-center justify-between" wx:if="{{couponInfo.bottomInfoFlag}}">
+            <view class="h-20rpx w-20rpx bg-_bl__h_f5f5f5_br_ border-rd-_bl_50_p__br_ ml--10rpx" wx:if="{{!expanding}}"></view>
+            <view class="h-1px bg-_bl__h_f5f5f5_br_ w-_bl_100_p__br_ flex-1 mx-20rpx my-0"></view>
+            <view class="h-20rpx w-20rpx bg-_bl__h_f5f5f5_br_ border-rd-_bl_50_p__br_ mr--10rpx" wx:if="{{!expanding}}"></view>
+        </view>
+        <view class="relative px-24rpx py-16rpx box-border {{bottomStatus=='open'?'h-auto':'h-80rpx overflow-hidden'}}" wx:if="{{couponInfo.bottomInfoFlag}}">
+            <view catchtap="changeBottomHeight" class="flex w-_bl_100_p__br_ h-48rpx items-center justify-between text-24rpx">
+                <view class="lh-48rpx flex items-center">使用规则<block wx:if="{{isShowUseButton||couponInfo.isGive}}">
+                        <text class="text-22rpx text-_bl__h_999999_br_ ml-10rpx i-jiantou-shang" wx:if="{{couponInfo.bottomInfoFlag&&bottomStatus=='open'}}"></text>
+                        <text class="text-22rpx text-_bl__h_999999_br_ ml-10rpx i-jiantou-xia" wx:if="{{couponInfo.bottomInfoFlag&&bottomStatus=='close'}}"></text>
+                    </block>
+                </view>
+                <view class="flex flex-none items-center" wx:if="{{!expanding&&couponInfo.useStatus!==1&&couponInfo.useStatus!==6}}">
+                    <block wx:if="{{isShowUseButton||couponInfo.isGive}}">
+                        <button catchtap="sendHandle" class="{{' w-120rpx h-48rpx box-border lh-48rpx bg-_bl__h_ffffff_br_ border-rd-_bl_25rpx_25rpx_25rpx_25rpx_br_ border-1rpx border-solid border-_bl__h_e1e1e1_br_ text-24rpx text-_bl__h_666666_br_ ml-16rpx '+(error?'bg-_bl__h_cccccc_br__i_ text-_bl__h_ffffff_br__i_ border-_bl__h_cccccc_br__i_':'')+' '}}" data-element-type="view" data-id="{{couponInfo.id}}" data-img="{{couponInfo.isGiveImg?'https://images.qmai.cn/'+couponInfo.isGiveImg:'https://images.qmai.cn/resource/20210824210816/2022/04/21/send-coupon-default.png'}}" data-notes="{{couponInfo.isGiveNotes}}" data-operation-type="进行赠送优惠券" data-screen-type="优惠券列表" data-title="{{couponInfo.title}}" style="border-color:{{colorTheme}};color: {{colorTheme}};" wx:if="{{couponInfo.isGive}}">送好友</button>
+                        <view class="ml-16" wx:if="{{!error&&couponInfo.inflateStatus===1}}">
+                            <expansion-btn bindexpand="expand" maxInflateAmount="{{couponInfo.maxInflationAmount}}"></expansion-btn>
+                        </view>
+                        <button catchtap="handleUse" class="{{' w-120rpx h-48rpx box-border lh-48rpx bg-_bl__h_ffffff_br_ border-rd-_bl_25rpx_25rpx_25rpx_25rpx_br_ border-1rpx border-solid border-_bl__h_e1e1e1_br_ text-24rpx text-_bl__h_666666_br_ ml-16rpx '+(state==2?'bg-_bl__h_cccccc_br__i_ text-_bl__h_ffffff_br__i_ border-_bl__h_cccccc_br__i_':'')+' '}}" disabled="{{state==2}}" style="background-color:{{colorTheme}};color:#fff;border: none" traceOperationType="选购商品" traceScreenType="优惠券列表" wx:elif="{{isShowUseButton}}">去使用</button>
+                    </block>
+                </view>
+            </view>
+            <coupon-desc bindapplyNavigation="handleNavigation" bottomStatus="{{bottomStatus}}" couponInfo="{{couponInfo}}" multiConfig="{{multiConfig}}" verifyData="{{state==1&&verifyData}}"></coupon-desc>
+        </view>
+        <image class="w-100rpx h-100rpx absolute right-8rpx top-8rpx" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/11/21/20241121-155231.png',0)}}" wx:if="{{couponInfo.inflateStatus===2}}"></image>
+    </view>
+</expansion-coupon>
+<block wx:if="{{couponInfo.couponsNum&&couponInfo.couponsNum>1}}">
+    <view class="h-10rpx bg-_bl__h_ffffff_br_ shadow-_bl_0rpx_2rpx_4rpx_0rpx_rgba_pl_0_2c_0_2c_0_2c_0_d_1_pr__br_ border-rd-_bl_0px_0px_20rpx_20rpx_br_ mx-auto my-0 relative w-668rpx h-12rpx z-2" style="{{couponInfo.inflateStatus>0?'background-color:'+tools.hexToRgba(colorTheme,0.08):''}};"></view>
+    <view class="h-10rpx bg-_bl__h_ffffff_br_ shadow-_bl_0rpx_2rpx_4rpx_0rpx_rgba_pl_0_2c_0_2c_0_2c_0_d_1_pr__br_ border-rd-_bl_0px_0px_20rpx_20rpx_br_ mx-auto my-0 relative w-644rpx z-1" style="{{couponInfo.inflateStatus>0?'background-color:'+tools.hexToRgba(colorTheme,0.08):''}};"></view>
+</block>
+<zm-loading wx:if="{{isLoading}}"></zm-loading>
+<show-toast id="showToast"></show-toast>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

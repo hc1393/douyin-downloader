@@ -1,0 +1,35 @@
+<view catchtouchmove="noop" class=" _aea5de2a " wx:if="{{isShow}}">
+    <view bindtap="close" class="blind-box-mask _aea5de2a "></view>
+    <view class="blind-box-wrapper _aea5de2a ">
+        <view class="blind-box-title _aea5de2a ">
+            <view class=" _aea5de2a ">开盲盒啦，恭喜您获得</view>
+            <block wx:if="{{isHideGoods}}">
+                <view class=" _aea5de2a " style="font-weight: 500;color:{{colorTheme}}">「</view>
+                <view class=" _aea5de2a " style="color:{{colorTheme}}">隐藏款</view>
+                <view class=" _aea5de2a " style="font-weight: 500;color:{{colorTheme}}">」</view>
+            </block>
+        </view>
+        <swiper bindchange="swiperChange" class="blind-box-swiper _aea5de2a " indicatorActiveColor="#fff" indicatorColor="#999" indicatorDots="{{blindBoxGoodsMulti&&blindBoxGoodsMulti.length>1}}">
+            <swiper-item catchtouchmove="{{blindBoxGoodsMulti.length==1?'preventDefault':''}}" class=" _aea5de2a " wx:for="{{blindBoxGoodsMulti}}" wx:key="index">
+                <view class="blind-box-content _aea5de2a ">
+                    <view class="blind-box-goods-img-animail _aea5de2a ">
+                        <image class="blind-box-goods-bg _aea5de2a " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/08/24/blindboxgoodsnewbg.gif',0)}}" wx:if="{{item.isLotty==2}}"></image>
+                        <view class="blind-box-goods-img-wrapper _aea5de2a ">
+                            <block wx:if="{{item.isLotty==2}}">
+                                <image class="xing-one _aea5de2a " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/08/22/blind-box-star.gif',0)}}"></image>
+                                <image class="xing-two _aea5de2a " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/08/22/blind-box-star.gif',0)}}"></image>
+                                <image class="xing-three _aea5de2a " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/08/22/blind-box-star.gif',0)}}"></image>
+                            </block>
+                            <image class="blind-box-goods-img _aea5de2a " lazyLoad="true" src="{{__oss__.s(mpxExt,item.img,0)}}"></image>
+                        </view>
+                    </view>
+                    <view class="blind-box-bottom blindBoxGoods-isLotty-special _aea5de2a ">
+                        <view class="blind-box-desc _aea5de2a ">{{item.name}}</view>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view bindtap="close" class="blind-box-btn _aea5de2a " style="background: {{colorTheme}}">开心收下</view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>

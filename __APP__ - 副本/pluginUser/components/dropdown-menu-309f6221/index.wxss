@@ -1,0 +1,1 @@
+.opacity-in{animation:fade-in .25s ease-in-out both}.opacity-out{animation:fade-out .25s ease-in-out both}

@@ -1,0 +1,23 @@
+<std-popup closeable lockScroll round bind:close="onClose" class=" _cd11dcd0 " position="bottom" show="{{visible}}" title="积分兑换">
+    <scroll-view scrollY class="integral-list _cd11dcd0 ">
+        <view bindtap="goDetail" class="integral-list_item _cd11dcd0 " data-id="{{item.id}}" data-type="{{item.goodsType}}" wx:for="{{mallGoodsList}}" wx:key="index">
+            <view class="integral-img _cd11dcd0 ">
+                <image class=" _cd11dcd0 " lazyLoad="true" src="{{__oss__.s(mpxExt,item.coverImg,0)}}"></image>
+            </view>
+            <view class="integral-wrap _cd11dcd0 ">
+                <view class="integral-info _cd11dcd0 ">
+                    <view class="integral-info_tit _cd11dcd0 ">{{item.goodsName}}</view>
+                    <view class="integral-info_amount _cd11dcd0 ">
+                        <text class="good-point-number _cd11dcd0 " style="color:{{colorTheme||''}}">{{item.pointsPrice}}</text>
+                        <text class="good-point-text _cd11dcd0 ">{{pointName}}</text>
+                    </view>
+                    <rich-text class="integral-info_rules _cd11dcd0 " nodes="{{item.buttonDescription||'查看详情'}}"></rich-text>
+                </view>
+                <view catchtap="toExchange" class="integral-button _cd11dcd0 " data-id="{{item.id}}" data-price="{{item.cashPrice}}" data-status="{{item.disableBtn}}" data-type="{{item.goodsType}}" style="background-color:{{item.disableBtn?'#cccccc':colorTheme}}">{{item.buttonText}}</view>
+            </view>
+        </view>
+    </scroll-view>
+</std-popup>
+<v-pay-choose balancePayDisabled="{{useWalletEnable==0}}" bindpayFail="payFail" bindpaySuccess="paySuccess" class=" _cd11dcd0 " id="payChoose"></v-pay-choose>
+<std-authorization bindsuccess="authorize" class=" _cd11dcd0 " id="authorization"></std-authorization>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>

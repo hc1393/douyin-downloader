@@ -1,0 +1,45 @@
+<pop-up position="bottom" show="{{show}}" zIndex="{{10002}}">
+    <view class="w-_bl_100_p__br_ h-1062rpx border-rd-_bl_30rpx_30rpx_0_0_br_ pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_ bg-_bl__h_ffffff_br_ flex items-center justify-center flex-col">
+        <block wx:if="{{status==='loading'}}">
+            <image class="w-200rpx h-200rpx mb-24rpx" src="{{__oss__.s(mpxExt,loadingIcon,0)}}"></image>
+            <view class="text-36rpx text-_bl__h_333333_br_">免密支付中...</view>
+        </block>
+        <block wx:if="{{status==='success'}}">
+            <view class="w-100rpx h-100rpx mb-24rpx flex items-center justify-center">
+                <view class="i-xz-xyy2 text-100 text-_bl__h_36cd18_br_"></view>
+            </view>
+            <view class="text-36rpx font-500 text-_bl__h_333333_br_ mb-16rpx">
+                <block wx:if="{{amount}}">¥{{amount}}</block>支付成功</view>
+        </block>
+        <block wx:if="{{status==='fail'}}">
+            <image class="w-100rpx h-100rpx mb-24rpx" src="{{__oss__.s(mpxExt,failIcon,0)}}"></image>
+            <view class="text-36rpx font-500 text-_bl__h_333333_br_ mb-16rpx">
+                <block wx:if="{{amount}}">¥{{amount}}</block>支付失败</view>
+            <view class="line-clamp-3 text-30rpx text-_bl__h_999999_br_ px-24rpx py-0 text-ellipsis" wx:if="{{failFont}}">{{failFont}}</view>
+        </block>
+        <button bindtap="closeWait" class="w-380rpx h-82rpx lh-82rpx border-rd-41rpx text-32rpx text-_bl__h_ffffff_br_ mt-130rpx" style="background-color: {{colorTheme}};" wx:if="{{status!=='loading'}}">{{status==='success'?'完成':'确定'}}</button>
+    </view>
+</pop-up>
+<pop-up position="bottom" show="{{display}}" zIndex="{{10002}}">
+    <view class="w-_bl_100_p__br_ h-600rpx border-rd-_bl_30rpx_30rpx_0_0_br_ pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_ bg-_bl__h_ffffff_br_ flex items-center justify-center flex-col">
+        <block wx:if="{{!showOrderError}}">
+            <view class="w-100rpx h-100rpx border-rd-_bl_50_p__br_ animate-_bl_spin_br_ animate-duration-1s animate-ease-_bl_linear_br_ animate-count-infinite animate-reverse" style="background: conic-gradient({{tools.hexToRgba(colorTheme,1)}}, {{tools.hexToRgba(colorTheme,0)}});">
+                <view class="absolute top-10rpx left-10rpx right-10rpx bottom-10rpx bg-_bl__h_ffffff_br_ border-rd-_bl_50_p__br_"></view>
+            </view>
+            <view class="text-36rpx text-_bl__h_333333_br_ m-24rpx">{{_i1+'...'}}</view>
+            <view class="text-26rpx text-_bl__h_999999_br_">{{_i2}}</view>
+        </block>
+        <block wx:else>
+            <view class="w-100rpx h-100rpx mt-58rpx flex items-center justify-center" wx:if="{{errorType==='navFailed'}}">
+                <view class="i-xz-xyy2 text-100 text-_bl__h_36cd18_br_"></view>
+            </view>
+            <image class="w-100rpx h-100rpx mt-58rpx" src="{{__oss__.s(mpxExt,resultIcon,0)}}" wx:else></image>
+            <view class="text-36rpx text-_bl__h_333333_br_ m-24rpx">{{_i3}}</view>
+            <view class="text-26rpx text-_bl__h_999999_br_" wx:if="{{errorType!=='navFailed'}}">{{_i4}}</view>
+            <button bindtap="onViewOrder" class="mx-0 mt-64rpx mb-0 w-380rpx h-82rpx lh-82rpx border-rd-_bl_41rpx_41rpx_41rpx_41rpx_br_ text-32rpx text-_bl__h_ffffff_br_" style="background-color: {{colorTheme}};">{{_i5}}</button>
+            <view bindtap="onCallStore" class="mx-0 mt-32rpx mb-0 text-32rpx text-_bl__h_3d3d3d_br_ text-center" wx:if="{{phoneNumber&&errorType!=='navFailed'}}">{{_i6}}</view>
+        </block>
+    </view>
+</pop-up>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

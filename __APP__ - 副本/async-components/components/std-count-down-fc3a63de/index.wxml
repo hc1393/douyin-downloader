@@ -1,0 +1,4 @@
+<view class="std-count-down" style="{{mainStyle}}">
+    <slot wx:if="{{useSlot}}"></slot>
+    <block wx:else>{{formattedTime}}</block>
+</view>

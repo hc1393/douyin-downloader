@@ -1,0 +1,8 @@
+<view catchtap="toPremiumMember" class="{{' flex items-center justify-between box-border mx-auto my-0 px-20rpx py-18rpx w-702rpx h-76rpx bg-gradient-linear bg-gradient-_bl_270deg_2c__h_ffdc98_0_p__2c__h_fff1cb_100_p__br_ border-rd-_bl_19rpx_19rpx_0rpx_0rpx_br_ '+(type==='goods'?'absolute top--74rpx left-24rpx':'')+' '+(type==='wishmatch'?'relative z-10 w-_bl_100_p__br__i_ pb-38rpx_i_ bottom--20rpx h-initial_i_':'')+' '+(type==='cart'?'relative mb--22px_i_ z-101 h-120rpx_i_ items-start_i_':'')+' '}}" style="{{premiumBottomSty}}">
+    <view class="flex h-40rpx lh-40rpx text-_bl__h_333_br_ text-24rpx pl-52rpx" style=" background: url('https://images.qmai.cn/resource/20210824210816/2022/02/07/vip-card-icon.png') left center no-repeat; background-size: 40rpx 40rpx; ">
+        <text class="truncate max-w-470rpx">{{promotionLeadTitle}}</text>
+    </view>
+    <view class="flex-none h-44rpx px-22rpx py-0 text-_bl__h_f4c27a_br_ text-22rpx lh-44rpx text-center bg-_bl__h_000000_br_ border-rd-22rpx">
+        <text>{{btnText}}</text>
+    </view>
+</view>

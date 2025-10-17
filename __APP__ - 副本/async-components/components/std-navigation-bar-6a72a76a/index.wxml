@@ -1,0 +1,24 @@
+<block wx:if="{{customNavEnabled}}">
+    <view style="height: {{system.statusBarHeight+navbarHeight}}px" wx:if="{{fixed&&placeholder}}"></view>
+    <view class="std-navigation-bar {{theme==='black'?'std-navigation-bar--black':''}} {{theme==='white'?'std-navigation-bar--white':''}} {{fixed?'std-navigation-bar--fixed':''}}" style="{{utils.getNavbarStyle(actionBtns,system,menuButtonRect,navbarHeight,background||navigationBarBackgroundColor)}}">
+        <view class="std-navigation-bar__body">
+            <view class="{{'std-navigation-bar__left '+(showSearch&&'wx'==='wx'?'is-group':'')+' '+(leftSolid?'is-solid':'')}}">
+                <view bindtap="{{'wx'==='wx'?'handleBack':'noop'}}" class="std-navigation-icon" style="width: {{iconWidth}}px; height: {{menuButtonRect.height}}px; color: {{leftIconColor}}; border-radius: {{menuButtonRect.height}}px;" wx:if="{{showBack}}">
+                    <view class="text-36 i-jiantou-zuo"></view>
+                </view>
+                <view bindtap="handleHome" class="{{'std-navigation-icon '+(theme==='black'?'bg-_bl_rgba_pl_255_2c_255_2c_255_2c_0_d_6_pr__br_':'bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_15_pr__br_')}}" style="width: {{iconWidth}}px; height: {{menuButtonRect.height}}px; color: {{leftIconColor}}; border-radius: {{menuButtonRect.height}}px;" wx:if="{{showHome}}">
+                    <view class="text-36 lh-36 i-home1"></view>
+                </view>
+                <block wx:if="{{showSearch}}">
+                    <view class="std-navigation-bar__line" style="height: {{menuButtonRect.height/2}}px"></view>
+                    <view bindtap="handleSearch" class="std-navigation-icon" style="width: {{iconWidth}}px; height: {{menuButtonRect.height}}px;">
+                        <view class="text-36 i-search2"></view>
+                    </view>
+                </block>
+            </view>
+            <view class="std-navigation-bar__title" style="color: {{titleColor}}" wx:if="{{title}}">{{title}}</view>
+            <slot name="title" wx:else></slot>
+        </view>
+    </view>
+</block>
+<wxs module="utils" src="../../wxs/index6a725a70.wxs"/>

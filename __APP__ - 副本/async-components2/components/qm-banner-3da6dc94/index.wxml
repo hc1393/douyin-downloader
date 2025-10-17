@@ -1,0 +1,58 @@
+<block wx:if="{{banners.length}}">
+    <view class="v-qm-banner-wrapper _3da6dc94 " style="{{proper&&proper.miniStyle}};{{!proper.isHidden?'':'display:none;'}}" wx:if="{{banners.length>1}}">
+        <view class="under-banner-imgs _3da6dc94 " wx:if="{{bannerStyle==2}}">
+            <std-image lazyLoad bind:error="imageErrorMultibannerStyle2" class=" _3da6dc94 " customStyle="position: absolute;top: 0;left: 0;opacity: 0;transition: all 1s; {{current==index?'opacity: 1;':''}}" height="100%" src="{{item.underImg}}" width="100%" wx:for="{{banners}}" wx:key="index"></std-image>
+        </view>
+        <swiper bindchange="swiperChange" class="v-qm-banner {{showType==2?'banner-limit':''}} _3da6dc94 " current="{{currentIndex}}" nextMargin="25px" previousMargin="25px" style="height: {{proper.commonStyle.height}}rpx;" wx:if="{{showType==2}}">
+            <swiper-item class="swiper-item _3da6dc94 " wx:for="{{banners}}" wx:key="index">
+                <view class=" _3da6dc94 " style="height:{{tools.styleToObj(proper.miniStyle).height}}">
+                    <view class="v-qm-video _3da6dc94 " wx:if="{{isVideoBlock}}">
+                        <std-image class=" _3da6dc94 " height="100%" src="{{item.videoCoverImg?item.videoCoverImg+'?x-oss-process=image/resize,w_1200':''}}" width="100%"></std-image>
+                    </view>
+                    <view class="v-qm-video relative _3da6dc94 " wx:elif="{{item.showVideo&&item.video}}">
+                        <video autoplay showMuteBtn loop binderror="videoErrorHandle" catchtap="bindLink" class="video video1 _3da6dc94 " controls="{{false}}" customCache="{{false}}" data-content="{{item.link}}" data-element-content="{{item.linkText}}" data-element-id="{{proper.id}}" data-element-name="{{item.linkText}}" data-item="{{item}}" data-name="{{item.linkText}}" data-operation-type="点击轮播图" data-qm_track-belong_event="Common_Home_BtnClick, Common_MySelf_BtnClick, Campaign_FriendZone_BtnClick" data-qm_track-button_name="banner点击" data-qm_track-first_category="{{bannerFirstCateGory}}" data-qm_track-index="{{index+1}}" data-qm_track-material_id="{{item.video}}" data-qm_track-material_name="{{item.linkText}}" data-screen-type="{{traceScreenType}}" muted="{{isMuted}}" poster="{{__oss__.s(mpxExt,item.videoCoverImg?item.videoCoverImg+'?x-oss-process=image/resize,w_1200':'',0)}}" referrerPolicy="origin" showFullscreenBtn="{{false}}" src="{{item.video}}"></video>
+                        <std-image bindtap="handleMutedChange" class="absolute right-20 bottom-10 _3da6dc94 " height="40rpx" src="{{isMuted?'https://images.qmai.cn/resource/20210824210816/2025/06/11/nbgbf.png':'https://images.qmai.cn/resource/20210824210816/2025/06/11/ybgbf.png'}}" width="40rpx"></std-image>
+                    </view>
+                    <std-image lazyLoad bind:error="imageErrorShowType2" catchtap="bindLink" class=" _3da6dc94 " customStyle="{{currentIndex==index?'transform: scale(1)':''}}" data-content="{{item.link}}" data-item="{{item}}" data-name="{{item.linkText}}" height="100%" src="{{item.img}}" width="100%"></std-image>
+                </view>
+            </swiper-item>
+        </swiper>
+        <swiper autoplay circular bindchange="swiperChange" class="v-qm-banner _3da6dc94 " interval="{{!proper.propsValue.interval||proper.propsValue.interval<2?2000:proper.propsValue.interval+'000'}}" style="overflow: hidden; border-radius: {{proper.commonStyle.borderRadius}}rpx; height: {{proper.commonStyle.height}}rpx;" wx:else>
+            <swiper-item class="swiper-item _3da6dc94 " wx:for="{{banners}}" wx:key="index">
+                <view class=" _3da6dc94 " style="height:{{tools.styleToObj(proper.miniStyle).height}}">
+                    <view class="v-qm-video _3da6dc94 " wx:if="{{isVideoBlock}}">
+                        <std-image class=" _3da6dc94 " height="100%" src="{{item.videoCoverImg?item.videoCoverImg+'?x-oss-process=image/resize,w_1200':''}}" width="100%"></std-image>
+                    </view>
+                    <view class="v-qm-video relative _3da6dc94 " wx:elif="{{item.showVideo&&item.video}}">
+                        <video autoplay showMuteBtn loop binderror="videoErrorHandle" catchtap="bindLink" class="video video2 _3da6dc94 " controls="{{false}}" customCache="{{false}}" data-content="{{item.link}}" data-element-content="{{item.link}}" data-element-id="{{proper.id}}" data-element-name="{{item.linkText}}" data-item="{{item}}" data-name="{{item.linkText}}" data-operation-type="点击轮播图" data-qm_track-belong_event="Common_Home_BtnClick, Common_MySelf_BtnClick, Campaign_FriendZone_BtnClick" data-qm_track-button_name="banner点击" data-qm_track-first_category="{{bannerFirstCateGory}}" data-qm_track-index="{{index+1}}" data-qm_track-material_id="{{item.video}}" data-qm_track-material_name="{{item.linkText}}" data-screen-type="{{traceScreenType}}" muted="{{isMuted}}" poster="{{__oss__.s(mpxExt,item.videoCoverImg?item.videoCoverImg+'?x-oss-process=image/resize,w_1200':'',0)}}" referrerPolicy="origin" showFullscreenBtn="{{false}}" src="{{item.video}}"></video>
+                        <std-image bindtap="handleMutedChange" class="absolute right-20 bottom-10 _3da6dc94 " height="40rpx" src="{{isMuted?'https://images.qmai.cn/resource/20210824210816/2025/06/11/nbgbf.png':'https://images.qmai.cn/resource/20210824210816/2025/06/11/ybgbf.png'}}" width="40rpx"></std-image>
+                    </view>
+                    <std-image lazyLoad bind:error="imageErrorShowType1" catchtap="bindLink" class=" _3da6dc94 " data-content="{{item.link}}" data-element-content="{{item.link}}" data-element-id="{{proper.id}}" data-element-name="{{item.linkText}}" data-element-type="轮播" data-item="{{item}}" data-name="{{item.linkText}}" data-operation-type="点击轮播图" data-qm_track-belong_event="Common_Home_BtnClick, Common_MySelf_BtnClick, Campaign_FriendZone_BtnClick" data-qm_track-button_name="banner点击" data-qm_track-first_category="{{bannerFirstCateGory}}" data-qm_track-index="{{index+1}}" data-qm_track-material_id="{{item.img}}" data-qm_track-material_name="{{item.linkText}}" data-screen-type="{{traceScreenType}}" height="100%" src="{{item.img}}" width="100%"></std-image>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class="v-banner-indicator-dots {{shapeClass==='roundness-dots'?'roundness-dots':''}} {{shapeClass==='rectangle-dots'?'rectangle-dots':''}} _3da6dc94 " style="{{dotsPositionStyle}}" wx:if="{{showType!=2}}">
+            <view class="dots {{current==index?'active':''}} _3da6dc94 " style="{{dotsColorStyle}}" wx:for="{{banners}}" wx:key="index"></view>
+        </view>
+    </view>
+    <view catchtap="bindLink" class="v-qm-banner-wrapper _3da6dc94 " data-content="{{banners[0].link}}" data-element-content="{{banners[0].link}}" data-element-id="{{proper.id}}" data-element-name="{{banners[0].name}}" data-element-type="轮播" data-item="{{banners[0]}}" data-name="{{banners[0].linkText}}" data-operation-type="{{banners[0].linkText}}" data-qm_track-belong_event="Common_Home_BtnClick, Common_MySelf_BtnClick, Campaign_FriendZone_BtnClick" data-qm_track-button_name="banner点击" data-qm_track-first_category="{{bannerFirstCateGory}}" data-qm_track-index="{{1}}" data-qm_track-material_id="{{banners[0].link}}" data-qm_track-material_name="{{banners[0].linkText}}" data-screen-type="{{traceScreenType}}" id="banner" style="{{proper&&proper.miniStyle}}" wx:else>
+        <view class="v-qm-video _3da6dc94 " wx:if="{{isVideoBlock}}">
+            <std-image class=" _3da6dc94 " height="100%" src="{{banners[0].videoCoverImg?banners[0].videoCoverImg+'?x-oss-process=image/resize,w_1200':''}}" width="100%"></std-image>
+        </view>
+        <view class="v-qm-video relative _3da6dc94 " wx:elif="{{banners[0].showVideo&&banners[0].video}}">
+            <video autoplay loop showMuteBtn binderror="videoErrorHandle" class="video video3 _3da6dc94 " controls="{{false}}" customCache="{{false}}" muted="{{isMuted}}" poster="{{__oss__.s(mpxExt,banners[0].videoCoverImg?banners[0].videoCoverImg+'?x-oss-process=image/resize,w_1200':'',0)}}" referrerPolicy="origin" showFullscreenBtn="{{false}}" src="{{banners[0].video}}"></video>
+            <std-image bindtap="handleMutedChange" class="absolute right-20 bottom-10 _3da6dc94 " height="40rpx" src="{{isMuted?'https://images.qmai.cn/resource/20210824210816/2025/06/11/nbgbf.png':'https://images.qmai.cn/resource/20210824210816/2025/06/11/ybgbf.png'}}" width="40rpx"></std-image>
+        </view>
+        <view class="under-banner-imgs _3da6dc94 " wx:if="{{bannerStyle==2}}">
+            <image lazyLoad binderror="imageErrorbannerStyle2" class="under-image show _3da6dc94 " src="{{__oss__.s(mpxExt,banners[0].underImg,1125)}}" width="1125"></image>
+        </view>
+        <view class="v-qm-banner _3da6dc94 ">
+            <std-image lazyLoad bind:error="imageErrorbannerStyle1" class=" _3da6dc94 " height="100%" src="{{banners[0].img}}" width="100%"></std-image>
+        </view>
+    </view>
+</block>
+<block wx:else>
+    <view class=" _3da6dc94 " style="{{proper&&proper.miniStyle}};background-color:#ffffff;" wx:if="{{expiredEffect===1}}"></view>
+</block>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

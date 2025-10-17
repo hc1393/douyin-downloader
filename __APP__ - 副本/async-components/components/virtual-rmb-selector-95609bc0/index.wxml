@@ -1,0 +1,25 @@
+<view class="flex">
+    <image class="w-48rpx h-48rpx border-rd-8rpx" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/01/26/20240126-114055.png',0)}}"></image>
+    <view class="flex-1 box-border px-18rpx py-0">
+        <view class="flex-1 h-48rpx lh-48rpx">
+            <text class="truncate text-30rpx text-_bl__h_333333_br_">数字人民币</text>
+        </view>
+        <view class="text-24rpx text-_bl__h_999999_br_">请选择付款钱包</view>
+        <view class="bank-wallets">
+            <view bindtap="onChoose" class="flex mt-40rpx" data-token="{{item.token}}" wx:if="{{index<1||showAll}}" wx:for="{{virtualRmb}}" wx:key="bankId">
+                <image class="w-48rpx h-48rpx border-rd-8rpx" src="{{__oss__.s(mpxExt,item.bankIcon,0)}}"></image>
+                <view class="flex-1 h-48rpx lh-48rpx px-18rpx py-0 w-0">
+                    <view class="truncate text-30rpx text-_bl__h_333333_br_">{{item.name}}</view>
+                </view>
+                <view class="flex items-center justify-center h-48rpx">
+                    <label class="{{'inline-block w-20px h-20px text-_bl__h_09bb07_br_ lh-20px text-center bg-no-repeat bg-center bg-_bl_length_c_18px_18px_br_ '+(choose==item.token?'text-20px i-xuanze_xuanzhong':'')}}" style="color: {{colorTheme}}; {{choose==item.token?'':'background-image: url(https://images.qmai.cn/s16/images/2019/06/12/4d131a42d8e708bd.png);'}}"></label>
+                </view>
+            </view>
+        </view>
+        <view bindtap="toggle" class="flex items-center justify-center pt-24rpx" wx:if="{{virtualRmb.length>1}}">
+            <text class="text-24rpx text-_bl__h_999999_br_ pr-8rpx">{{showAll?'收起':'查看更多'}}</text>
+            <text class="{{'text-24rpx text-_bl__h_999999_br_ '+(showAll?'i-jiantou-shang':'i-jiantou-xia')}}"></text>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

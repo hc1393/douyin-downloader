@@ -1,0 +1,16 @@
+<view catchtouchmove="noop" class=" _07064d71 " wx:if="{{isShow&&success}}">
+    <view class="fixed top-0 right-0 bottom-0 left-0 w-full h-full bg-hex-000 opacity-0 animate-fade-in-40 animate-duration-400ms animate-ease animate-normal animate-forwards z-1000 _07064d71 "></view>
+    <view class="popup _07064d71 ">
+        <view class="popup__content _07064d71 ">
+            <view class="popup__title _07064d71 ">{{success?info.autoRewardShowText||'恭喜您 中奖啦':'很遗憾 您未中奖'}}</view>
+            <image class="popup__image _07064d71 " lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,success?info.imageUrl:amoShouZuo?'https://images.qmai.cn/resource/20210824210816/2023/05/12/icon_maoxian.png?x-oss-process=image':'https://images.qmai.cn/resource/20210824210816/2023/04/09/img_empty-box@2x.png?x-oss-process=image',0)}}"></image>
+            <view class="popup__desc _07064d71 ">{{success?info.rewardName:'感谢您的参与'}}</view>
+            <view class="popup__small_desc _07064d71 " wx:if="{{info.rewardType==5}}">奖品为实物，为方便配送，请选择收获地址</view>
+            <view class="popup__buttom _07064d71 ">
+                <button catchtap="{{item.fun}}" class="buttom__btn {{item.plain?'':'is-active'}} _07064d71 " style="{{item.plain?plainStyle:themeStyle}}" wx:for="{{btns}}" wx:key="text">{{item.text}}</button>
+            </view>
+        </view>
+        <view catchtap="close" class="popup__close _07064d71 "></view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>

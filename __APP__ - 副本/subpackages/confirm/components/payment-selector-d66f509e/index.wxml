@@ -1,0 +1,85 @@
+<view class="mx-0 my-20rpx px-24rpx py-1px bg-_bl__h_fff_br_ border-rd-20rpx" style="{{!hidden?'':'display:none;'}}" wx:if="{{isShowPay}}">
+    <view class="mx-0 mt-30rpx mb-10rpx text-_bl__h_333_br_ font-bold text-30rpx">{{_i1}}</view>
+    <view class="relative px-0 py-30rpx not-last-after-absolute not-last-after-right-0 not-last-after-bottom-0 not-last-after-left-0 not-last-after-z-1 not-last-after-w-_bl_200_p__br_ not-last-after-h-1px not-last-after-bg-_bl__h_eee_br_ not-last-after-scale-50 not-last-after-origin-_bl_0_0_br_ not-last-after-origin-left-bottom not-last-after-content-empty" wx:if="{{physicalCards&&physicalCards.length}}">
+        <view bindtap="selectPayType" class="flex w-_bl_100_p__br_" data-pay-type="{{6}}">
+            <image class="w-48rpx h-48rpx border-rd-8rpx" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2023/08/23/physical-card-pay-icon.png',0)}}"></image>
+            <view class="flex-1 box-border px-18rpx py-0">
+                <view class="flex h-48rpx text-_bl__h_333_br_ text-30rpx lh-48rpx">{{_i2}}</view>
+                <view class="px-0 pt-0 pb-10rpx text-_bl__h_999_br_ text-22rpx">{{_i3+currencySymbol+physicalCardBalance}}</view>
+            </view>
+            <view class="h-48rpx lh-48rpx">
+                <text class="text-30rpx text-_bl__h_333333_br_ px-10rpx py-0" wx:if="{{entityCardIds&&entityCardIds.length}}">{{_i4+entityCardIds.length+_i5}}</text>
+                <text class="text-30rpx text-_bl__h_333333_br_ px-10rpx py-0" wx:else>{{_i6}}</text>
+                <text class="text-24rpx text-_bl__h_959595_br_ i-jiantou-you"></text>
+            </view>
+        </view>
+    </view>
+    <view class="{{'relative px-0 pt-30rpx pb-0 '+(hideRecommendList||!(recommendList&&recommendList.length)?'_i_pb-30':'')+' not-last-after-absolute not-last-after-right-0 not-last-after-bottom-0 not-last-after-left-0 not-last-after-z-1 not-last-after-w-_bl_200_p__br_ not-last-after-h-1px not-last-after-bg-_bl__h_eee_br_ not-last-after-scale-50 not-last-after-origin-_bl_0_0_br_ not-last-after-origin-left-bottom not-last-after-content-empty'}}" wx:if="{{showUseBalanceAndRecharge}}">
+        <view bindtap="selectPayType" class="flex w-_bl_100_p__br_" data-pay-type="{{1}}" wx:if="{{canUseBalance}}">
+            <image class="w-48rpx h-48rpx border-rd-8rpx" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2022/05/19/balance_icon.png',0)}}"></image>
+            <view class="flex-1 box-border px-18rpx py-0">
+                <view class="{{'flex h-48rpx text-30rpx lh-48rpx '+(noBalance&&!balanceActive?'text-_bl__h_999_br_':'text-_bl__h_333_br_')}}">
+                    <text style="color: #333">{{_i7}}</text>
+                    <text class="{{'flex-1 text-22rpx '+(noBalance&&!balanceActive?'text-_bl__h_999_br_':'text-_bl__h_333_br_')}}">{{'('+_i8}}<text style="color: {{colorTheme}};">{{currencySymbol+userAsset.balance||balance}} </text>
+                        <block wx:if="{{leftBalanceShow&&userAsset.afterBalance!=null}}">{{','+_i9}}<text style="color: {{colorTheme}};">{{currencySymbol+(userAsset.afterBalance<0?0:userAsset.afterBalance)}}</text>
+                        </block>)</text>
+                    <text class="text-_bl__h_999_br_ text-26rpx" wx:if="{{noBalance&&!balanceActive}}">{{_i10}}</text>
+                </view>
+                <view class="px-0 pt-0 pb-10rpx text-22rpx text-_bl__h_f93a4a_br_" wx:if="{{removeDepositPay}}">与已参与优惠无法同享</view>
+                <block wx:if="{{!hideRecommendList}}">
+                    <view class="px-0 pt-0 pb-10rpx text-_bl__h_999_br_ text-22rpx" wx:if="{{cItem.id}}">{{_i11}}</view>
+                    <view catchtap="goInfo" class="px-0 pt-0 pb-10rpx text-_bl__h_999_br_ text-22rpx" wx:if="{{protocolSwitch&&protocolSwitch!=2&&recommendList&&recommendList.length&&protocolTitle}}">{{_i12}}<text style="color: {{colorTheme}};">《{{protocolTitle}}》</text>
+                    </view>
+                </block>
+            </view>
+            <text catchtap="settingPsd" class="h-fit px-24rpx py-0 text-_bl_rgb_pl_25_2c_25_2c_25_pr__br_ font-500 text-24rpx lh-52rpx text-center bg-gradient-linear bg-gradient-_bl_-90deg_2c_rgb_pl_255_2c_189_2c_12_pr__2c_rgb_pl_255_2c_218_2c_44_pr__br_ border-rd-26rpx" wx:if="{{!isSetPassword&&passwordSwitch&&balance>0}}">{{_i13}}</text>
+            <view class="flex items-center justify-center h-48rpx" wx:else>
+                <view class="{{'flex-1 mr6 text-24rpx font-500 '+(noBalance&&!balanceActive?'text-_bl__h_999_br_':'text-_bl__h_333_br_')}}" style="color: {{colorTheme}};font-size: 24rpx;" wx:if="{{balanceActive&&useWallet}}">-{{currencySymbol+useWallet}}</view>
+                <label class="{{' inline-block w-20px h-20px text-_bl__h_09bb07_br_ lh-20px text-center bg-no-repeat bg-center bg-_bl_length_c_18px_18px_br_ '+(balanceActive?'text-20px bg-none_i_ i-xuanze_xuanzhong':'')+' '}}" style="background-image: url('https://images.qmai.cn/s16/images/2019/06/12/4d131a42d8e708bd.png'); color: {{colorTheme}};{{noBalance&&!balanceActive?'background-image: url(https://images.qmai.cn/resource/20210824210816/2024/07/30/nobalanceicon.png);':''}}"></label>
+            </view>
+        </view>
+        <stored-value-scroll bindchange="numChange" bindr="__refEmit" bindselect="selectRecommend" bindshowGiftsInfo="showGiftsInfo" class="ref_storedValueScrollRef_1" data-r=".ref_storedValueScrollRef_1" list="{{recommendList}}" selectedItem="{{cItem}}" wx:if="{{!hideRecommendList}}"></stored-value-scroll>
+    </view>
+    <view class="relative px-0 py-30rpx not-last-after-absolute not-last-after-right-0 not-last-after-bottom-0 not-last-after-left-0 not-last-after-z-1 not-last-after-w-_bl_200_p__br_ not-last-after-h-1px not-last-after-bg-_bl__h_eee_br_ not-last-after-scale-50 not-last-after-origin-_bl_0_0_br_ not-last-after-origin-left-bottom not-last-after-content-empty" wx:if="{{showNativePay}}">
+        <view bindtap="selectPayType" class="flex w-_bl_100_p__br_" data-pay-type="{{2}}">
+            <image class="w-48rpx h-48rpx border-rd-8rpx" src="{{__oss__.s(mpxExt,thirdIcon,0)}}"></image>
+            <view class="flex-1 box-border px-18rpx py-0">
+                <view class="flex h-48rpx text-_bl__h_333_br_ text-30rpx lh-48rpx">{{thirdName}}</view>
+            </view>
+            <view class="flex items-center justify-center h-48rpx">
+                <label class="{{' inline-block w-20px h-20px text-_bl__h_09bb07_br_ lh-20px text-center bg-no-repeat bg-center bg-_bl_length_c_18px_18px_br_ '+(payType==2||payType==3?'text-20px bg-none_i_ i-xuanze_xuanzhong':'')+' '}}" style="background-image: url('https://images.qmai.cn/s16/images/2019/06/12/4d131a42d8e708bd.png'); color: {{colorTheme}}"></label>
+            </view>
+        </view>
+    </view>
+    <view class="relative px-0 py-30rpx not-last-after-absolute not-last-after-right-0 not-last-after-bottom-0 not-last-after-left-0 not-last-after-z-1 not-last-after-w-_bl_200_p__br_ not-last-after-h-1px not-last-after-bg-_bl__h_eee_br_ not-last-after-scale-50 not-last-after-origin-_bl_0_0_br_ not-last-after-origin-left-bottom not-last-after-content-empty" wx:if="{{configCenterByKeys.yiwangtongzhifukaiguan==='1'&&!showCampusCardPay}}">
+        <view bindtap="selectPayType" class="flex w-_bl_100_p__br_" data-pay-type="{{4}}">
+            <image class="w-48rpx h-48rpx border-rd-8rpx" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2022/07/12/zhaohangicon.png',0)}}"></image>
+            <view class="flex-1 box-border px-18rpx py-0 flex items-center">
+                <view class="flex h-48rpx text-_bl__h_333_br_ text-30rpx lh-48rpx">{{_i14}}</view>
+                <view class="line-clamp-1 h-38rpx ml-10rpx pt-0 pb-0 pl-20rpx pr-14rpx text-_bl__h_f42131_br_ text-22rpx lh-38rpx bg-no-repeat bg-center-center bg-_bl_length_c_100_p__100_p__br_ text-ellipsis" style=" background-image: url('https://images.qmai.cn/resource/20210824210816/2022/07/12/discountborder.png'); " wx:if="{{configCenterByKeys.yiwangtongzhifuhuodong}}">{{configCenterByKeys.yiwangtongzhifuhuodong}}</view>
+            </view>
+            <view class="flex items-center justify-center h-48rpx">
+                <label class="{{' inline-block w-20px h-20px text-_bl__h_09bb07_br_ lh-20px text-center bg-no-repeat bg-center bg-_bl_length_c_18px_18px_br_ '+(payType==4||payType==5?'text-20px bg-none_i_ i-xuanze_xuanzhong':'')+' '}}" style="background-image: url('https://images.qmai.cn/s16/images/2019/06/12/4d131a42d8e708bd.png'); color: {{colorTheme}}"></label>
+            </view>
+        </view>
+    </view>
+    <view class="relative px-0 py-30rpx not-last-after-absolute not-last-after-right-0 not-last-after-bottom-0 not-last-after-left-0 not-last-after-z-1 not-last-after-w-_bl_200_p__br_ not-last-after-h-1px not-last-after-bg-_bl__h_eee_br_ not-last-after-scale-50 not-last-after-origin-_bl_0_0_br_ not-last-after-origin-left-bottom not-last-after-content-empty" wx:if="{{showCampusCardPay}}">
+        <view bindtap="selectPayType" class="flex w-_bl_100_p__br_" data-pay-type="{{9}}">
+            <image class="w-48rpx h-48rpx border-rd-8rpx" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2025/03/17/Frame 41.png',0)}}"></image>
+            <view class="flex-1 box-border px-18rpx py-0">
+                <view class="flex h-48rpx text-_bl__h_333_br_ text-30rpx lh-48rpx">校园一卡通</view>
+                <view class="text-24 font-400 c-_h_F80 leading-140_p_">到店取餐时，需刷卡支付</view>
+            </view>
+            <view class="flex items-center justify-center h-48rpx">
+                <label class="{{' inline-block w-20px h-20px text-_bl__h_09bb07_br_ lh-20px text-center bg-no-repeat bg-center bg-_bl_length_c_18px_18px_br_ '+(payType==9?'text-20px bg-none_i_ i-xuanze_xuanzhong':'')+' '}}" style="background-image: url('https://images.qmai.cn/s16/images/2019/06/12/4d131a42d8e708bd.png'); color: {{colorTheme}}"></label>
+            </view>
+        </view>
+    </view>
+    <view class="relative px-0 py-30rpx not-last-after-absolute not-last-after-right-0 not-last-after-bottom-0 not-last-after-left-0 not-last-after-z-1 not-last-after-w-_bl_200_p__br_ not-last-after-h-1px not-last-after-bg-_bl__h_eee_br_ not-last-after-scale-50 not-last-after-origin-_bl_0_0_br_ not-last-after-origin-left-bottom not-last-after-content-empty" wx:if="{{showVirtualRmb}}">
+        <virtual-rmb-selector bindchange="selectPayType" bindr="__refEmit" class="ref_virtualRmbRef_2" data-r=".ref_virtualRmbRef_2"></virtual-rmb-selector>
+    </view>
+</view>
+<popup-password bindcloseDialog="closeDialog" bindpasswordConfirm="passwordConfirm" bindrememberPsd="rememberPsd" clearValue="{{shouldClearPasswordValue}}" isSetPassword="{{isSetPassword}}" payTypeCheck="1" show="{{showPasswordDialog}}" useWallet="{{useWallet}}"></popup-password>
+<authorization force="{{true}}" id="authorization"></authorization>
+<show-toast id="showToast"></show-toast>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>

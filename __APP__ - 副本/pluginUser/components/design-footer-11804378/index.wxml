@@ -1,0 +1,8 @@
+<block wx:if="{{isShowTechSupport}}">
+    <view class="{{' h-168 '+(navTemplate==='normal-one'&&isFreeze?'h-206_i_':'')+' '+(navTemplate==='main-pic'&&isFreeze?'h-210_i_':'')+' '+(navTemplate==='normal-two'?isFreeze?'h-_bl_calc_pl_env_pl_safe-area-inset-bottom_pr__a_308rpx_pr__br__i_':'h-_bl_calc_pl_env_pl_safe-area-inset-bottom_pr__a_268rpx_pr__br__i_':'')+' '+(navTemplate==='concave'&&isFreeze?'h-210_i_':'')+' '+(navTemplate==='concave-top-round'&&isFreeze?'h-210_i_':'')+' '}}"></view>
+    <view bindtap="toCopyright" class="{{' fixed left-0 w-full h-fit pt-32 flex flex-col items-center box-border '+('catering'==='baking'?'pb-48':'pb-24')+' '+(navTemplate==='normal-one'?isFreeze?'bottom_a_safe-188':'bottom_a_safe-100':'')+' '+(navTemplate==='main-pic'?isFreeze?'bottom_a_safe-198':'bottom_a_safe-110':'')+' '+(navTemplate==='normal-two'?isFreeze?'bottom_a_safe-196':'bottom_a_safe-124':'')+' '+(navTemplate==='concave'?isFreeze?'bottom_a_safe-198':'bottom_a_safe-116':'')+' '+(navTemplate==='concave-top-round'?isFreeze?'bottom_a_safe-198':'bottom_a_safe-116':'')+' '}}">
+        <image lazyLoad class="w-84" mode="widthFix" src="{{__oss__.s(mpxExt,brandLogo,0)}}"></image>
+        <text class="text-24 text-_bl__h_999_br_ lh-28 mt-10">{{_i1}}</text>
+    </view>
+</block>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

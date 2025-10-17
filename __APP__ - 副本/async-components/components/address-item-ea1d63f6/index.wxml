@@ -1,0 +1,19 @@
+<view class="flex">
+    <view class="px-0 py-24rpx w-70rpx flex items-center justify-center" wx:if="{{!noActive}}">
+        <view class="i-duihao" style="color:{{active?colorTheme:'#fff'}}"></view>
+    </view>
+    <view class="{{'px-0 py-24rpx flex-1 '+(borderBottom?'border-b-1px border-b-solid border-b-_bl__h_eeeeee_br_':'')}}">
+        <view class="mb-14rpx text-_bl__h_333_br_ text-30rpx" style="{{addressIsWeight?'font-weight: bold;':''}}">{{item.street}}<block wx:if="{{item.doorNumber}}">{{item.doorNumber}}</block>
+        </view>
+        <view class="flex items-center text-_bl__h_999_br_ text-26rpx">
+            <qm-label bordered="{{false}}" customStyle="margin-right: 8rpx" label="常用" theme="{{colorTheme}}" wx:if="{{item.commonAddress==1}}"></qm-label>
+            <qm-label customStyle="margin-right: 8rpx" label="{{item.tagName}}" wx:if="{{item.tagName}}"></qm-label>
+            <view class="truncate mr-10rpx max-w-300rpx">{{item.acceptName}}<block wx:if="{{item.sexName}}">（{{item.sexName}}）</block>
+            </view>
+            <view class="truncate max-w-200rpx">{{item.mobile}}</view>
+        </view>
+    </view>
+    <view catchtap="__invoke" class="{{'px-0 py-24rpx w-82rpx flex items-center justify-center '+(borderBottom?'border-b-1px border-b-solid border-b-_bl__h_eeeeee_br_':'')}}" data-eventconfigs="{{ tap:[ ['editAddress',item.id] ] }}">
+        <view class="i-bianji text-_bl__h_999999_br_"></view>
+    </view>
+</view>

@@ -1,0 +1,27 @@
+<block wx:if="{{showBanner}}">
+    <view class="design-banner _285245a4 " style="{{__stringify__.stringifyStyle('',styleFromDesign)}};{{!designData.isHidden?'':'display:none;'}}" wx:if="{{multiImgsInBanner}}">
+        <view class="design-banner-under _285245a4 " wx:if="{{showUnderImg}}">
+            <image lazyLoad class="design-banner-unde__image {{currentIndex==index?'active':''}} _285245a4 " src="{{__oss__.s(mpxExt,item.underImg,0)}}" wx:for="{{banners}}" wx:key="index"></image>
+        </view>
+        <swiper autoplay circular bindchange="onSwiperChange" class="design-banner__swiper-wrapper _285245a4 " interval="{{swiperInterval}}" style="{{__stringify__.stringifyStyle('',swiperWrapperStyle)}}">
+            <swiper-item class="design-banner__swiper-item _285245a4 " wx:for="{{banners}}" wx:key="index">
+                <view class=" _285245a4 " style="height:{{currentStyleObj.height}}">
+                    <image lazyLoad catchtap="onBindLink" class="design-banner__swiper-image _285245a4 " data-content="{{item.link}}" data-item="{{item}}" data-name="{{item.linkText}}" src="{{__oss__.s(mpxExt,item.img,0)}}"></image>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class="design-banner__indicator-wrapper {{swiperIndicator.style===1?'roundness':'rectangle'}} _285245a4 " style="{{__stringify__.stringifyStyle('',swiperIndicatorBlockStyle)}}">
+            <view class="indicator {{currentIndex===index?'active':''}} _285245a4 " style="{{__stringify__.stringifyStyle('',swiperIndicatorDotStyle)}}" wx:for="{{banners}}" wx:key="index"></view>
+        </view>
+    </view>
+    <view catchtap="onBindLink" class="design-banner _285245a4 " data-content="{{banners[0].link}}" data-item="{{banners[0]}}" data-name="{{banners[0].linkText}}" id="design-banner" style="{{__stringify__.stringifyStyle('',styleFromDesign)}}" wx:else>
+        <view class="design-banner-under _285245a4 " wx:if="{{showUnderImg}}">
+            <image lazyLoad class="design-banner-unde__image active _285245a4 " src="{{__oss__.s(mpxExt,banners[0].underImg,0)}}"></image>
+        </view>
+        <view class="design-banner__swiper-wrapper _285245a4 ">
+            <image lazyLoad class="design-banner__swiper-image _285245a4 " src="{{__oss__.s(mpxExt,banners[0].img,0)}}"></image>
+        </view>
+    </view>
+</block>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>

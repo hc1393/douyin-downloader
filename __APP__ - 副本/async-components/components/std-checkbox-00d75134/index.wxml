@@ -1,0 +1,15 @@
+<view class="std-checkbox {{direction==='horizontal'?'std-checkbox--horizontal':''}}">
+    <view bindtap="onClickLabel" class="label-class std-checkbox__label std-checkbox__label--left {{disabled||parentDisabled?'std-checkbox__label--disabled':''}}" wx:if="{{labelPosition==='left'}}">
+        <slot></slot>
+    </view>
+    <view bindtap="toggle" class="std-checkbox__icon-wrap">
+        <slot name="icon" wx:if="{{useIconSlot}}"></slot>
+        <view class="std-checkbox__icon {{shape==='round'?'std-checkbox__icon--round':''}} {{disabled||parentDisabled?'std-checkbox__icon--disabled':''}} {{value?'std-checkbox__icon--checked':''}}" wx:else>
+            <view class="i-icon_duihao-xian text-24" style="{{utils.iconStyle(checkedColor,value,disabled,parentDisabled)}}"></view>
+        </view>
+    </view>
+    <view bindtap="onClickLabel" class="label-class std-checkbox__label std-checkbox__label--right {{disabled||parentDisabled?'std-checkbox__label--disabled':''}}" wx:if="{{labelPosition==='right'}}">
+        <slot></slot>
+    </view>
+</view>
+<wxs module="utils" src="../../wxs/index00d777b1.wxs"/>

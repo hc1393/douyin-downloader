@@ -1,0 +1,71 @@
+<view class="common-bt20 _3d1781ea " style="--std-primary-color: {{colorTheme}}" wx:if="{{source}}">
+    <view class="white border20 padding24 _3d1781ea ">
+        <view catchtap="exchangeDetail" class=" _3d1781ea " data-id="{{source.items[0].itemId}}" data-no="{{source.orderNo}}" data-status="{{source.status}}" data-type="{{source.items[0].itemType}}">
+            <view class="exchange-obj-document space-between _3d1781ea ">
+                <view class="order-no _3d1781ea ">兑换单号: {{source.orderNo}}</view>
+                <view class=" _3d1781ea " style="color:{{colorTheme?colorTheme:''}}">{{source.statusDesc}}</view>
+            </view>
+            <view class="exchange-obj _3d1781ea ">
+                <view class="exchange-obj-img _3d1781ea ">
+                    <image class="image _3d1781ea " lazyLoad="true" model="aspectFill" src="{{__oss__.s(mpxExt,source.items[0].itemImage||'https://images.qmai.cn/resource/20210825171016/2021/12/03/mini.png?x-oss-process=image',0)}}"></image>
+                </view>
+                <view class="exchange-obj-view _3d1781ea ">
+                    <view class="exchange-obj-info space-between _3d1781ea ">
+                        <view class="exchange-obj-name _3d1781ea ">{{source.items[0].itemName}}</view>
+                    </view>
+                    <view class="exchange-obj-num _3d1781ea ">x{{source.items[0].num}}</view>
+                </view>
+            </view>
+            <view class=" _3d1781ea " wx:if="{{source.combinedCouponList&&source.combinedCouponList.length&&showCombinedCoupon}}">
+                <std-mall-tying-goods class=" _3d1781ea " giftList="{{source.combinedCouponList}}"></std-mall-tying-goods>
+            </view>
+            <view class="exchange-obj-bottom {{isThirdEntity?'':'line-top'}} _3d1781ea ">
+                <view class=" _3d1781ea ">
+                    <block wx:if="{{isThirdEntity||source.items[0].saleType==2}}">
+                        <view class="exchanged-obj-point _3d1781ea " style="color:{{colorTheme?colorTheme:''}}" wx:if="{{source.items[0].pointsPrice}}">{{source.items[0].pointsPrice}}<text class="exchanged-obj-text _3d1781ea ">{{pointName}}</text>
+                        </view>
+                        <text class=" _3d1781ea " wx:if="{{source.items[0].pointsPrice&&source.totalAmount}}">+</text>
+                    </block>
+                    <block wx:else>
+                        <view class="exchanged-obj-point _3d1781ea " style="color:{{colorTheme?colorTheme:''}}">{{source.items[0].pointsPrice}}<text class="exchanged-obj-text _3d1781ea ">{{pointName}}</text>
+                        </view>
+                        <text class=" _3d1781ea " wx:if="{{source.totalAmount}}">+</text>
+                    </block>
+                    <text class="exchanged-obj-point _3d1781ea " wx:if="{{source.totalAmount>0}}">
+                        <text class=" _3d1781ea " style="color:{{colorTheme?colorTheme:''}}">{{source.totalAmount}}</text>
+                        <text class="exchanged-obj-text _3d1781ea ">元</text>
+                    </text>
+                </view>
+            </view>
+        </view>
+        <view class="exchange-obj_button _3d1781ea " wx:if="{{btnList&&btnList.length}}">
+            <block wx:for="{{btnList}}" wx:for-item="btn" wx:key="btn">
+                <view class="zm-button-wrape _3d1781ea " wx:if="{{btn.type=='CANCEL'}}">
+                    <std-button bind:click="cancelOrder" class=" _3d1781ea " customStyle="height: 60rpx;padding: 0 24rpx;font-weight: 500;font-size: 26rpx;line-height: 60rpx;border-radius: 8rpx;" data-no="{{source.orderNo}}" type="primary">取消订单</std-button>
+                </view>
+                <view class="zm-button-wrape _3d1781ea " wx:if="{{btn.type=='PAY'}}">
+                    <std-button bind:click="handlePayOrder" class=" _3d1781ea " customStyle="height: 60rpx;padding: 0 24rpx;font-weight: 500;font-size: 26rpx;line-height: 60rpx;border-radius: 8rpx;" data-no="{{source.orderNo}}" data-type="{{source.items[0].itemType}}" type="primary">继续支付</std-button>
+                </view>
+                <view class="zm-button-wrape _3d1781ea " wx:if="{{btn.type=='REFUNDRECORD'}}">
+                    <std-button bind:click="refundRecord" class=" _3d1781ea " customStyle="height: 60rpx;padding: 0 24rpx;font-weight: 500;font-size: 26rpx;line-height: 60rpx;border-radius: 8rpx;" data-orderno="{{source.orderNo}}" type="primary">退款记录</std-button>
+                </view>
+                <view class="zm-button-wrape _3d1781ea " wx:if="{{btn.type=='EVALUATE'}}">
+                    <std-button bind:click="evaluate" class=" _3d1781ea " customStyle="height: 60rpx;padding: 0 24rpx;font-weight: 500;font-size: 26rpx;line-height: 60rpx;border-radius: 8rpx;" data-orderno="{{source.orderNo}}" data-type="{{source.items[0].itemType}}" type="primary">立即评价</std-button>
+                </view>
+                <view class="zm-button-wrape _3d1781ea " wx:if="{{btn.type=='APPLYINVOICE'}}">
+                    <std-button bind:click="openInvoke" class=" _3d1781ea " customStyle="height: 60rpx;padding: 0 24rpx;font-weight: 500;font-size: 26rpx;line-height: 60rpx;border-radius: 8rpx;" data-orderno="{{source.orderNo}}" type="primary">申请开票</std-button>
+                </view>
+                <view class="zm-button-wrape _3d1781ea " wx:if="{{btn.type=='LOOKINVOICE'}}">
+                    <std-button bind:click="lookInvoice" class=" _3d1781ea " customStyle="height: 60rpx;padding: 0 24rpx;font-weight: 500;font-size: 26rpx;line-height: 60rpx;border-radius: 8rpx;" data-orderno="{{source.orderNo}}" type="primary">查看发票</std-button>
+                </view>
+                <view class="zm-button-wrape _3d1781ea " wx:if="{{btn.type=='CHECKLOGISTICS'}}">
+                    <std-button bind:click="lookLogistics" class=" _3d1781ea " customStyle="height: 60rpx;padding: 0 24rpx;font-weight: 500;font-size: 26rpx;line-height: 60rpx;border-radius: 8rpx;" data-orderno="{{source.orderNo}}" type="primary">查看物流</std-button>
+                </view>
+                <view class="zm-button-wrape _3d1781ea " wx:if="{{btn.type=='FINISH'}}">
+                    <std-button bind:click="confirmGoods" class=" _3d1781ea " customStyle="height: 60rpx;padding: 0 24rpx;font-weight: 500;font-size: 26rpx;line-height: 60rpx;border-radius: 8rpx;" data-orderno="{{source.orderNo}}" type="primary">确认收货</std-button>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

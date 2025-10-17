@@ -1,0 +1,198 @@
+<view catchtouchmove="noop" class="relative bg-_bl__h_ffffff_br_ z-21">
+    <image class="absolute left-0 right-0 w-_bl_100_p__br_ -z-1" mode="scaleToFill" src="{{__oss__.s(mpxExt,headImg,0)}}" style="top:{{-navbarHeight}}px;height: {{headImgHeight}}px;" wx:if="{{headImg&&!(pinInfo.isPin&&!modeLarge)}}"></image>
+    <view class="px-24rpx pt-16rpx pb-24rpx" wx:if="{{pinInfo.isPin&&!modeLarge}}">
+        <view class="h-104rpx border-rd-16px px-24rpx py-0 box-border flex items-center justify-between" style="background:{{toolsColor.hexToRgba(colorTheme,'0.1')}}">
+            <view bindtap="toPinDetail" class="flex items-center">
+                <view class="text-30rpx font-bold" style="color:{{colorTheme}}">{{_i1}}</view>
+                <block wx:if="{{pinInfo&&pinInfo.pinStatusBarData&&pinInfo.pinStatusBarData.usersAvatar&&pinInfo.pinStatusBarData.usersAvatar.length}}">
+                    <view class="ml-16rpx" wx:if="{{pinInfo.pinStatusBarData.usersAvatar&&pinInfo.pinStatusBarData.usersAvatar.length}}">
+                        <block wx:if="{{pinInfo.pinStatusBarData.usersAvatar&&pinInfo.pinStatusBarData.usersAvatar.length>2}}">
+                            <image class="w-56rpx h-56rpx border-rd-_bl_50_p__br_ border-4rpx border-solid border-_bl__h_fff_br_ bg-_bl__h_fff_br_ ml--22rpx box-border first-ml-0" lazyLoad="true" mode="scaleToFill" src="{{__oss__.s(mpxExt,item,0)}}" wx:if="{{index<1}}" wx:for="{{pinInfo.pinStatusBarData.usersAvatar}}" wx:key="id"></image>
+                        </block>
+                        <block wx:else>
+                            <image class="w-56rpx h-56rpx border-rd-_bl_50_p__br_ border-4rpx border-solid border-_bl__h_fff_br_ bg-_bl__h_fff_br_ ml--22rpx box-border first-ml-0" lazyLoad="true" mode="scaleToFill" src="{{__oss__.s(mpxExt,item,0)}}" wx:if="{{index<2}}" wx:for="{{pinInfo.pinStatusBarData.usersAvatar}}" wx:key="id"></image>
+                        </block>
+                        <image class="w-56rpx h-56rpx border-rd-_bl_50_p__br_ bg-_bl__h_fff_br_ ml--22rpx" lazyLoad="true" mode="scaleToFill" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/06/03/7cddadd91cd4c747.png',0)}}" wx:if="{{pinInfo.pinStatusBarData.usersAvatar&&pinInfo.pinStatusBarData.usersAvatar.length>2}}"></image>
+                    </view>
+                    <view class="text-_bl__h_666_br_ text-26rpx lh-38rpx ml-8rpx">共{{pinInfo.pinStatusBarData.usersAvatar.length}}人</view>
+                </block>
+            </view>
+            <view class="flex items-center">
+                <view bindtap="exitPin" class="w-140rpx h-56rpx border-rd-28rpx text-24rpx flex items-center justify-center bg-_bl__h_fff_br_ relative">{{_i2+_i3}}<view class="absolute border-1px border-solid border-_bl__h_d2d2d2_br_ border-rd-56rpx w-_bl_200_p__br_ h-_bl_200_p__br_ top-0 left-0 scale-50 origin-_bl_0_0_br_"></view>
+                </view>
+                <view bindtap="continueInvite" class="w-140rpx h-56rpx border-rd-28rpx text-24rpx flex items-center justify-center text-_bl__h_fff_br_ ml-12rpx relative" style="background:{{colorTheme}}" wx:if="{{pinInfo.isCreatePeople}}">继续邀请<button class="w-140rpx h-56rpx text-center lh-56rpx border-rd-28rpx absolute bg-transparent top-0 left-0" data-type="sharePin" openType="share"></button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="Q-header-top-content" wx:else>
+        <view class="{{' relative flex z-20 bg-_bl__h_fff_br_ px-24rpx py-20rpx '+(shopNameShopType==1&&(eatType==1||eatType==2)?'items-start':'items-center')+' '}}" style="background-color: {{headImg?'transparent':'#fff'}}">
+            <view catchtap="handleJump" class="flex-1 flex flex-row items-center justify-center pr-12rpx" data-element-type="view" data-operation-type="切换门店" data-screen-type="商品列表" wx:if="{{actualEatType==1||eatType==35}}">
+                <view class="w-0 flex-1 relative">
+                    <view class="flex items-center mb-15rpx" id="store-info">
+                        <text catchtap="collectStore" class="i-yishoucang text-32 mr-8" style="color: {{colorTheme}};" wx:if="{{shop.current.collect}}"></text>
+                        <text catchtap="collectStore" class="i-weishoucang text-32 mr-8 color-_h_999" wx:else></text>
+                        <text class="{{'inline-block font-bold text-_bl__h_333_br_ max-w-430rpx '+(modeLarge=='large'?'text-44rpx':'text-36rpx')+' '+(shopNameShopType==1?'line-clamp-2 lh-_bl_1_d_2_br_':'truncate lh-none')}}">{{shop.current.name}}</text>
+                        <view class="w-30rpx h-30rpx ml-10rpx flex-none flex items-center justify-center">
+                            <view class="i-chaidanjiantou-you text-black text-26"></view>
+                        </view>
+                    </view>
+                    <view class="flex items-center" wx:if="{{newTextData.takefood.showType==2&&(actualEatType==1||eatType==35)&&!modeLarge}}">
+                        <view catchtap="editMealInfo" class="h-40rpx flex items-center px-10rpx py-0 bg-_bl__h_f5f5f5_br_ border-rd-4rpx text-24rpx text-_bl__h_999_br_ mr-12rpx relative" data-edit-type="{{1}}" wx:if="{{showMealType!=0}}">
+                            <view class="lh-none">{{tools.arrayFind(mealInfo.mealTypeList,'type',mealInfo.mealType,'name')}}</view>
+                            <view class="i-shangjiantou text-14rpx text-_bl__h_999_br_ rotate-90 ml-12rpx" wx:if="{{showMealType==1}}"></view>
+                        </view>
+                        <view catchtap="editMealInfo" class="h-40rpx flex items-center px-10rpx py-0 bg-_bl__h_f5f5f5_br_ border-rd-4rpx text-24rpx text-_bl__h_999_br_ mr-12rpx relative" data-edit-type="{{2}}" wx:if="{{actualEatType==1&&showMealTimeType!=0}}">
+                            <view class="lh-none" wx:if="{{showMealTimeType==1}}">
+                                <text wx:if="{{mealInfo.mealTimeType==2}}">
+                                    <text wx:if="{{mealInfo.preMealTime}}">{{mealInfo.preMealTime}}</text>
+                                    <text style="color: red" wx:else>请选择预约时间</text>
+                                </text>
+                                <text wx:else>{{tools.arrayFind(mealInfo.mealTimeTypeList,'type',mealInfo.mealTimeType,'name')}}</text>
+                            </view>
+                            <view wx:else>立即用餐</view>
+                            <view class="i-shangjiantou text-14rpx text-_bl__h_999_br_ rotate-90 ml-12rpx" wx:if="{{showMealTimeType==1}}"></view>
+                        </view>
+                        <text class="{{'truncate text-_bl__h_999999_br_ '+(modeLarge=='large'?'text-36rpx':'text-24rpx')+' lh-none'}}" wx:if="{{shop.toUserDistance}}">距您{{shop.toUserDistance}}</text>
+                        <block wx:else>
+                            <text class="{{'truncate text-_bl__h_999999_br_ '+(modeLarge=='large'?'text-36rpx':'text-26rpx')}}">未授权定位</text>
+                            <text catchtap="authorizeLocation" class="{{'truncate text-_bl__h_999999_br_ '+(modeLarge=='large'?'text-36rpx':'text-26rpx')+' decoration-underline ml-8rpx'}}" style="color:{{colorTheme}}">去授权</text>
+                        </block>
+                        <view class="ml-8rpx pl-8rpx text-20rpx lh-20rpx border-l-1px border-l-solid border-l-_bl__h_e5e5e5_br_ flex-shrink-0" style="color: {{colorTheme}}" wx:if="{{shop.current.aboutToRest}}">{{shop.current.aboutToRest}}</view>
+                    </view>
+                    <view class="flex items-center" wx:else>
+                        <view class="i-juli1 text-32 mr-8 color-_h_999"></view>
+                        <text class="{{'truncate text-_bl__h_999999_br_ '+(modeLarge=='large'?'text-36rpx':'text-26rpx')}}" wx:if="{{shop.toUserDistance}}">{{_i4+shop.toUserDistance}}</text>
+                        <block wx:else>
+                            <text class="{{'truncate text-_bl__h_999999_br_ '+(modeLarge=='large'?'text-36rpx':'text-26rpx')}}">{{_i5}}</text>
+                            <text catchtap="authorizeLocation" class="{{'truncate text-_bl__h_999999_br_ '+(modeLarge=='large'?'text-36rpx':'text-26rpx')+' decoration-underline ml-8rpx'}}" style="color:{{colorTheme}}">{{_i6}}</text>
+                        </block>
+                        <view class="ml-8rpx pl-8rpx text-20rpx lh-20rpx border-l-1px border-l-solid border-l-_bl__h_e5e5e5_br_ flex-shrink-0" style="color: {{colorTheme}}" wx:if="{{shop.current.aboutToRest}}">{{shop.current.aboutToRest}}</view>
+                        <view class="flex items-center px-24rpx pt-0 pb-20rpx" style="padding: 0 20rpx" wx:if="{{isShowQueneProgress&&!modeLarge}}">
+                            <view class="flex-1 relative">
+                                <zm-progress activeColor="{{queueOrderMake.showColor}}" backgroundColor="#F5F5F5" borderRadius="18rpx" minWidthValue="204rpx" percent="{{queueOrderMake.mergePercentage*100}}" strokeWidth="26rpx"></zm-progress>
+                                <view class="absolute left-16rpx top-_bl_50_p__br_ translate-y--50_p_ text-24rpx text-_bl__h_333333_br_">{{_i7}}<text class="font-bold">{{queueOrderMake.cupNum}}</text>{{queueOrderMake.countUnit+_i8}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view catchtap="handleJump" class="{{'text-_bl__h_333_br_ flex-1 pr-12rpx '+(modeLarge=='large'?'text-34rpx':'text-26rpx')}}" data-element-type="view" data-operation-type="切换门店" data-screen-type="商品列表" wx:else>
+                <view class="flex items-center relative mt-0">
+                    <view class="{{'text-24rpx text-_bl__h_ffffff_br_ p-14rpx border-rd-10rpx absolute left-50rpx top-_bl_130_p__br_ bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_8_pr__br_ z-1 '+(showAutoAddressBubble?'animate-_bl_fade-in-up_br_ animate-duration-0_d_3s':'')}}" wx:if="{{showAutoAddressBubble}}">{{_i9}}<view class="absolute border-10rpx border-solid border-t-transparent border-b-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_8_pr__br_ border-x-transparent top--10rpx left-_bl_30_p__br_ border-t-none"></view>
+                    </view>
+                    <view class="{{'truncate font-500 text-_bl__h_222222_br_ max-w-480rpx '+(modeLarge=='large'?'text-44rpx lh-44rpx':'text-36rpx lh-36rpx')}}">{{address}}</view>
+                    <view class="w-30rpx h-30rpx ml-10rpx flex-none flex items-center justify-center">
+                        <view class="i-chaidanjiantou-you text-black text-26"></view>
+                    </view>
+                </view>
+                <view class="flex items-center mt-15rpx relative">
+                    <view catchtap="goMultiList" class="text-_bl__h_666_br_ flex items-center whitespace-nowrap" style="max-width:{{isShowQueneProgress&&!modeLarge?'264rpx':'500rpx'}}">{{_i10}}<text class="truncate font-500 text-_bl__h_333_br_ mx-3rpx my-0">{{shop.current.name}}</text>
+                        <view class="w-36rpx h-36rpx ml-8rpx inline-block shrink-0">
+                            <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/07/23/changeaddress.png',0)}}"></image>
+                        </view>
+                    </view>
+                    <view class="flex items-center px-24rpx pt-0 pb-20rpx" style="padding: 0 20rpx" wx:if="{{isShowQueneProgress&&!modeLarge}}">
+                        <view class="flex-1 relative">
+                            <zm-progress activeColor="{{queueOrderMake.showColor}}" backgroundColor="#F5F5F5" borderRadius="18rpx" percent="{{queueOrderMake.mergePercentage*100}}" strokeWidth="30rpx"></zm-progress>
+                            <view class="absolute left-16rpx top-_bl_50_p__br_ translate-y--50_p_ text-24rpx text-_bl__h_333333_br_">{{_i11}}<text class="font-bold">{{queueOrderMake.cupNum}}</text>{{queueOrderMake.countUnit+_i12}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="flex items-center" style="margin-top: 10rpx" wx:if="{{newTextData.takefood.showType==2&&eatType==3&&showMealType!=0&&!modeLarge}}">
+                    <view catchtap="editMealInfo" class="h-40rpx flex items-center px-10rpx py-0 bg-_bl__h_f5f5f5_br_ border-rd-4rpx text-24rpx text-_bl__h_999_br_ mr-12rpx relative" data-edit-type="{{1}}">
+                        <view class="lh-none">{{tools.arrayFind(mealInfo.mealTypeList,'type',mealInfo.mealType,'name','3')}}</view>
+                        <view class="i-shangjiantou text-14rpx text-_bl__h_999_br_ rotate-90 ml-12rpx" wx:if="{{showMealType==1}}"></view>
+                    </view>
+                    <view catchtap="editMealInfo" class="h-40rpx flex items-center px-10rpx py-0 bg-_bl__h_f5f5f5_br_ border-rd-4rpx text-24rpx text-_bl__h_999_br_ mr-12rpx relative" data-edit-type="{{2}}" wx:if="{{showMealTimeType!=0}}">
+                        <view class="lh-none" wx:if="{{showMealTimeType==1}}">{{mealInfo.mealTimeType==2?mealInfo.preMealTime:tools.arrayFind(mealInfo.mealTimeTypeList,'type',mealInfo.mealTimeType,'name')}}</view>
+                        <view wx:else>立即用餐</view>
+                        <view class="i-shangjiantou text-14rpx text-_bl__h_999_br_ rotate-90 ml-12rpx" wx:if="{{showMealTimeType==1}}"></view>
+                    </view>
+                </view>
+            </view>
+            <block wx:if="{{orderData.headType==2&&isTabbarPageTakeFood}}">
+                <view catchtap="createPinDialog" class="flex flex-col items-center justify-center pr-10" data-element-type="view" data-operation-type="进行拼单" data-screen-type="商品列表" wx:if="{{pinSetting.isOpenPin&&!pinInfo.isPin&&!modeLarge&&'wx'==='wx'}}">
+                    <block wx:if="{{orderData.spellContentType==2}}">
+                        <view class="w-100 h-100" wx:if="{{orderData.spellOrderImg}}">
+                            <image class="w-full h-full" src="{{__oss__.s(mpxExt,orderData.spellOrderImg,0)}}"></image>
+                        </view>
+                        <view class="text-100 lh-100 i-pindan" style="color:{{colorTheme}}" wx:else></view>
+                    </block>
+                    <block wx:else>
+                        <view class="w-60 h-60" wx:if="{{orderData.spellOrderImg}}">
+                            <image class="w-full h-full" src="{{__oss__.s(mpxExt,orderData.spellOrderImg,0)}}"></image>
+                        </view>
+                        <view class="text-60 lh-60 i-pindan" style="color:{{colorTheme}}" wx:else></view>
+                        <view class="h-34 text-28 lh-34 mt-2">{{_i13}}</view>
+                    </block>
+                </view>
+            </block>
+            <view catchtap="editMealInfo" class="flex" data-edit-type="{{2}}" wx:elif="{{showMealTimeType==1&&newTextData.takefood.showType==2&&actualEatType==1&&!modeLarge}}">
+                <view class="w-88rpx h-68rpx bg-no-repeat bg-_bl_length_c_100_p__100_p__br_ flex justify-center" style=" background-image: url({{newTextData.takefood.topRightBgImg}});{{newTextData.takefood.topRightTextPositionType==1?'align-items:center;':''}}" wx:if="{{newTextData.takefood.topRightBgImg}}">
+                    <view class="lh-none relative text-24rpx h-fit" style="color:{{newTextData.takefood.topRightTextColor||colorTheme}};{{newTextData.takefood.topRightTextPositionType==2?'top:'+(newTextData.takefood.topRightTextPositionTop||0)+'rpx;':''}}">{{mealInfo.mealTimeType==1||mealInfo.mealTimeType==2&&!mealInfo.preMealTime?'预约':'预约中'}}</view>
+                </view>
+                <block wx:else>
+                    <view class="i-yuyue text-68rpx" style="color:{{colorTheme}}" wx:if="{{mealInfo.mealTimeType==1||mealInfo.mealTimeType==2&&!mealInfo.preMealTime}}"></view>
+                    <view class="i-yuyue2 text-68rpx" style="color:{{colorTheme}}" wx:else></view>
+                </block>
+            </view>
+            <view class="rd-42 bg-hex-f5f5f5 p-5" wx:elif="{{actualEatTypeList&&actualEatTypeList.length&&configCenterByKeys&&configCenterByKeys['channelSelection']}}">
+                <view class="relative flex" wx:if="{{showEatTypeSwitch}}">
+                    <view class="absolute w-82 h-52 rd-42 left-0 top-0 transition-left duration-200" style="background: {{curNewTextItem.topRightBtnBgColor?curNewTextItem.topRightBtnBgColor:colorTheme}};left: {{orderTypeIndex*50}}%"></view>
+                    <view catchtap="switchOrderType" class="{{' relative flex w-82rpx h-52rpx border-rd-42rpx justify-center items-center font-bold z-10 '+(orderTypeIndex==index?'text-_bl__h_fff_br_ text-26rpx transition-all transition-ease-_bl_ease_br_ transition-duration-0_d_2s':'text-_bl__h_999_br_ text-24rpx')+' '+(modeLarge=='large'?orderTypeIndex==index?'text-30rpx_i_':'text-28rpx_i_':'')+' '}}" data-element-type="view" data-index="{{index}}" data-operation-type="切换业务类型" data-screen-type="商品列表" style="color: {{orderTypeIndex==index?curNewTextItem.topRightBtnTextColor:'#999'}}" wx:for="{{actualEatTypeList}}" wx:key="index">{{item.value}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="w-full pb-4" wx:if="{{showOrderList&&showOrderList.length}}">
+            <swiper circular autoplay="{{activityBriefly&&activityBriefly.showType==2?true:false}}" class="h-50rpx text-center" interval="3000" style="background-color: {{activityBriefly&&activityBriefly.backgroundColor?activityBriefly.backgroundColor:''}}" vertical="true">
+                <block wx:for="{{showOrderList}}" wx:key="index">
+                    <swiper-item wx:if="{{!(activityList&&activityList.length)&&item=='storeInfo'}}">
+                        <view style="height: 100%">
+                            <store-info-item activityList="{{activityList}}" binddetail="showShopNotice" headImg="{{headImg}}" tagName="{{item}}"></store-info-item>
+                        </view>
+                    </swiper-item>
+                    <block wx:elif="{{(shop.current.notices&&shop.current.notices.length&&shop.current.notices[0]||storeNoticeList&&storeNoticeList.length)&&item=='storeNotice'}}">
+                        <swiper-item wx:if="{{activityBriefly.showType==1}}">
+                            <view style="height: 100%">
+                                <store-info-item binddetail="showShopNotice" headImg="{{headImg}}" storeNoticeList="{{storeNoticeList}}" tagName="{{item}}"></store-info-item>
+                            </view>
+                        </swiper-item>
+                        <block wx:else>
+                            <block wx:if="{{storeNoticeList&&storeNoticeList.length}}">
+                                <swiper-item wx:for="{{storeNoticeList}}" wx:for-item="noticeItem" wx:key="id">
+                                    <view style="height: 100%">
+                                        <store-info-item binddetail="showShopNotice" headImg="{{headImg}}" noticeItem="{{noticeItem.noticeText}}" tagName="{{item}}"></store-info-item>
+                                    </view>
+                                </swiper-item>
+                            </block>
+                            <block wx:if="{{shop.current.notices[0]}}">
+                                <swiper-item wx:for="{{shop.current.notices}}" wx:for-item="notice" wx:key="nindex">
+                                    <view style="height: 100%">
+                                        <store-info-item binddetail="showShopNotice" headImg="{{headImg}}" noticeItem="{{notice}}" tagName="{{item}}"></store-info-item>
+                                    </view>
+                                </swiper-item>
+                            </block>
+                        </block>
+                    </block>
+                    <swiper-item wx:elif="{{outbreakTips&&item=='securityTips'}}">
+                        <view style="height: 100%">
+                            <store-info-item binddetail="showShopNotice" headImg="{{headImg}}" outbreakTips="{{outbreakTips}}" tagName="{{item}}"></store-info-item>
+                        </view>
+                    </swiper-item>
+                    <swiper-item wx:elif="{{activityList&&activityList.length&&item=='discountActivity'}}">
+                        <view style="height: 100%">
+                            <store-info-item activityList="{{activityList}}" binddetail="showShopNotice" bindlinklogin="linkLogin" headImg="{{headImg}}" tagName="{{item}}"></store-info-item>
+                        </view>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+    </view>
+    <v-component-district-switch bindswitch="switchHandle" content="{{shopArea}}" id="districtSwitch" style="margin-bottom: 20rpx" wx:if="{{shopArea&&shopArea.length}}"></v-component-district-switch>
+    <view class="{{'pointer-events-none fixed px-16rpx py-0 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_75_pr__br_ text-_bl__h_fff_br_ z-300 text-24rpx lh-56rpx border-rd-12rpx '+(showShopTipAni?'animate-duration-0_d_3s animate-_bl_fade-in_br_ animate-ease-_bl_linear_br_ animate-fill-forwards':'animate-duration-0_d_3s animate-_bl_fade-out_br_ animate-ease-_bl_linear_br_ animate-fill-forwards')}}" style="top:{{shopTipTop}}px;left:{{shopTipLeft}}px" wx:if="{{showShopTip}}">{{_i14}}<view class="absolute top--4px left-26px w-0 h-0 z-500 border-l-4px border-l-solid border-l-transparent border-r-4px border-r-solid border-r-transparent border-b-4px border-b-solid border-b-_bl__h_000_br_ op-75"></view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="toolsColor" src="../../wxs/tools22b08362.wxs"/>
+<wxs module="tools" src="../../wxs/reservation89aa9880.wxs"/>

@@ -1,0 +1,231 @@
+<qm-loading bindreload="reload" class=" _6450e146 " loadErrorInfo="{{loadErrorInfo}}" loadStatus="{{loadStatus}}" wx:if="{{isLoading}}"></qm-loading>
+<scroll-view scrollY bindscroll="onScrollViewScroll" class="h-100vh box-border _6450e146 " style="background: {{customData.userCenterStyle!=4?customData.allPageBgColor||'#f5f5f5':customData.pageBgColor?customData.pageBgColor:'#f5f5f5'}}" wx:else>
+    <view class="{{modeLarge=='large'?'mode_large':''}} relative z-1 _6450e146 " style="background: {{customData.userCenterStyle!=4?customData.allPageBgColor||'#f5f5f5':customData.pageBgColor?customData.pageBgColor:'#f5f5f5'}}" wx:if="{{isLoad}}">
+        <view class="status-btn-wrap fixed {{statusOpacity>=0.8?'active':''}} _6450e146 " style=" padding-top: {{capsuleTop}}px;">
+            <view bindtap="backFun" class="status-btn flex items-center justify-center _6450e146 " style="height: {{capsuleHeight}}px; width: {{capsuleHeight}}px;" wx:if="{{showBackBtn}}">
+                <view class="iconfont i-jiantou-zuo _6450e146 "></view>
+            </view>
+        </view>
+        <v-custom-page bindopenPinDialog="openPinDialog" bindrunAuthorization="runAuthorization" bodyColor="{{customData.pageBgColor}}" class=" _6450e146 " designData="{{customData.personal_center_new}}" id="customPage" traceScreenType="{{screenType}}" wx:if="{{customData.userCenterStyle==4}}"></v-custom-page>
+        <block wx:else>
+            <view class="header _6450e146 ">
+                <view bindlongtap="changeBg" class="header-bg absolute cover-bg _6450e146 " style="background-image: url({{bgImg}});" wx:if="{{bgImg}}"></view>
+                <swiper autoplay circular class="header-bg absolute cover-bg _6450e146 " duration="{{2000}}" wx:elif="{{vipCoverList&&vipCoverList.length&&customData.isShowEquityCardCover}}">
+                    <swiper-item class=" _6450e146 " wx:for="{{vipCoverList}}" wx:key="paidCardId">
+                        <image class="header-bg-swiper-image _6450e146 " mode="aspectFill" src="{{__oss__.s(mpxExt,item.backGroundPicture,0)}}"></image>
+                    </swiper-item>
+                </swiper>
+                <view bindlongtap="changeBg" class="header-bg absolute cover-bg _6450e146 " style="background-image: url({{customData.userBgImg}});" wx:elif="{{customData.userBgImg}}"></view>
+                <view bindlongtap="changeBg" class="header-bg absolute _6450e146 " style="background-color:{{customData.userBgColor||colorTheme}};" wx:else>
+                    <image class="h-bg-l absolute _6450e146 " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/08/12/55c78b771e7479da.png',0)}}"></image>
+                    <image class="h-bg-r absolute _6450e146 " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/08/12/79f7ce4830dcb754.png',0)}}"></image>
+                </view>
+                <block wx:if="{{capsuleHeight&&customData.userCenterStyle==1}}">
+                    <view class="no-auth-other-style _6450e146 " wx:if="{{!isAuth}}">
+                        <user-avatar avatarFrame="{{userInfoData}}" bindrunAuthorization="runAuthorization" class=" _6450e146 " size="88" traceScreenType="{{screenType}}"></user-avatar>
+                        <view class="store-content _6450e146 " style="color: #fff">
+                            <view class="store-name _6450e146 ">{{storeName+_i1}}</view>
+                            <view class="store-login-text _6450e146 ">{{_i2}}</view>
+                        </view>
+                        <view bindtap="checkLogin" class="store-login-btn _6450e146 " data-operation-type="查看会员登录" data-screen-type="{{screenType}}" style="background-color:#fff;color:{{colorTheme}}">{{_i3}}</view>
+                    </view>
+                    <view class="header-main relative flex flex-col _6450e146 " wx:else>
+                        <view class="flex items-center info-line _6450e146 " style="{{privilegeInfo.isOpenShow?'padding:30rpx 0 10rpx 0':''}}">
+                            <view class="header-user-info _6450e146 ">
+                                <view class="h-left relative _6450e146 ">
+                                    <user-avatar avatarFrame="{{userInfoData}}" bindrunAuthorization="runAuthorization" class=" _6450e146 " id="userAvatar" traceScreenType="{{screenType}}"></user-avatar>
+                                </view>
+                                <view class="h-info flex-1 _6450e146 ">
+                                    <view class="flex items-center _6450e146 ">
+                                        <view bindtap="goUpdateUserInfo" class=" _6450e146 " data-element-type="view" data-operation-type="查看会员个人资料" data-screen-type="{{screenType}}">
+                                            <view class="h-nickname text-hidden _6450e146 ">{{username}}</view>
+                                        </view>
+                                        <view bindtap="goCardInfo" class="h-lev _6450e146 " data-content="会员权益" data-name="会员权益" id="goCardInfo" style="color: {{colorTheme}};" wx:if="{{isShowLevel&&userInfoData.levelType=='ladder'&&userInfoData&&userInfoData.cardName}}">{{userInfoData.cardName}}</view>
+                                    </view>
+                                    <view class="h-info-b {{userInfoData.levelType=='only'?'h-info-b-inbl':''}} _6450e146 " wx:if="{{userInfoData.cardName&&!modeLarge}}">
+                                        <view bindtap="goCardInfo" class="h-lev _6450e146 " data-content="会员权益" data-element-content="会员等级权益" data-element-name="会员等级权益" data-name="会员权益" id="goCardInfo" style="color: {{colorTheme}};" wx:if="{{isShowLevel&&isShowLevel&&userInfoData.levelType=='only'}}">{{userInfoData.cardName}}</view>
+                                        <view bindtap="goExp" class="h-upgrade _6450e146 " data-element-content="会员等级权益" data-element-name="会员等级权益" wx:if="{{isShowLevel&&userInfoData.nextConditionValue>=0}}">
+                                            <view class=" _6450e146 " wx:if="{{userInfoData.max}}">{{_i4}}</view>
+                                            <view class=" _6450e146 " wx:else>{{_i5}}</view>
+                                            <view class="h-upgrade-b flex items-center _6450e146 " wx:if="{{!(userInfoData.max&&configCenterByKeys&&configCenterByKeys['Member.Level.Experience']==='other')}}">
+                                                <view class="h-upgrade-p _6450e146 ">
+                                                    <view class="h-upgrade-p-main _6450e146 " style="width: {{userInfoData.percent}}%;background-color: {{colorTheme}};"></view>
+                                                </view>
+                                                <view class="flex _6450e146 " wx:if="{{userInfoData.currentValue>0}}">
+                                                    <text class=" _6450e146 ">{{userInfoData.currentValue}}</text>/ {{userInfoData.nextConditionValue}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <button catchtap="goToPaymentCode" class="h-code _6450e146 " data-operation-type="查看会员码" data-screen-type="{{screenType}}" formType="submit" hoverClass="none" style="background-color: transparent" wx:if="{{customData.membership_code}}">
+                                <image class="image _6450e146 " lazyLoad="true" src="{{__oss__.s(mpxExt,paidMemberConfig.cardIconUrl,0)}}" wx:if="{{paidMemberConfig&&paidMemberConfig.isStoreJoin}}"></image>
+                                <text class="iconfont i-qr-code _6450e146 "></text>
+                            </button>
+                        </view>
+                        <view class="perfect-info-box _6450e146 " wx:if="{{privilegeInfo.isOpenShow}}">
+                            <view class="perfect-info-left _6450e146 " style="color: {{colorTheme}}">{{privilegeInfo.showBenefitsName}}</view>
+                            <view bindtap="goUpdateUserInfo" class="perfect-info-right _6450e146 " data-operation-type="查看会员个人资料" data-screen-type="{{screenType}}" style="background-color: {{colorTheme}}">{{_i6}}</view>
+                        </view>
+                        <qm-design-member-rights class=" _6450e146 " isShow="{{customData.member_rights}}" memberEquity="{{customData.member_rights_data}}" style="width: 100%" wx:if="{{customData.member_rights}}"></qm-design-member-rights>
+                    </view>
+                </block>
+            </view>
+            <view class="user-main _6450e146 " style="{{pagePaddingBottom}};{{customData.userCenterStyle==2&&!isAuth?'margin-top: -20rpx':''}}{{(customData.userCenterStyle==3||customData.userCenterStyle==1)&&!isAuth?'margin-top: -100rpx':memberBlockStyle}}">
+                <block wx:if="{{customData.userCenterStyle==2}}">
+                    <view class="no-auth-other-style _6450e146 " wx:if="{{!isAuth}}">
+                        <user-avatar avatarFrame="{{userInfoData}}" bindrunAuthorization="runAuthorization" class=" _6450e146 " size="88" traceScreenType="{{screenType}}"></user-avatar>
+                        <view class="store-content _6450e146 ">
+                            <view class="store-name _6450e146 ">{{storeName+_i7}}</view>
+                            <view class="store-login-text _6450e146 ">{{_i8}}</view>
+                        </view>
+                        <view bindtap="checkLogin" class="store-login-btn _6450e146 " data-operation-type="查看会员登录" data-screen-type="{{screenType}}" style="background-color:{{colorTheme}}">{{_i9}}</view>
+                    </view>
+                    <view class="main-item_wrapper _6450e146 " wx:else>
+                        <view class="item relative userinfo-block _6450e146 ">
+                            <view class="userinfo-member-mark _6450e146 " wx:if="{{customData.payMemberMark&&userMemberMark}}">
+                                <text class=" _6450e146 ">{{userMemberMark}}</text>
+                            </view>
+                            <view class="userinfo-block-body _6450e146 ">
+                                <view class="userinfo-block-left _6450e146 ">
+                                    <user-avatar avatarFrame="{{userInfoData}}" bindrunAuthorization="runAuthorization" class=" _6450e146 " id="userAvatar" traceScreenType="{{screenType}}"></user-avatar>
+                                </view>
+                                <view class="userinfo-block-center _6450e146 ">
+                                    <view class="userinfo-block-top _6450e146 ">
+                                        <view bindtap="goUpdateUserInfo" class=" _6450e146 " data-operation-type="查看会员个人资料" data-screen-type="{{screenType}}">
+                                            <view class="username text-hidden _6450e146 ">{{username}}</view>
+                                        </view>
+                                        <view bindtap="goCardInfo" class="level-name _6450e146 " data-content="会员权益" data-element-type="view" data-name="会员权益" data-operation-type="查看会员权益" data-screen-type="{{screenType}}" id="goCardInfo" style="background-color: {{colorTheme}}; " wx:if="{{isShowLevel&&userInfoData.levelType=='ladder'&&userInfoData&&userInfoData.cardName&&!modeLarge}}">{{userInfoData.cardName}}</view>
+                                    </view>
+                                    <block wx:if="{{isShowLevel&&userInfoData.nextConditionValue>=0&&userInfoData.cardName&&!modeLarge}}">
+                                        <view bindtap="goExp" class="userinfo-block-des _6450e146 " wx:if="{{userInfoData.max}}">{{_i10}}</view>
+                                        <view bindtap="goExp" class="userinfo-block-des _6450e146 " wx:else>{{_i11}}</view>
+                                        <view bindtap="goExp" class="userinfo-block-bottom _6450e146 " wx:if="{{!(userInfoData.max&&configCenterByKeys&&configCenterByKeys['Member.Level.Experience']==='other')}}">
+                                            <view class="progress-box _6450e146 ">
+                                                <view class="progress-inner _6450e146 " style="width: {{userInfoData.percent}}%;background-color: {{colorTheme}};"></view>
+                                            </view>
+                                            <view class="progress-font _6450e146 ">{{userInfoData.currentValue}}/{{userInfoData.nextConditionValue}}</view>
+                                        </view>
+                                    </block>
+                                </view>
+                                <view bindtap="goToPaymentCode" class="iconfont i-qr-code _6450e146 " data-operation-type="查看会员码" data-screen-type="{{screenType}}" wx:if="{{customData.membership_code}}"></view>
+                            </view>
+                            <view class="perfect-info-box _6450e146 " style="background-color: {{bgColor}};" wx:if="{{privilegeInfo.isOpenShow}}">
+                                <view class="perfect-info-left _6450e146 " style="color: {{colorTheme}}">{{privilegeInfo.showBenefitsName}}</view>
+                                <view bindtap="goUpdateUserInfo" class="perfect-info-right _6450e146 " data-operation-type="查看会员个人资料" data-screen-type="{{screenType}}" style="background-color: {{colorTheme}}">{{_i12}}</view>
+                            </view>
+                            <qm-design-member-rights class=" _6450e146 " isShow="{{customData.member_rights}}" memberEquity="{{customData.member_rights_data}}" wx:if="{{customData.member_rights}}"></qm-design-member-rights>
+                        </view>
+                    </view>
+                </block>
+                <block wx:if="{{customData.userCenterStyle==3}}">
+                    <view class="no-auth-other-style _6450e146 " wx:if="{{!isAuth}}">
+                        <user-avatar avatarFrame="{{userInfoData}}" class=" _6450e146 " size="88"></user-avatar>
+                        <view class="store-content _6450e146 ">
+                            <view class="store-name _6450e146 ">{{storeName+_i13}}</view>
+                            <view class="store-login-text _6450e146 ">{{_i14}}</view>
+                        </view>
+                        <view bindtap="checkLogin" class="store-login-btn _6450e146 " data-operation-type="查看会员登录" data-screen-type="{{screenType}}" style="background-color:{{colorTheme}}">{{_i15}}</view>
+                    </view>
+                    <user-center-style bindclickCode="goToPaymentCode" bindupdateUserInfo="goUpdateUserInfo" class=" _6450e146 " customData="{{customData}}" data-operation-type="查看会员个人资料" data-screen-type="{{screenType}}" teaBoyImgUrl="{{teaBoyImgUrl}}" userAsset="{{userAsset}}" userInfoData="{{userInfoData}}" wx:else></user-center-style>
+                </block>
+                <view class="integral-style3-tip _6450e146 " wx:if="{{siIntegralTips&&customData.userCenterStyle==3}}">{{integralTipsText||'近7天内无积分过期'}}</view>
+                <view class="my-group _6450e146 ">
+                    <v-custom-page bindopenPinDialog="openPinDialog" bindrunAuthorization="runAuthorization" class=" _6450e146 " designData="{{customData.personal_center_top_design_data}}" id="customPage" traceScreenType="{{screenType}}"></v-custom-page>
+                </view>
+                <view class="main-item_wrapper _6450e146 " wx:if="{{item.type=='ordinary'}}" wx:for="{{listData}}" wx:key="content">
+                    <view class="integral-overdue-tip _6450e146 " wx:if="{{siIntegralTips&&index==0&&customData.userCenterStyle!=3}}">{{integralTipsText||'近7天内无积分过期'}}</view>
+                    <view class="item relative _6450e146 ">
+                        <view class="ico-title _6450e146 ">{{item.title}}</view>
+                        <view class="ico-main flex items-center flex-wrap _6450e146 ">
+                            <block wx:if="{{item.subType=='assets'}}">
+                                <view bindtap="__invoke" class="ico-m-zc _6450e146 " data-content="{{i.name}}" data-defaulturl="{{i.defaultUrl}}" data-element-content="{{i.name}}" data-element-name="{{i.name}}" data-element-type="{{i.key}}" data-eventconfigs="{{ tap:[ ['handleClick','__mpx_event__',i.funName] ] }}" data-name="{{i.name}}" data-operation-type="{{i.key==='integral'?'查看积分':i.key==='coupon'?'查看优惠券':i.key==='balance'?'查看余额':i.key==='giftCard'?'查看礼品卡':i.key==='cardbag'?'查看卡包':i.key==='equityCard'?'查看权益卡':''}}" data-screen-type="{{screenType}}" id="assets" wx:for="{{item.list}}" wx:for-item="i" wx:key="assets">
+                                    <view class="ico-m-zc-t flex items-center justify-center _6450e146 ">
+                                        <image class="ico-m-zc-img _6450e146 " lazyLoad="true" src="{{__oss__.s(mpxExt,i.icon,0)}}"></image>
+                                        <view class="ico-m-title ico-m-zc-title _6450e146 ">{{i.name}}</view>
+                                    </view>
+                                    <view class="ico-m-zc-num text-center_i_ _6450e146 " wx:if="{{i.key=='integral'&&!isAuth}}">{{_i16}}</view>
+                                    <view class="ico-m-zc-num text-center_i_ _6450e146 " wx:elif="{{i.key=='coupon'&&!isAuth}}">{{_i17}}</view>
+                                    <view class="ico-m-zc-num text-center_i_ _6450e146 " wx:elif="{{i.key=='balance'&&!isAuth}}">{{_i18}}</view>
+                                    <view class="ico-m-zc-num text-center_i_ _6450e146 " wx:elif="{{i.key=='giftCard'&&!isAuth}}">{{_i19}}</view>
+                                    <view class="ico-m-zc-num text-center_i_ _6450e146 " wx:elif="{{i.key=='cardbag'}}">{{_i20}}</view>
+                                    <view class="ico-m-zc-num text-center_i_ _6450e146 " wx:elif="{{i.key=='equityCard'}}">{{_i21}}</view>
+                                    <view class="ico-m-zc-num text-center_i_ _6450e146 " wx:elif="{{i.key=='entityStoredCard'}}">{{_i22}}</view>
+                                    <view class="ico-m-zc-num text-center_i_ _6450e146 " wx:else>
+                                        <text class=" _6450e146 ">{{i.num}}</text>
+                                        <text class=" _6450e146 " wx:if="{{i.unit}}">{{i.unit}}</text>
+                                        <text class=" _6450e146 " wx:else>{{_i23}}</text>{{_i24}}</view>
+                                </view>
+                            </block>
+                            <block wx:elif="{{item.subType=='order'}}">
+                                <view bindtap="orderFun" class="ico-m-dd text-center_i_ _6450e146 " data-item="{{i}}" wx:if="{{i.show}}" wx:for="{{item.list}}" wx:for-item="i" wx:key="order">
+                                    <image class="ico-m-dd-img _6450e146 " lazyLoad="true" src="{{__oss__.s(mpxExt,i.icon,0)}}"></image>
+                                    <view class="ico-m-title _6450e146 ">{{i.name}}</view>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view bindtap="serviceFun" class="ico-m-gn text-center_i_ _6450e146 " data-content="{{i.text}}" data-item="{{i}}" data-name="{{i.text}}" id="service" wx:if="{{i.link!='/subpackages/suggestionFeedback/list/index'||i.link=='/subpackages/suggestionFeedback/list/index'}}" wx:for="{{item.list}}" wx:for-item="i" wx:key="service">
+                                    <button class="contact-btn _6450e146 " openType="contact" wx:if="{{i.link=='/officialAccountService'||i.link=='/customer'}}"></button>
+                                    <view class=" text-52 mb-10 {{i.img==='icon-dizhi'?'i-dizhi':''}} {{i.img==='icon-icon_erweima'?'i-icon_erweima':''}} {{i.img==='icon-10'?'i-10':''}} {{i.img==='icon-tuiguang'?'i-tuiguang':''}} {{i.img==='icon-qian3'?'i-qian3':''}} {{i.img==='icon-lipinka'?'i-lipinka':''}} {{i.img==='icon-liwu'?'i-liwu':''}} {{i.img==='icon-jianyifankui'?'i-jianyifankui':''}} _6450e146 " style="color: {{colorTheme}}" wx:if="{{i.icon}}"></view>
+                                    <image class="ico-m-gn-img _6450e146 " lazyLoad="true" src="{{__oss__.s(mpxExt,i.img,50)}}" width="50" wx:else></image>
+                                    <view class="ico-m-title _6450e146 ">{{i.text}}</view>
+                                    <view class="service-img-red _6450e146 " wx:if="{{isCustomerSuggestRed&&i.link=='/subpackages/suggestionFeedback/list/index'}}"></view>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                    <qm-vip-card class=" _6450e146 " payMember="{{customData.pay_member}}" proper="{{customData.pay_member_data}}" userCardId="{{vipCoverList&&vipCoverList.length?vipCoverList[0].paidCardId:null}}" visitorInfo="{{customData.notLoggedIn_switch[0]}}" wx:if="{{index==0&&customData.pay_member}}"></qm-vip-card>
+                    <view class="main-item_wrapper _6450e146 " wx:if="{{item.type=='card'}}">
+                        <view bindtap="{{item.isThird?'addThirdCard':'goToCard'}}" class="card-warpper item relative _6450e146 ">
+                            <text class=" _6450e146 ">{{_i25}}</text>
+                            <view class="button2 _6450e146 " style="background: {{colorTheme}}">{{_i26}}</view>
+                        </view>
+                    </view>
+                    <view class="my-group promoter-box _6450e146 " wx:if="{{item.type=='promoterIsShow'}}">
+                        <view bindtap="goToFun" class="extension-link _6450e146 " hoverClass="op-70">
+                            <image class="image _6450e146 " lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,item.data,0)}}"></image>
+                        </view>
+                    </view>
+                </view>
+                <view class="my-group _6450e146 ">
+                    <v-custom-page bindopenPinDialog="openPinDialog" bindrunAuthorization="runAuthorization" class=" _6450e146 " designData="{{customData.personal_center_new}}" id="customPage" traceScreenType="{{screenType}}"></v-custom-page>
+                </view>
+                <view class="mode-switch_sty _6450e146 " style="color: {{colorTheme}};" wx:if="{{isDesignLarge&&fontSizeSetting>=fontSizeNumber}}">
+                    <view bindtap="switchMode" class="mode-switch_body _6450e146 ">{{_i27}}<text class="iconfont i-qiehuan _6450e146 "></text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="{{showCopyright!==1?'h-110rpx pt-25':''}} box-content _6450e146 " style="{{wrapperPadding}};"></view>
+    <view bindlongtap="version" catchtap="tapCopyright" class="copyright fixed bottom-0 left-0 right-0 text-center _6450e146 " style="{{wrapperPadding}}" wx:if="{{showCopyright!==1&&isLoad}}">
+        <view class="mb-25rpx h-110rpx _6450e146 ">
+            <image bindload="versionLogoLoad" class="logo _6450e146 " lazyLoad="true" mode="heightFix" src="{{__oss__.s(mpxExt,customData.brandLogo||'https://images.qmai.cn/resource/20210824210816/2024/07/02/20240702-144639.png',0)}}" style="width: {{versionLogoWidth}}rpx"></image>
+            <view class=" _6450e146 ">{{_i29}}</view>
+        </view>
+    </view>
+</scroll-view>
+<block wx:if="{{showPasswordDialog}}">
+    <view class="password-mask _6450e146 "></view>
+    <view class="password-layer _6450e146 ">
+        <view class="password-main _6450e146 ">
+            <view catchtap="closeDialog" class="cha _6450e146 "></view>
+            <view class="password-text _6450e146 ">{{_i30}}</view>
+            <password class=" _6450e146 " id="password" passwordStatus="{{passwordStatus}}"></password>
+            <view catchtap="rememberPsd" class="password-remeber _6450e146 ">{{_i31+'?'}}</view>
+        </view>
+    </view>
+</block>
+<v-component-coupon advertInfo="{{advertInfo}}" bindreceiveCoupon="receiveCoupon" class=" _6450e146 " id="coupon"></v-component-coupon>
+<v-index-ad advertInfo="{{advertInfo}}" advertInfoArr="{{advertInfoArr}}" bindjumpPage="jumpPage" class=" _6450e146 " id="indexAd" pageType="userPage" traceScreenType="{{screenType}}"></v-index-ad>
+<authorization bindcomplete="authorize" class=" _6450e146 " id="authorizationUser" traceScreenType="{{screenType}}"></authorization>
+<authorization bindsuccess="authorizationSuccess" class=" _6450e146 " id="authorizationForDesign" traceScreenType="{{screenType}}"></authorization>
+<birth-popup class=" _6450e146 "></birth-popup>
+<wechat-member-card bindtakeCardSuccess="takeCardSuccess" cardInfo="{{wechatMemberCardInfo}}" class=" _6450e146 " id="wechat-member-card"></wechat-member-card>
+<advert-suspension-window advertImgSrc="{{levitatedSphereAdverObj.imgSrc}}" advertInfo="{{levitatedSphereAdverInfo}}" class=" _6450e146 " id="advertSuspensionWindow" isShowAdvertFlag="{{levitatedSphereAdverObj.isShowAdvertFlag}}" location="left" pageType="userPage" traceScreenType="{{screenType}}" wx:if="{{isShowLevitatedSphereAdver}}"></advert-suspension-window>
+<dining-assistant assistantData="{{assistantData}}" bindreGetPayTakeFoodAssistant="reGetPayTakeFoodAssistant" class=" _6450e146 " id="dining-assistant" wx:if="{{assistantIsShow}}"></dining-assistant>
+<std-advertisement class=" _6450e146 " id="std-advertisement" position="4"></std-advertisement>
+<v-pin-index-dialog class=" _6450e146 " id="pinIndexDialog" traceScreenType="{{screenType}}"></v-pin-index-dialog>
+<std-toast class=" _6450e146 " id="showToast"></std-toast>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

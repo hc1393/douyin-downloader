@@ -1,0 +1,46 @@
+<view>
+    <view class="text-36rpx font-bold text-_bl__h_161013_br_ mx-0 my-30rpx px-24rpx py-0">{{proper.groupName}}<text class="text-24rpx font-500 text-_bl__h_999999_br_ pl-10rpx" wx:if="{{!proper.isCheckBox&&proper.type==='mealGroup'}}">{{proper.goods.length}}选{{proper.minBuyNum}}</text>
+    </view>
+    <view class="mx-0 my-30rpx px-24rpx py-0" wx:if="{{proper.type!=='baseGoods'}}">
+        <text class="inline-block box-border min-w-148rpx h-60rpx lh-60rpx text-center px-24rpx py-0 mr-16rpx mb-16rpx bg-_bl__h_ffffff_br_ border-2rpx border-solid border-rd-8rpx text-24rpx font-500" style="color: {{designConfig.titleColor}};border-color: {{designConfig.titleColor}};" wx:if="{{item.checked||proper.type==='baseGoods'}}" wx:for="{{proper.goods}}" wx:key="combinedGoodsId">{{item.name}}</text>
+        <text class="inline-block box-border min-w-148rpx h-60rpx lh-60rpx text-center px-24rpx py-0 mr-16rpx mb-16rpx bg-_bl__h_e6e6e6_br_ border-_bl__h_e6e6e6_br_ border-2rpx border-solid border-rd-8rpx text-24rpx font-500 text-_bl__h_999999_br_" wx:if="{{shortNum>0}}">{{shortNum}}份未选</text>
+    </view>
+    <view class="w-_bl_100_p__br_ box-border px-24rpx py-0 mx-0 my-30rpx flex flex-wrap">
+        <view bindtap="{{proper.type==='mealGroup'?'stepsClick':''}}" class="w-220rpx box-border bg-_bl__h_ffffff_br_ shadow-_bl_0_5rpx_15rpx_0_rgba_pl_0_2c_0_2c_0_2c_0_d_08_pr__br_ border-2rpx border-solid border-rd-20rpx mr-21rpx mb-20rpx pb-24rpx relative _bl__u__c_nth-child_pl_3n_a_3_pr__br__c_mr-0" data-goodsid="{{item.combinedSkuId}}" data-groupid="{{proper.oriGroupId}}" data-info="{{item}}" style="border-color: {{item.checked?colorTheme:'#f5f5f5'}};" wx:for="{{proper.goods}}" wx:key="combinedGoodsId">
+            <text class="p-10rpx text-20rpx text-white absolute right--16rpx top--16rpx border-rd-_bl_50_p__br_ i-icon_duihao-xian" style="background-color: {{colorTheme}};" wx:if="{{item.checked}}"></text>
+            <view class="w-_bl_100_p__br_ h-220rpx border-rd-20rpx overflow-hidden">
+                <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item.pictureUrlList[0],0)}}"></image>
+                <view class="absolute top-0 left-0 right-0 bottom-0 h-220rpx" wx:if="{{item.inventory===0}}">
+                    <view class="op-50 bg-_bl__h_fff_br_ w-_bl_100_p__br_ h-_bl_100_p__br_"></view>
+                    <view class="absolute left-0 right-0 bottom-0 h-46rpx z-10 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_ text-center lh-46rpx text-26rpx text-_bl__h_fff_br_" wx:if="{{item.inventory===0}}">{{_i1}}</view>
+                </view>
+                <view class="absolute top-0 left-0 right-0 bottom-0 h-220rpx" wx:elif="{{item.isSaleTime===0}}">
+                    <view class="op-50 bg-_bl__h_fff_br_ w-_bl_100_p__br_ h-_bl_100_p__br_"></view>
+                    <view catchtap="__invoke" class="absolute left-0 right-0 bottom-0 h-46rpx z-10 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_ text-center lh-46rpx text-26rpx text-_bl__h_fff_br_" data-eventconfigs="{{ tap:[ ['checkSaleTime',item.saleTime] ] }}">{{_i2}}</view>
+                </view>
+            </view>
+            <view class="text-24rpx font-500 text-_bl__h_333333_br_ px-16rpx py-0 mt-24rpx">{{item.name}}</view>
+            <view class="flex items-center pl-16rpx" style="margin-top: 10rpx" wx:if="{{combExp}}">
+                <view class="text-26rpx lh-none" style="color: {{colorTheme}}">{{currencySymbol+item.combinedItemSkuSalePrice}}</view>
+                <block wx:if="{{item.combinedActivity&&item.combinedActivity.name&&item.combinedActivity.labelShow}}">
+                    <view class="px-8rpx py-0 h-30rpx lh-30rpx ml-10rpx text-22rpx bg-_bl__h_000_br_ text-_bl__h_fdd488_br_ border-rd-6rpx" wx:if="{{item.combinedActivity.type==1}}">{{item.combinedActivity.name}}</view>
+                    <view class="px-8rpx py-0 h-30rpx lh-30rpx ml-10rpx text-22rpx border-1px border-solid border-rd-6rpx" style="color: {{colorTheme}};border-color: {{colorTheme}}" wx:else>{{item.combinedActivity.name}}</view>
+                </block>
+            </view>
+            <view class="text-22rpx font-500 text-_bl__h_999999_br_ px-16rpx py-0 mt-10rpx" wx:if="{{item.specText}}">{{item.specText}}</view>
+            <block wx:if="{{!combExp}}">
+                <block wx:if="{{isMultiSpecs}}">
+                    <view class="text-26rpx font-bold px-16rpx py-0 mt-10rpx" style="color: {{colorTheme}};" wx:if="{{item.addPrice}}">{{item.addPrice>0?'+':'-'}}{{currencySymbol}}{{item.addPrice<0?-item.addPrice:item.addPrice}}</view>
+                </block>
+                <block wx:else>
+                    <view class="text-26rpx font-bold px-16rpx py-0 mt-10rpx" style="color: {{colorTheme}};" wx:if="{{item.addPrice}}">{{_i3+currencySymbol+item.addPrice}}</view>
+                </block>
+            </block>
+            <view class="px-15rpx py-0 h-88rpx flex items-center" wx:if="{{proper.isCheckBox&&item.checked}}">
+                <cart-control bindchange="stepsChange" data-goodidex="{{index}}" data-groupidex="{{freeGoodsIndex}}" num="{{item.num}}"></cart-control>
+            </view>
+            <button catchtap="handleCustom" class="w-130rpx h-52rpx lh-52rpx text-_bl__h_fff_br_ text-24rpx border-rd-26rpx mx-auto mt-20rpx mb-0" data-goodindex="{{index}}" data-goods="{{item}}" data-groupid="{{proper.oriGroupId}}" data-groupindex="{{freeGoodsIndex}}" data-type="{{proper.type==='baseGoods'?'base':'meal'}}" style="background-color: {{colorTheme}};margin-top: {{proper.isCheckBox&&item.checked?'0':'20rpx'}};}}" wx:if="{{item.isCustomized}}">去定制</button>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>

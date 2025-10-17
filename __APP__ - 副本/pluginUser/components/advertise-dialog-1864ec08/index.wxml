@@ -1,0 +1,19 @@
+<std-base-dialog id="__std_baseDialog" left="{{popLeft}}" maskClosable="{{false}}" openDelay="200" right="{{popRight}}">
+    <view class="relative max-h-720 animate-duration-400 animate-delay-200 w-screen rd-24 flex flex-col" wx:if="{{advertiseInfoList.length>1}}">
+        <swiper class="h-720" displayMultipleItems="{{1}}" nextMargin="30px" previousMargin="48rpx">
+            <swiper-item wx:for="{{advertiseInfoList}}" wx:key="index">
+                <view bindtap="bindLink" class="w-540 h-720" data-advert-info="{{item}}">
+                    <image class="block w-full h-720 max-h-720 rd-24" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,item.imgUrl,900)}}" width="900"></image>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view catchtap="hide" class="absolute w-52 h-52 flex items-center justify-center right-0 bottom--80 left-0 m-auto">
+            <view class="i-close2 text-_bl__h_FFF_br_ _i_text-56"></view>
+        </view>
+    </view>
+    <view catchtap="noop" catchtouchmove="noop" class="relative w-70vw flex flex-col" wx:else>
+        <image lazyLoad catchtap="bindLink" class="w-full block rd-20" mode="widthFix" src="{{__oss__.s(mpxExt,imgUrl,0)}}"></image>
+        <text catchtap="hide" class="{{' _i_absolute i-close2 text-_bl__h_FFF_br_ _i_text-56 extend-click '+(closeButtonLocation==='top-left'?'top-left':'')+' '+(closeButtonLocation==='top-right'?'top-right':'')+' '+(closeButtonLocation==='bottom-left'?'bottom-left':'')+' '+(closeButtonLocation==='bottom-right'?'bottom-right':'')+' '+(closeButtonLocation==='bottom-center'?'bottom-center':'')+' '}}"></text>
+    </view>
+</std-base-dialog>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

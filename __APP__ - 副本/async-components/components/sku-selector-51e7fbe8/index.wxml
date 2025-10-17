@@ -1,0 +1,114 @@
+<block wx:if="{{groupData.skuType==='specs'}}">
+    <view class="{{'mt-32rpx text-_bl__h_666_br_ text-24rpx flex items-end '+(siteConfig.specTitleBold?'font-bold':'')+' _51e7fbe8 '}}" style="font-size:{{siteConfig.specTitleFontSize}}rpx;">
+        <view class="shrink-0 _51e7fbe8 ">{{sku.name}}</view>
+        <view class="truncate font-normal text-24rpx text-_bl__h_999_br_ ml-16rpx _51e7fbe8 " style="font-size: {{renovationData.specTipsFontSize+'rpx'}}" wx:if="{{sku.description}}">{{sku.description}}</view>
+    </view>
+    <view class="food-sku_m-specs-wrap flex flex-wrap _51e7fbe8 ">
+        <view bindtap="skuSwitchFun" class="food-sku_m-sku-item food-sku_m-specs {{spec.singleSellOut(sku.id,i.id,isSingleSku,entity)?'disable':mutuallyExclusiveSelectStyle===1?i.activeClass=='active'?'active':i.activeClass=='disable'?'disable':'':i.activeClass=='disable'&&i.disableType==='mutex'?'mutex-disable':i.activeClass=='active'?'active':i.activeClass=='disable'?'disable':''}} {{skuSelectStyle==2&&i.activeClass=='active'?'sku-item-border':''}} _51e7fbe8 " data-i="{{i}}" data-index="{{groupData.position}}" data-item="{{sku}}" data-type="{{sku.skuType}}" style="background-color: {{i.activeClass=='active'?tools.hexToRgba(colorTheme,siteConfig.skuSelectBgColorAlpha):''}};color:{{i.activeClass=='active'&&skuSelectStyle!=2?textColor+'!important':''}};{{skuSelectStyle==2&&i.activeClass=='active'?'border-color:'+colorTheme+';color:'+colorTheme+'!important;':''}}" wx:for="{{sku.values}}" wx:for-index="iIndex" wx:for-item="i" wx:key="skuValue">
+            <block wx:if="{{i.isRecommend&&siteConfig.recommendStyleStar&&renovationData.recommendStyleType==1&&!spec.singleSellOut(sku.id,i.id,isSingleSku,entity)}}">
+                <image class="w-24rpx h-24rpx mr-10rpx _51e7fbe8 " lazyLoad="true" src="{{__oss__.s(mpxExt,renovationData.recommendStarIcon,0)}}" wx:if="{{renovationData.recommendStarIcon}}"></image>
+                <text class="iconfont i-star _51e7fbe8 " style="color:{{i.activeClass=='active'&&skuSelectStyle!=2?textColor+'!important':''}};color:{{i.activeClass=='active'&&skuSelectStyle==2?colorTheme+'!important':''}}" wx:else></text>
+            </block>{{i.value}}<text class=" _51e7fbe8 " wx:if="{{i.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&!spec.singleSellOut(sku.id,i.id,isSingleSku,entity)}}">（推荐）</text>
+            <text class="food-sku_m-sku-item-add-price _51e7fbe8 " style="color: {{i.activeClass&&skuSelectStyle!=2?textColor:colorTheme}};" wx:if="{{i.salePrice&&siteConfig.specShowAddPrice&&siteConfig.addPriceStyle!=='badge'}}">{{siteConfig.addPriceStyle==='rmb'?currencySymbol:'+'}}{{i.salePrice}}</text>
+            <view class="food-sku_m-sku-item-add-price-absolute _51e7fbe8 " wx:if="{{spec.unUsable(i.id,sku.id,usableSpecs)}}">不适用</view>
+            <view class="food-sku_m-sku-item-add-price-absolute _51e7fbe8 " style="color: {{i.activeClass&&skuSelectStyle!=2?colorTheme:'#fff'}};background-color: {{i.activeClass&&skuSelectStyle!=2?'#fff':colorTheme}};" wx:elif="{{i.salePrice&&siteConfig.specShowAddPrice&&siteConfig.addPriceStyle==='badge'}}">+{{i.salePrice}}</view>
+            <block wx:if="{{i.isRecommend&&renovationData.recommendStyleType==2&&!spec.singleSellOut(sku.id,i.id,isSingleSku,entity)}}">
+                <block wx:if="{{skuSelectStyle==2}}">
+                    <view class="recommend-tip-item recommend-tip-right-top _51e7fbe8 " style="background:{{colorTheme}};border:none;right:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _51e7fbe8 " wx:if="{{i.activeClass=='active'}}"></view>
+                        <view class="recommend-tip-right-top-after _51e7fbe8 " style="border-right-color: {{colorTheme}}"></view>
+                    </view>
+                    <view class="recommend-tip-item recommend-tip-left-top _51e7fbe8 " style="background:{{colorTheme}};border:none;left:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _51e7fbe8 " wx:if="{{i.activeClass=='active'}}"></view>
+                        <view class="recommend-tip-left-top-after _51e7fbe8 " style="border-left-color: {{colorTheme}}"></view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="recommend-tip-item recommend-tip-left-top _51e7fbe8 " style="background:#fff;color:{{colorTheme}};border-color:{{colorTheme}};left:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _51e7fbe8 " style="border-left-color: {{colorTheme}};">
+                            <view class="recommend-tip-left-top-after _51e7fbe8 " style="border-left-color: #fff; border-width: 7rpx; left: -6rpx; bottom: -4rpx"></view>
+                        </view>
+                    </view>
+                    <view class="recommend-tip-item recommend-tip-right-top _51e7fbe8 " style="background:#fff;color:{{colorTheme}};border-color:{{colorTheme}};right:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _51e7fbe8 " style="border-right-color: {{colorTheme}};">
+                            <view class="recommend-tip-right-top-after _51e7fbe8 " style="border-right-color: #fff; border-width: 7rpx; right: -6rpx; bottom: -4rpx"></view>
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </view>
+    </view>
+</block>
+<block wx:elif="{{groupData.skuType==='property'}}">
+    <view class="{{'mt-32rpx text-_bl__h_666_br_ text-24rpx flex items-end '+(siteConfig.zuoFaTitleBold?'font-bold':'')+' _51e7fbe8 '}}" style="font-size:{{siteConfig.zuoFaTitleFontSize}}rpx;">
+        <view class="shrink-0 _51e7fbe8 ">{{sku.name}}</view>
+        <view class="truncate font-normal text-24rpx text-_bl__h_999_br_ ml-16rpx _51e7fbe8 " style="font-size: {{renovationData.zuoFaTipsFontSize+'rpx'}}" wx:if="{{sku.description}}">{{sku.description}}</view>
+    </view>
+    <view class="food-sku_m-specs-wrap flex flex-wrap _51e7fbe8 ">
+        <block wx:if="{{showCover}}">
+            <view bindtap="skuSwitchFun" class="image-sku-item {{i.activeClass=='active'?'active':i.activeClass=='disable'?'disable':''}} {{skuSelectStyle==2&&i.activeClass=='active'?'sku-item-border':''}} _51e7fbe8 " data-i="{{i}}" data-index="{{groupData.position}}" data-item="{{sku}}" data-type="{{sku.skuType}}" style="border-color: {{i.activeClass=='active'?tools.hexToRgba(colorTheme,siteConfig.skuSelectBgColorAlpha):'transparent'}};{{skuSelectStyle==2&&i.activeClass=='active'?'border-color:'+colorTheme+';color:'+colorTheme+'!important;':''}}" wx:for="{{sku.values}}" wx:for-index="iIndex" wx:for-item="i" wx:key="id">
+                <image class="image-sku-item-pic _51e7fbe8 " src="{{__oss__.s(mpxExt,i.cover,0)}}"></image>
+                <view class="image-sku-item-font _51e7fbe8 ">
+                    <block wx:if="{{i.isRecommend&&(siteConfig.recommendStyleStar||from==='package-sku')&&renovationData.recommendStyleType==1&&i.activeClass!='disable'}}">
+                        <image class="w-24rpx h-24rpx mr-10rpx _51e7fbe8 " lazyLoad="true" src="{{__oss__.s(mpxExt,renovationData.recommendStarIcon,0)}}" wx:if="{{renovationData.recommendStarIcon}}"></image>
+                        <text class="iconfont i-star _51e7fbe8 " wx:else></text>
+                    </block>
+                    <text class="text-_bl__h_161013_br_ text-24rpx _51e7fbe8 ">{{i.value}}<text class="food-sku_m-sku-item-add-price _51e7fbe8 " style="color: {{colorTheme}};" wx:if="{{i.price&&siteConfig.addPriceStyle!=='badge'}}">{{siteConfig.addPriceStyle==='rmb'?currencySymbol:'+'}}{{i.price}}</text>
+                        <block wx:if="{{i.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&i.activeClass!='disable'}}">（推荐）</block>
+                    </text>
+                </view>
+                <view class="food-sku_m-sku-item-add-price-absolute _51e7fbe8 " style="color: #fff;background-color: {{colorTheme}};" wx:if="{{i.price&&siteConfig.addPriceStyle==='badge'}}">+{{i.price}}</view>
+                <block wx:if="{{i.isRecommend&&renovationData.recommendStyleType==2&&i.activeClass!='disable'}}">
+                    <block wx:if="{{skuSelectStyle==2}}">
+                        <view class="recommend-tip-item recommend-tip-right-top _51e7fbe8 " style="background:{{colorTheme}};border:none;right:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _51e7fbe8 " wx:if="{{i.activeClass=='active'}}"></view>
+                            <view class="recommend-tip-right-top-after _51e7fbe8 " style="border-right-color: {{colorTheme}}"></view>
+                        </view>
+                        <view class="recommend-tip-item recommend-tip-left-top _51e7fbe8 " style="background:{{colorTheme}};border:none;left:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _51e7fbe8 " wx:if="{{i.activeClass=='active'}}"></view>
+                            <view class="recommend-tip-left-top-after _51e7fbe8 " style="border-left-color: {{colorTheme}}"></view>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view class="recommend-tip-item recommend-tip-left-top _51e7fbe8 " style="background:#fff;color:{{colorTheme}};border-color:{{colorTheme}};left:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _51e7fbe8 " style="border-left-color: {{colorTheme}};">
+                                <view class="recommend-tip-left-top-after _51e7fbe8 " style="border-left-color: #fff; border-width: 7rpx; left: -6rpx; bottom: -4rpx"></view>
+                            </view>
+                        </view>
+                        <view class="recommend-tip-item recommend-tip-right-top _51e7fbe8 " style="background:#fff;color:{{colorTheme}};border-color:{{colorTheme}};right:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _51e7fbe8 " style="border-right-color: {{colorTheme}};">
+                                <view class="recommend-tip-right-top-after _51e7fbe8 " style="border-right-color: #fff; border-width: 7rpx; right: -6rpx; bottom: -4rpx"></view>
+                            </view>
+                        </view>
+                    </block>
+                </block>
+            </view>
+        </block>
+        <block wx:else>
+            <view bindtap="skuSwitchFun" class="food-sku_m-sku-item food-sku_m-specs {{mutuallyExclusiveSelectStyle===1?i.activeClass=='active'?'active':i.activeClass=='disable'?'disable':'':i.activeClass=='disable'&&i.disableType==='mutex'?'mutex-disable':i.activeClass=='active'?'active':i.activeClass=='disable'?'disable':''}} flex items-center {{skuSelectStyle==2&&i.activeClass=='active'?'sku-item-border':''}} {{i.warmTips?'food-sku_m-specs__tips':''}} _51e7fbe8 " data-i="{{i}}" data-index="{{groupData.position}}" data-item="{{sku}}" data-type="{{sku.skuType}}" style="background-color: {{i.activeClass=='active'?tools.hexToRgba(colorTheme,siteConfig.skuSelectBgColorAlpha):''}};color:{{i.activeClass=='active'&&skuSelectStyle!=2?textColor+'!important':''}};{{skuSelectStyle==2&&i.activeClass=='active'?'border-color:'+colorTheme+';color:'+colorTheme+'!important;':''}}" wx:for="{{sku.values}}" wx:for-index="iIndex" wx:for-item="i" wx:key="id">
+                <block wx:if="{{i.isRecommend&&(siteConfig.recommendStyleStar||from==='package-sku')&&renovationData.recommendStyleType==1&&i.activeClass!='disable'}}">
+                    <image class="w-24rpx h-24rpx mr-10rpx _51e7fbe8 " lazyLoad="true" src="{{__oss__.s(mpxExt,renovationData.recommendStarIcon,0)}}" wx:if="{{renovationData.recommendStarIcon}}"></image>
+                    <text class="iconfont i-star _51e7fbe8 " style="color:{{i.activeClass=='active'&&skuSelectStyle!=2?textColor+'!important':''}};color:{{i.activeClass=='active'&&skuSelectStyle==2?colorTheme+'!important':''}}" wx:else></text>
+                </block>{{i.value}}<text class="food-sku_m-sku-item-add-price _51e7fbe8 " style="color: {{i.activeClass&&skuSelectStyle!=2?textColor:colorTheme}};" wx:if="{{i.price&&siteConfig.addPriceStyle!=='badge'}}">{{siteConfig.addPriceStyle==='rmb'?currencySymbol:'+'}}{{i.price}}</text>
+                <view class="food-sku_m-sku-item-add-price-absolute _51e7fbe8 " style="color: {{i.activeClass&&skuSelectStyle!=2?colorTheme:'#fff'}};background-color: {{i.activeClass&&skuSelectStyle!=2?'#fff':colorTheme}};" wx:elif="{{i.price&&siteConfig.addPriceStyle==='badge'}}">+{{i.price}}</view>
+                <text class=" _51e7fbe8 " wx:if="{{i.isRecommend&&siteConfig.recommendStyleText&&renovationData.recommendStyleType==1&&i.activeClass!='disable'}}">（推荐）</text>
+                <tips-popup class=" _51e7fbe8 " tipsFont="{{i.warmTips}}"></tips-popup>
+                <block wx:if="{{i.isRecommend&&renovationData.recommendStyleType==2&&i.activeClass!='disable'&&(!i.price||siteConfig.addPriceStyle!=='badge')}}">
+                    <block wx:if="{{skuSelectStyle==2}}">
+                        <view class="recommend-tip-item recommend-tip-right-top _51e7fbe8 " style="background:{{colorTheme}};border:none;right:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _51e7fbe8 " wx:if="{{i.activeClass=='active'}}"></view>
+                            <view class="recommend-tip-right-top-after _51e7fbe8 " style="border-right-color: {{colorTheme}}"></view>
+                        </view>
+                        <view class="recommend-tip-item recommend-tip-left-top _51e7fbe8 " style="background:{{colorTheme}};border:none;left:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _51e7fbe8 " wx:if="{{i.activeClass=='active'}}"></view>
+                            <view class="recommend-tip-left-top-after _51e7fbe8 " style="border-left-color: {{colorTheme}}"></view>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view class="recommend-tip-item recommend-tip-left-top _51e7fbe8 " style="background:#fff;color:{{colorTheme}};border-color:{{colorTheme}};left:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==2}}">推荐<view class="recommend-tip-left-top-before _51e7fbe8 " style="border-left-color: {{colorTheme}};">
+                                <view class="recommend-tip-left-top-after _51e7fbe8 " style="border-left-color: #fff; border-width: 7rpx; left: -6rpx; bottom: -4rpx"></view>
+                            </view>
+                        </view>
+                        <view class="recommend-tip-item recommend-tip-right-top _51e7fbe8 " style="background:#fff;color:{{colorTheme}};border-color:{{colorTheme}};right:-2rpx;" wx:if="{{renovationData.recommendBadgeStyle==1}}">推荐<view class="recommend-tip-right-top-before _51e7fbe8 " style="border-right-color: {{colorTheme}};">
+                                <view class="recommend-tip-right-top-after _51e7fbe8 " style="border-right-color: #fff; border-width: 7rpx; right: -6rpx; bottom: -4rpx"></view>
+                            </view>
+                        </view>
+                    </block>
+                </block>
+            </view>
+        </block>
+    </view>
+</block>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="spec" src="../../wxs/index51e82265.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

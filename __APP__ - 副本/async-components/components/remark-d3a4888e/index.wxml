@@ -1,0 +1,29 @@
+<view catchtouchmove="noop" style="{{isShowPayCom?'':'display:none;'}}">
+    <view catchtap="hide" class="fixed top-0 right-0 bottom-0 left-0 z-1000 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_"></view>
+    <view catchtouchmove="noop" class="{{'fixed right-0 bottom-0 left-0 z-10001 overflow-hidden bg-_bl__h_fff_br_ border-rd-_bl_30rpx_30rpx_0_0_br_ px-32rpx pt-26rpx pb-_bl_calc_pl_30rpx_a_constant_pl_safe-area-inset-bottom_pr__pr__br_ pb-_bl_calc_pl_30rpx_a_env_pl_safe-area-inset-bottom_pr__pr__br_ translate-y-100_p_ op-0 '+(isShowAnimal?'animate-_bl_shade-in_br_ animate-fill-forwards animate-duration-0_d_3s animate-ease-_bl_ease-in-out_br_':'')+' '+(isCloseAnimal?'animate-_bl_shade-out_br_ animate-fill-forwards animate-duration-0_d_3s animate-ease-_bl_ease-in-out_br_':'')}}" style="{{remarkList.length?'':'min-height: 568rpx;box-sizing: border-box;'}}{{paddingBottom}}">
+        <view catchtap="hide" class="i-close p-32rpx absolute top-0 right-0 text-_bl__h_999_br_ text-32rpx"></view>
+        <view class="text-center text-36rpx font-bold">{{_i1}}</view>
+        <view catchtouchmove="noop" class="w-686rpx relative" style="{{keyboardIsShow&&!remarkList.length&&!hasEditStatus?'margin-bottom:130rpx':''}}">
+            <textarea adjustPosition="{{false}}" bindblur="bindblur" bindinput="remarkInput" bindkeyboardheightchange="keyboardheightchange" catchtouchmove="noop" class="{{'box-border w-_bl_100_p__br_ pt-18rpx pb-30rpx pl-18rpx pr-18rpx text-28rpx bg-_bl__h_f5f5f5_br_ border-rd-10rpx mt-34rpx '+(!hasShowQuickEdit?'h-180rpx':'h-130rpx')}}" confirmHold="{{isShowPayCom}}" confirmType="done" disabled="{{disabled}}" holdKeyboard="{{isShowPayCom}}" maxlength="30" placeholder="{{configPlaceholder||placeholder}}" placeholderStyle="color: #999;" showConfirmBar="{{false}}" value="{{remarkData}}"></textarea>
+            <view class="absolute bottom-6rpx right-6rpx text-24rpx text-_bl__h_999_br_">{{characterCount||0}}/30</view>
+        </view>
+        <view catchtouchmove="noop" class="mt-16rpx pb-114rpx" wx:if="{{hasShowQuickEdit}}">
+            <view class="mb-16rpx text-_bl__h_999999_br_ text-26rpx flex justify-between items-center">
+                <view class="text-26rpx text-_bl__h_333_br_ flex items-center">{{_i2}}<text class="text-_bl__h_999999_br_ text-24rpx ml-10rpx" wx:if="{{remarkList.length===20}}">{{_i3}}</text>
+                </view>
+                <view bindtap="handleSave" style="color:{{colorTheme}}" wx:if="{{hasEditStatus}}">{{_i4}}</view>
+                <view bindtap="handleEdit" wx:if="{{!hasEditStatus&&userRemarkList.length}}">
+                    <text class="text-26rpx mr-10rpx i-bianji"></text>{{_i5}}</view>
+            </view>
+            <scroll-view scrollY class="flex flex-wrap {{isAreaFocu?'h-182rpx overflow-y-scroll':''}}" style="max-height:{{scrollHeight}}; margin-top:{{hasEditStatus?'-10rpx':''}}">
+                <view catchtap="selectRemark" class="{{'inline-block h-60rpx mt-0 mb-20rpx ml-0 mr-20rpx relative bg-_bl__h_ffffff_br_ border-1px border-solid border-rd-8rpx z-1 '+(item.disabled==1?'border-_bl__h_ddd_br_':'border-_bl__h_e5e5e5_br_')}}" data-content="{{item.remarks}}" data-disabled="{{item.disabled}}" style="margin:{{hasEditStatus?'20rpx':0}} 20rpx {{hasEditStatus?0:'20rpx'}} 0;" wx:for="{{remarkList}}" wx:key="index">
+                    <text class="{{'truncate h-60rpx max-w-672rpx px-20rpx py-0 box-border inline-block text-28rpx lh-60rpx '+(item.disabled==1?'text-_bl__h_ccc_br_':'text-_bl__h_666666_br_')}}">{{item.remarks}}</text>
+                    <view catchtap="delRemark" class="w-46rpx h-46rpx absolute flex justify-center items-center right--20rpx top--20rpx z-10 rotate-45 origin-center" data-content="{{item.remarks}}" data-id="{{item.id}}" data-index="{{index}}" wx:if="{{item.disabled==2&&hasEditStatus}}">
+                        <text class="text-_bl__h_999_br_ text-32rpx i-jia"></text>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view catchtap="submitRemark" class="h-90rpx mt-30rpx text-_bl__h_ffffff_br_ text-34rpx lh-90rpx text-center border-rd-44rpx fixed left-24rpx right-24rpx bottom-26rpx" style="background-color: {{hasEditStatus?'#cccccc':colorTheme||'#F2B940'}};{{modalBottom}}">{{_i6}}</view>
+    </view>
+</view>

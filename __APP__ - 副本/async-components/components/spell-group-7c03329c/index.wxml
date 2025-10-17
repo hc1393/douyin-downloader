@@ -1,0 +1,23 @@
+<view style="{{spellGroupData.miniStyle}};line-height:1.5;" wx:if="{{activityList&&activityList.length}}">
+    <view class="border-rd-20rpx" tyle="border-radius:{{spellGroupData.propsValue&&spellGroupData.propsValue.borderRadius?spellGroupData.propsValue.borderRadius+'px':radius}};">
+        <view>
+            <view class="mx--8rpx my-0" wx:if="{{propsValue.list_type==2}}">
+                <goods-list-item designData="{{propsValue}}" goods="{{item}}" mode="middle" wx:for="{{activityList}}" wx:key="index"></goods-list-item>
+            </view>
+            <view wx:if="{{propsValue.list_type==1}}">
+                <view class="last-mb-16rpx" wx:for="{{activityList}}" wx:key="index">
+                    <goods-list-item designData="{{propsValue}}" goods="{{item}}" mode="large"></goods-list-item>
+                </view>
+            </view>
+            <view wx:if="{{propsValue.list_type==3}}">
+                <view class="last-mb-16rpx" wx:for="{{activityList}}" wx:key="index">
+                    <goods-list-item designData="{{propsValue}}" goods="{{item}}" mode="list"></goods-list-item>
+                </view>
+            </view>
+            <view catchtap="onLoadMore" class="text-_bl__h_999_br_ p-10rpx text-center text-24rpx" wx:if="{{hasMore&&activityList.length}}">
+                <text>点击查看更多</text>
+                <text class="text-24rpx i-arrow-down-bold"></text>
+            </view>
+        </view>
+    </view>
+</view>

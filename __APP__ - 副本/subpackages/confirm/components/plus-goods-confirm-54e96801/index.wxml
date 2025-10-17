@@ -1,0 +1,67 @@
+<config-provider>
+    <view class="w-_bl_100_p__br_ pt-24" wx:if="{{styleType===1}}">
+        <view class="pt-24 rounded-16 bg-gradient-to-b from-_bl_var_pl_--std-primary-color-opacity-10_pr__br_ to-_h_fff">
+            <view class="flex items-baseline mb-24 px-24">
+                <view class="font-bold text-36rpx text-_bl__h_333333_br_">{{_i1}}</view>
+                <block wx:if="{{info.tipPrice>0}}">
+                    <view class="text-24rpx text-_bl__h_999999_br_ pl-10rpx" wx:if="{{info.isFull}}">{{_i2}}<text class="c-primary">{{currencySymbol}}</text>
+                        <text class="text-30rpx c-primary">{{info.tipPrice}}</text>{{_i3}}</view>
+                    <view class="text-24rpx text-_bl__h_999999_br_ pl-10rpx" wx:else>{{_i4}}<text class="text-30rpx">{{info.tipPrice}}</text>{{_i5+_i6}}</view>
+                </block>
+            </view>
+            <view bindtap="onDetail" class="flex items-center my-24 px-24 gap-24" data-id="{{item.skuId}}" wx:for="{{expand?info.data:collapsedData}}" wx:key="index">
+                <image lazyLoad class="w-100 h-100 {{item.stock<=0?'op-50':''}}" mode="aspectFill" src="{{__oss__.s(mpxExt,item.images[0],0)}}"></image>
+                <view class="h-100 flex-1 flex flex-col justify-between items-start">
+                    <view class="text-24 font-500 leading-140_p_ c-_h_333 line-clamp-1">{{item.name}}</view>
+                    <view class="text-22 font-400 leading-140_p_ c-_h_999">{{item.specText}}</view>
+                    <view class="flex items-baseline">
+                        <text class="text-24 font-500 leading-140_p_ c-_h_F93A4A">{{currencySymbol+item.addPrice}}</text>
+                        <text class="text-22 font-400 leading-140_p_ c-_h_999 line-through" wx:if="{{helper.getNum(item.skuId,info.selectedGoods)<=0&&item.price>item.addPrice}}">{{currencySymbol+item.price}}</text>
+                    </view>
+                </view>
+                <view class="flex items-center justify-center">
+                    <cart-control transparentBg addDisabled="{{helper.checkNum(item,info.selectedGoods)}}" bindchange="onNumChange" binddisabled="onPlusDisabled" btnFontSize="34rpx" controlNumFontSize="24rpx" controlNumWidth="40rpx" data-id="{{item.skuId}}" num="{{helper.getNum(item.skuId,info.selectedGoods)}}" wx:if="{{item.stock>0}}"></cart-control>
+                    <view class="text-22 c-_h_999" wx:else>{{_i7}}</view>
+                </view>
+            </view>
+            <view bindtap="onToggleExpand" class="flex items-center justify-center my-24" wx:if="{{info.data.length>5}}">
+                <text class="text-24 font-400 leading-normal c-_h_999 pr-8">{{expand?'收起':'更多'}}</text>
+                <text class="{{(expand?'i-jiantou-shang':'i-jiantou-xia')+' text-24 c-_h_999'}}"></text>
+            </view>
+        </view>
+    </view>
+    <view class="w-_bl_100_p__br_ h-444rpx relative" style="--lr-padding: {{lrPadding}};" wx:else>
+        <view class="w-_bl_calc_pl_100_p__a_var_pl_--lr-padding_pr__u_2_pr__br_ h-_bl_100_p__br_ absolute top-0 left-_bl_calc_pl_var_pl_--lr-padding_pr__u_-1_pr__br_ box-border bg-gradient-to-b from-_bl_var_pl_--std-primary-color-opacity-10_pr__br_ to-_h_fff">
+            <view class="flex items-baseline mx-0 my-32rpx px-24rpx py-0">
+                <view class="font-bold text-36rpx text-_bl__h_333333_br_">{{_i8}}</view>
+                <block wx:if="{{info.tipPrice>0}}">
+                    <view class="text-24rpx text-_bl__h_999999_br_ pl-10rpx" wx:if="{{info.isFull}}">{{_i9}}<text class="c-primary">{{currencySymbol}}</text>
+                        <text class="text-30rpx c-primary">{{info.tipPrice}}</text>{{_i10}}</view>
+                    <view class="text-24rpx text-_bl__h_999999_br_ pl-10rpx" wx:else>{{_i11}}<text class="text-30rpx">{{info.tipPrice}}</text>{{_i12+_i13}}</view>
+                </block>
+            </view>
+            <scroll-view>
+                <view class="whitespace-nowrap w-fit flex pb-24rpx">
+                    <view bindtap="onDetail" class="w-220rpx overflow-hidden mr-24rpx bg-_bl__h_ffffff_br_ shadow-_bl_0rpx_5rpx_10rpx_0rpx_rgba_pl_0_2c_0_2c_0_2c_0_d_08_pr__br_ border-rd-8rpx first-ml-24rpx" data-id="{{item.skuId}}" wx:for="{{info.data}}" wx:key="index">
+                        <view class="w-_bl_100_p__br_ h-194rpx overflow-hidden relative">
+                            <image lazyLoad class="{{'w-_bl_100_p__br_ h-_bl_100_p__br_ relative '+(item.stock<=0?'op-50':'')}}" mode="aspectFill" src="{{__oss__.s(mpxExt,item.images[0],0)}}"></image>
+                            <view class="flex items-center justify-center w-_bl_100_p__br_ h-36rpx bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_ text-22rpx text-_bl__h_ffffff_br_ absolute left-0 bottom-0" wx:if="{{item.buyLimit!==1}}">{{_i14+item.buyLimit+_i15}}</view>
+                        </view>
+                        <view class="truncate w-_bl_100_p__br_ box-border px-12rpx py-0 mx-0 mt-12rpx mb-4rpx font-500 text-24rpx text-_bl__h_333333_br_">{{item.name}}</view>
+                        <view class="truncate px-12rpx py-0 h-32rpx lh-32rpx text-22rpx text-_bl__h_999999_br_">{{item.specText}}</view>
+                        <view class="flex items-center relative px-12rpx py-0 mx-0 mt-4rpx mb-20rpx">
+                            <text class="font-500 text-24rpx text-_bl__h_f93a4a_br_">{{currencySymbol+item.addPrice}}</text>
+                            <text class="text-22rpx text-_bl__h_999999_br_ line-through" wx:if="{{helper.getNum(item.skuId,info.selectedGoods)<=0&&item.price>item.addPrice}}">{{currencySymbol+item.price}}</text>
+                            <view class="flex items-center justify-center absolute right-0 px-12rpx py-0">
+                                <cart-control addDisabled="{{helper.checkNum(item,info.selectedGoods)}}" bindchange="onNumChange" binddisabled="onPlusDisabled" btnFontSize="34rpx" controlNumFontSize="24rpx" controlNumWidth="40rpx" data-id="{{item.skuId}}" num="{{helper.getNum(item.skuId,info.selectedGoods)}}" wx:if="{{item.stock>0}}"></cart-control>
+                                <view class="text-22rpx text-_bl__h_999999_br_" wx:else>{{_i16}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</config-provider>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="helper" src="../../wxs/indexf6eeff62.wxs"/>

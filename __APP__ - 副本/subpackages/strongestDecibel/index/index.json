@@ -1,0 +1,20 @@
+{
+  "navigationStyle": "custom",
+  "componentPlaceholder": {
+    "empty-image": "view",
+    "cell": "view",
+    "half-bowl": "view",
+    "love-dining": "view",
+    "love-donate": "view",
+    "material-cell": "view",
+    "merc-list": "view",
+    "plugin-demo": "view",
+    "pullNewList": "view",
+    "regift": "view",
+    "send-coupon": "view",
+    "studentVerify": "view"
+  },
+  "navigationBarTitleText": "最强分贝",
+  "navigationBarBackgroundColor": "#000000",
+  "navigationBarTextStyle": "black"
+}

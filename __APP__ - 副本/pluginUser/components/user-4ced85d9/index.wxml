@@ -1,0 +1,14 @@
+<config-provider>
+    <block wx:if="{{isLoaded}}">
+        <tab-user bindmounted="asyncComponentMounted" id="index" wx:if="{{isOldUserCenter}}"></tab-user>
+        <design-user-template designData="{{designData}}" isRefresh="{{isRefresh}}" wx:else></design-user-template>
+    </block>
+    <std-design-mp-loading wx:else></std-design-mp-loading>
+    <improve-privileges-remind-dialog id="improvePrivilegesRemindDialog"></improve-privileges-remind-dialog>
+    <log-off-frozen-banner freezeEndTime="{{freezeEndTime}}" id="logOffFrozenBanner"></log-off-frozen-banner>
+    <advertise-dialog id="advertiseDialog"></advertise-dialog>
+    <advertise-suspension id="advertiseSuspension"></advertise-suspension>
+    <get-meal-reminder id="getMealReminder"></get-meal-reminder>
+    <std-authorization force bind:success="refresh" id="__authorization" traceScreenType="{{screenType}}"></std-authorization>
+    <medal-receive-dialog id="medalReceiveRemindDialog"></medal-receive-dialog>
+</config-provider>

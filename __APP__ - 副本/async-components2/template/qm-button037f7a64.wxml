@@ -1,0 +1,4 @@
+<template name="qm-button">
+    <button class="v-qm-button" openType="contact" style="{{data&&data.miniStyle}}" type="primary" wx:if="{{data.events.type==3}}">{{data.propsValue.text}}</button>
+    <view catchtap="bindEvent" class="v-qm-button" data-item="{{data}}" style="{{data&&data.miniStyle}}" wx:else>{{data.propsValue.text}}</view>
+</template>

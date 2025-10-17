@@ -1,0 +1,15 @@
+<view class="w-full flex items-center">
+    <view class="flex-1 flex flex-col items-center justify-center">
+        <text class="text-30rpx text-hex-666666 leading-42rpx mb-8rpx">{{tableFont}}</text>
+        <text class="text-48rpx text-hex-333333 leading-66rpx">{{tableNum}}</text>
+    </view>
+    <view class="h-89rpx relative">
+        <view class="absolute top-_bl_-50_p__br_ right-_bl_-50_p__br_ bottom-_bl_-50_p__br_ left-_bl_-50_p__br_ box-border border-0 border-solid border-_bl__h_eee_br_ border-r-1px scale-50 pointer-events-none"></view>
+    </view>
+    <view class="flex-1 flex flex-col items-center justify-center">
+        <text class="text-30rpx text-hex-666666 leading-42rpx mb-8rpx">{{orderFont}}</text>
+        <image class="w-68rpx h-72rpx" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/12/28/131c510f050531fa.gif',0)}}" wx:if="{{orderNum==0}}"></image>
+        <text class="text-48rpx text-hex-333333 leading-66rpx" wx:else>{{orderNum}}</text>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

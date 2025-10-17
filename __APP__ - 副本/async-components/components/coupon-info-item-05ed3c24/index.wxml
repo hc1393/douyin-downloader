@@ -1,0 +1,48 @@
+<view class="flex items-center justify-between flex-1 relative {{isCouponReviewItem?'coupon-info__receive':''}} {{isShowDetailButton?'coupon-info_limit':''}} {{isShowFlexSty?'coupon-info_flexyc':''}} {{isFromPage=='couponActivity'?'coupon-info_activity':''}} {{isSpecialCoupon?'coupon_special_info':''}} _05ed3c24 ">
+    <view class="w-80rpx h-30rpx border-rd-_bl_20rpx_0rpx_20rpx_0rpx_br_ absolute top-0 left-0 text-20rpx text-center lh-30rpx text-_bl__h_fff_br_ _05ed3c24 " style="background-color:{{colorTheme}};" wx:if="{{showNum&&couponInfo.couponsNum>1}}">共{{couponInfo.couponsNum}}张</view>
+    <view class="flex flex-col items-center justify-center w-190rpx _05ed3c24 ">
+        <block wx:if="{{couponDesignConfig.couponType==1}}">
+            <coupon-sale class=" _05ed3c24 " couponInfo="{{couponInfo}}" error="{{error}}" isSpecialCoupon="{{isSpecialCoupon}}" opType="{{opType}}"></coupon-sale>
+            <block wx:if="{{couponDesignConfig.isShowUseThreshold}}">
+                <view class="coupon-conditional _05ed3c24 " wx:if="{{couponInfo.category===14}}">兑换券</view>
+                <view class="coupon-conditional _05ed3c24 " wx:elif="{{couponInfo.category===13&&couponInfo.useChannel.length==1&&couponInfo.useChannel[0]==2}}">限线下使用</view>
+                <view class="coupon-conditional _05ed3c24 " wx:elif="{{couponInfo.thresholdType===1}}">{{_i1}}</view>
+                <view class="coupon-conditional _05ed3c24 " wx:else>满{{couponInfo.useThreshold||0}}{{couponInfo.thresholdType==2?'元':''}}{{couponInfo.thresholdType==3?'件':''}}{{couponInfo.thresholdType==4?'千克':''}}可用</view>
+            </block>
+        </block>
+        <image class="w-96rpx h-96rpx _05ed3c24 " lazyLoad="true" src="{{__oss__.s(mpxExt,couponInfo.templateImageUrl||'https://images.qmai.cn/resource/20210824210816/2021/11/21/组 54.png?x-oss-process=image',0)}}" wx:elif="{{couponDesignConfig.couponType==2}}"></image>
+        <block wx:else>
+            <image class="w-96rpx h-96rpx _05ed3c24 " lazyLoad="true" src="{{__oss__.s(mpxExt,couponInfo.templateImageUrl||'https://images.qmai.cn/resource/20210824210816/2021/11/21/组 54.png?x-oss-process=image',0)}}" wx:if="{{couponInfo.templateImageUrl&&couponDesignConfig.style==1}}"></image>
+            <block wx:else>
+                <coupon-sale class=" _05ed3c24 " couponInfo="{{couponInfo}}" error="{{error}}" isSpecialCoupon="{{isSpecialCoupon}}" opType="{{opType}}"></coupon-sale>
+                <block wx:if="{{couponDesignConfig.isShowUseThreshold}}">
+                    <view class="coupon-conditional _05ed3c24 " wx:if="{{couponInfo.category===14}}">兑换券</view>
+                    <view class="coupon-conditional _05ed3c24 " wx:elif="{{couponInfo.category===13&&couponInfo.useChannel.length==1&&couponInfo.useChannel[0]==2}}">限线下使用</view>
+                    <view class="coupon-conditional _05ed3c24 " wx:elif="{{couponInfo.thresholdType===1}}">{{_i2}}</view>
+                    <view class="coupon-conditional _05ed3c24 " wx:else>满{{couponInfo.useThreshold||0}}{{couponInfo.thresholdType==2?'元':''}}{{couponInfo.thresholdType==3?'件':''}}{{couponInfo.thresholdType==4?'千克':''}}可用</view>
+                </block>
+            </block>
+        </block>
+    </view>
+    <view class="flex flex-1 flex-col {{isFromPage=='couponActivity'?'box-border pl-10rpx':''}} _05ed3c24 ">
+        <view class="coupon-name {{error?'stale':''}} {{isFromPage=='couponActivity'||isBcathGoupon?'coupon-name__limit':''}} _05ed3c24 " style="color: {{disabledState?'#999999':''}};">{{couponInfo.title}}</view>
+        <view class="flex items-center mt-8 text-24 text-hex-F53F3F leading-34 _05ed3c24 " wx:if="{{couponInfo.inflateStatus===1&&couponInfo.activityEndDate}}">
+            <count-down class=" _05ed3c24 " second="{{couponInfo.activityEndDate/1000}}"></count-down>后将不可膨胀</view>
+        <block wx:elif="{{couponDesignConfig.showCouponValidityPeriod}}">
+            <view class="flex items-center justify-between w-_bl_100_p__br_ mt-10rpx _05ed3c24 ">
+                <view class="coupon-validity {{isFromPage=='couponActivity'?'coupon-validity__limit':''}} _05ed3c24 ">{{couponInfo.expireDescValidity}}</view>
+            </view>
+            <view class="flex items-center justify-between w-_bl_100_p__br_ mt-10rpx _05ed3c24 " wx:if="{{couponInfo.validityType===2&&!isHistoryCoupon}}">
+                <view class="coupon-validity {{isFromPage=='couponActivity'?'coupon-validity__limit':''}} _05ed3c24 " style="color: {{couponInfo.validityType===2&&!isHistoryCoupon?colorTheme:''}}">{{couponInfo.validity}}</view>
+            </view>
+        </block>
+    </view>
+    <block wx:if="{{isShowDetailButton}}">
+        <view class="w-178rpx flex justify-center items-center _05ed3c24 ">
+            <view catchtap="handleView" class="w-132rpx h-48rpx text-_bl__h_fff_br_ text-24rpx border-rd-24rpx flex justify-center items-center _05ed3c24 " data-id="{{couponInfo.id}}" style="background-color:{{colorTheme}};">查看详情</view>
+        </view>
+        <view class="absolute top-0 right-180rpx z-1 w-1rpx h-_bl_100_p__br_ border-r-1rpx border-r-dashed border-r-_bl__h_eee_br_ _05ed3c24 "></view>
+    </block>
+    <view class="coupon-stamp {{couponReceiveState==1?'coupon-stamp_received':couponReceiveState==3?'coupon-stamp_reback':'coupon-stamp_expired'}} _05ed3c24 " wx:if="{{couponReceiveState}}"></view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

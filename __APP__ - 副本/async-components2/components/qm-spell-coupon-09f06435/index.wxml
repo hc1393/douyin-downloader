@@ -1,0 +1,77 @@
+<view class="bg-white pb-24rpx_i_" style="{{info?info.miniStyle:''}}" wx:if="{{list.length}}">
+    <view bindtap="linkSpellCouponList" class="flex items-center justify-between h-96rpx">
+        <text class="text-32rpx font-bold text-_bl__h_222222_br_">{{info.propsValue.title||'拼券'}}</text>
+        <text class="text-24rpx text-_bl__h_999999_br_ flex items-center">查看更多 <text class="text-24rpx text-_bl__h_999999_br_ pl-4rpx i-jiantou-you"></text>
+        </text>
+    </view>
+    <view class="flex flex-wrap justify-between">
+        <block wx:if="{{info.propsValue&&info.propsValue.list_type==1}}">
+            <view bindtap="linkSpellCouponDetail" class="list-type1 box-border p-24rpx border-rd-8rpx bg-_bl__h_f8f8f8_br_ overflow-hidden w-_bl_100_p__br_" data-id="{{item.activityId}}" style="border-radius: {{info.propsValue.borderRadius}}px;" wx:for="{{list}}" wx:key="activityId">
+                <view class="w-_bl_100_p__br_ h-402rpx relative border-rd-8rpx overflow-hidden">
+                    <image class="w-_bl_100_p__br_ h-_bl_100_p__br_ border-rd-8rpx" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item.activityImgUrl,0)}}"></image>
+                    <count-down format="距结束DD天HH:mm:ss" second="{{item.time}}" timeStyle="width: 300rpx;height: 44rpx;text-align:center;line-height: 44rpx; background: linear-gradient(-54deg, #FF2E58, #FF5246);position: absolute; left: 0; bottom: 0; border-radius: 0 8rpx 0 0;font-size: 24rpx;color: white;" wx:if="{{info.propsValue.junctionGroupVisible}}"></count-down>
+                </view>
+                <view class="flex items-center mx-0 my-20rpx">
+                    <text class="inline-flex items-center px-8rpx py-0 mr-10rpx h-30rpx lh-30rpx border-2rpx border-solid border-_bl__h_f84036_br_ border-rd-4rpx text-20rpx text-_bl__h_f84036_br_" wx:if="{{info.propsValue.startGroupVisible}}">{{item.ladderNum}}人团</text>
+                    <text class="flex-1 text-28rpx text-_bl__h_222222_br_ font-bold text-ellipsis line-clamp-1" wx:if="{{info.propsValue.nameVisible}}">{{item.activityName}}</text>
+                </view>
+                <view class="flex items-center justify-between mx-0 mt-10rpx mb-20rpx">
+                    <view class="flex items-center">
+                        <text class="text-32rpx font-bold text-_bl__h_333333_br_ pr-10rpx">￥{{filter.handlePrice(item.discountAmount)}}</text>
+                        <text class="pr-10rpx text-20rpx decoration-line-through text-_bl__h_a3a3a3_br_" wx:if="{{info.propsValue.priceVisible}}">￥{{item.originalAmount}}</text>
+                        <text class="text-24rpx text-_bl__h_999999_br_" wx:if="{{info.propsValue.alreadyGroupVisible}}">已团{{item.totalSale}}</text>
+                    </view>
+                    <button class="w-120rpx h-48rpx m-0 lh-48rpx bg-gradient-linear bg-gradient-_bl_90deg_2c__h_fe1936_2c__h_fe762c_br_ border-rd-24rpx text-24rpx text-_bl__h_ffffff_br_" wx:if="{{info.propsValue.openGroupVisible}}">去拼券</button>
+                </view>
+            </view>
+        </block>
+        <block wx:elif="{{info.propsValue&&info.propsValue.list_type==2}}">
+            <view bindtap="linkSpellCouponDetail" class="w-340rpx box-border p-24rpx border-rd-8rpx bg-_bl__h_f8f8f8_br_ overflow-hidden" data-id="{{item.activityId}}" style="border-radius: {{info.propsValue.borderRadius}}px;" wx:for="{{list}}" wx:key="activityId">
+                <view class="w-292rpx h-292rpx relative border-rd-8rpx overflow-hidden">
+                    <image class="w-_bl_100_p__br_ h-_bl_100_p__br_ border-rd-8rpx" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item.activityImgUrl,0)}}"></image>
+                    <count-down format="距结束DD天HH:mm:ss" second="{{item.time}}" timeStyle="width: 100%;height: 44rpx;text-align:center;line-height: 44rpx; background: linear-gradient(-54deg, #FF2E58, #FF5246);position: absolute; left: 0; bottom: 0; font-size: 24rpx;color: white;" wx:if="{{info.propsValue.junctionGroupVisible}}"></count-down>
+                </view>
+                <view class="flex items-center mx-0 my-20rpx">
+                    <text class="flex-1 text-28rpx text-_bl__h_222222_br_ font-bold text-ellipsis line-clamp-1" wx:if="{{info.propsValue.nameVisible}}">{{item.activityName}}</text>
+                </view>
+                <view class="flex items-center">
+                    <text class="inline-flex items-center px-8rpx py-0 mr-10rpx h-30rpx lh-30rpx border-2rpx border-solid border-_bl__h_f84036_br_ border-rd-4rpx text-20rpx text-_bl__h_f84036_br_" wx:if="{{info.propsValue.startGroupVisible}}">{{item.ladderNum}}人团</text>
+                    <text class="text-24rpx text-_bl__h_999999_br_" wx:if="{{info.propsValue.alreadyGroupVisible}}">已团{{item.totalSale}}</text>
+                </view>
+                <view class="flex items-center justify-between mx-0 mt-10rpx mb-20rpx">
+                    <view class="flex items-center">
+                        <text class="text-32rpx font-bold text-_bl__h_333333_br_ pr-10rpx">￥{{filter.handlePrice(item.discountAmount)}}</text>
+                        <text class="pr-10rpx text-20rpx decoration-line-through text-_bl__h_a3a3a3_br_" wx:if="{{info.propsValue.priceVisible}}">￥{{item.originalAmount}}</text>
+                    </view>
+                    <button class="w-120rpx h-48rpx m-0 lh-48rpx bg-gradient-linear bg-gradient-_bl_90deg_2c__h_fe1936_2c__h_fe762c_br_ border-rd-24rpx text-24rpx text-_bl__h_ffffff_br_" wx:if="{{info.propsValue.openGroupVisible}}">去拼券</button>
+                </view>
+            </view>
+        </block>
+        <block wx:elif="{{info.propsValue&&info.propsValue.list_type==3}}">
+            <view bindtap="linkSpellCouponDetail" class="w-_bl_100_p__br_ flex items-center mb-16rpx box-border p-24rpx border-rd-8rpx bg-_bl__h_f8f8f8_br_ overflow-hidden" data-id="{{item.activityId}}" style="border-radius: {{info.propsValue.borderRadius}}px;" wx:for="{{list}}" wx:key="activityId">
+                <view class="w-220rpx h-220rpx relative border-rd-8rpx overflow-hidden">
+                    <image class="w-_bl_100_p__br_ h-_bl_100_p__br_ border-rd-8rpx" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item.activityImgUrl,0)}}"></image>
+                    <count-down format="DD天HH:mm:ss" second="{{item.time}}" timeStyle="width: 100%;height: 44rpx;text-align:center;line-height: 44rpx; background: linear-gradient(-54deg, #FF2E58, #FF5246);position: absolute; left: 0; bottom: 0; font-size: 22rpx;color: white;" wx:if="{{info.propsValue.junctionGroupVisible}}"></count-down>
+                </view>
+                <view class="box-border flex-1 h-220rpx pl-24rpx flex flex-col justify-between">
+                    <view class="flex items-center mx-0 my-20rpx">
+                        <text class="inline-flex items-center px-8rpx py-0 mr-10rpx h-30rpx lh-30rpx border-2rpx border-solid border-_bl__h_f84036_br_ border-rd-4rpx text-20rpx text-_bl__h_f84036_br_" wx:if="{{info.propsValue.startGroupVisible}}">{{item.ladderNum}}人团</text>
+                        <text class="flex-1 text-28rpx text-_bl__h_222222_br_ font-bold text-ellipsis line-clamp-1" wx:if="{{info.propsValue.nameVisible}}">{{item.activityName}}</text>
+                    </view>
+                    <view>
+                        <text class="text-24rpx text-_bl__h_999999_br_" wx:if="{{info.propsValue.alreadyGroupVisible}}">已团{{item.totalSale}}</text>
+                    </view>
+                    <view class="flex items-center justify-between mx-0 mt-10rpx mb-20rpx">
+                        <view class="flex items-center">
+                            <text class="text-32rpx font-bold text-_bl__h_333333_br_ pr-10rpx">￥{{filter.handlePrice(item.discountAmount)}}</text>
+                            <text class="pr-10rpx text-20rpx decoration-line-through text-_bl__h_a3a3a3_br_" wx:if="{{info.propsValue.priceVisible}}">￥{{item.originalAmount}}</text>
+                        </view>
+                        <button class="w-120rpx h-48rpx m-0 lh-48rpx bg-gradient-linear bg-gradient-_bl_90deg_2c__h_fe1936_2c__h_fe762c_br_ border-rd-24rpx text-24rpx text-_bl__h_ffffff_br_" wx:if="{{info.propsValue.openGroupVisible}}">去拼券</button>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="filter" src="../../wxs/handle-number3f4b4d82.wxs"/>

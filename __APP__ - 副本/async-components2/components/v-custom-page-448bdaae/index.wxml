@@ -1,0 +1,9 @@
+<view class="fixed top-0 right-0 bottom-0 left-0" style="background-color:{{bodyColor}};" wx:if="{{bodyColor}}"></view>
+<view class="relative component-tree-test" style="min-height:{{designHight*2+'rpx'}}; background-color:{{bodyColor?bodyColor:''}};">
+    <component-tree bindclick="bindLink" bindpopupShow="popupShow" bindpupupAuthLocationHadShow="pupupAuthLocationHadShow" bindrunAuthorization="runAuthorization" bindrunAuthorizationWithCallback="runAuthorizationWithCallback" bindsetShowCartIconEvent="setShowCartIcon" bindshopHomeGoTakeFood="shopHomeGoTakeFood" bindskuEvent="handleShowSKU" bindtapEvent="bindEvent" designData="{{designData}}" fromPage="{{isFromPage}}" traceScreenType="{{traceScreenType}}"></component-tree>
+</view>
+<view class="relative z-998">
+    <block wx:if="{{isShopOpend}}">
+        <goods-cart-icon bindshow="onShowCart" count="{{cartCount}}" wx:if="{{cartCount&&showCartIcon}}"></goods-cart-icon>
+    </block>
+</view>

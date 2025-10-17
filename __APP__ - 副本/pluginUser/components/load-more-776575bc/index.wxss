@@ -1,0 +1,1 @@
+.std-load-more{animation:tui-rotate .7s linear infinite;background:0 0;border:2px solid #e5e5e5;border-left-color:#8f8d8e;border-radius:50%;display:inline-block;height:28rpx;margin:0 6px;vertical-align:middle;width:28rpx}@keyframes tui-rotate{0%{transform:rotate(0)}to{transform:rotate(1turn)}}@-webkit-keyframes tui-rotate{0%{transform:rotate(0)}to{transform:rotate(1turn)}}

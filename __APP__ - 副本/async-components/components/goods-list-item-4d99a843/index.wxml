@@ -1,0 +1,56 @@
+<view class="goods-list-item {{mode==='middle'?'middle':''}} {{mode==='large'?'large':''}} {{mode==='list'?'list':''}} {{countDownEnd?'activety-end':''}} _4d99a843 ">
+    <view catchtap="navActivityGoodsDetail" class="goods-list-item-wrap _4d99a843 ">
+        <view class="goods-image-wrapper _4d99a843 ">
+            <view class="goods-tags _4d99a843 ">
+                <image class="tags-image _4d99a843 " lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,'https://img-shop.qmimg.cn/s1001195/images/2021/04/14/ef126811d64eab27.png',0)}}" wx:if="{{goods.isNewMember}}"></image>
+            </view>
+            <view class="goods-image-content _4d99a843 ">
+                <image class="goods-image _4d99a843 " lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,goods.activityGoodsInfoVO.goodsImgUrl?goods.activityGoodsInfoVO.goodsImgUrl+'?x-oss-process=image/resize,w_320,h_320':'https://images.qmai.cn/s1000184/images/2019/04/25/ed15a7f64e48a463.png',0)}}"></image>
+                <view class="count-down-wrap _4d99a843 " wx:if="{{designData.junctionGroupVisible&&goods.activityStatus==2}}">
+                    <view class=" _4d99a843 " style="padding-right: 10rpx; font-size: 22rpx" wx:if="{{mode=='large'||mode=='middle'}}">{{countDownEnd?'已结束':'距离结束'}}</view>
+                    <count-down bind:countDownOver="countDownOver" class=" _4d99a843 " format="DD天HH小时mm分ss秒" idProper="{{goods.id}}" scene="style_1" second="{{time}}" timeStyle="background:transparent;color:#fff;{{mode=='list'?'font-size:18rpx;min-width:18rpx;min-height:18rpx;line-height:18rpx;':''}}" unitStyle="color:#fff;font-size:{{mode=='list'?'22rpx':'24rpx;'}}"></count-down>
+                </view>
+            </view>
+        </view>
+        <view class="goods-info-wrap _4d99a843 ">
+            <view class="goods-name _4d99a843 " wx:if="{{designData.nameVisible||designData.startGroupVisible}}">
+                <view class="spell-group _4d99a843 " style="color: #f84036" wx:if="{{goods.initGroupPurchaseTeamNum&&designData.startGroupVisible}}">
+                    <text class=" _4d99a843 ">{{goods.initGroupPurchaseTeamNum}}人团</text>
+                    <view class="line _4d99a843 " style="border-color: #f84036"></view>
+                </view>
+                <view class="name _4d99a843 " wx:if="{{designData.nameVisible}}">{{goods.activityGoodsInfoVO.goodsName||''}}</view>
+            </view>
+            <view class="goods-spell _4d99a843 ">
+                <view class="spell-group _4d99a843 " style="color: #f84036" wx:if="{{designData.startGroupVisible}}">
+                    <text class=" _4d99a843 ">{{goods.initGroupPurchaseTeamNum}}人团</text>
+                    <view class="line _4d99a843 " style="border-color: #f84036"></view>
+                </view>
+                <view class="group-num _4d99a843 " wx:if="{{goods.totalSale&&designData.alreadyGroupVisible}}">已团{{goods.totalSale}}件</view>
+            </view>
+            <view class="spell-progress _4d99a843 ">
+                <view class="progress-bar _4d99a843 ">
+                    <view class="progress-bar-cantent _4d99a843 ">
+                        <view class="progress-bar-cantent-main _4d99a843 " style="width: {{goods.progress?goods.progress+'%':'0%'}}"></view>
+                    </view>
+                    <view class="group-num _4d99a843 ">
+                        <text class=" _4d99a843 " wx:if="{{goods.totalSale&&designData.alreadyGroupVisible}}">已团{{goods.totalSale}}件</text>
+                    </view>
+                </view>
+            </view>
+            <view class="goods-bottom _4d99a843 ">
+                <view class="goods-price _4d99a843 ">
+                    <block wx:if="{{goods.leaderDiscountSwitch==1}}">
+                        <text class="sale-price _4d99a843 " wx:if="{{goods.activityGoodsInfoVO.leaderDiscountAfterPrice}}">￥{{goods.activityGoodsInfoVO.leaderDiscountAfterPrice}}</text>
+                    </block>
+                    <block wx:else>
+                        <text class="sale-price _4d99a843 " wx:if="{{goods.activityGoodsInfoVO.discountAfterPrice}}">￥{{goods.activityGoodsInfoVO.discountAfterPrice}}</text>
+                    </block>
+                    <text class="line-price _4d99a843 " wx:if="{{goods.activityGoodsInfoVO.price&&designData.priceVisible}}">￥{{goods.activityGoodsInfoVO.price}}</text>
+                    <text class="group-num _4d99a843 " wx:if="{{goods.totalSale&&designData.alreadyGroupVisible}}">已团{{goods.totalSale}}件</text>
+                </view>
+                <view catchtap="navActivityGoodsDetail" class="goods-spell-group _4d99a843 " style="background:{{goods.activityStatus!=2?'linear-gradient(90deg, #58CA8A, #6FCE85);':''}}" wx:if="{{designData.openGroupVisible}}">{{buttonTxt}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

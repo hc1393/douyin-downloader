@@ -1,0 +1,81 @@
+<view class="coupon-list-item {{isFrom=='list'?'list-item_style':'detail-item_style'}} _9b949420 " style="background: {{isFrom=='detail'?'linear-gradient(135deg, '+tools.hexToRgba(colorTheme,'0.1')+' 0%,'+tools.hexToRgba(colorTheme,'0.02')+') 100%;':''}}">
+    <view class="coupon-info__header flex items-center justify-between {{status==1&&!hasPackageLableList?'header_w100':''}} _9b949420 ">
+        <view class="text-32rpx text-_bl__h_333_br_ font-bold w-390rpx lh-44rpx _9b949420 ">{{couponInfo.activityName||couponInfo.title}}</view>
+        <view class="coupon-info-clock flex items-center _9b949420 " wx:if="{{couponInfo.countdownEndDate&&couponInfo.countdownEndDate!='0'&&!detailStyle2}}">
+            <text class="coupon-info-clock__text _9b949420 ">距结束</text>
+            <count-down bindcountDownOver="countDownOver" class=" _9b949420 " from="couponPackage" idProper="{{couponInfo.id}}" scene="style_1" second="{{couponInfo.countdownEndDate}}" timeStyle="color:#FB2542;font-size:24rpx;background:transparent;padding:0 0;"></count-down>
+        </view>
+        <view class="coupon-package-price _9b949420 " wx:if="{{status==1&&!hasPackageLableList}}">仅需<view class="current-price _9b949420 " style="color: {{colorTheme}};">¥<text class="amount _9b949420 ">{{couponInfo.sellPrice}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="coupon-info__tags flex items-center {{status==1?'justify-between':''}} _9b949420 " wx:if="{{hasPackageLableList}}">
+        <view class="coupon-info__tags flex items-center _9b949420 ">
+            <view class="tag-item _9b949420 " wx:for="{{couponInfo.couponPackageLabelList}}" wx:key="label">{{item}}</view>
+        </view>
+        <view class="coupon-package-price _9b949420 " wx:if="{{status==1}}">仅需<view class="current-price _9b949420 " style="color: {{colorTheme}};">¥<text class="amount _9b949420 ">{{couponInfo.sellPrice}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="coupon-info__middle flex items-center justify-between _9b949420 " wx:if="{{status==2}}">
+        <sale-progress-bar gap class=" _9b949420 " progress="{{couponInfo.progressBar*100||0}}" saleNum="{{couponInfo.totalSaleNum}}" wx:if="{{isFrom==='detail'&&couponPackageStyle===2}}"></sale-progress-bar>
+        <view class="coupon-package-progress _9b949420 " wx:else>
+            <view class="coupon-package-progress_line _9b949420 " wx:if="{{showProgressLine}}">
+                <view class="coupon-progress_bg _9b949420 ">
+                    <view class="coupon-progress_percent _9b949420 " style="width: {{filter.filterPercent(couponInfo.progressBar)}}%;background-color:{{colorTheme}};"></view>
+                </view>
+            </view>
+            <view class="coupon-package-progress_text _9b949420 ">
+                <block wx:if="{{!couponInfo.totalSaleNum&&!showProgressLine}}">热销中，速速抢购</block>
+                <block wx:else>
+                    <block wx:if="{{couponInfo.totalSaleNum}}">已被抢<text class=" _9b949420 " style="color: {{colorTheme}};">{{couponInfo.totalSaleNum}}</text>
+                    </block>
+                    <block wx:if="{{showProgressLine}}">
+                        <text class="progress-sign _9b949420 ">/</text>
+                        <text class="total-progress_num _9b949420 ">{{couponInfo.totalStock}}</text>
+                    </block>
+                </block>
+            </view>
+        </view>
+        <view class="coupon-package-price _9b949420 ">仅需<view class="current-price _9b949420 " style="color: {{colorTheme}};">¥<text class="amount _9b949420 ">{{couponInfo.sellPrice}}</text>
+            </view>
+            <text class="original-price _9b949420 " wx:if="{{couponInfo.marketPrice}}">¥{{couponInfo.marketPrice}}</text>
+        </view>
+    </view>
+    <view class="text-22rpx text-_bl__h_999_br_ lh-32rpx mx-0 my-14rpx flex items-center justify-between _9b949420 " wx:if="{{status==1}}">
+        <view class="flex-1 flex items-center _9b949420 " wx:if="{{!detailStyle2}}">
+            <view class=" _9b949420 ">限售{{couponInfo.totalStock}}份</view>
+            <view class="flex-1 flex items-center ml-6rpx _9b949420 " wx:if="{{couponInfo.countdownStartDate}}">
+                <text class="coupon-info-clock__text _9b949420 "> | 距开抢还有</text>
+                <count-down bindcountDownOver="countDownOver" class=" _9b949420 " from="couponPackage" idProper="{{couponInfo.id}}" scene="style_1" second="{{couponInfo.countdownStartDate}}" timeStyle="color:#999999;font-size:24rpx;background:transparent;padding:0 0;" unitStyle="color:#999999;"></count-down>
+            </view>
+        </view>
+        <view class="coupon-package-price _9b949420 ">
+            <text class="original-price _9b949420 " wx:if="{{couponInfo.marketPrice}}">¥{{couponInfo.marketPrice}}</text>
+        </view>
+    </view>
+    <view class="coupon-info__bottom flex items-center justify-between _9b949420 " wx:if="{{isFrom=='list'}}">
+        <view class="coupon-list-wrap flex items-center justify-between _9b949420 ">
+            <scroll-view scrollX class="coupon-scroll-view _9b949420 ">
+                <view class="coupon-scroll-wrap flex items-center _9b949420 ">
+                    <view class="coupon-scroll-item _9b949420 " style="background-color: {{tools.hexToRgba(colorTheme,0.1)}};" wx:for="{{couponInfo.coupons}}" wx:for-item="coupon" wx:key="index">
+                        <coupon-sale class=" _9b949420 " couponInfo="{{coupon}}" isFrom="couponPackage"></coupon-sale>
+                        <view class="coupon-conditional _9b949420 " wx:if="{{coupon.type===14}}">兑换券</view>
+                        <view class="coupon-conditional _9b949420 " wx:elif="{{coupon.type===13&&coupon.useChannel&&coupon.useChannel.length==1&&coupon.useChannel[0]==2}}">限线下使用</view>
+                        <view class="coupon-conditional _9b949420 " wx:elif="{{coupon.thresholdType===1}}">{{_i1}}</view>
+                        <view class="coupon-conditional _9b949420 " wx:else>满{{coupon.useThreshold||0}}{{coupon.thresholdType==2?'元':''}}{{coupon.thresholdType==3?'件':''}}{{coupon.thresholdType==4?'千克':''}}可用</view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="coupon-count {{couponInfo.totalCouponNum>4?'coupon-count_shadow':''}} _9b949420 ">共{{couponInfo.totalCouponNum}}张</view>
+        </view>
+        <view bindtap="handleButton" class="coupon-button-box _9b949420 ">
+            <view class="push-button _9b949420 " style="background-color:{{colorTheme}};">{{status==2?'开抢':'详情'}}</view>
+        </view>
+    </view>
+    <view class="coupon-info__sharp _9b949420 " wx:if="{{isFrom=='detail'}}">
+        <view class="iconfont icon-couponPackage-sharp _9b949420 " style="color:{{colorTheme}}"></view>
+    </view>
+</view>
+<wxs module="filter" src="../../wxs/coupon-package9a47a89a.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

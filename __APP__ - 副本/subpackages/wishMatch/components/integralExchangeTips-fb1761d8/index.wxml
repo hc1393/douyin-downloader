@@ -1,0 +1,45 @@
+<pop-up show="{{show}}">
+    <view catchtouchmove="noop" class="w-670rpx bg-_bl__h_ffffff_br_ border-rd-20rpx box-border p-40rpx">
+        <view class="font-500 text-36rpx text-center">
+            <text class="font-size-inherit font-inherit" style="color: {{colorTheme}};">{{repGoods.pointExchageItemVO.pointNum}}{{pointName}}</text>
+            <text class="font-size-inherit font-inherit">免费{{oriGoods?'换购':'加购'}}</text>
+            <text class="font-size-inherit font-inherit" style="color: {{colorTheme}};">￥{{repGoods.freeUpPrice}}</text>
+            <text class="font-size-inherit font-inherit">商品</text>
+        </view>
+        <view class="text-24rpx text-_bl__h_333333_br_ text-center mx-0 my-16rpx">{{pointName}}余额：{{userIntegral}}</view>
+        <view class="mx-0 mt-48rpx mb-32rpx flex justify-center">
+            <view class="w-199rpx text-left" wx:if="{{oriGoods}}">
+                <view class="w-_bl_100_p__br_ h-200rpx bg-_bl__h_f7f7f7_br_ border-rd-16rpx overflow-hidden relative">
+                    <view class="flex items-center justify-center w-60rpx h-30rpx bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_ border-rd-_bl_12rpx_0rpx_12rpx_0rpx_br_ text-20rpx text-_bl__h_ffffff_br_ absolute left-0 top-0">已选</view>
+                    <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" mode="aspectFill" src="{{__oss__.s(mpxExt,oriGoods.pictureUrlList[0],0)}}"></image>
+                </view>
+                <view class="line-clamp-2 font-500 text-24rpx mx-0 my-8rpx text-_bl__h_333333_br_ text-ellipsis">{{oriGoods.name}}</view>
+                <view class="text-24rpx" style="color: {{colorTheme}};" wx:if="{{oriGoods.freeUpPrice}}">¥{{oriGoods.freeUpPrice}}</view>
+            </view>
+            <view class="flex-1 h-200rpx flex items-center justify-center flex-col mx-26rpx my-0" wx:if="{{oriGoods}}">
+                <view class="text-24rpx text-_bl__h_999999_br_" style="color: {{colorTheme}};">{{repGoods.pointExchageItemVO.pointNum}}{{pointName}}</view>
+                <view class="text-24rpx text-_bl__h_999999_br_">换购</view>
+                <view class="w-139rpx h-11rpx border-b-1rpx border-b-solid border-b-_bl__h_999999_br_ relative">
+                    <view class="w-11rpx h-1rpx bg-_bl__h_999999_br_ absolute bottom-0 right-2rpx origin-right rotate-45"></view>
+                </view>
+            </view>
+            <view class="w-199rpx text-left" wx:if="{{repGoods}}">
+                <view class="w-_bl_100_p__br_ h-200rpx bg-_bl__h_f7f7f7_br_ border-rd-16rpx overflow-hidden relative">
+                    <view class="flex items-center justify-center w-60rpx h-30rpx bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_ border-rd-_bl_12rpx_0rpx_12rpx_0rpx_br_ text-20rpx text-_bl__h_ffffff_br_ absolute left-0 top-0" style="background-color: {{colorTheme}};">推荐</view>
+                    <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" mode="aspectFill" src="{{__oss__.s(mpxExt,repGoods.pictureUrlList[0],0)}}"></image>
+                </view>
+                <view class="line-clamp-2 font-500 text-24rpx mx-0 my-8rpx text-_bl__h_333333_br_ text-ellipsis">{{repGoods.name}}</view>
+                <view class="text-24rpx" style="color: {{colorTheme}};">¥{{repGoods.freeUpPrice}}</view>
+            </view>
+        </view>
+        <view class="w-_bl_100_p__br_ flex justify-between items-center mx-0 my-32rpx">
+            <button catchtap="abandon" class="w-280rpx h-80rpx box-border lh-80rpx bg-_bl__h_ffffff_br_ border-rd-40rpx border-2rpx border-solid text-30rpx" data-activity-id="{{repGoods.pointExchageItemVO.activityId}}" data-activity-name="{{activityData.activityName}}" data-activity-type="积分换购" data-element-name="放弃优惠" data-never-remind="{{noReminderNextTime?'下次不再提醒':''}}" data-operation-type="放弃优惠" data-screen-type="商品详情" style="color: {{colorTheme}};border-color: {{colorTheme}};">放弃优惠</button>
+            <button catchtap="exchange" class="w-280rpx h-80rpx box-border lh-80rpx border-rd-40rpx text-30rpx text-_bl__h_ffffff_br_" data-activity-id="{{repGoods.pointExchageItemVO.activityId}}" data-activity-name="{{activityData.activityName}}" data-activity-type="积分换购" data-element-name="立即{{oriGoods?'换购':'加购'}}" data-never-remind="{{noReminderNextTime?'下次不再提醒':''}}" data-operation-type="立即{{oriGoods?'换购':'加购'}}" data-screen-type="商品详情" style="background-color: {{colorTheme}};">立即{{oriGoods?'换购':'加购'}}</button>
+        </view>
+        <view catchtap="onReminderNextTime" class="flex items-center justify-center">
+            <label class="{{'inline-block w-20px h-20px text-_bl__h_09bb07_br_ lh-20px text-center bg-no-repeat bg-center bg-_bl_length_c_18px_18px_br_ '+(noReminderNextTime?'text-20px i-xuanze_xuanzhong':'')}}" style="color: {{colorTheme}}; {{noReminderNextTime?'':'background-image: url(https://images.qmai.cn/s16/images/2019/06/12/4d131a42d8e708bd.png);'}}"></label>
+            <text class="text-24rpx text-_bl__h_999999_br_ pl-10rpx">下次不再提醒</text>
+        </view>
+    </view>
+</pop-up>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>

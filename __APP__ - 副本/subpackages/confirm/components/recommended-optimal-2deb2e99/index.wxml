@@ -1,0 +1,4 @@
+<view class="px-0 pt-24rpx pb-0">
+    <view bindtap="tapSystemRecommend" class="px-10rpx py-0 w-fit h-48rpx border-rd-10rpx bg-_bl__h_ffe4e4_br_ flex items-center justify-center text-24rpx text-_bl__h_fc4930_br_">{{showFont}}<text class="pl-4rpx text-24rpx text-_bl__h_fc4930_br_ i-jiantou-you" wx:if="{{!isUseRecommend}}"></text>
+    </view>
+</view>

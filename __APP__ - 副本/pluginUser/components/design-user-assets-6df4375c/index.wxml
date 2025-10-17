@@ -1,0 +1,19 @@
+<view class="_i_px-24 box-border" style="{{config.style}}">
+    <view class="overflow-hidden {{showExpiredReminder?'rd-t-16 rd-b-8':'rd-16'}}" style="{{allBgStyle}}" wx:if="{{mode===1}}">
+        <view class="py-24 rd-16 flex justify-between items-center box-border" style="{{bgStyle}}">
+            <view bindtap="toAssetsPage" class="h-92 flex flex-col justify-between items-center" data-item="{{item}}" style="{{widthStyle}}" wx:for="{{list}}" wx:key="index">
+                <view class="h-50 lh-50 text-36 font-500" style="{{valueStyle}}">{{isAuth?item.value:'**'}}</view>
+                <view class="h-34 lh-34 text-24" style="{{labelStyle}}">{{item.label}}</view>
+            </view>
+        </view>
+        <design-user-assets-expired-tips bgColor="{{expiredTipsBgColor}}" textColor="{{expiredTipsTextColor}}" wx:if="{{showExpiredReminder}}"></design-user-assets-expired-tips>
+    </view>
+    <view class="rd-16 overflow-hidden {{isHasBg?'p-24':''}}" style="{{bgStyle}}" wx:if="{{mode===2}}">
+        <view class="w-full h-46 flex justify-between items-center mb-24 box-border {{isHasBg?'':'px-8'}}">
+            <text class="text-32 text-_bl__h_3D3D3D_br_ lh-none font-500">{{_i1}}</text>
+            <design-user-assets-expired-tips bgColor="transparent" textColor="{{expiredTipsTextColor}}" wx:if="{{showExpiredReminder}}"></design-user-assets-expired-tips>
+        </view>
+        <design-user-assets-icon-card bindtoAssetsPage="toAssetsPage" labelStyle="{{labelStyle}}" list="{{list}}" row="{{row}}" valueStyle="{{valueStyle}}"></design-user-assets-icon-card>
+    </view>
+</view>
+<std-design-jump-help id="std-design-jump-help"></std-design-jump-help>

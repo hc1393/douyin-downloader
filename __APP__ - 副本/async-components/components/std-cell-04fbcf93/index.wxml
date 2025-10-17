@@ -1,0 +1,18 @@
+<view bind:tap="onClick" class=" bg-hex-fff box-border c-hex-333 flex text-30 lh-42 px-24 py-32 relative w-full {{center?'items-center':''}} {{!border?'after-hidden':''}} {{disabled?'op-50':''}} " style="{{customStyle}}">
+    <slot name="icon"></slot>
+    <view class="flex-1" style="{{utils.titleStyle( {titleWidth:titleWidth,titleStyle:titleStyle} )}}">
+        <block wx:if="{{title}}">{{title}}</block>
+        <slot name="title" wx:else></slot>
+        <view class="c-hex-333 text-24 lh-36 mt-6" wx:if="{{label||useLabelSlot}}">
+            <slot name="label" wx:if="{{useLabelSlot}}"></slot>
+            <block wx:elif="{{label}}">{{label}}</block>
+        </view>
+    </view>
+    <view class="c-hex-999 overflow-hidden text-right align-middle flex-1">
+        <block wx:if="{{value||value===0}}">{{value}}</block>
+        <slot wx:else></slot>
+    </view>
+    <slot name="right-icon"></slot>
+    <slot name="extra"></slot>
+</view>
+<wxs module="utils" src="../../wxs/index04fbf610.wxs"/>

@@ -1,0 +1,17 @@
+<view class="fixed right-0 bottom-122rpx left-0 z-26 flex items-center justify-center" style="{{customStyle}}" wx:if="{{showTip}}">
+    <view class="flex w-690rpx h-170rpx bg-_bl__h_fff_br_ border-rd-12rpx shadow-_bl_0rpx_4rpx_14rpx_0rpx_rgba_pl_200_2c_204_2c_213_2c_0_d_5_pr__br_">
+        <view class="flex flex-_bl_0_0_528rpx_br_ items-start box-border pt-32rpx pb-32rpx pl-26rpx pr-44rpx border-r-1px border-r-solid border-r-_bl__h_e2e5e7_br_">
+            <image class="flex-_bl_0_0_36rpx_br_ w-36rpx h-36rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/09/18/7d695d9f14f1dd3b.png',0)}}"></image>
+            <view class="ml-16rpx">
+                <view class="text-_bl__h_000_br_ font-bold text-30rpx lh-none">开启提醒通知</view>
+                <view class="mt-18rpx text-_bl__h_999_br_ font-400 text-24rpx lh-36rpx">{{desFont}}</view>
+            </view>
+        </view>
+        <view class="flex-_bl_0_1_100_p__br_">
+            <view bindtap="openSubscription" class="w-_bl_100_p__br_ h-84rpx text-_bl__h_000_br_ font-400 text-26rpx lh-84rpx text-center border-b-1px border-b-solid border-b-_bl__h_c8ccd5_br_">开启</view>
+            <view bindtap="colse" class="w-_bl_100_p__br_ h-84rpx text-_bl__h_999_br_ font-400 text-26rpx lh-84rpx text-center">取消</view>
+        </view>
+    </view>
+</view>
+<subscribe-mask show="{{isSubscribeMaskShow}}"></subscribe-mask>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

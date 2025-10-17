@@ -1,0 +1,28 @@
+<view catchtap="hideModal" catchtouchmove="noop" class="fixed top-0 left-0 z-2001 w-_bl_100_p__br_ h-_bl_100_p__br_ overflow-hidden text-_bl__h_fff_br_ bg-_bl__h_000_br_ op-50" wx:if="{{showBottomFrameStatus}}"></view>
+<view animation="{{animationData}}" catchtouchmove="noop" class="fixed bottom-0 left-0 z-10001 box-border w-_bl_100_p__br_ overflow-hidden bg-_bl__h_fff_br_ border-rd-_bl_30rpx_30rpx_0_0_br_ pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_" style="{{pagePaddingBottom}}" wx:if="{{showBottomFrameStatus}}">
+    <view catchtap="noop" class="flex items-center h-96 p-x-32 relative">
+        <view class="flex-1 text-center text-36 text-_h_333 font-500">免费入会享好礼</view>
+        <view catchtap="hideModal" class="flex items-center justify-center w-40 h-40 absolute right-32 top-32">
+            <view class="i-guanbi2 color-_h_999 text-32"></view>
+        </view>
+    </view>
+    <view class="px-32rpx py-24rpx flex flex-col items-center justify-center">
+        <button catchtap="checkAgreeOpen" class="w-580rpx h-92rpx m-x-auto flex justify-center items-center self-stretch rounded-_bl_60px_br_ bg-_h_00A47C c-_h_fff text-32rpx" type="primary">免费入会</button>
+        <view catchtap="checkboxChange" class="text-24 mt-56 relative">
+            <view class="flex {{isAgreeOn?'animate-shake-horizontal animate-duration-800ms animate-ease-in-out':''}}">
+                <view class="i-circle mr-12 text-36 text-hex-b7b7b7" wx:if="{{!agreeOpen}}"></view>
+                <view class="i-xuanze_xuanzhong mr-12 text-36 text-hex-b7b7b7" style="color: {{colorTheme}}" wx:else></view>
+                <view class="leading-40 text-hex-333333">
+                    <text>请仔细阅读</text>
+                    <block wx:for="{{list}}" wx:key="id">
+                        <text catchtap="toProtocol" class="c-hex-344f78" data-id="{{item.id}}">《{{item.name}}》</text>
+                        <text wx:if="{{index!==list.length-1}}">、</text>
+                    </block>
+                    <text>，您点击领卡代表您同意上述协议</text>
+                </view>
+            </view>
+            <view class="{{'absolute w-222 h-58 leading-58 text-center rounded-8 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_6_pr__br_ text-hex-fff text-24 top--68 left--24 '+(isAgreeTip?'animate-appear animate-duration-0s animate-delay-2s animate-forwards invisible':'')}}" wx:if="{{!agreeOpen}}">请阅读并同意<view class="w-0 h-0 border-solid border-10rpx border-transparent relative left-32" style="border-top-color: rgba(0, 0, 0, 0.6)"></view>
+            </view>
+        </view>
+    </view>
+</view>

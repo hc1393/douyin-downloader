@@ -1,0 +1,19 @@
+<view class="{{' fixed top-0 left-0 box-border w-_bl_100_p__br_ bg-_bl__h_fff_br_ shadow-_bl_0_5rpx_12rpx_0_rgba_pl_0_2c_0_2c_0_2c_0_d_05_pr__br_ '+(couponType==4?'h-auto px-24rpx pt-20rpx pb-0':'h-110rpx px-24rpx py-20rpx')+' '}}">
+    <view bindtap="handleBrand" class="flex items-center justify-between box-border w-_bl_100_p__br_ h-60rpx px-24rpx py-0 text-_bl__h_333_br_ text-26rpx bg-_bl__h_f5f5f5_br_ border-rd-8rpx">
+        <text>{{curBrandName||brandList[0].name}}</text>
+        <text class="text-_bl__h_a0a0a0_br_ text-24rpx i-jiantou-shang" wx:if="{{brandBtnStatus=='open'}}"></text>
+        <text class="text-_bl__h_a0a0a0_br_ text-24rpx i-jiantou-xia" wx:if="{{brandBtnStatus=='close'}}"></text>
+    </view>
+    <view class="relative z-13 flex w-_bl_100_p__br_ bg-_bl__h_fff_br_" wx:if="{{couponType==4}}">
+        <view bindtap="tabChange" class="flex flex-1 items-center justify-center" data-index="{{item.value}}" wx:for="{{tab}}" wx:key="value">
+            <view class="box-border h-90rpx text-_bl__h_666_br_ font-500 text-30rpx lh-90rpx border-b-6rpx border-b-solid border-b-transparent" style="{{item.value==tabIndex?tabActiveStyle:''}}">{{item.label}}</view>
+        </view>
+    </view>
+    <view class="absolute top-130rpx right-24rpx z-15 border-1px border-solid border-_bl__h_e5e5e5_br_ shadow-_bl_0_4rpx_16rpx_0_rgba_pl_0_2c_0_2c_0_2c_0_d_08_pr__br_" style="{{brandListShow?'':'display:none;'}}">
+        <image class="absolute top--29rpx right-10rpx w-48rpx h-29rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/08/04/07ae257357723f16.png',0)}}"></image>
+        <view class="flex flex-col items-center justify-center px-24rpx py-0 bg-_bl__h_fff_br_ border-rd-12rpx">
+            <view catchtap="changeBrand" class="truncate max-w-650rpx h-100rpx text-30rpx lh-100rpx text-center not-last-border-b-1px not-last-border-b-solid not-last-border-b-_bl__h_eee_br_" data-choose="1" data-id="{{item.id}}" data-name="{{item.name}}" wx:for="{{brandList}}" wx:key="index">{{item.name}}</view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

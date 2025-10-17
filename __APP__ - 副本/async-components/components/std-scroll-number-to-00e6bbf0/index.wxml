@@ -1,0 +1,11 @@
+<view class="scroll-number" style="color:{{colorTheme}};{{customStyle}};">
+    <block wx:for="{{valArr}}" wx:key="index">
+        <view class="number-dot" wx:if="{{item.isNaN}}">{{item.val}}</view>
+        <view class="number-item" wx:else>
+            <view class="scroll-ani" style="transition-duration: {{duration}}ms; {{aniArr[index]}}">
+                <view class="scroll-ani-item" wx:for="{{numArr}}" wx:for-index="idx" wx:for-item="num" wx:key="idx">{{num}}</view>
+                <view class="scroll-ani-item" wx:for="{{numArr}}" wx:for-index="idx" wx:for-item="num" wx:key="idx">{{num}}</view>
+            </view>
+        </view>
+    </block>
+</view>

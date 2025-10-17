@@ -1,0 +1,3 @@
+<view class="std-mall-switch _c4cd4c54 " style="--std-primary-color: {{themeColor}}">
+    <view bind:tap="onTap" class="std-mall-switch__item {{item.type===current?'active':''}} _c4cd4c54 " data-type="{{item.type}}" wx:for="{{tabList}}" wx:key="type">{{item.name}}</view>
+</view>

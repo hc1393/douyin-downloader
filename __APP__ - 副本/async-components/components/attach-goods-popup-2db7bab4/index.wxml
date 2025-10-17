@@ -1,0 +1,61 @@
+<view bindtap="closeSlide" catchtouchmove="pop" class="top--1px right-0 bottom-0 left-0 z-1001 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_8_pr__br_ fixed" style="{{maskIsShow?'':'display:none;'}}"></view>
+<view catchtouchmove="pop" class="{{'bottom-0 left-0 z-10001 w-_bl_100_p__br_ bg-_bl__h_fff_br_ border-rd-_bl_30rpx_30rpx_0_0_br_ transition-transform transition-duration-0_d_3s transition-ease-_bl_linear_br_ fixed flex flex-col '+(isShow?'translate-y-0':'translate-y-100_p_')}}">
+    <view class="top-0 left-0 z-5 justify-end box-border w-_bl_100_p__br_ pt-24rpx pb-0 pl-0 pr-24rpx border-rd-_bl_30rpx_30rpx_0_0_br_ transition-all transition-duration-0_d_3s transition-ease-_bl_linear_br_ absolute flex">
+        <view bindtap="closeSlide" class="relative w-56rpx h-56rpx m-0 mr-24rpx last-mr-0 flex items-center justify-center rounded-full bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_2_pr__br_">
+            <view class="i-guanbi2 text-white text-24"></view>
+        </view>
+    </view>
+    <view id="mainScrollWrap">
+        <scroll-view scrollY class="max-h-66vh">
+            <view class="px-32rpx py-47rpx" wx:if="{{info}}">
+                <view class="relative">
+                    <swiper class="w-_bl_100_p__br_ h-300rpx_i_ mb-40rpx" wx:if="{{info.pictureUrlList&&info.pictureUrlList.length}}">
+                        <swiper-item wx:for="{{info.pictureUrlList}}" wx:key="*this">
+                            <image class="w-300rpx h-300rpx mx-auto mt-0 mb-40rpx border-rd-6rpx block" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item,0)}}"></image>
+                        </swiper-item>
+                    </swiper>
+                    <image catchtap="previewImage" class="w-300rpx h-300rpx mx-auto mt-0 mb-40rpx border-rd-6rpx block" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2019/06/04/5da0f65ae34e1952.png',0)}}" wx:else></image>
+                </view>
+                <view class="truncate font-bold text-36rpx lh-36rpx">{{info.name}}</view>
+                <view class="transition-height transition-duration-0_d_15s transition-ease-_bl_linear_br_ overflow-hidden mx-0 my-16rpx" style="color: #999; font-size: 12px; {{skuDescDisplayHeight?'height:'+skuDescDisplayHeight+'px':''}}" wx:if="{{info.richTextDetail}}">
+                    <rich-text id="food-sku-richtext" nodes="{{info.richTextDetail}}"></rich-text>
+                </view>
+                <view class="absolute w-_bl_100_p__br_ h-20px translate-y--20px bg-gradient-linear bg-gradient-_bl_-180deg_2c_rgba_pl_255_2c_255_2c_255_2c_0_pr__2c__h_fff_br_ pointer-events-none" wx:if="{{isShowSkuDescSwitcher&&isSkuDescCollapsed}}"></view>
+                <view bindtap="skuDescDisplayToggle" class="text-_bl__h_666_br_ text-24rpx text-center h-60rpx lh-60rpx" wx:if="{{isShowSkuDescSwitcher}}">{{_i1}}<text class="ml-14rpx text-24rpx {{isSkuDescCollapsed?'i-jiantou-xia':'i-jiantou-shang'}}"></text>
+                </view>
+                <view class="mt-8rpx">
+                    <block wx:for="{{subpackageArr}}" wx:key="sku">
+                        <view class="mt-32rpx text-_bl__h_666_br_ text-24rpx">{{item.name}}</view>
+                        <view class="flex flex-wrap">
+                            <view bindtap="skuSwitchFun" class="{{' relative bg-_bl__h_f8f8f8_br_ border-rd-8rpx h-62rpx mt-16rpx mb-0 ml-0 mr-32rpx px-24rpx py-0 text-24rpx lh-62rpx '+(i.activeClass=='active'?'text-_bl__h_fff_br_':i.activeClass=='disable'?'text-_bl__h_ccc_br_':'text-_bl__h_333333_br_')+' '}}" data-i="{{i}}" data-index="{{iIndex}}" data-item="{{item}}" style="background-color: {{i.activeClass=='active'&&skuSelectStyle!=2?colorTheme:''}}{{i.activeClass=='active'&&skuSelectStyle==2?tools.hexToRgba(colorTheme,0.1):''}};color: {{i.activeClass=='active'&&skuSelectStyle!=2?textColor+'!important':''}};{{i.activeClass=='active'&&skuSelectStyle==2?'color: '+colorTheme+'!important;border: 1px solid '+colorTheme+';':''}}" wx:for="{{item.values}}" wx:for-index="iIndex" wx:for-item="i" wx:key="skuValue">{{i.value}}<text wx:if="{{i.desc}}">({{i.desc}})<block wx:if="{{i.price&&addPriceStyle!=='badge'}}">{{' '}}{{addPriceStyle==='rmb'?currencySymbol:'+'}}{{i.price}}</block>
+                                </text>
+                                <view class="absolute top-0 right-0 h-20rpx px-4rpx py-0 text-_bl__h_fff_br_ text-18rpx lh-20rpx text-center bg-_bl__h_ccc_br_ border-rd-_bl_0_8rpx_br_" style="color: {{i.activeClass?colorTheme:'#fff'}};background-color: {{i.activeClass?'#fff':colorTheme}};" wx:if="{{i.price&&addPriceStyle==='badge'}}">+{{i.price}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view class="mt-40rpx" wx:if="{{cartGoodsList.length}}">
+                    <view class="text-_bl__h_666_br_ text-24rpx lh-_bl_1_d_2_br_">{{_i2}}</view>
+                    <view bindtap="cartGoodsSwitchFun" class="{{' food-goods_item box-border mt-24rpx px-24rpx py-20rpx lh-_bl_1_d_2_br_ bg-_bl__h_f8f8f8_br_ border-rd-8rpx '+(cart.isDisable?'food-goods_disable':'')+' '+(cart.activeClass=='active'?'active':'')+' '}}" data-id="{{cart.id}}" data-index="{{cIndex}}" style="background-color: {{cart.activeClass=='active'&&skuSelectStyle!=2?colorTheme:''}}{{cart.activeClass=='active'&&skuSelectStyle==2?tools.hexToRgba(colorTheme,0.1):''}};{{cart.activeClass=='active'&&skuSelectStyle==2?'border: 1px solid '+colorTheme+';':''}}" wx:for="{{cartGoodsList}}" wx:for-index="cIndex" wx:for-item="cart" wx:key="cart">
+                        <view class="{{'text-_bl__h_333_br_ text-28rpx '+(cart.isDisable?'text-_bl__h_ccc_br__i_':'')+' '+(cart.activeClass=='active'?'text-_bl__h_fff_br__i_':'')}}" style="color:{{cart.activeClass=='active'&&skuSelectStyle==2?colorTheme:''}};">{{cart.name}}</view>
+                        <view class="{{'mt-16rpx text-_bl__h_666_br_ text-22rpx '+(cart.isDisable?'text-_bl__h_ccc_br__i_':'')+' '+(cart.activeClass=='active'?'text-_bl__h_fff_br__i_':'')}}" style="color:{{cart.activeClass=='active'&&skuSelectStyle==2?colorTheme:''}};" wx:if="{{cart.filterType==='meal'}}">{{cart.curMealText}}</view>
+                        <view class="{{'mt-16rpx text-_bl__h_666_br_ text-22rpx '+(cart.isDisable?'text-_bl__h_ccc_br__i_':'')+' '+(cart.activeClass=='active'?'text-_bl__h_fff_br__i_':'')}}" style="color:{{cart.activeClass=='active'&&skuSelectStyle==2?colorTheme:''}};" wx:else>{{cart.skuText}}<block wx:if="{{cart.skuText&&cart.loadingGoodsText}}">，</block>{{cart.loadingGoodsText}}</view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="justify-between text-_bl__h_fff_br_ shadow-_bl_0_-8rpx_8rpx_0_rgba_pl_37_2c_37_2c_37_2c_0_d_1_pr__br_ z-1 px-24rpx pt-0 pb-24rpx box-border" style="padding-bottom:{{pagePaddingBottom}}">
+        <view class="p-16rpx flex items-center">
+            <view class="w-0 mr-40rpx text-_bl__h_7e7e7e_br_ text-22rpx flex-1">
+                <view class="text-_bl__h_333_br_ font-bold text-36rpx">{{currencySymbol+finalPrice}}</view>
+            </view>
+            <view class="min-w-130rpx text-_bl__h_333_br_ text-30rpx text-right">
+                <cart-control addDisabled="{{cartButton.isDisable}}" bindchange="goodsNumChange" data-goods="{{goods}}" num="{{num}}" wx:if="{{!info.unit_type}}"></cart-control>
+            </view>
+        </view>
+        <zm-button block round bindbtntap="addCartFun" disabled="{{cartButton.isDisable}}" size="large" textColor="{{textColor}}">{{cartButton.text}}</zm-button>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

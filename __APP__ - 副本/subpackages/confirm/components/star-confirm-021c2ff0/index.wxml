@@ -1,0 +1,84 @@
+<import src="/subpackages/confirm/template/goods-list-item3ca5da55.wxml"></import>
+<view class="star-new-act" style="--theme-color: {{colorTheme}};" wx:if="{{info.newActivity==1}}">
+    <view class="star-zero-tips" wx:if="{{showTips}}">点这里查看活动规则<text catchtap="closeTips" class="iconfont i-close"></text>
+    </view>
+    <view bindtap="openStarDetail" class="star-content">
+        <view class="act-name">
+            <view class="tag-block" style="background-color: {{colorTheme}};">集</view>{{info.activityName}}</view>
+        <view class="act-res">
+            <text class="act-res-font">本单预计获得<text class="strong-theme-font">{{info.starNum}}</text>"{{info.starName}}"</text>
+            <image class="star-custom-img" src="{{__oss__.s(mpxExt,jixingImg,0)}}" wx:if="{{jixingImg}}"></image>
+            <text class="star-res-icon iconfont i-xingxing-2" style="color: {{colorTheme}};" wx:else></text>
+            <text class="act-res-icon iconfont i-md-information-circle-outline"></text>
+        </view>
+    </view>
+    <view class="star-err-fonts" wx:if="{{zeroMsgFont}}">
+        <clamp-fonts oneLineRight closeText="" expandText="" fontColor="#FF8F0F" fonts="{{zeroMsgFont}}" rows="{{1}}"></clamp-fonts>
+    </view>
+    <view bindtap="abandonDiscount" class="star-abandon-discount" wx:if="{{!info.showStarAssembly}}">
+        <text class="font">放弃本单优惠，<block wx:if="{{info.moreStarNum>0}}">多获得<text class="strong-theme-font">{{info.moreStarNum}}</text>
+            </block>
+            <block wx:else>仅累计</block>"{{info.starName}}"</text>
+        <label class="switch-item-checkbox {{giveUpStar==1?'active iconfont i-xuanze_xuanzhong':''}}" style="color: {{colorTheme}}"></label>
+    </view>
+</view>
+<view class="star-confirm {{showStarNoChoose?'star-confirm-no-choose':''}} {{shakeStatue?'animated animate__tada':''}}" wx:else>
+    <view class="star-confirm-no-choose-font" style="color:{{colorTheme}};" wx:if="{{showStarNoChoose}}">不要忘记选择您的优惠哦</view>
+    <view class="switch-item" wx:if="{{info.shareActivity==2||starConfirmNoChoice&&joinOrderStar==1}}">
+        <view class="switch-item-left">
+            <view class="switch-item-top">
+                <text class="w-32rpx h-32rpx mr-12rpx text-_bl__h_fff_br_ text-22rpx lh-32rpx text-center border-rd-6rpx" style="background: {{colorTheme}};">集</text>
+                <text class="switch-item-top-font" wx:if="{{jixingText}}">{{jixingText}}</text>
+                <text class="switch-item-top-font" wx:else>当前订单可获得{{info.starNum}}{{info.starName}}</text>
+            </view>
+            <text class="switch-item-bottom-font" wx:if="{{info.shareActivity==2}}">{{info.isStarDiscountGoods==0?'优惠商品不可参与集'+info.starName||'点':'优惠商品可参与集'+info.starName||'点'}}</text>
+        </view>
+    </view>
+    <block wx:elif="{{info.shareActivity==1}}">
+        <view bindtap="handleSwitch" class="switch-item line-bot" data-value="0">
+            <view class="switch-item-left">
+                <view class="switch-item-top">
+                    <text class="w-32rpx h-32rpx mr-12rpx text-_bl__h_fff_br_ text-22rpx lh-32rpx text-center border-rd-6rpx" style="background: {{colorTheme}};">惠</text>
+                    <text class="switch-item-top-font">享受优惠，不集{{info.starName||'点'}}</text>
+                </view>
+            </view>
+            <label class="switch-item-checkbox {{joinOrderStar==0?'active iconfont i-xuanze_xuanzhong':''}}" style="color: {{colorTheme}}"></label>
+        </view>
+        <view bindtap="handleSwitch" class="switch-item" data-value="1">
+            <view class="switch-item-left">
+                <view class="switch-item-top">
+                    <text class="w-32rpx h-32rpx mr-12rpx text-_bl__h_fff_br_ text-22rpx lh-32rpx text-center border-rd-6rpx" style="background: {{colorTheme}};">集</text>
+                    <text class="switch-item-top-font">我要集{{info.starName||'点'}}，不享受优惠</text>
+                </view>
+                <text class="switch-item-bottom-font" wx:if="{{jixingText}}">{{jixingText}}</text>
+                <text class="switch-item-bottom-font" wx:elif="{{info.starNum>0}}">当前订单得{{info.starNum}}{{info.starName}}</text>
+            </view>
+            <label class="switch-item-checkbox {{joinOrderStar==1?'active iconfont i-xuanze_xuanzhong':''}}" style="color: {{colorTheme}}"></label>
+        </view>
+    </block>
+</view>
+<pop-up bindclose="closeStarDetail" position="bottom" show="{{showStarDetail}}">
+    <view catchtap="noop" class="star-detail">
+        <view class="header">{{info.activityName}}</view>
+        <view catchtap="closeStarDetail" class="close-btn iconfont i-close"></view>
+        <scroll-view scrollY class="body">
+            <view class="title">预计可得{{info.starName}}说明</view>
+            <view class="fonts" wx:if="{{info.ruleType==1}}">本单预计可得{{info.starNum}}“{{info.starName}}”，可获得“{{info.starName}}”的实付金额=¥{{info.starNum==0?0:info.actualPayAmount}}</view>
+            <view class="fonts" wx:elif="{{info.ruleType==2}}">本单预计可得{{info.starNum}}“{{info.starName}}”</view>
+            <view class="fonts" wx:elif="{{info.ruleType==3}}">本单预计可得{{info.starNum}}“{{info.starName}}”, 可获得“{{info.starName}}”的商品={{info.starNum==0?0:starGoodsCount}}件</view>
+            <view class="goods-wrap" wx:if="{{info.ruleType==3&&info.starNum>0}}">
+                <block wx:for="{{starGoods}}" wx:key="uniqueId">
+                    <view class="simple-goods" wx:if="{{item.simpleDisplay}}">
+                        <text class="strong-font">{{item.goodsName}}</text>
+                        <text class="normal-font"> x{{item.num}}</text>
+                    </view>
+                    <template is="goods-list-item" data="{{...item,colorTheme:colorTheme,pointName:pointName,currencySymbol:currencySymbol,mpxExt:mpxExt}}" wx:else></template>
+                </block>
+            </view>
+            <view class="title">活动规则</view>
+            <view class="fonts">{{info.activityContent}}</view>
+            <view class="fill-safety-zone"></view>
+        </scroll-view>
+    </view>
+</pop-up>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>

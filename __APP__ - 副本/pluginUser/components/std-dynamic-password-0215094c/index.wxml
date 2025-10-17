@@ -1,0 +1,14 @@
+<view class="{{'pb-24 flex flex-col items-center justify-center relative '+(isBaking?'mb-24':'pt-24 b-t-1px b-l-none b-r-none b-b-none b-_h_e1e1e1 b-dashed')+' '}}" wx:if="{{showComponent}}">
+    <view class="text-30 leading-42 font-400 c-_h_333">{{_i1}}</view>
+    <view class="text-48 leading-67 font-500 tracking-12 my-4">{{password}}</view>
+    <view class="flex items-center">
+        <text class="text-24 font-400 leading-34 c-_h_999 pr-10">{{_i2}}</text>
+        <view catchtap="openTip" class="i-wenhao text-24 font-400 leading-34 c-_h_999 relative">
+            <view class="absolute right-2 -bottom-20 b-10rpx b-solid b-transparent b-b-_h_000 b-b-op-80 z-1" wx:if="{{showTip}}"></view>
+        </view>
+    </view>
+    <view class="absolute top-_bl_calc_pl_100_p__a_20rpx_pr__br_ left-0 right-0 mx-auto -mt-24 w-580 bg-op-80 bg-_h_000 p-16 rounded-8 text-left text-24 font-400 c-_h_fff leading-34 z-1" wx:if="{{showTip}}">{{_i3}}</view>
+    <root-portal>
+        <view bindtap="closeTip" class="fixed left-0 right-0 bottom-0 top-0 z-10001" wx:if="{{showTip}}"></view>
+    </root-portal>
+</view>

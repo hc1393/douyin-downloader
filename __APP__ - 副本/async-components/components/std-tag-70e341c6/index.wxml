@@ -1,0 +1,5 @@
+<view class=" std-tag {{type==='default'?'std-tag--default':''}} {{type==='danger'?'std-tag--danger':''}} {{type==='primary'?'std-tag--primary':''}} {{type==='success'?'std-tag--success':''}} {{type==='warning'?'std-tag--warning':''}} {{size==='medium'?'std-tag--medium':''}} {{size==='large'?'std-tag--large':''}} {{mark?'std-tag--mark':''}} {{plain?'std-tag--plain':''}} {{round?'rd-999':''}} _70e341c6 " style="{{__stringify__.stringifyStyle( '',computed.rootStyle( {plain:plain,color:color,textColor:textColor} ) )}}">
+    <slot class=" _70e341c6 "></slot>
+</view>
+<wxs module="__stringify__" src="../../../wxs/stringify5cb088ac.wxs"/>
+<wxs module="computed" src="../../wxs/index70e2f4cc.wxs"/>

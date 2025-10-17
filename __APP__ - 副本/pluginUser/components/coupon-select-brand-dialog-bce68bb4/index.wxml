@@ -1,0 +1,17 @@
+<std-base-dialog id="__std_baseDialog">
+    <view catchtap="noop" catchtouchmove="noop" class="relative w-80vw flex flex-col">
+        <view class="h-fit rd-30 overflow-hidden">
+            <view class="h-100 bg-_bl__h_F7F7F7_br_ flex justify-center items-center px-36">
+                <text class="text-_bl__h_333_br_ text-36 text-center lh-48 line-clamp-3">{{mpx.i18n.t('stdUser.coupon.selectBrandTitle')}}</text>
+            </view>
+            <scroll-view scrollY class="max-h-640 bg-_bl__h_FFF_br_">
+                <view class="h-fit py-28 flex flex-col items-center gap-20">
+                    <view bindtap="handleJump" class="w-460 h-90 text-_bl__h_333_br_ text-32 text-center lh-90 bg-_bl__h_F8F8F8_br_ rd-45 truncate box-border" data-item="{{item}}" wx:for="{{applyBrandList}}" wx:key="index">{{item.sellerName}}</view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="w-full h-104 flex justify-center items-end">
+            <text catchtap="hide" class="i-close2 text-_bl__h_FFF_br_ _i_text-56 extend-click"></text>
+        </view>
+    </view>
+</std-base-dialog>

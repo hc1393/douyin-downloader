@@ -1,0 +1,3 @@
+<template name="qm-member-level">
+    <view catchtap="qmLevelTap" class="text-_bl__h_fff_br_" data-item="{{data}}" style="{{data&&data.miniStyle}};background-color: {{data.propsValue.bgColor?'':colorTheme}};overflow:hidden;">{{userAssets&&userAssets.levelInfo&&userAssets.levelInfo.cardName||'***'}}</view>
+</template>

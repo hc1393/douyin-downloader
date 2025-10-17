@@ -1,0 +1,46 @@
+<view wx:if="{{isShowPayCom}}">
+    <view catchtap="hideModel" class="{{'fixed top-0 right-0 bottom-0 left-0 z-1000 bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_6_pr__br_ '+(showMask?'animate-_bl_fade-in_br_ animate-fill-forwards animate-duration-0_d_3s animate-ease-_bl_ease-in-out_br_':'animate-_bl_fade-out_br_ animate-fill-forwards animate-duration-0_d_3s animate-ease-_bl_ease-in-out_br_')}}"></view>
+    <view class="{{'fixed right-0 bottom-0 left-0 z-1001 pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_ overflow-hidden bg-_bl__h_fff_br_ border-rd-_bl_30rpx_30rpx_0_0_br_ '+(showShade?'animate-_bl_shade-in_br_ animate-fill-forwards animate-duration-0_d_3s animate-ease-_bl_ease-in-out_br_':'animate-_bl_shade-out_br_ animate-fill-forwards animate-duration-0_d_3s animate-ease-_bl_ease-in-out_br_')}}" style="{{paddingBottom}}">
+        <view class="relative flex items-center justify-center box-border h-114rpx px-30rpx py-0 bg-_bl__h_f4f1f4_br_">
+            <view class="flex items-center justify-center text-_bl__h_323232_br_ font-bold text-36rpx">
+                <text>{{_i1}}</text>
+                <text bindtap="hideModel" class="absolute right-30rpx w-40rpx h-40rpx text-_bl__h_999_br_ after-absolute after-top--10px after-right--10px after-bottom--10px after-left--10px after-content-empty" style=" background: url('https://images.qmai.cn/s0/2025/05/09/25f4fc59cb773fc804.png') no-repeat center center; background-size: 40rpx 40rpx; "></text>
+            </view>
+        </view>
+        <view class="max-h-800rpx overflow-auto border-rd-10rpx">
+            <view catchtap="selectPayType" class="flex flex-col min-w-0 p-30rpx bg-_bl__h_fff_br_" data-paytypecheck="3">
+                <view class="flex items-center justify-between">
+                    <view class="flex justify-initial overflow-hidden text-_bl__h_333_br_ text-30rpx lh-50rpx text-ellipsis">
+                        <image class="shrink-0 w-50rpx h-50rpx mr-15rpx" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2018/11/07/b008e7ba74c826fb.png',0)}}"></image>
+                        <text>{{_i2}}</text>
+                    </view>
+                    <view class="truncate flex items-center justify-start">
+                        <radio-group class="scale-80">
+                            <radio checked="{{payTypeCheck==3}}" color="{{colorTheme}}" name="payWay"></radio>
+                        </radio-group>
+                    </view>
+                </view>
+            </view>
+            <view catchtap="selectPayType" class="flex flex-col min-w-0 p-30rpx bg-_bl__h_fff_br_" data-paytypecheck="4">
+                <view class="flex items-center justify-between">
+                    <view class="flex justify-initial overflow-hidden text-_bl__h_333_br_ text-30rpx lh-50rpx text-ellipsis">
+                        <image class="shrink-0 w-50rpx h-50rpx mr-15rpx" lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2022/07/12/zhaohangicon.png',0)}}"></image>
+                        <text>{{_i3}}</text>
+                    </view>
+                    <view class="truncate flex items-center justify-start">
+                        <radio-group class="scale-80">
+                            <radio checked="{{payTypeCheck==4}}" color="{{colorTheme}}" name="payWay"></radio>
+                        </radio-group>
+                    </view>
+                </view>
+            </view>
+            <view class="flex flex-col min-w-0 p-30rpx bg-_bl__h_fff_br_" wx:if="{{showVirtualRmb}}">
+                <virtual-rmb-selector bindchange="selectPayType" bindr="__refEmit" class="ref_virtualRmbRef_1" data-paytypecheck="7" data-r=".ref_virtualRmbRef_1"></virtual-rmb-selector>
+            </view>
+        </view>
+        <view bindtap="paySelected" class="box-border p-30rpx text-_bl__h_fff_br_ text-37rpx text-center">
+            <view class="w-_bl_100_p__br_ h-88rpx text-_bl__h_fff_br_ font-500 text-32rpx lh-88rpx bg-_bl__h_1aad19_br_ border-rd-44rpx" style="background-color: {{colorTheme}};" type="primary">{{_i4}}</view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

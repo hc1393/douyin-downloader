@@ -1,0 +1,52 @@
+<config-provider>
+    <block wx:if="{{isAuth}}">
+        <std-design-mp-loading wx:if="{{isLoading}}"></std-design-mp-loading>
+        <view class="flex flex-col h-screen bg-_bl__h_F5F5F5_br_" wx:else>
+            <tab bold bindchange="handleCouponCategoryChange" size="{{32}}" sliderHeight="6rpx" tabs="{{couponCategories}}" wx:if="{{couponCategories&&couponCategories.length}}"></tab>
+            <dropdown-menu bindchange="handleDropdownChange" options="{{dropdownOptions}}" wx:if="{{isShowDropdownMenu}}"></dropdown-menu>
+            <brand-tabs bindchange="handleBrandTabsChange" current="{{currentBrandTab}}" tabs="{{brandList}}" wx:if="{{isShowBrandTabs}}"></brand-tabs>
+            <coupon-subscribe id="__std_couponSubscribe" title="{{_i1}}" wx:if="{{isShowCouponSubscribe}}"></coupon-subscribe>
+            <view class="flex-1 overflow-y-auto">
+                <view class="min-h-full p-24 box-border">
+                    <coupon-exchange-bar wx:if="{{isShowExchangeCoupons&&exchangeCouponStyle===1}}"></coupon-exchange-bar>
+                    <advertise-coupon-list advertiseInfo="{{advertiseInfo}}"></advertise-coupon-list>
+                    <block wx:if="{{list&&list.length}}">
+                        <coupon-item activeBrandId="{{activeBrandId}}" bindblackUserToast="toBlackUserToast" bindexchangeGoods="toExchangeGoods" bindgiftFriend="toGift" bindopenVerifyDialog="toOpenVerifyDialog" bindrefreshList="getCouponList" bindselectBrand="toSelectBrand" blackUserInfo="{{blackUserInfo}}" couponsQuickVerification="{{couponsQuickVerification}}" data-item="{{item}}" info="{{item}}" showExpandBtn="{{true}}" wx:for="{{list}}" wx:key="index"></coupon-item>
+                    </block>
+                    <std-empty description="{{empty.desc}}" image="{{empty.img}}" mainStyle="padding-top: 280rpx;" wx:else></std-empty>
+                </view>
+            </view>
+            <view class="px-24 h-88 pb-safe bg-_bl__h_FFF_br_ flex justify-between items-center border-t border-t-solid border-_bl__h_F5F5F5_br_">
+                <block wx:if="{{isShowExchangeCoupons&&exchangeCouponStyle===2}}">
+                    <view bindtap="toExchange" class="flex-1 h-40 text-_bl__h_333_br_ text-28 lh-40 text-center box-border">{{_i2}}</view>
+                    <view class="w-1 h-36 bg-_bl__h_E1E1E1_br_"></view>
+                </block>
+                <view bindtap="toHistoryList" class="flex-1 h-40 text-_bl__h_333_br_ text-28 lh-40 text-center box-border">{{_i3}}</view>
+                <view class="w-1 h-36 bg-_bl__h_E1E1E1_br_"></view>
+                <block wx:if="{{isShowBatchGift}}">
+                    <view bindtap="toBatchGift" class="flex-1 h-40 text-_bl__h_333_br_ text-28 lh-40 text-center box-border">{{_i4}}</view>
+                    <view class="w-1 h-36 bg-_bl__h_E1E1E1_br_"></view>
+                </block>
+                <view bindtap="toGiftRecords" class="relative flex-1 h-40 text-center box-border" wx:if="{{isShowGiftRecords}}">
+                    <text class="text-_bl__h_333_br_ text-28 lh-40">{{_i5}}</text>
+                    <view class="absolute -top-42 left-1_s_2 -translate-x-1_s_2 w-fit h-32 box-border rd-full rd-bl-0 px-6 text-20 text-_bl__h_FFF_br_ flex items-center bg-_bl__h_F53F3F_br_ z-9 truncate" wx:if="{{giftingCouponCount}}">{{_i6}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <view class="flex flex-col items-center" wx:else>
+        <view class="pt-280 flex flex-col items-center">
+            <image lazyLoad src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/07/23/49f82e3c9dab3ffa.png',0)}}"></image>
+            <text>{{_i7}}</text>
+        </view>
+        <button bindtap="toLogin" class="button min-w-140 h-60 px-16 py-0 text-26 rd-full _i_text-_bl__h_FFF_br_ _i_bg-primary mt-30">{{_i8}}</button>
+    </view>
+    <coupon-verify-dialog id="__std_couponVerifyDialog"></coupon-verify-dialog>
+    <coupon-exchange-goods-dialog id="__std_couponExchangeGoodsDialog"></coupon-exchange-goods-dialog>
+    <coupon-select-brand-dialog id="__std_couponSelectBrandDialog"></coupon-select-brand-dialog>
+    <coupon-gift-prompt-dialog id="__std_couponGiftPromptDialog"></coupon-gift-prompt-dialog>
+    <std-authorization force bind:success="componentOnShow" id="__authorization"></std-authorization>
+    <std-pageview-task bindr="__refEmit" class="ref_pageTaskRef_1" data-r=".ref_pageTaskRef_1" pageType="{{stdPageType}}" wx:if="{{stdPageType}}"></std-pageview-task>
+    <std-toast id="showToast"></std-toast>
+</config-provider>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

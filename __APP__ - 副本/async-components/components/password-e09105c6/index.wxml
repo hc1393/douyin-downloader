@@ -1,0 +1,10 @@
+<view class="bottom-500 left-0 w-full">
+    <view>
+        <view class="{{'relative flex items-center box-border w-_bl_580rpx_br_ h-_bl_98rpx_br_ mx-auto overflow-hidden b-solid b-2rpx b-_h_d2d2d2 rounded-_bl_10rpx_br_ '+(payFocus?'_u_shadow-_bl_0_0_5px__h_ffd13a_br_ transition-shadow duration-300 ease-linear_u_':'')}}">
+            <view class="relative flex flex-1 items-center justify-center box-border h-full b-l-2rpx b-l-solid b-l-_h_d2d2d2 first-b-l-none" wx:for="{{6}}" wx:for-index="i" wx:key="item">
+                <text class="w-30 h-30 bg-_h_555 rd-30" wx:if="{{pwdVal.length>i}}"></text>
+            </view>
+            <input adjustPosition="{{false}}" bindblur="blurInput" bindfocus="focusInput" bindinput="inputPwd" class="absolute top-0 left--420 z-10 w-1000 h-98 overflow-hidden c-_h_fff op-0" focus="{{payFocus}}" maxlength="6" type="number" value="{{pwdVal}}"></input>
+        </view>
+    </view>
+</view>

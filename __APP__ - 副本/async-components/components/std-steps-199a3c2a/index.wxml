@@ -1,0 +1,23 @@
+<view class="std-steps {{direction==='horizontal'?'std-steps--horizontal':''}} {{direction==='vertical'?'std-steps--vertical':''}}">
+    <view class="std-step__wrapper">
+        <view bindtap="onClick" class="std-step {{direction==='horizontal'?'std-step--horizontal':''}} {{direction==='vertical'?'std-step--vertical':''}} {{status(index,active)==='finish'?'std-step--finish':''}} {{status(index,active)==='process'?'std-step--process':''}} {{status(index,active)==='inactive'?'std-step--inactive':''}} std-hairline" data-index="{{index}}" wx:for="{{steps}}" wx:key="index">
+            <view class="std-step__title">
+                <view class="std-step__title-top">
+                    <text class="std-step__status" style="{{index===active?'color: '+activeColor:''}}" wx:if="{{item.title}}">{{item.title}}</text>
+                    <text class="std-step__time" style="{{index===active?'color: '+activeColor:''}}">{{item.text}}</text>
+                    <view bind:tap="onClickLink" class="std-step__title-link" wx:if="{{index===0&&linkText}}">
+                        <view class="std-step__title-link__text" style="color: {{activeColor}}">{{linkText}}</view>
+                        <view class="i-arrow-r1" style="color: {{activeColor}}"></view>
+                    </view>
+                </view>
+                <view class="desc-class">{{item.desc}}</view>
+            </view>
+            <view class="std-step__circle-container">
+                <view class="std-step__circle" style="background-color: {{index<active?activeColor:'#c9c9c9'}}" wx:if="{{!item.title}}"></view>
+                <view class="std-step__icon" style="background-color: {{index===active?activeColor:plain?'#ffffff':inactiveColor}};border-color: {{plain?activeColor:inactiveColor}}" wx:else></view>
+            </view>
+            <view class="std-step__line" style="{{'background-color: '+(plain?activeColor:index<active?activeColor:inactiveColor)}}" wx:if="{{index!==steps.length-1}}"></view>
+        </view>
+    </view>
+</view>
+<wxs module="status" src="../../wxs/index6aba9a86.wxs"/>

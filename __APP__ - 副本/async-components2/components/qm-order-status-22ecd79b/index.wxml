@@ -1,0 +1,73 @@
+<view style="{{style}}">
+    <view bindtap="goOrderDetail" class="bg-_bl__h_fff_br_ px-32rpx py-30rpx border-rd-20rpx" wx:if="{{orderComponentData&&orderComponentData.orderNo}}">
+        <view class="text-24rpx text-_bl__h_666_br_ flex justify-between lh-none">
+            <view style="display: flex;color:{{colorTheme}}" wx:if="{{orderComponentData.cupTotal}}">
+                <block wx:if="{{orderComponentData.cupTotal>0}}">前面还有<view style="font-weight: bold">
+                        <text wx:if="{{showProcessingOrderNum}}">{{orderComponentData.cupNum}}单/</text>{{orderComponentData.cupTotal}}{{orderComponentData.countUnit}}</view>
+                </block>
+                <block wx:else>当单</block>制作中</view>
+            <view style="color: {{colorTheme}}" wx:else>{{orderComponentData.stateText}}</view>
+            <view wx:if="{{orderType!=3&&orderStatus!=10&&orderStatus!=40}}">预计等待</view>
+        </view>
+        <block wx:if="{{orderStatus==10}}">
+            <view class="text-28rpx font-bold lh-none mt-20rpx">请在<text style="color: {{colorTheme}}">{{orderComponentData.zdCancelTime}}</text>内完成支付，以免订单被自动取消</view>
+            <view class="flex justify-end mt-26rpx">
+                <view class="w-136rpx h-56rpx lh-56rpx text-center border-rd-28rpx text-_bl__h_fff_br_ text-24rpx" style="background-color: {{colorTheme}}">立即支付</view>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="text-28rpx flex justify-between items-center font-bold lh-none mt-16rpx" wx:if="{{orderType!=3}}">
+                <view>取单号：<block wx:if="{{orderComponentData.singleNo}}">{{orderComponentData.singleNo}}</block>
+                    <image class="w-68rpx h-72rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/12/28/131c510f050531fa.gif',0)}}" wx:else></image>
+                </view>
+                <view style="color: {{colorTheme}};font-weight:500" wx:if="{{orderStatus==40}}">请取餐</view>
+                <view wx:if="{{orderStatus!=40&&orderComponentData.zdCancelTime}}">{{orderComponentData.zdCancelTime}}</view>
+            </view>
+            <block wx:if="{{orderType==3}}">
+                <view class="text-24rpx font-normal" style="color: {{colorTheme}}" wx:if="{{orderStatus==80&&orderComponentData.isSplitDelivery&&orderComponentData.isSplitDelivery==1}}">本单商品已分开配送</view>
+                <view class="text-28rpx flex justify-between items-center font-bold lh-none mt-16rpx" wx:else>
+                    <view style="display: flex">
+                        <view wx:if="{{orderComponentData.copyWrit}}">{{orderComponentData.copyWrit}}，</view>
+                        <view style="font-weight: 500" wx:if="{{orderComponentData.zdCancelTime}}">预计等待</view>
+                        <view style="color: {{colorTheme}};font-weight:500;padding-left:8rpx" wx:if="{{orderComponentData.zdCancelTime}}">{{orderComponentData.zdCancelTime}}</view>
+                    </view>
+                </view>
+            </block>
+            <view class="w-_bl_100_p__br_ px-28rpx py-0 mt-42rpx box-border" wx:if="{{orderType!=3&&orderComponentData.isShowProgress}}">
+                <view class="flex items-center justify-around">
+                    <view class="w-50rpx h-46rpx">
+                        <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,waitOrdersImg,0)}}" style="opacity: {{orderStatus==20?1:0.3}};"></image>
+                    </view>
+                    <view class="w-172rpx h-1px bg-_bl__h_ddd_br_ mx-20rpx my-0"></view>
+                    <view class="w-50rpx h-46rpx">
+                        <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,makeOrdersImg,0)}}" style="opacity: {{orderStatus==30?1:0.3}};"></image>
+                    </view>
+                    <view class="w-172rpx h-1px bg-_bl__h_ddd_br_ mx-20rpx my-0"></view>
+                    <view class="w-50rpx h-46rpx">
+                        <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,finishOrdersImg,0)}}" style="opacity: {{orderStatus==40?1:0.3}};"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="w-_bl_100_p__br_ px-22rpx py-0 mt-42rpx box-border" wx:if="{{orderType==3&&orderComponentData.isShowProgress}}">
+                <view class="flex items-center justify-around">
+                    <view class="w-50rpx h-46rpx">
+                        <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,takeoutWaitOrdersImg,0)}}" style="opacity: {{orderStatus==30?1:0.3}};"></image>
+                    </view>
+                    <view class="w-100rpx h-1px bg-_bl__h_ddd_br_ mx-16rpx my-0"></view>
+                    <view class="w-50rpx h-46rpx">
+                        <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,takeoutMakeOrdersImg,0)}}" style="opacity: {{orderStatus==70?1:0.3}};"></image>
+                    </view>
+                    <view class="w-100rpx h-1px bg-_bl__h_ddd_br_ mx-16rpx my-0"></view>
+                    <view class="w-50rpx h-46rpx">
+                        <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,deliveryOrdersImg,0)}}" style="opacity: {{orderStatus==80?1:0.3}};"></image>
+                    </view>
+                    <view class="w-100rpx h-1px bg-_bl__h_ddd_br_ mx-16rpx my-0"></view>
+                    <view class="w-50rpx h-46rpx">
+                        <image class="w-_bl_100_p__br_ h-_bl_100_p__br_" lazyLoad="true" src="{{__oss__.s(mpxExt,takeoutFinishOrdersImg,0)}}" style="opacity: {{orderStatus==90?1:0.3}};"></image>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

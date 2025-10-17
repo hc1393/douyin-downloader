@@ -1,0 +1,26 @@
+<block wx:if="{{list&&list.length&&isShowTabbar}}">
+    <view class="h-94rpx pb-_bl_constant_pl_safe-area-inset-bottom_pr__br__i_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br__i_"></view>
+    <view class="{{'fixed left-0 right-0 bg-white flex content-start z-300 box-content pb-_bl_constant_pl_safe-area-inset-bottom_pr__br__i_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br__i_ lh-_bl_1_d_2_br_ overflow-hidden whitespace-nowrap pointer-events-auto '+(navTemplate==3?'border-rd-60rpx mx-24rpx my-0 h-120rpx pb-0_i_ bottom-_bl_constant_pl_safe-area-inset-bottom_pr__br_ bottom-_bl_env_pl_safe-area-inset-bottom_pr__br_':'bottom-0 h-96rpx')+' '+(!isIhponX&&navTemplate==3?'bottom-10rpx_i_':'')}}" style="background-color: {{navTemplate==4||navTemplate==5||navTemplate==3?'transparent':backgroundColor}}; {{navTemplate==2||navTemplate==4||navTemplate==5?'overflow: inherit':''}}; {{isShowGrayFilter?'filter: grayscale(100%)':''}}">
+        <image class="absolute top--39rpx left-0 right-0 w-_bl_100_p__br_ h-85rpx -z-1" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2021/10/27/shadow_1.png',0)}}" wx:if="{{navTemplate==2}}"></image>
+        <view class="bg-_bl__h_d2d2d2_br_ absolute left-0 top-0 w-_bl_100_p__br_ h-2rpx scale-y-50 origin-center-top lh-_bl_1_d_2_br_ overflow-hidden whitespace-nowrap pointer-events-auto" style="background-color: {{borderStyle}}" wx:if="{{navTemplate==1}}"></view>
+        <view class="flex content-start fixed w-_bl_100_p__br_ bottom-0 z-1" wx:if="{{navTemplate==4||navTemplate==5}}">
+            <view class="min-h-96rpx flex-1 border-rd-tr-46rpx pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_ mr--2rpx" style="background-color: {{backgroundColor||'white'}};{{navTemplate==5?'border-top-left-radius: 26rpx':''}}"></view>
+            <view class="min-h-96rpx w-120rpx relative pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_ overflow-hidden" style="background: radial-gradient(circle at 50% 0rpx, transparent 68rpx, {{backgroundColor||'white'}} 0) top left 100% no-repeat"></view>
+            <view class="min-h-96rpx flex-1 border-rd-tl-46rpx pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_ ml--2rpx" style="background-color: {{backgroundColor||'white'}};{{navTemplate==5?'border-top-right-radius: 26rpx':''}}"></view>
+        </view>
+        <view bindtap="switchTab" class="{{'flex-1 text-center flex justify-center items-center flex-col bg-_bl__h_ffffff_br_ z-1 lh-_bl_1_d_2_br_ overflow-hidden whitespace-nowrap pointer-events-auto '+(navTemplate==3?'h-120rpx':'')}}" data-content="{{item.text}}" data-element-name="{{item.text}}" data-element-type="view" data-name="{{item.pagePath}}" data-operation-type="点击底部导航" data-path="{{item.pagePath}}" data-screen-type="{{__oc__.g( currentTabbar,['text'] )}}" id="tabBar" style="background-color: {{navTemplate==1||navTemplate==4||navTemplate==5?'transparent':backgroundColor}};{{item.isMain||item.isConcave?'overflow: inherit':''}}" wx:for="{{list}}" wx:key="index">
+            <view class="w-116rpx h-116rpx border-rd-_bl_50_p__br_ bg-_bl__h_ffffff_br_ mt--30rpx flex items-center justify-center overflow-hidden" wx:if="{{item.isMain}}">
+                <std-image lazyLoad customStyle="display: block;line-height: 1.2;overflow: hidden;pointer-events: auto;" height="110" src="{{path===item.pagePath?item.selectedIconPath:item.iconPath}}" width="110"></std-image>
+            </view>
+            <view class="mt--74rpx flex items-center justify-center" wx:elif="{{item.isConcave}}">
+                <image class="w-104rpx h-104rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,path===item.pagePath?item.selectedIconPath:item.iconPath,0)}}"></image>
+            </view>
+            <block wx:else>
+                <std-image lazyLoad customStyle="display: block;line-height: 1.2;pointer-events: auto;" height="54" src="{{path===item.pagePath?item.selectedIconPath:item.iconPath}}" width="54"></std-image>
+                <view class="{{'lh-_bl_1_d_2_br_ whitespace-nowrap pointer-events-auto overflow-visible block w-_bl_100_p__br_ '+(modeLarge=='large'?'text-28rpx':'text-20rpx')}}" style="color: {{path===item.pagePath?selectedColor:color}}">{{item.text}}</view>
+            </block>
+        </view>
+    </view>
+</block>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>
+<wxs module="__oc__" src="../../wxs/oc71f5331b.wxs"/>

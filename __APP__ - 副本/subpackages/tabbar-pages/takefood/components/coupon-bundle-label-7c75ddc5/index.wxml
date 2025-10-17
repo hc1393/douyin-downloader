@@ -1,0 +1,15 @@
+<view class="relative flex items-center w-fit" style="{{customStyle}};" wx:if="{{newCouponPackPrice!==null}}">
+    <view class="flex h-30rpx mr-4rpx border-rd-6rpx bg-_bl__h_fc4930_br_" style="background-color:{{colorTheme}}">
+        <view class="flex items-center box-border h-_bl_100_p__br_ pl-6rpx pr-10rpx py-0 text-18rpx font-500 lh-none bg-_bl__h_fff_br_ border-1px border-solid border-r-none border-rd-_bl_6rpx_0_12rpx_6rpx_br_ border-_bl__h_fc4930_br_ text-_bl__h_fc4930_br_" style="border-color:{{colorTheme}};color:{{colorTheme}}">
+            <text class="flex items-baseline mr-4">{{currencySymbol}}<text class="text-26rpx">{{newCouponPackPrice}}</text>
+            </text>
+            <text class="font-normal" wx:if="{{isShowStart}}">起</text>
+        </view>
+        <view class="relative box-border w-8rpx h-_bl_100_p__br_ bg-_bl__h_fff_br_ border-t-1px border-t-solid border-r-none border-b-none border-l-none border-t-_bl__h_fc4930_br_" style="border-top-color:{{colorTheme}}">
+            <view class="absolute bottom-0 left-0 w-10rpx h-_bl_100_p__br_ bg-_bl__h_fc4930_br_ border-rd-_bl_8rpx_0_0_br_" style="background-color:{{colorTheme}}"></view>
+        </view>
+        <view class="flex items-center justify-center h-_bl_100_p__br_ pt-0 pb-0 pl-4rpx pr-6rpx border-rd-6rpx">
+            <text class="text-_bl__h_fff_br_ text-20rpx lh-none">神券价</text>
+        </view>
+    </view>
+</view>

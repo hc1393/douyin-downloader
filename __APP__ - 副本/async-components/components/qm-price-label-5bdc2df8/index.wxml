@@ -1,0 +1,36 @@
+<view class="flex items-center justify-center whitespace-nowrap h-30rpx border-solid border-1px border-rd-6rpx text-18rpx overflow-hidden box-border" style="border-color:{{theme}}; {{customStyle}}" wx:if="{{!newCustomStyle||!isCanCustomConfig}}">
+    <text class="lh-none box-border px-4rpx py-0 max-w-116rpx flex items-center justify-center h-36rpx" style="color: {{theme}};">{{currencySymbol+price}}</text>
+    <text class="flex items-center justify-center h-_bl_100_p__br_ lh-10rpx px-8rpx py-0 text-_bl__h_fff_br_ text-18rpx w-_bl_100_p__br_" style="background-color: {{theme}};">{{label}}</text>
+</view>
+<view class="text-18rpx flex items-center h-36rpx" wx:else>
+    <block wx:if="{{newCustomStyle.backGroundType==1}}">
+        <view class="lh-none box-border px-4rpx py-0 max-w-116rpx flex items-center justify-center h-36rpx bg-no-repeat bg-_bl_length_c_100_p__100_p__br_ bg-center-center" style="background-image: url({{newCustomStyle.backGroundStr}});color:{{newCustomStyle.txtColor}}">
+            <view class="truncate">
+                <text wx:if="{{depositPriceGoodsLabel}}">{{depositPriceGoodsLabel}}</text>
+                <text wx:elif="{{newCustomStyle.labelsType==1&&newCustomStyle.configGoodsLabels}}">{{newCustomStyle.configGoodsLabels}}</text>
+                <text wx:else>{{label}}</text>
+            </view>
+        </view>
+        <view class="lh-none box-border px-4rpx py-0 max-w-130rpx flex items-center justify-center h-36rpx bg-no-repeat bg-_bl_length_c_100_p__100_p__br_ bg-center-center" style="background-image: url({{newCustomStyle.rightBackGroundStr}});color:{{newCustomStyle.rightTxtColor}}">
+            <view class="flex items-end">
+                <text class="text-24rpx lh-none font-600">{{currencySymbol}}</text>
+                <text class="text-30rpx lh-none font-600">{{price}}</text>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="lh-none box-border px-4rpx py-0 max-w-116rpx flex items-center justify-center h-36rpx" style="background-color: {{newCustomStyle.backGroundStr}};color:{{newCustomStyle.txtColor}};border-radius: 6rpx 0 0 6rpx;">
+            <view class="truncate">
+                <text wx:if="{{depositPriceGoodsLabel}}">{{depositPriceGoodsLabel}}</text>
+                <text wx:elif="{{newCustomStyle.labelsType==1&&newCustomStyle.configGoodsLabels}}">{{newCustomStyle.configGoodsLabels}}</text>
+                <text wx:else>{{label}}</text>
+            </view>
+        </view>
+        <view class="lh-none box-border px-4rpx py-0 max-w-130rpx flex items-center justify-center h-36rpx" style="background-color: {{newCustomStyle.rightBackGroundStr}};color:{{newCustomStyle.rightTxtColor}};border-radius: 0 6rpx 6rpx 0;">
+            <view class="flex items-end">
+                <view class="text-24rpx lh-none font-600">{{currencySymbol}}</view>
+                <view class="text-30rpx lh-none font-600">{{price}}</view>
+            </view>
+        </view>
+    </block>
+</view>

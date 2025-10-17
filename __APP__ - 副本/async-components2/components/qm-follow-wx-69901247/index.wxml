@@ -1,0 +1,7 @@
+<view bindtap="closeFollowWxBtn" class="fixed left-0 right-0" style="{{info?info.miniStyle:''}}{{info.isFixed?'':'position:relative;'}}" wx:if="{{!closeFollowWx}}">
+    <view class="block w-48rpx h-48rpx bg-center-center bg-_bl_length_c_28rpx_28rpx_br_ bg-no-repeat z-9999 fixed right-0" style="{{info.isFixed?'':'position:absolute;'}}" wx:if="{{followWxStatus===0}}">
+        <image class="w-40rpx h-40rpx m-4rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2018/07/27/1916647aad4bbe8a.png',0)}}"></image>
+    </view>
+    <official-account binderror="binderror" bindload="bindload"></official-account>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

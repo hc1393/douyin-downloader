@@ -1,0 +1,22 @@
+{
+  "navigationStyle": "default",
+  "backgroundColor": "#f5f5f5",
+  "enablePullDownRefresh": false,
+  "componentPlaceholder": {
+    "std-coupon-gift-list": "view",
+    "cell": "view",
+    "half-bowl": "view",
+    "love-dining": "view",
+    "love-donate": "view",
+    "material-cell": "view",
+    "merc-list": "view",
+    "plugin-demo": "view",
+    "pullNewList": "view",
+    "regift": "view",
+    "send-coupon": "view",
+    "studentVerify": "view"
+  },
+  "navigationBarTitleText": "赠送记录",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black"
+}

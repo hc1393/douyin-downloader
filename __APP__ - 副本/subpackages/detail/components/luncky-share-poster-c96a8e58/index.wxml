@@ -1,0 +1,40 @@
+<std-popup catchtouchmove="noop" customStyle="background-color:transparent;" show="{{show}}" zIndex="9999">
+    <view class="relative w-600rpx mt-50">
+        <view class="text-24rpx color-hex-cccccc leading-24rpx h-50rpx w-full text-center" wx:if="{{swiperImgList.length>1}}">左右滑动可切换你喜欢的图片</view>
+        <view class="luncky-banner-wrapper" wx:if="{{swiperImgList.length}}">
+            <view class="absolute t-500rpx l-0rpx w-600rpx h-680rpx">
+                <image class="absolute w-full h-full t-0rpx l-0rpx opacity-0 transition-all duration-1000 rounded-t-20 {{currentIndex==index?'opacity-100':''}}" mode="aspectFill" src="{{__oss__.s(mpxExt,item,0)}}" wx:for="{{underImgList}}" wx:key="index"></image>
+            </view>
+            <swiper autoplay circular bindchange="swiperChange" class="relative w-600rpx h-680rpx" current="{{currentIndex}}" style="height: 680rpx">
+                <swiper-item class="swiper-item" wx:for="{{swiperImgList}}" wx:key="index">
+                    <image class="w-full h-full rounded-t-20" mode="aspectFill" src="{{__oss__.s(mpxExt,item,0)}}"></image>
+                </swiper-item>
+            </swiper>
+            <view class="text-54 font-500 absolute top-334 w-full text-center tracking-4 pl-4 box-border" style="color:{{textColorList[currentIndex]}}">「{{lunckyText}}」</view>
+            <view class="absolute w-full flex items-center justify-center bottom-166rpx l-0rpx" wx:if="{{swiperImgList.length>1}}">
+                <view class="w-12rpx h-12rpx rounded-12rpx ml-8rpx mr-8rpx {{currentIndex===index?'w-32rpx':''}}" style="background-color: {{currentIndex===index?'#ffffff':tools.hexToRgba('#ffffff',0.3)}};" wx:for="{{swiperImgList}}" wx:key="index"></view>
+            </view>
+        </view>
+        <view class="w-600rpx h-150rpx">
+            <image class="w-full h-full rounded-b-20rpx" mode="aspectFill" src="{{__oss__.s(mpxExt,lunckyBottomImg,0)}}"></image>
+        </view>
+    </view>
+    <view class="w-600rpx mt-120 flex items-center justify-between">
+        <view bindtap="closepopShow" class="flex flex-1 flex-col items-center justify-center">
+            <view class="luncky-share-circle flex items-center justify-center w-112rpx h-112rpx rounded-full" style="background-color: {{tools.hexToRgba('#ffffff',0.25)}};">
+                <text class="i-close text-hex-ffffff text-60"></text>
+            </view>
+            <view class="w-126rpx leading-28rpx text-hex-ffffff text-24rpx mt-20rpx text-center">取消</view>
+        </view>
+        <view bindtap="createPoster" class="flex flex-1 flex-col items-center justify-center">
+            <view class="luncky-share-circle flex items-center justify-center w-112rpx h-112rpx rounded-full" style="background-color: {{tools.hexToRgba('#ffffff',0.25)}};">
+                <text class="i-haibao1 text-hex-ffffff text-50"></text>
+            </view>
+            <view class="w-126rpx leading-28rpx text-hex-ffffff text-24rpx mt-20rpx text-center">生成海报</view>
+        </view>
+    </view>
+    <zm-loading wx:if="{{isLoading}}"></zm-loading>
+    <canvas id="posterCanvas" style="width: 300px; height: 415px; z-index: 1; position: absolute; top: -1000px; left: -1000px" type="2d"></canvas>
+</std-popup>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

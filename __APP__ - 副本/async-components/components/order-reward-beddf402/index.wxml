@@ -1,0 +1,93 @@
+<view class="mt-20 overflow-hidden {{!done&&discountAccountTime?'rd-t-20 rd-b-10':'rd-20'}}" wx:if="{{display}}">
+    <view class="w-full bg-_bl__h_FFF_br_" wx:if="{{comingBenefitInfoShow}}">
+        <view class="w-full text-26 rd-t-20 rd-b-0 py-10 px-24 box-border" style="background: {{'#FFFFFF linear-gradient(90deg, '+tools.hexToRgba('#ffffff','0')+' 0%,'+tools.hexToRgba(colorTheme,'0.12')+' 100%);'}};">
+            <view class="flex lh-50 justify-between my-10 mx-0 text-_bl__h_333_br_" wx:if="{{starComingBenefitInfo}}">
+                <view class="max-w-480 whitespace-nowrap text-ellipsis overflow-hidden">{{starComingBenefitInfo.benefitTitle}}<text style="color: {{colorTheme}};">{{starComingBenefitInfo.comingRewardName}}</text>
+                    <text wx:if="{{starComingBenefitInfo.couponTemplatesInfo&&starComingBenefitInfo.couponTemplatesInfo.length>1}}">{{_i1+'\n            '}}</text>
+                </view>
+                <view>
+                    <block wx:if="{{starComingBenefitInfo.benefitStarNum>5}}">
+                        <text class="text-30 font-bold text-primary">{{starComingBenefitInfo.currentStarNum}}</text>/{{starComingBenefitInfo.benefitStarNum}}</block>
+                    <view class="flex items-center" wx:else>
+                        <view class="w-20 h-20 m-6 border-1 border-solid rd-full" style="border-color: {{tools.hexToRgba(colorTheme,'0.3')}};background: {{index<starComingBenefitInfo.currentStarNum?colorTheme:'#ffffff'}}" wx:for="{{starComingBenefitInfo.benefitStarNum}}" wx:key="index"></view>
+                    </view>
+                </view>
+            </view>
+            <view class="w-full h-fit rd-10 overflow-hidden" wx:if="{{pointComingBenefitInfo}}">
+                <view class="h-60 flex justify-between items-center">
+                    <view class="w-fit h-fit">
+                        <text class="text-24 text-_bl__h_333_br_">{{pointComingBenefitInfo.nearestGoodsDesc}}</text>
+                        <text class="ml-4 text-24" style="color: {{colorTheme}}">{{pointComingBenefitInfo.nearlyGoodsName}}
+              </text>
+                    </view>
+                    <view bindtap="toExchange" class="w-130 h-56 text-28 text-_bl__h_FFF_br_ flex justify-center items-center rd-28" style="background: {{colorTheme}}">{{_i2}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <block wx:else>
+        <view class="h-110 bg-_bl__h_FFF_br_ text-28 rd-t-20 rd-b-0 flex justify-center items-center" wx:if="{{itemNum===1}}">
+            <view class="flex-1 h-76 flex justify-center items-center" wx:if="{{exp}}">
+                <view class="iconfont i-jingyan text-28" style="color: {{colorTheme}};"></view>
+                <view class="ml-10">{{_i3}}</view>
+                <view class="font-bold ml-20" style="color: {{colorTheme}};">+{{exp}}</view>
+            </view>
+            <view class="flex-1 h-76 flex justify-center items-center" wx:if="{{integral}}">
+                <view class="iconfont i-bonus-line text-28" style="color: {{colorTheme}};"></view>
+                <view class="ml-10">{{_i4}}</view>
+                <view class="font-bold ml-20" style="color: {{colorTheme}};">+{{integral}}</view>
+            </view>
+            <view class="flex-1 h-76 flex justify-center items-center" wx:if="{{point}}">
+                <view class="iconfont i-xingxing-2 text-28" style="color: {{colorTheme}};"></view>
+                <view class="ml-10">{{_i5}}</view>
+                <view class="font-bold ml-20" style="color: {{colorTheme}};">+{{point}}</view>
+            </view>
+        </view>
+        <view class="h-110 bg-_bl__h_FFF_br_ text-28 rd-t-20 rd-b-0 flex justify-center items-center" wx:elif="{{itemNum===2}}">
+            <view class="flex-1 flex justify-center items-center flex justify-center items-center" wx:if="{{exp}}">
+                <view class="iconfont i-jingyan text-28" style="color: {{colorTheme}};"></view>
+                <view class="ml-10">{{_i6}}</view>
+                <view class="font-bold ml-20" style="color: {{colorTheme}};">+{{exp}}</view>
+            </view>
+            <view class="h-76 w-1 bg-_bl__h_EEE_br_" wx:if="{{exp}}"></view>
+            <view class="flex-1 flex justify-center items-center flex justify-center items-center" wx:if="{{integral}}">
+                <view class="iconfont i-bonus-line text-28" style="color: {{colorTheme}};"></view>
+                <view class="ml-10">{{_i7}}</view>
+                <view class="font-bold ml-20" style="color: {{colorTheme}};">+{{integral}}</view>
+            </view>
+            <view class="h-76 w-1 bg-_bl__h_EEE_br_" wx:if="{{!exp}}"></view>
+            <view class="flex-1 flex justify-center items-center flex justify-center items-center" wx:if="{{point}}">
+                <view class="iconfont i-xingxing-2 text-28" style="color: {{colorTheme}};"></view>
+                <view class="ml-10">{{_i8}}</view>
+                <view class="font-bold ml-20" style="color: {{colorTheme}};">+{{point}}</view>
+            </view>
+        </view>
+        <view class="h-110 bg-_bl__h_FFF_br_ text-28 rd-t-20 rd-b-0 flex justify-center items-center" wx:else>
+            <view class="flex-1 flex-col flex justify-center items-center" wx:if="{{exp}}">
+                <view class="flex justify-center items-center">
+                    <view class="iconfont i-jingyan text-28" style="color: {{colorTheme}};"></view>
+                    <view class="ml-10">{{_i9}}</view>
+                </view>
+                <view class="font-bold ml-10 ld-40" style="color: {{colorTheme}};">+{{exp}}</view>
+            </view>
+            <view class="h-76 w-1 bg-_bl__h_EEE_br_"></view>
+            <view class="flex-1 flex-col flex justify-center items-center" wx:if="{{integral}}">
+                <view class="flex justify-center items-center">
+                    <view class="iconfont i-bonus-line text-28" style="color: {{colorTheme}};"></view>
+                    <view class="ml-10">{{_i10}}</view>
+                </view>
+                <view class="font-bold ml-10 ld-40" style="color: {{colorTheme}};">+{{integral}}</view>
+            </view>
+            <view class="h-76 w-1 bg-_bl__h_EEE_br_"></view>
+            <view class="flex-1 flex-col flex justify-center items-center" wx:if="{{point}}">
+                <view class="flex justify-center items-center">
+                    <view class="iconfont i-xingxing-2 text-28" style="color: {{colorTheme}};"></view>
+                    <view class="ml-10">{{_i11}}</view>
+                </view>
+                <view class="font-bold ml-10 ld-40" style="color: {{colorTheme}};">+{{point}}</view>
+            </view>
+        </view>
+    </block>
+    <view class="w-full h-56 pl-28 bg-_bl__h_EDEDED_br_ flex items-center text-24 text-_bl__h_999_br_ box-border" wx:if="{{!done&&discountAccountTime}}">{{_i12}}</view>
+</view>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

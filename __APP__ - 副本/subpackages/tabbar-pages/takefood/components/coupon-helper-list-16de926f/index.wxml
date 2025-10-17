@@ -1,0 +1,23 @@
+<view class="text-left px-0 py-1rpx">
+    <view class="w-_bl_100_p__br_" wx:if="{{advertGoodsCouponInfo.length}}">
+        <swiper autoplay circular class="h-374rpx text-center">
+            <swiper-item wx:for="{{advertGoodsCouponInfo}}" wx:key="index">
+                <image bindtap="orderAdvertImgBindTap" class="w-_bl_100_p__br_ h-_bl_100_p__br_" data-item="{{item}}" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,item.landingPageImg,0)}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="w-_bl_100_p__br_ box-border pl-24rpx pr-24rpx pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_">
+        <view class="text-24rpx text-_bl__h_666666_br_ text-center mx-0 my-16rpx" wx:if="{{(!isQmComputingEngine||isOtherCoupons)&&haveCoupons}}">每单仅可使用一张</view>
+        <block wx:if="{{availableItems.length}}">
+            <view class="text-30rpx text-_bl__h_333333_br_ mx-0 mt-24rpx mb-16rpx">可用券（{{availableItems.length}}）</view>
+            <goods-coupon-item binduse="useCoupon" list="{{availableItems}}" otherCouponIdList="{{otherCouponIdList}}" selectedCouponIdList="{{selectedCouponIdList}}" storeError="{{storeError}}"></goods-coupon-item>
+        </block>
+        <block wx:if="{{unavailableItems.length}}">
+            <view class="text-30rpx text-_bl__h_333333_br_ mx-0 mt-24rpx mb-16rpx">不可用券（{{unavailableItems.length}}张）</view>
+            <goods-coupon-item disabled list="{{unavailableItems}}" storeError="{{storeError}}"></goods-coupon-item>
+        </block>
+        <empty-image src="https://images.qmai.cn/s16/images/2020/07/23/49f82e3c9dab3ffa.png" text="{{_i1}}" wx:if="{{!haveCoupons}}"></empty-image>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

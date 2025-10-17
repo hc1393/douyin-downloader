@@ -1,0 +1,28 @@
+<view class="fixed top-0 left-0 z-10002 w-_bl_100_p__br_ h-_bl_100_p__br_ overflow-hidden text-_bl__h_fff_br_ bg-_bl_rgb_pl_0_2c_0_2c_0_pr__br_ op-50" wx:if="{{show}}"></view>
+<view class="fixed top-150rpx right-0 left-0 z-10003 box-border w-640rpx h-660rpx m-auto pt-40rpx pb-30rpx pl-31rpx pr-30rpx bg-_bl_rgb_pl_255_2c_255_2c_255_pr__br_ border-rd-14rpx" style="bottom: {{true}}px" wx:if="{{show}}">
+    <view class="password-content">
+        <view catchtap="closeDialog" class="relative text-center">
+            <view class="relative top-0 left-0 w-26rpx h-26rpx overflow-hidden">
+                <view class="absolute w-1px h-26rpx bg-_bl_rgb_pl_191_2c_191_2c_191_pr__br_ rotate--45"></view>
+                <view class="absolute w-1px h-26rpx bg-_bl_rgb_pl_191_2c_191_2c_191_pr__br_ rotate-45"></view>
+            </view>
+            <view class="absolute top-0 right-0 left-0 text-_bl_rgb_pl_0_2c_0_2c_0_pr__br_ font-500 text-34rpx lh-32rpx">请输入支付密码</view>
+        </view>
+        <view class="mt-70rpx text-_bl_rgb_pl_0_2c_0_2c_0_pr__br_ font-500 text-36rpx lh-34rpx text-center">
+            <view class="address" wx:if="{{shopInfo.current&&shopInfo.current.name}}">{{shopInfo.current.name}}</view>
+            <view class="relative h-54rpx mt-43rpx">
+                <text class="text-_bl_rgb_pl_1_2c_1_2c_1_pr__br_ font-bold text-48rpx">¥</text>
+                <text class="ml-9rpx text-_bl_rgb_pl_1_2c_1_2c_1_pr__br_ font-bold text-72rpx lh-54rpx">{{payTypeCheck!=1?0:useWallet}}</text>
+            </view>
+            <view class="h-1px mt-59rpx bg-_bl_rgb_pl_225_2c_225_2c_225_pr__br_"></view>
+        </view>
+        <view class="flex items-center box-border px-0 pt-30rpx pb-56rpx overflow-hidden">
+            <text class="flex-1 text-_bl_rgb_pl_102_2c_102_2c_102_pr__br_ font-500 text-28rpx lh-30rpx">支付方式</text>
+            <image class="w-40rpx h-40rpx mr-10rpx" lazyLoad="true" mode="aspectFit" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2018/11/07/e4b8611a78cf88fa.jpeg',0)}}"></image>
+            <text class="text-_bl_rgb_pl_102_2c_102_2c_102_pr__br_ font-500 text-28rpx lh-30rpx">余额支付</text>
+        </view>
+        <password bindpasswordConfirm="passwordConfirm" id="password" isPhonePsd="{{true}}"></password>
+        <view catchtap="rememberPsd" class="float-right mt-29rpx text-_bl_rgb_pl_153_2c_153_2c_153_pr__br_ font-500 text-24rpx">忘记支付密码?</view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

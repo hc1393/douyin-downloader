@@ -1,0 +1,48 @@
+<config-provider>
+    <view class="flex flex-col h-screen bg-_bl__h_FFF_br_" wx:if="{{isLoaded}}">
+        <std-navigation-bar background="white" title="{{_i1}}"></std-navigation-bar>
+        <block wx:if="{{step===1}}">
+            <scroll-view scrollY class="min-h-0 flex-1">
+                <view class="p-24">
+                    <log-off-desc account="{{account}}"></log-off-desc>
+                    <view class="text-30 text-_bl__h_F53F3F_br_ font-medium lh-42 mb-24">{{_i2}}</view>
+                    <log-off-assets assets="{{assets}}" wx:if="{{logOffConfig.isShowAsset}}"></log-off-assets>
+                </view>
+            </scroll-view>
+            <view class="px-24 pb-safe">
+                <agree agreement="{{agreement}}" bindchange="toToggleCheck" checked="{{checked}}" id="__std_agree" wx:if="{{logOffConfig.isSupportLogoff}}"></agree>
+                <button bindtap="toStep2" class="{{'button flex w-full bg-primary text-_bl__h_FFF_br_ '+(checked?'':'button-disabled')}}">{{_i3}}</button>
+            </view>
+        </block>
+        <block wx:if="{{step===2}}">
+            <scroll-view scrollY class="min-h-0 flex-1">
+                <view class="pt-40 px-32">
+                    <view class="text-36 text-_bl__h_3D3D3D_br_ font-medium lh-42 mb-8">{{_i4}}</view>
+                    <view class="text-26 text-_bl__h_999_br_ lh-40 mb-24">{{_i5}}</view>
+                    <bar-selector bindchange="onSelectReason" list="{{reasonList}}"></bar-selector>
+                </view>
+            </scroll-view>
+            <view class="px-24 pb-safe">
+                <button bindtap="toStep3" class="{{'button flex w-full bg-primary text-_bl__h_FFF_br_ '+(reason?'':'button-disabled')}}">{{_i6}}</button>
+            </view>
+        </block>
+        <view class="pt-184 px-88 flex flex-col items-center box-border" wx:if="{{step===3}}">
+            <image lazyLoad class="w-120 h-120 mb-24" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/08/03/std-pluginUser-logoff.png',0)}}"></image>
+            <view class="w-full text-center text-36 text-_bl__h_3D3D3D_br_ lh-50 mb-24">{{_i7}}</view>
+            <view class="w-full text-center text-30 text-_bl__h_999_br_ lh-42">
+                <text>{{_i8}}</text>
+                <text class="text-primary">{{freezeEndTime}}</text>
+                <text class="text-primary">（</text>
+                <text class="text-primary">{{logOffConfig.freezeDayNum}}</text>
+                <text class="text-primary">{{_i9}}</text>
+                <text class="text-primary">）</text>
+                <text>{{_i10}}</text>
+            </view>
+            <button bindtap="toRevokeCancel" class="button flex w-400 bg-primary text-_bl__h_FFF_br_ rd-full mt-100">{{_i11}}</button>
+            <button bindtap="toRtnIndex" class="button flex w-400 bg-_bl__h_FFF_br_ text-_bl__h_333_br_ rd-full border-1 border-solid border-_bl__h_E1E1E1_br_ mt-24">{{_i12}}</button>
+        </view>
+    </view>
+    <std-design-mp-loading wx:else></std-design-mp-loading>
+    <log-off-confirm-dialog bindok="toLogOff" id="logOffConfirmDialog"></log-off-confirm-dialog>
+</config-provider>
+<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

@@ -1,0 +1,2 @@
+<zm-loading wx:if="{{!componentMounted}}"></zm-loading>
+<tab-p2 bindmounted="asyncComponentMounted" id="index" wx:if="{{isLoad}}"></tab-p2>

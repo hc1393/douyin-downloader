@@ -1,0 +1,37 @@
+<view class="w-_bl_100_p__br_ h-460rpx relative" style="--lr-padding: {{lrPadding}}; --theme-color: {{colorTheme}}; --light-theme-color: {{tools.hexToRgba(colorTheme,0.1)}}">
+    <view class="w-_bl_calc_pl_100_p__a_var_pl_--lr-padding_pr__u_2_pr__br_ h-_bl_100_p__br_ absolute top-0 left-_bl_calc_pl_var_pl_--lr-padding_pr__u_-1_pr__br_ box-border bg-gradient-to-b from-_bl_var_pl_--light-theme-color_pr__br_ to-_h_fff">
+        <view class="flex items-baseline mx-0 my-32rpx px-24rpx py-0">
+            <view class="font-500 text-36rpx text-_bl__h_333333_br_ line-clamp-1">{{_i1}}</view>
+            <view class="text-24rpx text-_bl__h_999999_br_ px-10rpx py-0 flex-1 whitespace-nowrap" wx:if="{{info.fixGiftType===1}}">共<text class="text-30rpx text-_bl_var_pl_--theme-color_pr__br_">{{fixGiftsNum}}</text>件赠品</view>
+            <view class="text-24rpx text-_bl__h_999999_br_ px-10rpx py-0 flex-1 whitespace-nowrap" wx:else>最多可选择<text class="text-30rpx text-_bl_var_pl_--theme-color_pr__br_">{{info.limitNum}}</text>件赠品</view>
+            <view catchtap="abandonGift" class="flex items-center justify-end flex-shrink-0 w-120 h-48 rounded-6 text-_bl_var_pl_--theme-color_pr__br_ text-22" wx:if="{{info.selectedGoods&&info.selectedGoods.length}}">{{_i2}}</view>
+            <view catchtap="openFullSendChoosePopup" class="flex items-center justify-center flex-shrink-0 w-120 h-48 text-_bl_var_pl_--theme-color_pr__br_ text-22 rounded-6 b-2rpx b-style-solid border-_bl_var_pl_--theme-color_pr__br_" wx:else>{{_i3}}</view>
+        </view>
+        <scroll-view>
+            <view class="whitespace-nowrap w-fit flex pb-10">
+                <view bindtap="onDetail" class="w-220rpx overflow-hidden mr-24rpx bg-_bl__h_ffffff_br_ shadow-_bl_0rpx_5rpx_10rpx_0rpx_rgba_pl_0_2c_0_2c_0_2c_0_d_08_pr__br_ border-rd-8rpx first-ml-24rpx" data-index="{{index}}" wx:for="{{info.data}}" wx:key="index">
+                    <view class="w-_bl_100_p__br_ h-194rpx overflow-hidden relative">
+                        <image lazyLoad class="{{'w-_bl_100_p__br_ h-_bl_100_p__br_ relative '+(item.stock<=0?'op-50':'')}}" mode="aspectFill" src="{{__oss__.s(mpxExt,item.images[0],0)}}"></image>
+                        <view class="flex items-center justify-center w-_bl_100_p__br_ h-36rpx bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_5_pr__br_ text-22rpx text-_bl__h_ffffff_br_ absolute left-0 bottom-0" wx:if="{{item.giveGoodsLimitSwitch===1&&item.giveGoodsLimit>0}}">{{_i4+item.giveGoodsLimit+_i5}}</view>
+                    </view>
+                    <view class="truncate w-_bl_100_p__br_ box-border px-12rpx py-0 mx-0 mt-12rpx mb-4rpx font-500 text-24rpx text-_bl__h_333333_br_">{{item.name}}</view>
+                    <view class="truncate px-12rpx py-0 h-32rpx lh-32rpx text-22rpx text-_bl__h_999999_br_">{{item.specText}}</view>
+                    <view class="flex items-center relative px-12rpx py-0 mx-0 mt-4rpx mb-20rpx">
+                        <text class="font-500 text-24rpx text-_bl__h_f93a4a_br_">{{currencySymbol+item.addPrice}}</text>
+                        <text class="text-22rpx text-_bl__h_999999_br_ line-through" wx:if="{{(helper.getNum(item.skuId,info.selectedGoods)<=0||info.fixGiftType===1)&&item.price>item.addPrice}}">{{currencySymbol+item.price}}</text>
+                        <view class="flex items-center justify-center absolute right-0 px-12rpx py-0">
+                            <view catchtap="onDetail" class="bg-_bl_var_pl_--theme-color_pr__br_ min-w-80 h-36 rounded-18 box-border px-10 flex items-center justify-center text-20 c-_h_fff" data-index="{{index}}" wx:if="{{info.fixGiftType===1&&item.practiceList&&item.practiceList.length}}">{{_i6}}</view>
+                            <block wx:elif="{{info.fixGiftType!==1}}">
+                                <cart-control addDisabled="{{helper.checkNum(item,info.selectedGoods,info.limitNum)}}" bindchange="onNumChange" binddisabled="onPlusDisabled" btnFontSize="34rpx" controlNumFontSize="24rpx" controlNumWidth="40rpx" data-index="{{index}}" num="{{helper.getNum(item.skuId,info.selectedGoods)}}" wx:if="{{item.stock>0}}"></cart-control>
+                                <view class="text-22rpx text-_bl__h_999999_br_" wx:else>{{_i7}}</view>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>
+<wxs module="helper" src="../../wxs/index29c67e76.wxs"/>
+<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

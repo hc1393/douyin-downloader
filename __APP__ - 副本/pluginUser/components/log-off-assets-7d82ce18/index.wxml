@@ -1,0 +1,6 @@
+<view class="w-full h-fit px-24 pt-24 bg-_bl__h_F5F5F5_br_ rd-8 overflow-hidden box-border" wx:if="{{!!__oc__.g( assets,['length'] )}}">
+    <view class="flex justify-between items-center pb-24" wx:for="{{assets}}">
+        <view class="text-26 text-_bl__h_666_br_">{{item}}</view>
+    </view>
+</view>
+<wxs module="__oc__" src="../../../wxs/oc71f5331b.wxs"/>

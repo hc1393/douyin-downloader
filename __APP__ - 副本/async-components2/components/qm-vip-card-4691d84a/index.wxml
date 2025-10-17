@@ -1,0 +1,16 @@
+<view style="{{showData.miniStyle}}" wx:if="{{isLoad}}">
+    <image bindtap="linkCardDetail" class="w-_bl_100_p__br_" mode="widthFix" src="{{__oss__.s(mpxExt,visitorInfo.img,0)}}" wx:if="{{visitorInfo&&visitorInfo.enable&&visitorInfo.img&&!isAuth}}"></image>
+    <view bindtap="linkCardDetail" class="h-260rpx w-_bl_100_p__br_ border-rd-12rpx bg-center bg-_bl_length_c_cover_br_ bg-no-repeat" style="background-image: url({{showData.propsValue&&showData.propsValue.cardImg||'https://images.qmai.cn/resource/20210824210816/2022/01/29/qm-vip-card-bg.png'}});" wx:else>
+        <view class="w-_bl_100_p__br_ h-68rpx box-border px-24rpx py-0 flex items-center justify-between">
+            <text class="flex-1 text-24rpx text-_bl__h_ddd1c4_br_" style="color: {{showData.propsValue.cardColor}};">{{(detail?detail.paidBenefitNotes:'')||showData.propsValue.cardTitle}}</text>
+            <view class="flex items-center justify-center px-20rpx py-0 h-42rpx op-90 border-rd-21rpx text-24rpx font-bold text-_bl__h_333333_br_" style="color: {{showData.propsValue.btnTitleColor}}; background-color: {{showData.propsValue.btnColor||'#FFECBB'}};" wx:if="{{detail&&detail.canBuy!=2&&showData.propsValue.btnTitle}}">{{(detail&&detail.canBuy==1?'续费':'')||showData.propsValue.btnTitle}}</view>
+        </view>
+        <view class="flex h-172rpx w-_bl_100_p__br_">
+            <view class="flex-1 flex flex-col items-center" wx:for="{{showData.propsValue.memberList}}" wx:key="index">
+                <image class="w-80rpx h-80rpx mx-0 mt-24rpx mb-8rpx" src="{{__oss__.s(mpxExt,item.img,0)}}"></image>
+                <text class="inline-block w-100rpx text-24rpx text-_bl__h_a5a098_br_ lh-_bl_120_p__br_ text-center">{{item.title}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

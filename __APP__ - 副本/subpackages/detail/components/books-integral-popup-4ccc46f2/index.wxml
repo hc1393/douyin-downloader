@@ -1,0 +1,8 @@
+<qm-popup bindclose="handleClose" show="{{show}}" zIndex="99999">
+    <view class="relative flex flex-col items-center justify-center w-400 h-400">
+        <view class="mb-28 c-_h_fff text-48 leading-50">+<text class="ml6">{{number}}</text>
+        </view>
+        <image class="w-300 h-300" src="{{__oss__.s(mpxExt,effectImage,0)}}"></image>
+    </view>
+</qm-popup>
+<wxs module="__oss__" src="../../../../wxs/oss28ac43a0.wxs"/>

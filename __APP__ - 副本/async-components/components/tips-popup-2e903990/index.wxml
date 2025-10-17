@@ -1,0 +1,9 @@
+<view catchtap="open" class="{{'text-30rpx lh-normal text-_bl__h_8e8e8e_br_ i-md-information-circle-outline '+(isType=='selfCup'?'relative top-auto right-auto ml-8rpx':'absolute top-16rpx right--40rpx')}}" id="tips-icon" style="font-size:{{fontSize}}rpx;" wx:if="{{tipsFont}}">
+    <block wx:if="{{show}}">
+        <view catchtap="close" class="w-100vw h-100vh fixed left-0 top-0 transition-none z-9998 {{!display?'op-0':''}}"></view>
+        <view class="{{'w-0 h-0 border-t-10rpx border-t-solid border-t-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_8_pr__br_ border-r-10rpx border-r-solid border-r-transparent border-l-10rpx border-l-solid border-l-transparent border-rd-4rpx absolute left-0 right-0 bottom-34rpx m-auto transition-none z-9999 '+(!display?'op-0':'')}}"></view>
+        <view catchtap="noop" class="{{' box-border text-justify lh-_bl_120_p__br_ px-20rpx py-12rpx border-rd-8rpx bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_8_pr__br_ absolute bottom-40rpx right-_bl_50_p__br_ transition-none z-9999 '+(fixedWidth?'w-150px whitespace-normal':'whitespace-nowrap')+' '+(!display?'op-0':'')+' '}}" id="tips-content" style="{{right?'right:'+right+'px;':''}}">
+            <text class="text-24rpx text-_bl__h_ffffff_br_">{{tipsFont}}</text>
+        </view>
+    </block>
+</view>

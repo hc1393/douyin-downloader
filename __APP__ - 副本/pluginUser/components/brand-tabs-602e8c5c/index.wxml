@@ -1,0 +1,9 @@
+<config-provider>
+    <scroll-view scrollX class="w-full h-fit overflow-hidden bg-_bl__h_FFF_br_" id="__std_scrollView">
+        <view class="relative w-fit h-80 px-36 py-6 whitespace-nowrap flex justify-start items-center">
+            <view bindtap="handleClick" class="{{'relative w-fit h-56 border-_bl_2rpx_br_ border-solid '+(currentTab===index?'bg-primary-opacity-10 border-primary':'bg-_bl__h_F6F6F6_br_ border-_bl__h_F6F6F6_br_')+' px-16 flex items-center rd-8 mr-16 overflow-hidden box-border z-2'}}" data-index="{{index}}" wx:for="{{tabList}}" wx:key="index">
+                <view class="{{'text-28 lh-_bl_1_br_ transition-all ease-in-out duration-300 '+(currentTab===index?'text-primary':'text-_bl__h_666_br_')}}" id="__std_itemChild">{{item[field]}}</view>
+            </view>
+        </view>
+    </scroll-view>
+</config-provider>

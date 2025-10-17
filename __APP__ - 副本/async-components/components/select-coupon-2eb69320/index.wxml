@@ -1,0 +1,188 @@
+<view catchtouchmove="noop" wx:if="{{showMask}}">
+    <view catchtap="hide" class="fixed top-0 right-0 bottom-0 left-0 z-1000 bg-hex-00000080 {{showMask?'animate-fade-in':'animate-fade-out'}} animate-forwards animate-duration-300ms animate-ease-in-out"></view>
+    <view class="{{'fixed right-0 bottom-0 left-0 z-10001 overflow-hidden border-rd-_bl_30rpx_30rpx_0_0_br_ bg-_bl__h_f5f5f5_br_ px-24rpx pt-90rpx pb-24rpx '+(showShade?'animate-_bl_shade-in_br_ animate-fill-forwards animate-duration-0_d_3s animate-ease-_bl_ease-in-out_br_':'animate-_bl_shade-out_br_ animate-fill-forwards animate-duration-0_d_3s animate-ease-_bl_ease-in-out_br_')}}">
+        <view class="fixed top-0 left-0 w-_bl_100_p__br_ bg-_bl__h_fff_br_ h-90rpx lh-90rpx text-center border-rd-_bl_30rpx_30rpx_0_0_br_ text-36rpx font-bold">选择优惠券<view bindtap="hide" class="i-close absolute right-0 top-0 px-24rpx py-26rpx text-30rpx text-_bl__h_999_br_ lh-none"></view>
+        </view>
+        <scroll-view scrollY class="box-border w-_bl_100_p__br_ max-h-_bl_calc_pl_85vh-90rpx_pr__br_ min-h-_bl_calc_pl_35vh-90rpx_pr__br_ pt-20rpx" wx:if="{{couponList&&couponList.length||thirdCouponList&&thirdCouponList.length||couponPackageInfo||meituanCouponList&&meituanCouponList.length}}">
+            <view bindtap="seleted" class="flex items-center justify-between box-border fixed left-0 bottom-0 w-_bl_100_p__br_ h-_bl_calc_pl_100rpx_a_constant_pl_safe-area-inset-bottom_pr__pr__br_ h-_bl_calc_pl_100rpx_a_env_pl_safe-area-inset-bottom_pr__pr__br_ pl-24rpx pr-24rpx pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_ border-1rpx border-solid border-_bl__h_eae9e9_br_ text-24rpx text-_bl__h_333_br_ bg-_bl__h_ffffff_br_ z-1" data-index="0" wx:if="{{tabIndex==0&&(couponList&&couponList.length||couponPackageInfo)}}">
+                <view>不使用券</view>
+                <view class="w-50rpx h-50rpx flex items-center justify-center">
+                    <view class="text-48rpx i-xuanze_xuanzhong" style="color: {{colorTheme}}" wx:if="{{couponsIndex==0}}"></view>
+                    <view class="w-36rpx h-36rpx border-2rpx border-solid border-_bl__h_c5c5c5_br_ border-rd-_bl_50_p__br_" wx:else></view>
+                </view>
+            </view>
+            <view bindtap="seleted" class="flex items-center justify-between box-border fixed left-0 bottom-0 w-_bl_100_p__br_ h-_bl_calc_pl_100rpx_a_constant_pl_safe-area-inset-bottom_pr__pr__br_ h-_bl_calc_pl_100rpx_a_env_pl_safe-area-inset-bottom_pr__pr__br_ pl-24rpx pr-24rpx pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_ border-1rpx border-solid border-_bl__h_eae9e9_br_ text-24rpx text-_bl__h_333_br_ bg-_bl__h_ffffff_br_ z-1" data-index="0" wx:if="{{tabIndex==1&&thirdCouponList&&thirdCouponList.length}}">
+                <view>不使用券</view>
+                <view class="w-50rpx h-50rpx flex items-center justify-center">
+                    <view class="text-48rpx i-xuanze_xuanzhong" style="color: {{colorTheme}}" wx:if="{{thirdCouponsIndex==0}}"></view>
+                    <view class="w-36rpx h-36rpx border-2rpx border-solid border-_bl__h_c5c5c5_br_ border-rd-_bl_50_p__br_" wx:else></view>
+                </view>
+            </view>
+            <view bindtap="seleted" class="flex items-center justify-between box-border fixed left-0 bottom-0 w-_bl_100_p__br_ h-_bl_calc_pl_100rpx_a_constant_pl_safe-area-inset-bottom_pr__pr__br_ h-_bl_calc_pl_100rpx_a_env_pl_safe-area-inset-bottom_pr__pr__br_ pl-24rpx pr-24rpx pb-_bl_constant_pl_safe-area-inset-bottom_pr__br_ pb-_bl_env_pl_safe-area-inset-bottom_pr__br_ border-1rpx border-solid border-_bl__h_eae9e9_br_ text-24rpx text-_bl__h_333_br_ bg-_bl__h_ffffff_br_ z-1" data-index="0" wx:if="{{tabIndex==2&&meituanCouponList&&meituanCouponList.length}}">
+                <view>不使用券</view>
+                <view class="w-50rpx h-50rpx flex items-center justify-center">
+                    <view class="text-48rpx i-xuanze_xuanzhong" style="color: {{colorTheme}}" wx:if="{{meituanCouponsIndex==0}}"></view>
+                    <view class="w-36rpx h-36rpx border-2rpx border-solid border-_bl__h_c5c5c5_br_ border-rd-_bl_50_p__br_" wx:else></view>
+                </view>
+            </view>
+            <view wx:if="{{tabIndex==0&&(couponList&&couponList.length||couponPackageInfo)}}">
+                <coupon-package-confirm notCancel bindchange="couponPackageChange" id="couponPackageConfirm" info="{{couponPackageInfo}}" wx:if="{{couponPackageInfo}}"></coupon-package-confirm>
+                <view bindtap="seleted" class="bg-_bl__h_ffffff_br_ border-rd-20rpx mt-24rpx relative" data-index="{{index+1}}" data-item="{{item}}" wx:for="{{couponList}}" wx:key="cardId">
+                    <view class="pt-40rpx pb-40rpx pl-0 pr-24rpx flex relative">
+                        <view class="px-16rpx py-2rpx border-rd-_bl_0_18rpx_0_18rpx_br_ bg-_bl__h_ffc300_br_ text-_bl__h_333_br_ text-24rpx absolute right-0 top-0" wx:if="{{item.couponType==70}}">{{_i1}}</view>
+                        <image class="w-120rpx h-120rpx mx-24rpx my-0 bg-_bl__h_cccccc_br_" src="{{__oss__.s(mpxExt,item.imageUrl,0)}}" wx:if="{{couponShowImg&&item.imageUrl}}"></image>
+                        <view class="w-190rpx flex flex-col items-center justify-center" wx:else>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:if="{{item.couponTemplate.type===1||item.couponTemplate.type===71}}">{{currencySymbol}}<text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>
+                            </view>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:if="{{item.couponTemplate.type===2}}">
+                                <text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>折</view>
+                            <block wx:if="{{item.couponTemplate.type===3||item.couponTemplate.type===72||item.couponTemplate.type===15}}">
+                                <text class="text-38rpx text-_bl__h_f93a4a_br_ font-bold" wx:if="{{item.couponFreeFlag}}">{{item.couponTemplate.type===3?'兑换':'免费'}}</text>
+                                <block wx:else>
+                                    <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:if="{{item.couponTemplate&&item.couponTemplate.discountUnit==2}}">
+                                        <text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>折</view>
+                                    <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:elif="{{item.couponTemplate&&item.couponTemplate.discountUnit==1}}">{{currencySymbol}}<text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>
+                                    </view>
+                                </block>
+                            </block>
+                            <block wx:if="{{item.couponTemplate.type===4}}">
+                                <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:if="{{item.couponTemplate.discountAmount}}">
+                                    <text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>{{item.couponTemplate&&item.couponTemplate.discountUnit==2?'折':'元'}}</view>
+                                <block wx:else>
+                                    <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" style="line-height: 30px" wx:if="{{item.couponTemplate.giveCount}}">免{{item.couponTemplate.giveCount}}件</view>
+                                </block>
+                            </block>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" style="line-height: 30px" wx:if="{{item.couponTemplate.type===5}}">免{{item.couponTemplate.discountGoodsCount}}件</view>
+                            <block wx:if="{{item.couponTemplate.type===6}}">
+                                <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:if="{{item.couponTemplate.expressContent==30||item.couponTemplate.expressContent==20}}">
+                                    <text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>{{item.couponTemplate.expressContent==20?'折':'元'}}</view>
+                                <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" style="line-height: 30px" wx:else>免运费</view>
+                            </block>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" style="line-height: 30px" wx:if="{{item.couponTemplate.type===7}}">免排队</view>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_ w-_bl_100_p__br_ justify-center items-baseline flex" style="line-height: 30px" wx:if="{{item.couponTemplate.type===11}}">减至<text class="font-bold {{item.reduceAmountFlag=='mid'?'text-40rpx':item.reduceAmountFlag=='sml'?'text-24rpx':'text-54rpx'}}">{{item.couponTemplate.discountAmount}}</text>元</view>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" style="line-height: 30px" wx:if="{{item.couponTemplate.type===13}}">兑换商品</view>
+                            <view class="text-22rpx text-_bl__h_666666_br_" wx:if="{{item.couponTemplate&&item.couponTemplate.thresholdType===1}}">{{_i2}}</view>
+                            <view class="text-22rpx text-_bl__h_666666_br_" wx:else>满{{item.couponTemplate.useThreshold||0}}{{item.couponTemplate.thresholdType==2?'元':''}}{{item.couponTemplate.thresholdType==3?'件':''}}{{item.couponTemplate.thresholdType==4?'千克':''}}可用</view>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" style="line-height: 30px" wx:if="{{item.couponFromType==2}}">{{item.couponTemplate.coupon_title}}</view>
+                        </view>
+                        <view class="w-0 flex-1">
+                            <view class="{{'line-clamp-2 text-32rpx font-bold mb-24rpx '+(item.unUseStatus?'text-_bl__h_333333_br_':'text-_bl__h_999999_br_')}}">{{item.couponTemplate.name}}</view>
+                            <view class="lh-none text-24rpx text-_bl__h_999999_br_" wx:if="{{item.beginAt}}">{{item.beginAt}}~{{item.endAt}}</view>
+                            <view class="lh-none text-24rpx text-_bl__h_999999_br_" wx:else>{{item.endAt}}到期</view>
+                            <view class="text-24rpx text-_bl__h_f93a4a_br_" wx:if="{{item.share==0}}">本优惠券不可与其他营销活动共享</view>
+                            <view class="text-24rpx text-_bl__h_f93a4a_br_" wx:if="{{item.showDesc}}">{{item.showDesc}}</view>
+                        </view>
+                        <view class="w-50rpx h-50rpx flex items-center justify-center" wx:if="{{item.unUseStatus}}">
+                            <view class="text-48rpx i-xuanze_xuanzhong" style="color: {{colorTheme}}" wx:if="{{couponsIndex==index+1}}"></view>
+                            <view class="w-36rpx h-36rpx border-2rpx border-solid border-_bl__h_c5c5c5_br_ border-rd-_bl_50_p__br_" wx:else></view>
+                        </view>
+                    </view>
+                    <view class="mx-0 my--10rpx h-20rpx flex items-center justify-between">
+                        <view class="h-20rpx w-20rpx bg-_bl__h_f5f5f5_br_ border-rd-_bl_50_p__br_" style="margin-left: -10rpx"></view>
+                        <view class="h-1px bg-_bl__h_f5f5f5_br_ w-_bl_100_p__br_ flex-1 mx-20rpx my-0"></view>
+                        <view class="h-20rpx w-20rpx bg-_bl__h_f5f5f5_br_ border-rd-_bl_50_p__br_" style="margin-right: -10rpx"></view>
+                    </view>
+                    <view class="relative px-24rpx py-20rpx h-auto box-border">
+                        <view class="pb-20rpx text-24rpx text-_bl__h_ff0b0b_br_" wx:if="{{item.unUseDesc}}">不可用原因：{{item.unUseDesc}}</view>
+                        <view class="relative {{bottomStatus[item.cardId]==='open'?'':'h-48rpx overflow-hidden'}}" wx:if="{{item.couponInfo.bottomInfoFlag}}">
+                            <view catchtap="changeBottomHeight" class="flex w-_bl_100_p__br_ h-48rpx items-center justify-between text-24rpx" data-item="{{item}}">
+                                <view class="lh-48rpx flex items-center">使用规则<image class="right-35rpx w-36rpx h-36rpx ml-10rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/12/04/fb8c209ae37bedc6.png',0)}}" wx:if="{{bottomStatus[item.cardId]==='open'}}"></image>
+                                    <image class="right-35rpx w-36rpx h-36rpx ml-10rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/12/04/6cdaf5cf79a3f57f.png',0)}}" wx:if="{{bottomStatus[item.cardId]==='close'}}"></image>
+                                </view>
+                            </view>
+                            <coupon-desc bottomStatus="{{bottomStatus[item.cardId]}}" couponInfo="{{item.couponInfo}}" multiConfig="{{applicableStoreRule}}" verifyData="{{item.couponInfo.useStatus==1&&verifyData}}"></coupon-desc>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{tabIndex==1&&thirdCouponList&&thirdCouponList.length}}">
+                <view bindtap="seleted" class="bg-_bl__h_ffffff_br_ border-rd-20rpx mt-24rpx relative" data-index="{{index+1}}" data-item="{{item}}" wx:for="{{thirdCouponList}}">
+                    <view class="pt-40rpx pb-40rpx pl-0 pr-24rpx flex relative">
+                        <view class="w-190rpx flex flex-col items-center justify-center">
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:if="{{item.couponTemplate.type===1}}">{{currencySymbol}}<text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>
+                            </view>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:if="{{item.couponTemplate.type===2}}">
+                                <text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>折</view>
+                            <block wx:if="{{item.couponTemplate.type===3}}">
+                                <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:if="{{item.couponTemplate&&item.couponTemplate.discountUnit==2}}">
+                                    <text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>折</view>
+                                <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:elif="{{item.couponTemplate&&item.couponTemplate.discountUnit==1}}">{{currencySymbol}}<text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>
+                                </view>
+                            </block>
+                            <block wx:if="{{item.couponTemplate.type===4}}">
+                                <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" wx:if="{{item.couponTemplate.discountAmount}}">
+                                    <text class="text-54rpx">{{item.couponTemplate.discountAmount}}</text>折</view>
+                                <block wx:else>
+                                    <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" style="line-height: 30px" wx:if="{{item.couponTemplate.giveCount}}">免{{item.couponTemplate.giveCount}}件</view>
+                                </block>
+                            </block>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" style="line-height: 30px" wx:if="{{item.couponTemplate.type===5}}">免{{item.couponTemplate.discountGoodsCount}}件</view>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_ w-_bl_100_p__br_ justify-center items-baseline flex" style="line-height: 30px" wx:if="{{item.couponTemplate.type===11}}">减至<text class="font-bold {{item.reduceAmountFlag=='mid'?'text-40rpx':item.reduceAmountFlag=='sml'?'text-24rpx':'text-54rpx'}}">{{item.couponTemplate.discountAmount}}</text>元</view>
+                            <view class="text-22rpx text-_bl__h_666666_br_" wx:if="{{item.couponTemplate&&item.couponTemplate.thresholdType===1}}">{{_i3}}</view>
+                            <view class="text-22rpx text-_bl__h_666666_br_" wx:else>满{{item.couponTemplate.useThreshold||0}}{{item.couponTemplate.thresholdType==2?'元':''}}{{item.couponTemplate.thresholdType==3?'件':''}}{{item.couponTemplate.thresholdType==4?'千克':''}}可用</view>
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_" style="line-height: 30px" wx:if="{{item.couponFromType==2}}">{{item.couponTemplate.coupon_title}}</view>
+                        </view>
+                        <view class="w-0 flex-1">
+                            <view class="line-clamp-2 text-32rpx font-bold text-_bl__h_333333_br_ mb-24rpx selectcoupon-name">{{item.couponTemplate.name}}</view>
+                            <view class="lh-none text-24rpx text-_bl__h_999999_br_">{{item.beginAt}}~{{item.endAt}}</view>
+                            <view class="text-24rpx text-_bl__h_f93a4a_br_" wx:if="{{item.share==0}}">本优惠券不可与其他营销活动共享</view>
+                        </view>
+                        <view class="w-50rpx h-50rpx flex items-center justify-center" wx:if="{{item.unUseStatus}}">
+                            <view class="text-48rpx i-xuanze_xuanzhong" style="color: {{colorTheme}}" wx:if="{{thirdCouponsIndex==index+1}}"></view>
+                            <view class="w-36rpx h-36rpx border-2rpx border-solid border-_bl__h_c5c5c5_br_ border-rd-_bl_50_p__br_" wx:else></view>
+                        </view>
+                    </view>
+                    <block wx:if="{{!item.unUseStatus}}">
+                        <view class="mx-0 my--10rpx h-20rpx flex items-center justify-between">
+                            <view class="h-20rpx w-20rpx bg-_bl__h_f5f5f5_br_ border-rd-_bl_50_p__br_ ml--10rpx"></view>
+                            <view class="h-1px bg-_bl__h_f5f5f5_br_ w-_bl_100_p__br_ flex-1 mx-20rpx my-0"></view>
+                            <view class="h-20rpx w-20rpx bg-_bl__h_f5f5f5_br_ border-rd-_bl_50_p__br_ mr--10rpx"></view>
+                        </view>
+                        <view class="relative px-24rpx py-20rpx h-auto box-border">
+                            <view wx:if="{{item.unUseDesc}}">
+                                <view class="pb-20rpx text-24rpx text-_bl__h_ff0b0b_br_">不可用原因</view>
+                                <view class="pt-10rpx pb-10rpx pl-36rpx pr-0 lh-_bl_1_d_8_br_ text-22rpx text-_bl__h_666666_br_">{{item.unUseDesc}}</view>
+                            </view>
+                            <block wx:if="{{!isZhouHeiYa}}">
+                                <view class="flex mb-10rpx" wx:if="{{item.couponTemplate.applyGoodsType!=1}}">
+                                    <view class="text-22rpx text-_bl__h_666666_br_">{{item.couponTemplate.category!=4?item.couponTemplate.applyGoodsType==2?'指定商品适用':'指定商品不适用':'指定商品适用'}}</view>
+                                    <view catchtap="handleView" class="text-22rpx ml-20rpx" data-coupon="{{item.couponTemplate}}" data-flag="goods" style="color: {{colorTheme}}" wx:if="{{item.couponTemplate.goodsIds&&item.couponTemplate.goodsIds.length}}">查看商品<text class="i-jiantou-you text-18rpx"></text>
+                                    </view>
+                                </view>
+                                <view class="flex mb-10rpx">
+                                    <view class="text-22rpx text-_bl__h_666666_br_">适用门店</view>
+                                    <view catchtap="handleView" class="text-22rpx ml-20rpx" data-coupon="{{item.couponTemplate}}" data-flag="multis" style="color: {{colorTheme}}">查看门店<text class="i-jiantou-you text-18rpx"></text>
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view wx:if="{{tabIndex==2&&meituanCouponList&&meituanCouponList.length}}">
+                <view bindtap="seleted" class="bg-_bl__h_ffffff_br_ border-rd-20rpx mt-24rpx relative" data-index="{{index+1}}" data-item="{{item}}" wx:for="{{meituanCouponList}}" wx:key="couponCode">
+                    <view class="pt-40rpx pb-40rpx pl-0 pr-24rpx flex relative">
+                        <view class="w-190rpx flex flex-col items-center justify-center">
+                            <view class="text-24rpx font-bold mb-10rpx lh-none text-_bl__h_f93a4a_br_">{{currencySymbol}}<text class="text-54rpx">{{item.dealValue}}</text>
+                            </view>
+                            <view class="text-22rpx text-_bl__h_666666_br_"></view>
+                        </view>
+                        <view class="w-0 flex-1">
+                            <view class="line-clamp-2 text-32rpx font-bold text-_bl__h_333333_br_ mb-24rpx selectcoupon-name">{{item.dealTitle}}</view>
+                            <view class="lh-none text-24rpx text-_bl__h_999999_br_">{{item.couponEndTime}}</view>
+                        </view>
+                        <view class="w-50rpx h-50rpx flex items-center justify-center">
+                            <view class="text-48rpx i-xuanze_xuanzhong" style="color: {{colorTheme}}" wx:if="{{meituanCouponsIndex==index+1}}"></view>
+                            <view class="w-36rpx h-36rpx border-2rpx border-solid border-_bl__h_c5c5c5_br_ border-rd-_bl_50_p__br_" wx:else></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="h-_bl_calc_pl_124rpx_a_constant_pl_safe-area-inset-bottom_pr__pr__br_ h-_bl_calc_pl_124rpx_a_env_pl_safe-area-inset-bottom_pr__pr__br_"></view>
+        </scroll-view>
+        <empty-image height="420" src="https://images.qmai.cn/s16/images/2020/07/23/49f82e3c9dab3ffa.png" text="暂无可用的美团点评券～" width="420" wx:if="{{tabIndex==2&&!(meituanCouponList&&meituanCouponList.length)}}"></empty-image>
+        <empty-image height="420" src="https://images.qmai.cn/s16/images/2020/07/23/49f82e3c9dab3ffa.png" text="暂无可用的活动券～" width="420" wx:if="{{tabIndex==1&&!(thirdCouponList&&thirdCouponList.length)}}"></empty-image>
+        <empty-image height="420" src="https://images.qmai.cn/s16/images/2020/07/23/49f82e3c9dab3ffa.png" text="暂无可用的商家券～" width="420" wx:if="{{tabIndex==0&&!(couponList&&couponList.length)&&!couponPackageInfo}}"></empty-image>
+    </view>
+</view>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

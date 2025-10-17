@@ -1,0 +1,78 @@
+<std-popup closeable lockScroll round bindclose="hideModel" class=" _78856e0a " position="bottom" show="{{isShowPayCom}}" title="确认支付">
+    <view class="payChoose__body _78856e0a ">
+        <block wx:if="{{balance>0}}">
+            <view catchtap="selectPayType" class="payChoose__row _78856e0a " data-paytypecheck="1" wx:if="{{canUseBalance}}">
+                <view class="payChoose__row_wrap _78856e0a ">
+                    <view class="payChoose__row_l _78856e0a ">
+                        <image class="payChoose__icon_pay _78856e0a " lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2020/10/12/41d1cab760117b09.png',0)}}"></image>
+                        <view class="row_content _78856e0a ">
+                            <view class="content_value _78856e0a ">
+                                <view class=" _78856e0a " style="width: 80rpx; padding-right: 4rpx">储值</view>
+                                <view class="{{balance>999?'limit-text':''}} _78856e0a " style="color: #999" wx:if="{{balanceEnabled}}">(可用{{balance}})</view>
+                                <view class="{{balance>999?'limit-text':''}} _78856e0a " style="color: #999" wx:else>(余额{{balance}}{{accountStatus==1?'':'，'+notUseReason}})</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="payChoose__row_r _78856e0a ">
+                        <text catchtap="settingPsd" class="payChoose__set_btn _78856e0a " wx:if="{{!isSetPassword&&passwordSwitch}}">设置密码</text>
+                        <block wx:elif="{{balanceEnabled}}">
+                            <text class="payChoose__frozen _78856e0a " wx:if="{{accountStatus==1}}">已冻结</text>
+                            <block wx:else>
+                                <text class="payChoose__amount _78856e0a " wx:if="{{payTypeCheck==1}}">-{{payTypeCheck!=1?0:useWallet}}</text>
+                            </block>
+                            <radio-group class="payChoose__radio_group _78856e0a " wx:if="{{accountStatus==1}}">
+                                <radio disabled checked="{{payTypeCheck==1}}" class=" _78856e0a " color="{{colorTheme}}" name="payWay"></radio>
+                            </radio-group>
+                            <radio-group class="payChoose__radio_group _78856e0a " wx:else>
+                                <radio checked="{{payTypeCheck==1||payTypeCheck==5}}" class=" _78856e0a " color="{{colorTheme}}" disabled="{{balance>0&&remainingPayTotal>balance}}" name="payWay"></radio>
+                            </radio-group>
+                        </block>
+                    </view>
+                </view>
+            </view>
+            <view class="no-balance _78856e0a " wx:if="{{remainingPayTotal>balance}}">余额不够支付，不支持混合支付，请充值</view>
+            <view class="pay-item-line _78856e0a "></view>
+        </block>
+        <view catchtap="selectPayType" class="payChoose__row _78856e0a " data-paytypecheck="3">
+            <view class="payChoose__row_wrap _78856e0a ">
+                <view class="payChoose__row_l _78856e0a ">
+                    <image class="payChoose__icon_pay _78856e0a " lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2018/11/07/b008e7ba74c826fb.png',0)}}"></image>
+                    <text class=" _78856e0a ">微信支付</text>
+                </view>
+                <view class="payChoose__row_r _78856e0a ">
+                    <radio-group class="payChoose__radio_group _78856e0a ">
+                        <radio checked="{{(remainingPayTotal>balance||payTypeCheck==2||payTypeCheck==3)&&payTypeCheck!=4&&payTypeCheck!=5}}" class=" _78856e0a " color="{{colorTheme}}" name="payWay" wx:if="{{balanceEnabled}}"></radio>
+                        <radio checked="{{true}}" class=" _78856e0a " color="{{colorTheme}}" name="payWay" wx:else></radio>
+                    </radio-group>
+                </view>
+            </view>
+        </view>
+        <view catchtap="selectPayType" class="payChoose__row _78856e0a " data-paytypecheck="4" wx:if="{{'wx'==='wx'&&configCenterSource.yiwangtongzhifukaiguan==='1'}}">
+            <view class="payChoose__row_wrap _78856e0a ">
+                <view class="payChoose__row_l payChoose__row_center _78856e0a ">
+                    <image class="payChoose__icon_pay _78856e0a " lazyLoad="true" mode="widthFix" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2022/07/12/zhaohangicon.png',0)}}"></image>
+                    <text class=" _78856e0a ">招行一网通支付</text>
+                    <view class="payChoose__row_hd_bg _78856e0a " wx:if="{{configCenterSource.yiwangtongzhifuhuodong}}">{{configCenterSource.yiwangtongzhifuhuodong}}</view>
+                </view>
+                <view class="payChoose__row_r _78856e0a ">
+                    <radio-group class="payChoose__radio_group _78856e0a ">
+                        <radio checked="{{payTypeCheck==4||payTypeCheck==5}}" class=" _78856e0a " color="{{colorTheme}}" name="payWay"></radio>
+                    </radio-group>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="payChoose__foot _78856e0a ">
+        <std-button block round bind:click="authMobileSuccess" class=" _78856e0a " type="primary">{{payBtnText}}</std-button>
+    </view>
+</std-popup>
+<popup-password bindcloseDialog="closeDialog" bindpasswordConfirm="passwordConfirm" bindrememberPsd="rememberPsd" class=" _78856e0a " clearValue="{{shouldClearPasswordValue}}" isSetPassword="{{isSetPassword}}" payTypeCheck="{{payTypeCheck}}" show="{{showPasswordDialog}}" useWallet="{{useWallet}}"></popup-password>
+<confirm bindcancel="cancel" bindconfirm="confirm" class=" _78856e0a " isShow="{{isShow}}" zIndex="{{20000}}">
+    <view class="protocol _78856e0a ">
+        <text class=" _78856e0a ">请阅读并同意</text>
+        <text catchtap="goInfo" class="protocol-name _78856e0a ">《{{protocolTitle}}》</text>
+    </view>
+</confirm>
+<std-authorization bindsuccess="authorize" class=" _78856e0a " force="{{force}}" id="authorization"></std-authorization>
+<std-design-mp-loading class=" _78856e0a " wx:if="{{isLoading}}"></std-design-mp-loading>
+<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

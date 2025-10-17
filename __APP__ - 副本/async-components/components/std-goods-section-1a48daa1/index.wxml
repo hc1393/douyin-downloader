@@ -1,0 +1,15 @@
+<view class="bg-hex-fff rounded-24 m-24 mx-20 p-32 px-24">
+    <slot name="header"></slot>
+    <view class="items-center flex justify-center mb-12">
+        <std-brand-info></std-brand-info>
+        <view class="flex-auto"></view>
+        <slot name="header-right"></slot>
+    </view>
+    <slot></slot>
+    <view class="items-center flex justify-between my-20 mb-12 w-full" wx:if="{{showFooter&&(footerLabel||footerValue)}}">
+        <text class="text-hex-333 text-28">{{footerLabel}}</text>
+        <text class="text-hex-111 text-38 font-700">{{footerValue}}</text>
+    </view>
+    <slot name="footer"></slot>
+    <slot name="extra"></slot>
+</view>

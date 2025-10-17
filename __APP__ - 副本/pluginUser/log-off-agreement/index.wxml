@@ -1,0 +1,11 @@
+<config-provider>
+    <view class="flex flex-col h-screen" wx:if="{{isLoaded}}">
+        <std-navigation-bar background="#F5F5F5" title="{{_i1}}"></std-navigation-bar>
+        <scroll-view scrollY class="min-h-0 flex-1 pb-safe">
+            <view class="p-24">
+                <rich-text nodes="{{agreement}}"></rich-text>
+            </view>
+        </scroll-view>
+    </view>
+    <std-design-mp-loading wx:else></std-design-mp-loading>
+</config-provider>

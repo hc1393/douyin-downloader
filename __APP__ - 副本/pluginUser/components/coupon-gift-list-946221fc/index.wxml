@@ -1,0 +1,14 @@
+<config-provider>
+    <view class="flex flex-col h-screen bg-_bl__h_F5F5F5_br_ box-border overflow-hidden">
+        <tab bold bindchange="handleTabChange" size="{{32}}" sliderHeight="6rpx" tabs="{{tabs}}" wx:if="{{tabs&&tabs.length}}"></tab>
+        <std-design-mp-loading wx:if="{{isLoading}}"></std-design-mp-loading>
+        <scroll-view scrollY class="flex-1 overflow-hidden" wx:else>
+            <view class="min-h-full p-24 box-border">
+                <block wx:if="{{list&&list.length}}">
+                    <coupon-item bindcancelGift="toCancelGift" data-item="{{item}}" hideNearExpireText="{{true}}" hideVerifyCode="{{true}}" info="{{item}}" isGifting="{{activeTabIndex===0}}" isShowRecipientInfo="{{activeTabIndex===1}}" showBottom="{{false}}" wx:for="{{list}}" wx:key="index"></coupon-item>
+                </block>
+                <std-empty description="{{empty.desc}}" image="{{empty.img}}" mainStyle="padding-top: 280rpx;" wx:else></std-empty>
+            </view>
+        </scroll-view>
+    </view>
+</config-provider>
