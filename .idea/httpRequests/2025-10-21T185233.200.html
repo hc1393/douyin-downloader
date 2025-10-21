@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <title>三角洲小涛查-三角洲经济学，三角洲攻略站-三角洲鼠鼠工具-三角洲行动助手-acgice_B站Orzice | 三角洲小涛查</title>
+    <meta name="keywords" content=""/>
+    <meta name="description"
+          content="三角洲小涛查-三角洲经济学，三角洲攻略站-三角洲鼠鼠工具-三角洲行动助手-acgice_B站Orzice | 三角洲小涛查"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <link rel="icon" href="/favicon.png">
+    <script src="/static/js/vue-2.6.14.min.js"></script>
+    <script> var BaseApiHost = "https:\/\/api.acgice.com";
+    var TimeUnix = 1761043940;
+    var TimeUnixBD = Math.round(new Date().getTime() / 1000);
+    var TimeUnixDiff = TimeUnixBD - TimeUnix;
+
+    function GetTimeUnix() {
+        let time_unix = Math.round(new Date().getTime() / 1000);
+        return time_unix - TimeUnixDiff;
+    }
+
+    function SetLoginCookie(url) {
+        const currentUrl = url || window.location.href;
+        const expirationDate = new Date();
+        expirationDate.setHours(expirationDate.getHours() + 1);
+        const cookieString = `login_redirect_url=${currentUrl}; expires=${expirationDate.toUTCString()}; path=/`;
+        document.cookie = cookieString;
+    }
+
+    function HTLogin() {
+        SetLoginCookie();
+        window.location.href = "/desk/login";
+    }
+
+    function HTLoginOut() {
+        SetLoginCookie();
+        window.location.href = "/desk/login_out";
+    } </script>
+    <link href="/static/plus/element-ui-2.15.14.css" rel="stylesheet">
+    <link href="https://smart.aimatech.com/static/js/element-ui/daisyui.5.0.css" rel="stylesheet" type="text/css"
+          referrerpolicy="no-referrer"/>
+    <script src="/static/js/element-ui-2.15.14-index.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.11.1.min.js"></script>
+    <script src="https://smart.aimatech.com/static/js/element-ui/axios-1.6.5.js" referrerpolicy="no-referrer"></script>
+    <script src="/static/js/crypto-js.min.js"></script>
+    <script src="/static/js/token.js"></script>
+    <script src="/static/func/base1.js"></script>
+    <script src="https://smart.aimatech.com/static/js/element-ui/tailwind.js" referrerpolicy="no-referrer"></script>
+    <link href="/static/css/sanjiaozhou.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/ad.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/new_common.css" rel="stylesheet" type="text/css"/>
+    <style> .title-highlight {
+        font-size: 24px;
+        text-shadow: none;
+    }
+
+    @media (max-width: 768px) {
+        .title-highlight {
+            font-size: 16px;
+            text-shadow: none;
+        }
+
+        .el-message-box {
+            left: 50% !important;
+            top: 50% !important;
+            max-width: 90% !important;
+            margin: 0 !important;
+        }
+
+        .kuaizhuang {
+            width: 90% !important;
+        }
+    }
+
+    .el-scrollbar .el-scrollbar__bar {
+        opacity: 1 !important;
+    }</style>
+</head>
+<body>
+<div id="appHeader">
+    <div class="ht-header flex items-center justify-between w-screen pl-3 pr-3 border-b border-base-300 h-14 bg-base-100">
+        <div class="flex-none">
+            <button class="btn btn-square btn-ghost" onclick="MenuView()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     class="inline-block h-5 w-5 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="flex-1"><a class="btn btn-ghost text-xl" href="/sjz/">三角洲小涛查</a></div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1 cursor-default">
+                <li>
+                    <a href="https://qm.qq.com/cgi-bin/qm/qr?k=MDjzyAwuCfbrfL_F0_SpzInvKgl5p63a&jump_from=webapi&authKey=yCgmGp3ISS8pym0zDF3luC6YIxik6k+H/ejf1lTdB7DDQ7ME7a0fkaTf8nqq2Hvs"
+                       target="_blank">反馈QQ群：781697278</a></li>
+                <li><a href="https://space.bilibili.com/4201439" target="_blank">B站：Orzice</a></li>
+            </ul>
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" style="width: 150px;">
+                    <div class="w-10 rounded-full"><img referrerpolicy="no-referrer"
+                                                        src="https://i0.hdslb.com/bfs/face/e1c03b788b0440e84c82c118a84e9ce2e0e8c572.jpg"/>
+                    </div>
+                    <div style="display: inline-flex;align-items: center;"> 未登录</div>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    <li><a class="justify-between" href="###" onclick="HTLogin()" style="color: red"> QQ登录 <span
+                            class="badge">无需注册</span> </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script> var base_vue = new Vue({
+    el: '#appHeader', data() {
+        return {path: "/sjz/",}
+    }, mounted() {
+    }, methods: {
+        windowOpen(url) {
+            window.open(url);
+        }, locationHref(url) {
+            window.location.href = url;
+        }, handleCommand(command) {
+        }
+    }
+})</script>
+<div class="flex desk-home">
+    <div id="appMenu" class="el-aside pt-3 pl-3 bg-base-100" style="">
+        <ul class="menu rounded-box w-56">
+            <li><a href="/sjz/v/index" menu-key="index" class="">首页</a></li>
+            <li><a href="/sjz/v/follow" menu-key="follow">我的关注</a></li>
+            <li><a href="https://orzice.com/" target="_blank" menu-key="sjzsjd">前往【三角洲数据帝】</a></li>
+            <li>
+                <details open>
+                    <summary>三角洲数据帝</summary>
+                    <ul>
+                        <li><a href="https://orzice.com/v/zb_ss" target="_blank"
+                               menu-key="zb_ss">【新版本】卡战备(V3.3)</a></li>
+                        <li><a href="https://orzice.com/v/zhanji" target="_blank" style="color: red" menu-key="task_s6">【独家】战绩日报查询详细版</a>
+                        </li>
+                        <li><a href="https://orzice.com/v/rihuo" target="_blank" style="color: red" menu-key="task_s6">玩家趋势统计！</a>
+                        </li>
+                        <li><a href="https://orzice.com/v/task_s6" target="_blank" style="color: red"
+                               menu-key="task_s6">S6赛季任务抢先看！</a></li>
+                        <li><a href="https://orzice.com/v/zb_diy" target="_blank"
+                               menu-key="zb_diy">DIY凑战备(自定义)</a></li>
+                        <li><a href="https://orzice.com/v/zb_top" target="_blank" menu-key="zb_top">实时假账排行榜</a>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>鼠鼠必备</summary>
+                    <ul>
+                        <li><a href="/sjz/v/mnq_sstc" menu-key="mnq_sstc">偷吃模拟器(开容器)</a></li>
+                        <li><a href="/sjz/v/scp_book" menu-key="scp_book">收藏品图鉴</a></li>
+                        <li><a href="/sjz/v/task_S5" menu-key="task_S5">S5赛季任务</a></li>
+                        <li><a href="/sjz/v/item_jz" menu-key="item_jz">物品单格价值</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li class="ad-guanggao">
+                <details open>
+                    <summary>金主赞助</summary>
+                    <ul>
+                        <li><a href="/sjz/v/support" menu-key="support">赞助我们</a></li>
+                        <li><a href="https://pxb7.com/api/promotion/s?p=M0Vpz2q" target="_blank"> <img
+                                src="https://api.acgice.com/img/px_1.png"> </a></li>
+                        <li><a href="https://www.zxfps.com/" target="_blank"> <img
+                                src="https://api.acgice.com/img/zxds.png"> </a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>特勤处</summary>
+                    <ul>
+                        <li><a href="/sjz/v/manufacture?t=1" menu-key="manufacture?t=1">技术中心</a></li>
+                        <li><a href="/sjz/v/manufacture?t=2" menu-key="manufacture?t=2">工作台</a></li>
+                        <li><a href="/sjz/v/manufacture?t=3" menu-key="manufacture?t=3">制药台</a></li>
+                        <li><a href="/sjz/v/manufacture?t=4" menu-key="manufacture?t=4">防具台</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>子弹</summary>
+                    <ul>
+                        <li><a href="https://orzice.com/v/ammo" target="_blank" menu-key="ammo">子弹列表</a></li>
+                        <li>
+                            <details open>
+                                <summary>子弹经济学</summary>
+                                <ul>
+                                    <li><a href="/sjz/v/ammo_pay" menu-key="ammo_pay">子弹涨跌Top</a></li>
+                                    <li><a href="/sjz/v/ammo_zr_yz" menu-key="ammo_zr_yz">昨日倒子弹最高收益</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li><a href="/sjz/v/ammo_top" menu-key="ammo_top">子弹自选包收益</a></li>
+                        <li><a href="/sjz/v/ammo_day" menu-key="ammo_day">子弹低价补货预测</a></li>
+                        <li><a href="/sjz/v/zb_ammo_day" menu-key="zb_ammo_day">今日子弹低价补货预测</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>钥匙卡</summary>
+                    <ul>
+                        <li><a href="https://orzice.com/v/keys" target="_blank" menu-key="keys">钥匙卡列表</a></li>
+                        <li><a href="/sjz/v/keys_day" menu-key="keys_day">钥匙卡低价补货预测</a></li>
+                        <li><a href="/sjz/v/keys_day_yc" menu-key="keys_day_yc">【明日】钥匙卡预测</a></li>
+                        <li><a href="/sjz/v/zb_keys_day" menu-key="zb_keys_day">今日钥匙卡低价预测</a></li>
+                        <li><a href="/sjz/v/zb_keys_day_yc" menu-key="zb_keys_day_yc">明日钥匙卡低价预测</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>枪械/装备/收集品</summary>
+                    <ul>
+                        <li><a href="https://orzice.com/v/zhanbei" target="_blank" menu-key="gun">武器</a></li>
+                        <li><a href="https://orzice.com/v/zhanbei" target="_blank" menu-key="acc">武器配件</a></li>
+                        <li><a href="https://orzice.com/v/zhanbei" target="_blank" menu-key="helmet">头盔</a></li>
+                        <li><a href="https://orzice.com/v/zhanbei" target="_blank" menu-key="armor">护甲</a></li>
+                        <li><a href="https://orzice.com/v/zhanbei" target="_blank" menu-key="chest">胸挂</a></li>
+                        <li><a href="https://orzice.com/v/zhanbei" target="_blank" menu-key="bag">背包</a></li>
+                        <li><a href="https://orzice.com/v/consume" target="_blank" menu-key="consume">消耗品</a></li>
+                        <li><a href="https://orzice.com/v/collection" target="_blank" menu-key="collection">收集品</a>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>实用工具</summary>
+                    <ul>
+                        <li><a href="https://orzice.com/v/map" target="_blank" menu-key="map">【强烈推荐】地图工具</a>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>其他</summary>
+                    <ul>
+                        <li><a href="/sjz/v/about" menu-key="about">开发人员与鸣谢</a></li>
+                        <li><a href="https://orzice.com/v/wenti" target="_blank" menu-key="wenti">问题反馈</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details open>
+                    <summary>共创社区</summary>
+                    <ul>
+                        <li><a href="/sjz/v/api_sq" menu-key="api_sq">【API】我们提供的接口</a></li>
+                        <li><a href="/sjz/v/tools_process" menu-key="tools_process">【共创】流程图制作工具</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li style="height: 80px;background-color: var(--root-bg, var(--color-base-100));"></li>
+        </ul>
+    </div>
+    <div class="ele-admin-shade" onclick="MenuView()"></div>
+    <script> var vueData = new Vue({
+        el: '#appMenu', data() {
+            return {active: "index", path: "/sjz/v/",}
+        }, mounted() {
+        }, methods: {
+            locationHref(url) {
+                window.location.href = url;
+            }, handleSelect(key) {
+                if (key == "" || !key) {
+                    return;
+                }
+                if (key == "pc") {
+                    window.open("https://www.acgice.com/doc/pack/sanjiaozhou.html");
+                    return;
+                }
+                this.locationHref(this.path + key);
+            }
+        }
+    });
+    $(function () {
+        $("#appMenu a").removeClass("menu-active");
+        $("#appMenu a[menu-key='index']").addClass("menu-active");
+        let menu_key = $("#appMenu a[menu-key='index']");
+        $("#appMenu").scrollTop(menu_key.offset().top - $("#appMenu").offset().top);
+    });
+
+    function MenuView() {
+        $("#appMenu").toggle();
+        if ($("#appMenu").is(':visible')) {
+            $(".ele-admin-shade").css("display", "block");
+        } else {
+            $(".ele-admin-shade").css("display", "none");
+        }
+    };</script>
+    <main id="app" class="el-main h-full fp-content">
+        <div class="premium-sponsor-container ad-guanggao" style="width: 97%;margin:10px 0px 10px 15px;"
+             @click="windowOpen('https://pxb7.com/api/promotion/s?p=M0Vpz2q')">
+            <div class="premium-ad-card" style="padding:10px">
+                <div class="bg-decoration">
+                    <div class="particle particle-1"></div>
+                    <div class="particle particle-2"></div>
+                    <div class="particle particle-3"></div>
+                    <div class="particle particle-4"></div>
+                    <div class="glow-effect glow-1"></div>
+                    <div class="glow-effect glow-2"></div>
+                    <div class="geometric-shape shape-1"></div>
+                    <div class="geometric-shape shape-2"></div>
+                </div>
+                <div class="ad-content">
+                    <div class="icon-section">
+                        <div class="main-icon" style="width:40px;height: 40px;margin-left: 10px">
+                            <div class="icon-bg"><span class="icon-emoji"> <img src="//api.acgice.com/img/jz_px_40.png"> </span>
+                            </div>
+                            <div class="icon-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <div class="title-area" style="margin-bottom:0">
+                            <div class="main-title" style="font-size: 16px">
+                                <div class="sponsor-badge" style="margin-bottom:0"><span class="badge-icon">💎</span>
+                                    <span class="badge-text">金主赞助</span>
+                                    <div class="badge-shine"></div>
+                                </div>
+                                <span class="title-highlight">上螃蟹，横行三角洲！ 绝版刀皮 / 千万哈夫币 低至50元</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action-section">
+                        <div class="cta-button" style="padding: 6px 12px;margin-right: 10px"><span
+                                class="cta-text">立即前往</span>
+                            <div class="cta-arrow">→</div>
+                            <div class="button-glow"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-glow"></div>
+            </div>
+        </div>
+        <div class="premium-sponsor-container ad-guanggao" style="width: 97%;margin:10px 0px 10px 15px;"
+             @click="windowOpen('https://www.zxfps.com/')">
+            <div class="premium-ad-card" style="padding:3px">
+                <div class="bg-decoration">
+                    <div class="particle particle-1"></div>
+                    <div class="particle particle-2"></div>
+                    <div class="particle particle-3"></div>
+                    <div class="particle particle-4"></div>
+                    <div class="glow-effect glow-1"></div>
+                    <div class="glow-effect glow-2"></div>
+                    <div class="geometric-shape shape-1"></div>
+                    <div class="geometric-shape shape-2"></div>
+                </div>
+                <div class="ad-content">
+                    <div class="content-section">
+                        <div class="title-area" style="margin-bottom:0;margin-left: 20px;">
+                            <div class="main-title" style="text-align: center;"><span class="title-highlight"
+                                                                                      style="font-size: 17px;">出哈夫币，来准星代售，效率高，有保障！三角洲经济学教父代言！</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-glow"></div>
+            </div>
+        </div>
+        <div style="width: 100%;text-align: center;font-size: 12px;color: #b3b3b3">
+            目前网站的运营成本很高，我们只会接一些靠谱的广告回血
+        </div>
+        <div role="alert" class="alert alert-warning mt-2" style="width: 100%;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <span>本网站作为腾讯热门游戏《三角洲行动》的攻略站点，为玩家提供各类实用攻略。本站所使用的游戏图片、素材版权归腾讯公司所有。</span>
+        </div>
+        <div class=" text-center" style="width: 100%;">
+            <div class=" text-center stats bg-base-500 shadow flex flex-wrap">
+                <div class="stat w-1/5">
+                    <div class="stat-title">零号大坝</div>
+                    <div class="stat-value text-success">{{map_pwd.a[0]}}</div>
+                    <div class="stat-desc">{{map_pwd.a[1]}}</div>
+                </div>
+                <div class="stat w-1/5">
+                    <div class="stat-title">长弓溪谷</div>
+                    <div class="stat-value text-info">{{map_pwd.b[0]}}</div>
+                    <div class="stat-desc">{{map_pwd.b[1]}}</div>
+                </div>
+                <div class="stat w-1/5">
+                    <div class="stat-title">巴克什</div>
+                    <div class="stat-value text-primary">{{map_pwd.c[0]}}</div>
+                    <div class="stat-desc">{{map_pwd.c[1]}}</div>
+                </div>
+                <div class="stat w-1/5">
+                    <div class="stat-title">航天基地</div>
+                    <div class="stat-value text-secondary">{{map_pwd.d[0]}}</div>
+                    <div class="stat-desc">{{map_pwd.d[1]}}</div>
+                </div>
+                <div class="stat w-1/5">
+                    <div class="stat-title">潮汐监狱</div>
+                    <div class="stat-value text-secondary">{{map_pwd.e?map_pwd.e[0]:'-'}}</div>
+                    <div class="stat-desc">{{map_pwd.e?map_pwd.e[1]:'-'}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="m-2"><h4 class="component-preview-title mt-2 mb-1 text-lg font-semibold">补卡预测</h4></div>
+        <div class="overflow-x-auto rounded-box border border-base-content/5 mt-2" style="width: 100%">
+            <table class="table table-pin-rows table-pin-cols">
+                <thead>
+                <tr>
+                    <th style="text-align: center;width: 80px">小时</th>
+                    <td>补卡</td>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,i) in keys_day" :key="item.id">
+                    <th style="text-align: center;">{{ item.hour}} 点</th>
+                    <td style="min-width: 500px" class="flex flex-wrap">
+                        <div v-for="(items,ii) in item.data" style="text-align: center;min-width: 100px;"
+                             :key="items.id" class="cursor-pointer m-2 " @click="GoLines(items.id,items.name,items)">
+                            <img style="display: block;margin: 0 auto;" class="size-10 rounded-box"
+                                 :data-grade="items.grade" :src="items.pic"/>
+                            <div class="mt-1">{{items.name}}</div>
+                            <div class="badge badge-outline badge-secondary" style=" ">{{NumQfw(items.price)}}</div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="m-2"><h4 class="component-preview-title mt-2 mb-1 text-lg font-semibold">特勤处 (总利润)</h4></div>
+        <div class="flex flex-wrap" style="width: 100%;">
+            <div class="w-1/2 sm:w-fulls" style="min-width: 280px">
+                <ul class="list bg-base-500 rounded-box shadow-md m-2">
+                    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">技术中心</li>
+                    <li class="list-row cursor-pointer" v-for="(item,i) in manufacture_1" :key="item.id"
+                        @click="GoLines(item.id,item.name,item)">
+                        <div><img class="size-10 rounded-box" :data-grade="item.grade" :src="item.pic"/></div>
+                        <div class="list-col-grow">
+                            <div>{{item.name}}</div>
+                            <div class="text-xs uppercase font-semibold opacity-60">每小时利润：<span>{{NumQfw(item.price_hour)}}</span>
+                            </div>
+                        </div>
+                        <div class="badge badge-success" style="color: #fff;width: 100px;">{{NumQfw(item.price)}}</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-1/2 sm:w-fulls" style="min-width: 280px">
+                <ul class="list bg-base-500 rounded-box shadow-md m-2">
+                    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">工作台</li>
+                    <li class="list-row cursor-pointer" v-for="(item,i) in manufacture_2" :key="item.id"
+                        @click="GoLines(item.id,item.name,item)">
+                        <div><img class="size-10 rounded-box" :data-grade="item.grade" :src="item.pic"/></div>
+                        <div class="list-col-grow">
+                            <div>{{item.name}}</div>
+                            <div class="text-xs uppercase font-semibold opacity-60">每小时利润：<span>{{NumQfw(item.price_hour)}}</span>
+                            </div>
+                        </div>
+                        <div class="badge badge-success" style="color: #fff;width: 100px;">{{NumQfw(item.price)}}</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-1/2 sm:w-fulls" style="min-width: 280px">
+                <ul class="list bg-base-500 rounded-box shadow-md m-2">
+                    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">制药台</li>
+                    <li class="list-row cursor-pointer" v-for="(item,i) in manufacture_3" :key="item.id"
+                        @click="GoLines(item.id,item.name,item)">
+                        <div><img class="size-10 rounded-box" :data-grade="item.grade" :src="item.pic"/></div>
+                        <div class="list-col-grow">
+                            <div>{{item.name}}</div>
+                            <div class="text-xs uppercase font-semibold opacity-60">每小时利润：<span>{{NumQfw(item.price_hour)}}</span>
+                            </div>
+                        </div>
+                        <div class="badge badge-success" style="color: #fff;width: 100px;">{{NumQfw(item.price)}}</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-1/2 sm:w-fulls" style="min-width: 280px">
+                <ul class="list bg-base-500 rounded-box shadow-md m-2">
+                    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">防具台</li>
+                    <li class="list-row cursor-pointer" v-for="(item,i) in manufacture_4" :key="item.id"
+                        @click="GoLines(item.id,item.name,item)">
+                        <div><img class="size-10 rounded-box" :data-grade="item.grade" :src="item.pic"/></div>
+                        <div class="list-col-grow">
+                            <div>{{item.name}}</div>
+                            <div class="text-xs uppercase font-semibold opacity-60">每小时利润：<span>{{NumQfw(item.price_hour)}}</span>
+                            </div>
+                        </div>
+                        <div class="badge badge-success" style="color: #fff;width: 100px;">{{NumQfw(item.price)}}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="m-2" style="width: 100%;">
+            <h4 class="component-preview-title mt-4 mb-3 text-lg font-semibold flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-primary" fill="none"
+                     viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                </svg>
+                限时活动
+            </h4>
+        </div>
+        <div class="activity-grid m-2 " v-if="huodong && huodong.length > 0" style="width: 100%;">
+            <div v-for="(activity, index) in huodong" :key="activity.id + '_' + index"
+                 class="activity-card rounded-lg shadow-lg bg-base-500 p-6 ml-2 ">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-primary flex items-center">
+                        <div class="activity-indicator mr-2"></div>
+                        {{ activity.name }}
+                    </h3>
+                    <div class="status-badge">进行中</div>
+                </div>
+                <div class="flex items-center text-sm opacity-70 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>{{ activity.start }} 至 {{ activity.end }}</span></div>
+                <div class="space-y-3"><h4 class="text-sm font-semibold opacity-80 mb-2">
+                    活动物品（点击查询刷新容器）：</h4>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div v-for="item in activity.item" :key="item.id"
+                             class="item-card flex items-center p-3 rounded-lg cursor-pointer"
+                             @click="goItemInfo(item)">
+                            <div class="flex-shrink-0 mr-4"><img :src="item.pic" :alt="item.name"
+                                                                 class="w-12 h-12 rounded-lg" :data-grade="item.grade">
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex items-center justify-between mb-1"><h5 class="font-semibold text-base">
+                                    {{ item.name }}</h5></div>
+                                <div class="price-trends-container">
+                                    <div class="price-period">
+                                        <div class="period-header">今日</div>
+                                        <div class="period-content">
+                                            <div class="price-value"
+                                                 :class="{ 'price-up': item.price.bl > 0, 'price-down': item.price.bl < 0, 'price-stable': item.price.bl === 0 }">
+                                                {{ NumQfw(item.price.price) }}
+                                            </div>
+                                            <div class="price-change"
+                                                 :class="{ 'price-up': item.price.bl > 0, 'price-down': item.price.bl < 0, 'price-stable': item.price.bl === 0 }">
+                                                {{ item.price.bl > 0 ? '+' : '' }}{{ item.price.bl }}%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="price-period">
+                                        <div class="period-header">7日</div>
+                                        <div class="period-content">
+                                            <div class="price-value"
+                                                 :class="{ 'price-up': item.price.day_7_bl > 0, 'price-down': item.price.day_7_bl < 0, 'price-stable': item.price.day_7_bl === 0 }">
+                                                {{ NumQfw(item.price.day_7_price) }}
+                                            </div>
+                                            <div class="price-change"
+                                                 :class="{ 'price-up': item.price.day_7_bl > 0, 'price-down': item.price.day_7_bl < 0, 'price-stable': item.price.day_7_bl === 0 }">
+                                                {{ item.price.day_7_bl > 0 ? '+' : '' }}{{ item.price.day_7_bl }}%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="price-period">
+                                        <div class="period-header">30日</div>
+                                        <div class="period-content">
+                                            <div class="price-value"
+                                                 :class="{ 'price-up': item.price.day_30_bl > 0, 'price-down': item.price.day_30_bl < 0, 'price-stable': item.price.day_30_bl === 0 }">
+                                                {{ NumQfw(item.price.day_30_price) }}
+                                            </div>
+                                            <div class="price-change"
+                                                 :class="{ 'price-up': item.price.day_30_bl > 0, 'price-down': item.price.day_30_bl < 0, 'price-stable': item.price.day_30_bl === 0 }">
+                                                {{ item.price.day_30_bl > 0 ? '+' : '' }}{{ item.price.day_30_bl }}%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 ml-2">
+                                <svg v-if="item.price.bl > 0" xmlns="http://www.w3.org/2000/svg"
+                                     class="h-5 w-5 price-up" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M7 11l5-5m0 0l5 5m-5-5v12"/>
+                                </svg>
+                                <svg v-else-if="item.price.bl < 0" xmlns="http://www.w3.org/2000/svg"
+                                     class="h-5 w-5 price-down" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M17 13l-5 5m0 0l-5-5m5 5V6"/>
+                                </svg>
+                                <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 price-stable opacity-50"
+                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%;">
+            <div class="mt-5 mb-5 text-center">
+                <div class="bg-base-200 rounded-lg p-4"><p class="text-sm text-base-content/70"><span
+                        class="font-medium">💡 温馨提示：</span> 我们的运营成本很高，如果您有能力的话,可以通过赞助的方式支持我们的运营
+                    <a href="/sjz/v/support" style="color:red;">点击我，前往赞助</a></p></div>
+            </div>
+            <div class="mt-5"><p style="font-size: 12px;color: #b3b3b3"> 本网站作为腾讯热门游戏《三角洲行动》的攻略站点，为玩家提供各类实用攻略。<br>
+                网站所使用的游戏图片、素材，版权归腾讯公司所有，仅用于非商业展示和游戏资料参考。<br>
+                网站数据皆来源于《三角洲行动》官方公开内容，若权利人认定存在侵权，可立即联系我们删除，本网站会及时处理。<br>
+                欢迎在抖音等短视频平台转载本站内容或制作视频发布，但请明确标注来源为“三角洲小涛查”，或采用其他显著的指引方式。<br>
+            </p></div>
+        </div>
+        <div style="height: 80px;width: 100%;"></div>
+    </main>
+</div>
+<script src="https://api.acgice.com/static/js/highcharts.js"></script>
+<style></style>
+<div id="LinesData" style="display: none;" class="relative z-200" aria-labelledby="modal-title" role="dialog"
+     aria-modal="true">
+    <div class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
+    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-lg bg-base-100 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                 style="max-width: 700px;min-width: 330px;">
+                <div class="bg-base-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:items-start ">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"><h3
+                                class="text-base font-semibold text-gray-900" id="modal-title"></h3>
+                            <div class="mt-2">
+                                <figure class="highcharts-figure">
+                                    <div id="container"></div>
+                                </figure>
+                                <div id="average"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-base-100 px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                    <button onclick="GoLinesHour()" class="btn btn-secondary">72小时</button>
+                    <button onclick="GoLinesDay(30)" class="btn btn-primary">30天</button>
+                    <button onclick="GoItemLines()" class="btn btn-secondary">详情</button>
+                    <button onclick="follow()" class="btn btn-secondary" style="position: fixed;right: 15px;">关注
+                    </button>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                    <button onclick="EndLines()" type="button"
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-base-100 px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto">
+                        关 闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>var jc_click = false;
+$(document).on('click', function (event) {
+    if (!jc_click) {
+        return;
+    }
+    const $target = $(event.target);
+    const $linesData = $('#LinesData .transform');
+    if (!$("#LinesData").is(':visible')) {
+        return;
+    }
+    if (!$linesData.is(event.target) && $linesData.has(event.target).length === 0 && $linesData.is(':visible')) {
+        EndLines();
+    }
+});
+let p_id = null;
+let p_name = null;
+let p_data = null;
+let cache = {};
+let cache_day = {};
+
+function GoLines(id, name, data) {
+    p_id = id;
+    p_name = name;
+    p_data = data;
+    GoLinesHour();
+}
+
+function follow() {
+    if (p_id == null) {
+        return;
+    }
+    let data = localStorage.getItem('follow');
+    if (data == null) {
+        data = [];
+    } else {
+        data = JSON.parse(data);
+    }
+    if (data.length >= 20) {
+        alert("最多关注20个");
+        return;
+    }
+    let obj = {name: p_name, id: p_id, pic: p_data.pic, grade: p_data.grade,};
+    let index = data.findIndex(item => item.id === p_id);
+    if (index !== -1) {
+        if (base_vue) {
+            base_vue.$message({message: '已经关注过了', type: 'error'});
+        } else {
+            alert("已经关注过了");
+        }
+    } else {
+        data.push(obj);
+        if (base_vue) {
+            base_vue.$message({message: '关注成功，可在关注列表中查看', type: 'success'});
+        } else {
+            alert("关注成功，可在关注列表中查看");
+        }
+    }
+    localStorage.setItem('follow', JSON.stringify(data));
+}
+
+var ErrorLinesId = [];
+
+function GoLinesHour() {
+    let p = " (72小时)";
+    if (cache[p_id]) {
+        ShowLines(p_name, cache[p_id].a, cache[p_id].b, p);
+        $("#LinesData").show();
+        return;
+    }
+    let Errtext = "不支持查看价格折线图";
+    if (p_id <= 0) {
+        GoItemLines();
+        if (base_vue) {
+            base_vue.$message({message: Errtext, type: 'error'});
+        } else {
+            alert(Errtext);
+        }
+        return;
+    }
+    if (ErrorLinesId.includes(p_id)) {
+        GoItemLines();
+        if (base_vue) {
+            base_vue.$message({message: Errtext, type: 'error'});
+        } else {
+            alert(Errtext);
+        }
+        return;
+    }
+    FuncShowLinesHour(p_id, Errtext, p);
+}
+
+function GoLinesDay(day) {
+    let p = " (" + day + "天)";
+    if (cache_day[p_id + "_" + day]) {
+        ShowLines(p_name, cache_day[p_id + "_" + day].a, cache_day[p_id + "_" + day].b, p);
+        $("#LinesData").show();
+        return;
+    }
+    FuncShowLinesDay(day, p);
+}
+
+function GoItemLines() {
+    if (p_id == null || p_id == 0) {
+        return;
+    }
+    window.open(vueData.path + "info/" + p_id);
+}
+
+function NumQfw(num) {
+    return Number(num).toLocaleString();
+}
+
+function ShowLines(name, title, data, p = "") {
+    $("#LinesData").show();
+    let min = Math.min(...data);
+    let max = Math.max(...data);
+    let average = (min + max) / 2;
+    let txt = "<span>最低：";
+    txt += `<div class="badge badge-success" style="color: rgb(255, 255, 255); width: 100px;">` + NumQfw(min) + `</div>`;
+    txt += "</span>";
+    txt += "<span class='pl-2'>平均：";
+    txt += `<div class="badge badge-secondary" style="color: rgb(255, 255, 255); width: 100px;">` + NumQfw(average) + `</div>`;
+    txt += "</span>";
+    $("#average").html(txt);
+    Highcharts.chart('container', {
+        title: {text: name + p, align: 'left'},
+        subtitle: {text: '数据来源于腾讯官方数据，仅供参考', align: 'left'},
+        yAxis: {title: {text: '价格'}},
+        xAxis: {accessibility: {rangeDescription: ''}, categories: title},
+        tooltip: {crosshairs: true, shared: true},
+        plotOptions: {series: {marker: {radius: 4, lineWidth: 1}}},
+        series: [{name: name, data: data}],
+        responsive: {
+            rules: [{
+                condition: {maxWidth: 700},
+                chartOptions: {legend: {layout: 'horizontal', align: 'center', verticalAlign: 'bottom'}}
+            }]
+        }
+    });
+    setTimeout(function () {
+        jc_click = true;
+    }, 500);
+}
+
+function EndLines() {
+    $("#LinesData").hide();
+    jc_click = false;
+}</script>
+<style> .activity-card {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.price-up {
+    color: #10B981;
+    font-weight: 600;
+}
+
+.price-down {
+    color: #EF4444;
+    font-weight: 600;
+}
+
+.price-stable {
+    color: #6B7280;
+}
+
+.activity-indicator {
+    width: 12px;
+    height: 12px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: pulse-indicator 2s infinite;
+}
+
+@keyframes pulse-indicator {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+.activity-grid .item-card {
+    transition: all 0.2s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background: transparent;
+    flex-direction: row;
+}
+
+.activity-grid .item-card:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(1.02);
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1rem;
+}
+
+.price-trends-container {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.price-period {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    padding: 0.5rem;
+    text-align: center;
+    min-width: 0;
+}
+
+.period-header {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.period-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.price-value {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    word-break: break-all;
+}
+
+.price-change {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    .stat-mobile {
+        width: calc(50% - 0.5rem) !important;
+        min-width: 140px !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .stats {
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .keys-day-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        min-width: auto !important;
+        padding: 0.5rem;
+    }
+
+    .keys-day-item {
+        text-align: center;
+        min-width: 80px;
+        flex: 0 0 auto;
+        margin: 0.25rem;
+    }
+
+    .price-trends-container {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+
+    .price-period {
+        flex: 1;
+        min-width: 70px;
+        padding: 0.375rem;
+    }
+
+    .period-header {
+        font-size: 10px;
+    }
+
+    .price-value {
+        font-size: 10px;
+    }
+
+    .price-change {
+        font-size: 9px;
+    }
+
+    .activity-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem;
+    }
+
+    .activity-card {
+        margin-left: 0 !important;
+        padding: 1rem !important;
+    }
+
+    .activity-grid .item-card {
+        padding: 0.75rem !important;
+    }
+
+    .activity-grid .item-card img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .w-1\/2 {
+        width: 100% !important;
+        min-width: auto !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .stat-mobile {
+        width: 20% !important;
+    }
+
+    .keys-day-items {
+        display: flex;
+        flex-wrap: wrap;
+        min-width: 500px;
+    }
+
+    .keys-day-item {
+        text-align: center;
+        min-width: 100px;
+        margin: 0.5rem;
+    }
+
+    .price-trends-container {
+        flex-wrap: nowrap;
+    }
+
+    .price-period {
+        min-width: 90px;
+    }
+}
+
+.status-badge {
+    background: linear-gradient(45deg, #10B981, #059669);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}</style>
+<script> var AppDataVue = new Vue({
+    el: '#app', data() {
+        return {
+            tips: false,
+            tips_error: false,
+            tips_title: "",
+            tips_desc: "",
+            map_pwd: {a: ['', ''], b: ['', ''], c: ['', ''], d: ['', ''],},
+            huodong: [],
+            manufacture_1: [],
+            manufacture_2: [],
+            manufacture_3: [],
+            manufacture_4: [],
+            keys_day: [],
+        }
+    }, mounted() {
+        this.getMapPwd();
+        this.getKeysDay();
+        this.getManufacture();
+        this.getTops();
+    }, methods: {
+        goItemInfo(key) {
+            if (key == "" || !key) {
+                return;
+            }
+            this.windowOpen(vueData.path + "info/" + key.id);
+        }, getKeysDay() {
+            $(document).ready(function () {
+                FuncGetKeysDay(1);
+            });
+        }, getMapPwd() {
+            $(document).ready(function () {
+                FuncMapPwd();
+            });
+        }, getTops() {
+            $(document).ready(function () {
+                FuncHuoDong();
+            });
+        }, getManufacture() {
+            $(document).ready(function () {
+                FuncGetManufacture("manufacture_" + 1, 1, 1);
+                FuncGetManufacture("manufacture_" + 2, 2, 1);
+                FuncGetManufacture("manufacture_" + 3, 3, 1);
+                FuncGetManufacture("manufacture_" + 4, 4, 1);
+            });
+        }, NumQfw(num) {
+            return Number(num).toLocaleString();
+        }, windowOpen(url) {
+            window.open(url);
+        }, locationHref(url) {
+            window.location.href = url;
+        }, jsonToUrlParam(json) {
+            return new URLSearchParams(json).toString();
+        }, Tips(title, desc, error) {
+            this.tips_title = title;
+            this.tips_desc = desc;
+            this.tips_error = error;
+            this.tips = true;
+        }
+    }
+})</script>
+<script> $(document).ready(function () {
+    if (navigator.userAgent.indexOf('Windows') !== -1 || navigator.userAgent.indexOf('Macintosh') !== -1) {
+    } else {
+        var laiyuan = document.referrer;
+        if (!laiyuan || laiyuan == "") {
+            laiyuan = localStorage.getItem("laiyuan");
+        }
+        if (laiyuan && laiyuan.indexOf(window.location.host) !== -1) {
+            laiyuan = localStorage.getItem("laiyuan");
+        }
+        if (laiyuan && laiyuan != "" && laiyuan.indexOf('xiaoheihe.cn') !== -1) {
+            $(".ad-guanggao").hide();
+            $("body").css("margin-top", "100px");
+            $("#app").css("height", "calc(100vh - 156px) !important");
+            localStorage.setItem("laiyuan", laiyuan);
+        }
+    }
+});</script>
+<script> var _hmt = _hmt || [];
+(function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?478a782a8156dd110651a25857abf563";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();</script>
+</body>
+</html>

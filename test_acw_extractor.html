@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACW TC Extractor 测试</title>
+</head>
+<body>
+    <h1>ACW TC Extractor 功能测试</h1>
+    <div id="output"></div>
+    
+    <script src="acw_tc_extractor.js"></script>
+    <script>
+        // 测试代码功能
+        console.log("开始测试 ACW TC Extractor...");
+        
+        // 测试随机ID生成
+        try {
+            const randomId = ka();
+            console.log("生成的随机ID:", randomId);
+            document.getElementById('output').innerHTML += `<p>随机ID: ${randomId}</p>`;
+        } catch (e) {
+            console.error("随机ID生成失败:", e);
+        }
+        
+        // 测试Base64编码
+        try {
+            const testData = '{"test": "data"}';
+            const encoded = Do(testData);
+            console.log("Base64编码结果:", encoded);
+            document.getElementById('output').innerHTML += `<p>Base64编码: ${encoded}</p>`;
+        } catch (e) {
+            console.error("Base64编码失败:", e);
+        }
+        
+        // 测试Cookie设置
+        try {
+            const cookieResult = set(
+                "test_cookie",
+                '{"test": "value"}',
+                1, // 1天过期
+                true,
+                undefined,
+                undefined,
+                "; domain=localhost"
+            );
+            console.log("Cookie设置结果:", cookieResult);
+            document.getElementById('output').innerHTML += `<p>Cookie设置: ${cookieResult}</p>`;
+        } catch (e) {
+            console.error("Cookie设置失败:", e);
+        }
+        
+        // 测试存储功能
+        try {
+            const storageResult = setStorage("test_storage", {"key": "value"}, {includes: ["localStorage"]});
+            console.log("存储设置结果:", storageResult);
+            document.getElementById('output').innerHTML += `<p>存储设置: ${JSON.stringify(storageResult)}</p>`;
+        } catch (e) {
+            console.error("存储设置失败:", e);
+        }
+        
+        // 测试数据解析
+        try {
+            const testString = "eebe63203aaaaf3519819c86d11901942433edb69c48c548626b79cbf1f8624a:cddacd4903bcbc6bd6d8bb6a0d44961ca34f91bf2ed112d4300b40eda5691af7b3f9aecfc6d6162a882fc8308eb4951e05b18cf6318fd1d635c10a22e2758f5575cbeba071979d695c3261cc5dee2a1e1e985682414625929026437e91b63bc6:1760875455701";
+            const parsed = f(testString);
+            console.log("数据解析结果:", parsed);
+            document.getElementById('output').innerHTML += `<p>数据解析: ${parsed}</p>`;
+        } catch (e) {
+            console.error("数据解析失败:", e);
+        }
+        
+        console.log("测试完成!");
+    </script>
+</body>
+</html>

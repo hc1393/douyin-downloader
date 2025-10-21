@@ -4,6 +4,16 @@ Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 content-length: 0
 
+<> 2025-10-21T185233.200.html
+
+###
+
+GET https://www.acgice.com/sjz/
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
 <> 2025-09-18T130246.200.html
 
 ###

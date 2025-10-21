@@ -70,6 +70,31 @@ class Commons:
             self.manage_sessions()
             time.sleep(5)  # 每5秒检查一次
 
+    def load_wechatEx_cookie_hook(self):
+        path = self.wechatutils_instance.get_configs_path()
+        if get_cpu_architecture() == "MacOS x64":
+            wechat_instances = self.wechatutils_instance.get_wechat_pids_and_versions_mac()
+        else:
+            wechat_instances = self.wechatutils_instance.get_wechat_pids_and_versions()
+
+        if wechat_instances:
+            for pid, version in wechat_instances:
+                try:
+                    cookie_hook_code = open(path + "../scripts/cookie_hook.js", "r", encoding="utf-8").read()
+                    session = self.inject_wechatEx(pid, cookie_hook_code)
+                    if session:
+                        self.active_sessions.append(session)
+                    print(Color.GREEN +f"[+] 成功注入{version}小程序Cookie监控，PID: {pid}", Color.END)
+                except Exception as e:
+                    print(Color.RED + f"[-] 注入{version}小程序Cookie监控失败！", Color.END)
+        else:
+            self.wechatutils_instance.print_process_not_found_message()
+
+        # 管理会话
+        while self.active_sessions:
+            self.manage_sessions()
+            time.sleep(5)  # 每5秒检查一次
+
     def load_wechatEXE_configs(self):
         wechat_instances = self.wechatutils_instance.get_wechat_pids_and_versions()
         if wechat_instances:

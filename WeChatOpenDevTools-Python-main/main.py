@@ -17,12 +17,14 @@ def main():
                         [+] python  main.py -x  开启小程序F12              
                         [+] python  main.py -c  开启内置浏览器F12
                         [+] python  main.py -all   开启内置浏览器F12与小程序F12
+                        [+] python  main.py -cookie 跟踪小程序Cookie
                                      
     """
     parser = argparse.ArgumentParser(description=HELPALL, formatter_class=RawTextHelpFormatter)
     parser.add_argument('-x', action='store_true', help='开启小程序F12')
     parser.add_argument('-c', action='store_true', help='开启内置浏览器F12')
     parser.add_argument('-all', action='store_true', help='开启内置浏览器F12与小程序F12')
+    parser.add_argument('-cookie', action='store_true', help='跟踪小程序Cookie')
     args = parser.parse_args()
 
     if args.x:
@@ -31,6 +33,8 @@ def main():
         commons.load_wechatEXE_configs()
     elif args.all:
         commons.load_wechatEXE_and_wechatEx()
+    elif args.cookie:
+        commons.load_wechatEx_cookie_hook()
     else:
 
         print_colored_message(HELPALL, Color.RED)
