@@ -20,7 +20,7 @@ def get_cookie(time):
   return result
 
 
-def fetch_request():
+def fetch_request(cityid):
     time = int(datetime.now().timestamp()*1000)
     fronttraceid=get_url(time)
     cookie=get_cookie(time)
@@ -40,8 +40,7 @@ def fetch_request():
     #     "src": "WEB"
     # }
     params = {
-        "bizFrontendCategoryId": "63f9bed409eccc0001cc32aa",
-        "cityId": "BL1034",
+        "cityId":cityid,
         "lang": "zh",
         "length": "10",
         "offset": "0",
@@ -126,7 +125,7 @@ def save_to_csv(data, filename='演出数据.csv'):
     print(f"数据已保存到 {filename}")
 
 
-def fetch_show_detail(showid):
+def fetch_show_detail(cityid,showid,siteid):
     url = 'https://m.piaoxingqiu.com/cyy_gatewayapi/show/pub/v5/show/'+showid+'/static'
 
     params = {
@@ -135,9 +134,9 @@ def fetch_show_detail(showid):
         "utcOffset": "480",
         "ver": "4.45.3",
         "src": "WEB",
-        "cityId": "BL1034",
+        "cityId": cityid,
         "source": "FROM_QUICK_ORDER",
-        "siteId": "6268b17853245f055f21d677"
+        "siteId": siteid
     }
 
     headers = {
@@ -166,12 +165,56 @@ def fetch_show_detail(showid):
     # 返回JSON响应
     return response.json()
 
-if __name__ == "__main__":
-    # 获取原始响应数据
-    response_data = fetch_request()
-    print("原始响应数据:")
-    print(json.dumps(response_data, ensure_ascii=False, indent=2))
+def load_cities_from_csv(filename='城市数据.csv'):
+    """
+    从CSV文件中加载城市数据
+    """
+    cities = []
+    try:
+        with open(filename, 'r', encoding='utf-8-sig') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                cities.append({
+                    'cityId': row['cityId'],
+                    'siteId': row['siteId']
+                })
+    except FileNotFoundError:
+        print(f"未找到文件 {filename}，请先运行城市列表请求.py 生成城市数据")
+    return cities
 
+def load_shows_from_csv(filename='演出数据.csv'):
+    """
+    从CSV文件中加载演出数据
+    """
+    shows = []
+    try:
+        with open(filename, 'r', encoding='utf-8-sig') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                shows.append({
+                    'showId': row['showId'],
+                    'showName': row['showName']
+                })
+    except FileNotFoundError:
+        print(f"未找到文件 {filename}，请先获取演出数据")
+    return shows
+
+if __name__ == "__main__":
+    # 从城市数据CSV文件中读取城市信息
+    cities = load_cities_from_csv()
+    if not cities:
+        print("请先运行城市列表请求.py生成城市数据文件")
+        exit()
+    
+    # 使用第一个城市进行演示
+    city = cities[0]
+    cityid = city['cityId']
+    siteid = city['siteId']
+    
+    print(f"使用城市ID: {cityid}, 站点ID: {siteid}")
+    
+    # 获取原始响应数据
+    response_data = fetch_request(cityid)
     # 提取指定字段
     extracted_data = extract_show_data(response_data)
     print("\n提取后的数据:")
@@ -179,3 +222,15 @@ if __name__ == "__main__":
 
     # 保存到CSV文件
     save_to_csv(extracted_data)
+    
+    # 如果有演出数据，则获取第一个演出的详细信息
+    if extracted_data:
+        show = extracted_data[0]
+        showid = show['showId']
+        show_name = show['showName']
+        print(f"\n获取演出 '{show_name}' 的详细信息...")
+        
+        # 获取演出详细信息
+        detail_data = fetch_show_detail(cityid, showid, siteid)
+        print("演出详细信息:")
+        print(json.dumps(detail_data, ensure_ascii=False, indent=2))
