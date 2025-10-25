@@ -1,3 +1,0 @@
-<view class="std-rich-text">
-    <rich-text nodes="{{nodes}}"></rich-text>
-</view>

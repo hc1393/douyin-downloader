@@ -1,7 +1,0 @@
-<view class="mt-8rpx" wx:if="{{attributesData&&attributesData.length}}">
-    <block wx:for="{{attributesData}}" wx:key="id">
-        <sku-selector bindchange="skuChange" groupData="{{item}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" wx:if="{{item.skuType==='property'}}"></sku-selector>
-        <attach-selector bindattachImgShowChange="attachImgShowChange" bindchange="chargingChange" bindshowMore="chargingShowMore" groupAttach="{{item}}" siteConfig="{{goodsDetailData}}" textColor="{{textColor}}" wx:elif="{{item.skuType==='attach'}}"></attach-selector>
-    </block>
-</view>
-<wxs module="tools" src="../../wxs/tools22b08362.wxs"/>

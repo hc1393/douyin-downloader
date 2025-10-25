@@ -1,5 +1,0 @@
-<view class="flex {{flexDirection==='column'?'w-200 items-center justify-center flex-col':'items-baseline'}}">
-    <coupon-sale couponInfo="{{couponInfo}}" error="{{disabled}}"></coupon-sale>
-    <view class="{{'text-22 leading-31 '+(disabled?'c-_h_999':'c-_h_666')}}" wx:if="{{couponInfo.category===13&&couponInfo.useChannel.length==1&&couponInfo.useChannel[0]==2}}">限线下使用</view>
-    <view class="{{'text-22 leading-31 '+(disabled?'c-_h_999':'c-_h_666')+' '+(flexDirection==='row'?'pl-10':'')}}" wx:elif="{{couponInfo.category!==13&&couponInfo.thresholdType!==1}}">满{{couponInfo.useThreshold||0}}{{couponInfo.thresholdType==2?'元':''}}{{couponInfo.thresholdType==3?'件':''}}{{couponInfo.thresholdType==4?'千克':''}}可用</view>
-</view>

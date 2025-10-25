@@ -1,8 +1,0 @@
-<config-provider>
-    <view class="{{'flex flex-col h-screen '+(isNotLastStep?'bg-primary-opacity-20':'bg-_bl__h_FFF_br_')}}" wx:if="{{isLoaded}}">
-        <std-navigation-bar background="transparent" title="{{_i1}}"></std-navigation-bar>
-        <steps activeStep="{{activeStep}}" bindchange="onStepChange" steps="{{steps}}" wx:if="{{isNotLastStep}}"></steps>
-        <assets-move-step-form activeStep="{{activeStep}}" bindnextStep="toNextStepCb" class="min-h-0 flex-1" id="__std_assetsMoveStepForm"></assets-move-step-form>
-    </view>
-    <std-design-mp-loading wx:else></std-design-mp-loading>
-</config-provider>

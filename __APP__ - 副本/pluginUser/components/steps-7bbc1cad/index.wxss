@@ -1,1 +1,0 @@
-.dash-line{position:relative}.dash-line:before{border-top:2rpx dashed var(--std-primary-color-opacity-40);content:"";height:1rpx;left:56rpx;position:absolute;top:24rpx;width:120rpx}

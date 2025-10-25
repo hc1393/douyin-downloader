@@ -1,4 +1,0 @@
-<view class="w-full text-center py-24 lh-_bl_1_br_ text-24">
-    <view class="std-load-more"></view>
-    <view class="inline-block align-middle">{{text}}</view>
-</view>

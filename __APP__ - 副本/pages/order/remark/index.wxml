@@ -1,6 +1,0 @@
-<textarea bindinput="remarkInput" class="remark-textarea _638e961d mpx-app-scope" placeholder="{{placeholder}}" value="{{remark}}"></textarea>
-<view class="remark-fast _638e961d mpx-app-scope" wx:if="{{remarkSelect&&remarkSelect.length}}">
-    <view class="remark-fast-title _638e961d mpx-app-scope">{{_i1}}</view>
-    <view bindtap="selectRemark" class="remark-fast-item _638e961d mpx-app-scope" data-content="{{item}}" wx:for="{{remarkSelect}}" wx:key="index">{{item}}</view>
-</view>
-<view bindtap="submitRemark" class="remark-btn _638e961d mpx-app-scope" style="background-color: {{colorTheme||'#F2B940'}};">{{_i2}}</view>

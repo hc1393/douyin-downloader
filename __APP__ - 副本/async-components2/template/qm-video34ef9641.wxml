@@ -1,6 +1,0 @@
-<template name="qm-video">
-    <view class="w-_bl_100_p__br_ h-400rpx" style="{{data&&data.miniStyle}}" wx:if="{{data.propsValue.url||data.propsValue.poster}}">
-        <video controls showMuteBtn autoplay="{{data&&data.propsValue&&data.propsValue.isPlayAuto}}" class="w-_bl_100_p__br_ h-_bl_100_p__br_" customCache="{{false}}" loop="{{data&&data.propsValue&&data.propsValue.loop}}" poster="{{__oss__.s(mpxExt,data.propsValue.poster?data.propsValue.poster:data.propsValue.coverImg?data.propsValue.coverImg+'?x-oss-process=image/resize,w_1200':'',0)}}" referrerPolicy="origin" showCenterPlayBtn="{{false}}" src="{{data.propsValue.url}}"></video>
-    </view>
-</template>
-<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

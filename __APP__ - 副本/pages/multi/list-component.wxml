@@ -1,7 +1,0 @@
-<std-navigation-bar class=" _63263d1d mpx-app-scope" linearGradientBackground="background:#fff;" title="选择适用门店" titleColor="#333" transparentBack="true"></std-navigation-bar>
-<v-header bindauthorizeLocation="authorizeLocation" class=" _63263d1d mpx-app-scope" isLocation="{{isLocation}}" shopList="{{shopList}}" wx:if="{{fromType==='couponGoodsListIndex'}}"></v-header>
-<v-map class=" _63263d1d mpx-app-scope" map="{{map}}" wx:if="{{showMap}}"></v-map>
-<v-search bindclearNameOrAddress="clearNameOrAddress" bindgetMultiData="getMultiData" bindinitShopListData="initShopListData" bindselectOtherCity="selectOtherCity" bindupdateProperty="updateProperty" class=" _63263d1d mpx-app-scope" curAddressCity="{{curAddressCity}}" multiHeaderTopNotWeChat="{{multiHeaderTopNotWeChat}}"></v-search>
-<v-list bindauthorizeLocation="authorizeLocation" bindhandleSelect="handleSelect" bindupdateProperty="updateProperty" class=" _63263d1d mpx-app-scope" curAddressCity="{{curAddressCity}}" fromType="{{fromType}}" id="vList" isLocation="{{isLocation}}" nameOrAddress="{{nameOrAddress}}" shopList="{{shopList}}" zmLoading="{{zmLoading}}" wx:if="{{loading}}"></v-list>
-<zm-loading class=" _63263d1d mpx-app-scope" wx:else></zm-loading>
-<zm-loading class=" _63263d1d mpx-app-scope" wx:if="{{selectedLoading}}"></zm-loading>

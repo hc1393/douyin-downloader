@@ -1,5 +1,0 @@
-<view class="overlay _78c7cd99 " wx:if="{{isShowLoading&&isShowOverlay}}">
-    <image class="design-loading-img _78c7cd99 " lazyLoad="true" src="{{__oss__.s(mpxExt,currentImgSrc,0)}}"></image>
-</view>
-<image class="design-loading-img _78c7cd99 " lazyLoad="true" src="{{__oss__.s(mpxExt,currentImgSrc,0)}}" wx:elif="{{isShowLoading}}"></image>
-<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

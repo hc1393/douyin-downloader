@@ -1,6 +1,0 @@
-<view bindtap="close" class="fixed top-0 left-0 right-0 bottom-0 {{show?'':'invisible'}} _14750d9b " style="z-index: {{zIndex}}">
-    <view bindtap="onMaskClick" class="absolute top-0 left-0 right-0 bottom-0 box-border {{fadeShow?'opacity-in':'opacity-out'}} _14750d9b " style="background-color: {{maskColor}}; z-index: {{zIndex+1}}" wx:if="{{isMask}}"></view>
-    <view class="absolute left-72 right-72 bottom-0 flex justify-center items-center transition-all ease-in-out duration-250 {{fadeShow?'top-0 scale-100 opacity-100':'top-100 scale-50 opacity-0'}} _14750d9b " style="z-index: {{zIndex+2}}; left: {{left}}rpx; right: {{right}}rpx;">
-        <slot class=" _14750d9b "></slot>
-    </view>
-</view>

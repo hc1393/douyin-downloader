@@ -1,7 +1,0 @@
-<view class="{{' fixed left-24 right-24 z-9 h-64 bg-_bl_rgba_pl_51_2c_51_2c_51_2c_0_d_9_pr__br_ px-16 py-8 rd-8 box-border flex justify-between items-center '+(navTemplate==='normal-one'?'bottom-_bl_calc_pl_env_pl_safe-area-inset-bottom_pr__a_120rpx_pr__br_':'')+' '+(navTemplate==='main-pic'?'bottom-_bl_calc_pl_env_pl_safe-area-inset-bottom_pr__a_132rpx_pr__br_':'')+' '+(navTemplate==='normal-two'?'bottom-_bl_calc_pl_env_pl_safe-area-inset-bottom_pr__a_140rpx_pr__br_':'')+' '+(navTemplate==='concave'?'bottom-_bl_calc_pl_env_pl_safe-area-inset-bottom_pr__a_132rpx_pr__br_':'')+' '+(navTemplate==='concave-top-round'?'bottom-_bl_calc_pl_env_pl_safe-area-inset-bottom_pr__a_132rpx_pr__br_':'')+' '}}" wx:if="{{isShow}}">
-    <view class="h-full flex items-center">
-        <text class="i-md-information-circle-outline text-32 text-_bl__h_FFF_br_ mr-8 lh-_bl_1_br_"></text>
-        <text class="text-26 text-_bl__h_FFF_br_ lh-_bl_1_br_">{{tips}}</text>
-    </view>
-    <button bindtap="toRevokeCancel" class="button button-primary h-full px-20 py-7 rd-full text-24">{{_i1}}</button>
-</view>

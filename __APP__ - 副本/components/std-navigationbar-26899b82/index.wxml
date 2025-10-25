@@ -1,5 +1,0 @@
-<index-wx background="{{background}}" backgroundImage="{{backgroundImage}}" bindgetNavHeight="getNavHeight" bindsearch="search" confirmBack="{{confirmBack}}" confirmText="{{confirmText}}" customerTheme="{{customerTheme}}" delta="{{delta}}" fixed="{{fixed}}" isShowBack="{{isShowBack}}" linearGradientBackground="{{linearGradientBackground}}" notShowHome="{{notShowHome}}" onlyShowHome="{{onlyShowHome}}" shouldExtNavColor="{{shouldExtNavColor}}" showPinNav="{{showPinNav}}" showSearch="{{showSearch}}" showStoreName="{{showStoreName}}" title="{{title}}" titleColor="{{titleColor}}" transparentBack="{{transparentBack}}">
-    <slot name="left" slot="left"></slot>
-    <slot name="center" slot="center"></slot>
-    <slot name="right" slot="right"></slot>
-</index-wx>

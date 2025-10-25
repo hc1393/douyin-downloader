@@ -1,6 +1,0 @@
-<view bindtap="toggleShop" class="flex items-center">
-    <text class="text-36rpx text-_bl__h_666666_br_ i-dizhi_huaban"></text>
-    <text class="truncate text-30rpx text-_bl__h_333333_br_ pl-10rpx">{{shop.current&&shop.current.name||'未获取到门店信息，请选择'}}</text>
-    <text class="text-24rpx text-_bl__h_999999_br_ px-10rpx py-0 whitespace-nowrap" wx:if="{{shop.toUserDistance}}">距您{{shop.toUserDistance}}</text>
-    <text class="text-36rpx text-_bl__h_666666_br_ i-qiehuan1 text-right flex-1"></text>
-</view>

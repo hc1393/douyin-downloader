@@ -1,4 +1,0 @@
-<view class="location-auth-view box-border flex items-center justify-between text-24rpx _752c5b1a " wx:if="{{!isLocation&&shopList.length}}">
-    <view class=" _752c5b1a ">授权当前定位可查看门店距离</view>
-    <view bindtap="authorizeLocation" class="location-auth-btn h-48rpx text-white flex justify-center items-center _752c5b1a ">去授权</view>
-</view>

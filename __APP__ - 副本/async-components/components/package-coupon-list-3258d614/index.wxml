@@ -1,3 +1,0 @@
-<view class="coupon-contain-main">
-    <coupon-marketing-item coupon="{{item}}" storeApplyShowConfig="{{storeApplyShowConfig}}" wx:for="{{coupons}}" wx:key="id"></coupon-marketing-item>
-</view>

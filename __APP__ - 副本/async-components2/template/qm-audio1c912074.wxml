@@ -1,5 +1,0 @@
-<template name="qm-audio">
-    <view class="flex justify-center" style="{{data&&data.miniStyle}}" wx:if="{{data.propsValue.url}}">
-        <audio controls author="{{data.propsValue.author||''}}" autoplay="{{data&&data.propsValue&&data.propsValue.isPlayAuto?data.propsValue.isPlayAuto:true}}" loop="{{data.propsValue.loop}}" name="{{data.propsValue.title||''}}" poster="{{data.propsValue.coverImg?data.propsValue.coverImg+'?x-oss-process=image/resize,w_1200':''}}" src="{{data.propsValue.url}}"></audio>
-    </view>
-</template>

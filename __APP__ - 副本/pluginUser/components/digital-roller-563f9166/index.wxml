@@ -1,9 +1,0 @@
-<config-provider>
-    <view class="inline-flex justify-between items-center">
-        <view class="overflow-hidden" style="width:{{cellWidth}};height:{{height+'px'}}" wx:for="{{columns}}" wx:key="index">
-            <view class="column flex flex-col justify-center items-center" style="transform:translate3d(0, -{{keys[index]*height}}px, 0);transition-duration:{{duration}}s;transition-timing-function:{{animation}}">
-                <view class="flex justify-center items-center text-primary" style="font-size:{{size+'rpx'}};font-weight:{{bold?'bold':'normal'}};height:{{height+'px'}};line-height:{{size+'rpx'}}" wx:for="{{item}}" wx:for-index="idx" wx:for-item="val" wx:key="idx">{{val}}</view>
-            </view>
-        </view>
-    </view>
-</config-provider>

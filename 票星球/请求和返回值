@@ -1,0 +1,1120 @@
+fetch("https://gator.volces.com/list", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+    "cache-control": "no-cache",
+    "content-type": "application/json; charset=UTF-8",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+    "sec-ch-ua-mobile": "?1",
+    "sec-ch-ua-platform": "\"Android\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://m.piaoxingqiu.com/",
+  "body": "[{\"events\":[{\"event\":\"leave_page\",\"params\":\"{\\\"fromPage\\\":\\\"pages/list/list\\\",\\\"loadDuration\\\":22023,\\\"displayDuration\\\":22023,\\\"trackSessionId\\\":\\\"06061f02050308a61a0448530f072106\\\",\\\"cityId\\\":\\\"BL1034\\\",\\\"siteID\\\":\\\"6268b17853245f055f21d677\\\",\\\"event_index\\\":1761226718989}\",\"local_time_ms\":1761226720349,\"is_bav\":0,\"session_id\":\"9f96a7ef-835c-4eaf-bb96-b1faca0aa7fb\"},{\"event\":\"click_show\",\"params\":\"{\\\"module\\\":\\\"HOME_PAGE\\\",\\\"fromPage\\\":\\\"pages/list/list\\\",\\\"showId\\\":\\\"68bfd0ef6e8a8400018918cd\\\",\\\"showName\\\":\\\"【沈阳】2025陈小春 生∙旦∙净∙末∙丑巡回演唱会-沈阳站\\\",\\\"loadDuration\\\":12,\\\"trackSessionId\\\":\\\"06061f02050308a61a0448530f072106\\\",\\\"cityId\\\":\\\"BL1034\\\",\\\"siteID\\\":\\\"6268b17853245f055f21d677\\\",\\\"event_index\\\":1761226718988}\",\"local_time_ms\":1761226720341,\"is_bav\":0,\"session_id\":\"9f96a7ef-835c-4eaf-bb96-b1faca0aa7fb\"}],\"user\":{\"user_unique_id\":\"6474309bcb521200018c8594\",\"web_id\":\"7562803883399986700\"},\"header\":{\"app_id\":20009669,\"os_name\":\"android\",\"os_version\":\"6.0\",\"device_model\":\"Nexus 5\",\"language\":\"zh-CN\",\"platform\":\"wap\",\"sdk_version\":\"5.2.9_tob\",\"sdk_lib\":\"js\",\"timezone\":8,\"tz_offset\":-28800,\"resolution\":\"414x554\",\"browser\":\"Microsoft Edge\",\"browser_version\":\"141.0.0.0\",\"referrer\":\"https://m.piaoxingqiu.com/\",\"referrer_host\":\"m.piaoxingqiu.com\",\"width\":414,\"height\":554,\"screen_width\":414,\"screen_height\":554,\"custom\":\"{\\\"terminalSrc\\\":\\\"H5\\\",\\\"version\\\":\\\"4.45.1\\\",\\\"product\\\":\\\"PIAOXINGQIU\\\",\\\"merchantId\\\":\\\"6267a80eed218542786f1494\\\",\\\"userId\\\":\\\"6474309bcb521200018c8594\\\",\\\"origin_referrer\\\":\\\"https://m.piaoxingqiu.com/\\\",\\\"origin_referrer_host\\\":\\\"m.piaoxingqiu.com\\\"}\"},\"local_time\":1761226720,\"verbose\":1}]",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+});
+返回值
+{
+    "Type": "Web/Mp(MiniProgram)",
+    "e": 0,
+    "message": "success",
+    "sc": 1,
+    "server_time": 1761226719,
+    "tc": 1
+}
+---------------------------------------------------------------------------------------
+
+fetch("https://m.piaoxingqiu.com/cyy_gatewayapi/show/pub/v5/show/68bfd0ef6e8a8400018918cd/static?lang=zh&terminalSrc=H5&utcOffset=480&ver=4.45.1&src=H5&cityId=BL1034&source=FROM_QUICK_ORDER&siteId=6268b17853245f055f21d677", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+    "access-token": "eyJ0eXAiOiJKV1QiLCJjdHkiOiJKV1QiLCJ6aXAiOiJERUYiLCJhbGciOiJSUzUxMiJ9.eNqEj8sKwjAQRf9l1l0kaZqkXSqIgiKIrqWPEYJtU9oU1NJ_d1LBpW5mMffcM8wE44D9rr05yCYo7GvtKoQMNtv99QARDGOx-i6VUDo3DLES3CRSaKNuXKaSOGpegqgKmNQyZmlRFonggjHGTWmSBWt8-Q8TH9vJ1XSyHet6jqDLe2-9dW2oUe7dHdsgCfmCHzvsc-9-mmNqlj3mHs-2ITnXirNUppqGJOmzC8sI8NEtoaIHKZzfAAAA__8.ST4B_vcRyCGfgkylDTdosGLmDADYNc7AElGAZwJWkJxK-9Kg2mE7GBaQ17cFQmjiu378oA2KWcs5AML9MRYwMjj7KTzfFfcgWj5dF_4X2IP1MVFp6hub5FNuPlW4dCmDh3konOuDVkPiktgf458HU4v6jgsItvAqZGW2vCj24jo",
+    "angry-dog": "dhivnAn4HQJ27dpVPQFUmrNR5aO4KV8kRQndNTynzOiZ6ZReA-lWohf1s9H5g0qGW8AaNWZ3_O-_F5dEKK20UCyGJZupFoUFD51gb_3wlcLQ-BTQSZwr0ffnPCxQEiJcWEpHek8wcVUwSEp3UGN5Wg.WyIxLjAuMCIsIkg1Il0",
+    "cache-control": "no-cache",
+    "front-trace-id": "mh3gwzbds7fz3xa1und",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+    "sec-ch-ua-mobile": "?1",
+    "sec-ch-ua-platform": "\"Android\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "src": "H5",
+    "terminal-src": "H5",
+    "utc-offset": "480",
+    "ver": "4.45.1"
+  },
+  "referrer": "https://m.piaoxingqiu.com/content/68bfd0ef6e8a8400018918cd?showId=68bfd0ef6e8a8400018918cd",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+});
+------响应值
+{
+    "statusCode": 200,
+    "comments": "成功",
+    "mode": 0,
+    "result": {},
+    "data": {
+        "rsCode": 200,
+        "basicInfo": {
+            "hotMode": true,
+            "stdShowId": "68bfd0ef6e8a8400018918cb",
+            "bizShowId": "68bfd0ef6e8a8400018918cd",
+            "showName": "【沈阳】2025陈小春 生∙旦∙净∙末∙丑巡回演唱会-沈阳站",
+            "sourceType": "SELF_BUILT_EXTERNAL_PRODUCE",
+            "originalSeatPickType": "SUPPORT_NONE",
+            "contentUrl": "https://cdn.ticketmars.com/prod/showContent/68bfd0ef6e8a8400018918cd/content_68ec5bfa03d6c70001b82d48.content",
+            "posterUrl": "https://cdn.ticketmars.com/image/prod/20251001_75/17592967804294791.png",
+            "posterColor": "#8c2f2bff",
+            "venueId": "687769f55632f30001e207e4",
+            "venueName": "三生制药体育馆（原辽宁体育馆）",
+            "venueAddress": "沈阳市浑南区浑南中路32号（奥体中心西侧）",
+            "venueLat": 41.739936,
+            "venueLng": 123.458607,
+            "cityId": "BL1070",
+            "cityName": "沈阳市",
+            "onSaleShowCount": 1,
+            "showTags": [],
+            "authorizationUrl": "",
+            "minOriginalPriceInfo": {
+                "currency": "CNY",
+                "yuanNum": "480",
+                "centNum": "",
+                "suffix": "",
+                "prefix": "¥"
+            },
+            "maxOriginalPriceInfo": {
+                "currency": "CNY",
+                "yuanNum": "1380",
+                "centNum": "",
+                "suffix": "",
+                "prefix": "¥"
+            },
+            "showDate": "2025年11月22日 - 11月23日",
+            "showDuration": "以现场为准",
+            "seatPlanURL": "https://cdn.ticketmars.com/image/prod/20251013_95/17603204993959306.png",
+            "displayAdvance": false,
+            "venueDisplayAdvance": false,
+            "sessionDisplayAdvance": false,
+            "seatPlanDisplayAdvance": false,
+            "showType": {
+                "name": "YanChangHui"
+            },
+            "showDetailStatus": "PRE_SALE",
+            "existsPrivilegePurchase": false,
+            "displayCountdownTime": true,
+            "captchaTypes": [],
+            "tourId": "67da81908d42e10001817a09",
+            "currency": "CNY",
+            "serviceFeeConfigInfo": {
+                "bizShowId": "68bfd0ef6e8a8400018918cd"
+            },
+            "utcOffset": 480,
+            "localTimeTxt": "（活动当地时间）",
+            "displayFraudFlag": true
+        },
+        "additionalInfo": {
+            "hasCoupon": true,
+            "hasPromo": false,
+            "hasAddPurchase": false,
+            "hasPaymentDiscount": false,
+            "hasUserPromo": false,
+            "hasPCard": false,
+            "hasPriority": false,
+            "hasChannelDiscount": false,
+            "checkChannelFreeCombo": false,
+            "channelPickSeatProject": false,
+            "hasTyingSale": false,
+            "hasJumpGuid": false,
+            "supportPromotion": true
+        },
+        "descInfo": {
+            "observationInstructions": [
+                {
+                    "key": "TICKETS_AND_ADMISSION",
+                    "name": "票品及入场",
+                    "value": "身份证直刷：本项目需实名制购票及入场，购票完成后观演人信息不可更改，须购票时填写的实名观演人携带本人有效证件验证入场",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 1
+                },
+                {
+                    "key": "SHOW_DURATION",
+                    "name": "演出时长",
+                    "value": "以现场为准",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 2
+                },
+                {
+                    "key": "MAIN_ACTOR",
+                    "name": "主要演员(团体)",
+                    "value": "陈小春",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 3
+                },
+                {
+                    "key": "ENTRY_TIME",
+                    "name": "入场时间",
+                    "value": "请于开始前约120分钟入场",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 4
+                },
+                {
+                    "key": "RESTRICTED_ITEM",
+                    "name": "禁止携带物品",
+                    "value": "由于安保和版权的原因，大多数演出、展览及比赛场所禁止携带食品、饮料、专业摄录设备、打火机等物品，请您注意现场工作人员和广播的提示，予以配合。",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 5
+                },
+                {
+                    "key": "LUGGAGE_DEPOSIT",
+                    "name": "物品寄存",
+                    "value": "无寄存处,请自行保管携带物品，谨防贵重物品丢失。",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 6
+                },
+                {
+                    "key": "MINIMUM_SHOW_DURATION",
+                    "name": "最低演出时长",
+                    "value": "120分钟",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 7
+                },
+                {
+                    "key": "MINIMUM_SHOW_NUMBER",
+                    "name": "最低演出曲目",
+                    "value": "22首",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 8
+                }
+            ],
+            "ticketInstructions": [
+                {
+                    "key": "CHILDREN_INTRODUCTION",
+                    "name": "儿童购票",
+                    "value": "儿童一律凭票入场",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 1
+                },
+                {
+                    "key": "REAL_NAME_PURCHASE_TICKET_INTRODUCTION",
+                    "name": "实名购票规则",
+                    "value": "一票一证：每张门票对应一个证件；证件支持：身份证/护照/港澳居民来往内地通行证/台湾居民来往大陆通行证",
+                    "isMarked": false,
+                    "tagContent": "门票对应唯一证件(身份证/护照/港澳居民来往内地通行证/台湾居民来往大陆通行证)",
+                    "isOrderMarked": false,
+                    "seq": 2
+                },
+                {
+                    "key": "LIMITATION",
+                    "name": "限购规则",
+                    "value": "每个场次限购4张/套，项目限购4张/套",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 3
+                },
+                {
+                    "key": "EXCEPTION_ORDER_INTRODUCTION",
+                    "name": "异常排单说明",
+                    "value": "对于异常订购行为，商家有权在订单成立或者生效之后取消相应订单。 异常订购行为包括但不限于以下情形： \n（1）通过同一ID订购超出限购张数的订单。 \n（2）经合理判断认为非真实消费者的下单行为，包括但不限于通过批量相同或虚构的支付账号、收货地址（包括下单时填写及最终实际收货地址）、收件人、电话号码订购超出限购张数的订单。",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 4
+                },
+                {
+                    "key": "EXCHANGE_POLICY",
+                    "name": "退换政策",
+                    "value": "本项目支持有条件退款，若需要收取退票手续费，将以用户实际支付票款为基准收取。基于项目主办方提供的退票政策不同，具体可支持用户申请退款的情形请详见该项目详情页退票政策相关说明或公告。",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 5
+                },
+                {
+                    "key": "INVOICE_INTRODUCTION",
+                    "name": "发票说明",
+                    "value": "电子发票\n发票开具方：主办方\n该项目可申请开具电子发票。发票由三方提供，订单交易完成后6日将关闭申请。",
+                    "isMarked": false,
+                    "isOrderMarked": false,
+                    "seq": 6
+                }
+            ],
+            "markedTextList": []
+        },
+        "noteInfos": [
+            {
+                "name": "支持有条件退",
+                "value": "",
+                "type": true,
+                "code": "CONDITION_REFUND",
+                "refundCfg": {
+                    "showName": "【沈阳】2025陈小春 生∙旦∙净∙末∙丑巡回演唱会-沈阳站",
+                    "refundTimes": 1,
+                    "refundTimesDesc": "该项目可退1次。",
+                    "type": "SESSION_SETTING",
+                    "rateItems": [
+                        {
+                            "rate": 0.0,
+                            "sessionItems": [
+                                {
+                                    "sessionBeginTime": 1763811000000,
+                                    "sessionName": "2025-11-22 周六 19:30",
+                                    "timeRange": [
+                                        {
+                                            "left": "2025-09-29 13:18",
+                                            "right": "2025-10-01 13:18"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "sessionBeginTime": 1763897400000,
+                                    "sessionName": "2025-11-23 周日 19:30",
+                                    "timeRange": [
+                                        {
+                                            "left": "2025-10-13 13:18",
+                                            "right": "2025-10-15 13:18"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "rate": 20.0,
+                            "sessionItems": [
+                                {
+                                    "sessionBeginTime": 1763811000000,
+                                    "sessionName": "2025-11-22 周六 19:30",
+                                    "timeRange": [
+                                        {
+                                            "left": "2025-10-01 13:19",
+                                            "right": "2025-10-31 13:18"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "sessionBeginTime": 1763897400000,
+                                    "sessionName": "2025-11-23 周日 19:30",
+                                    "timeRange": [
+                                        {
+                                            "left": "2025-10-15 13:19",
+                                            "right": "2025-10-31 13:18"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "rate": 30.0,
+                            "sessionItems": [
+                                {
+                                    "sessionBeginTime": 1763811000000,
+                                    "sessionName": "2025-11-22 周六 19:30",
+                                    "timeRange": [
+                                        {
+                                            "left": "2025-10-31 13:19",
+                                            "right": "2025-11-15 13:18"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "sessionBeginTime": 1763897400000,
+                                    "sessionName": "2025-11-23 周日 19:30",
+                                    "timeRange": [
+                                        {
+                                            "left": "2025-10-31 13:19",
+                                            "right": "2025-11-16 13:18"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "refundCfgV2": {
+                    "showName": "【沈阳】2025陈小春 生∙旦∙净∙末∙丑巡回演唱会-沈阳站",
+                    "refundTimes": 1,
+                    "refundTimesDesc": "该项目可退1次。",
+                    "type": "SESSION_SETTING",
+                    "refundCfgItemList": [
+                        {
+                            "refundRuleList": [
+                                {
+                                    "beginTime": [
+                                        2025,
+                                        9,
+                                        29,
+                                        13,
+                                        18
+                                    ],
+                                    "left": "09.29 13:18",
+                                    "right": "10.01 13:18",
+                                    "refundHandlFeeStr": "免费退票",
+                                    "timeStatus": -1
+                                },
+                                {
+                                    "beginTime": [
+                                        2025,
+                                        10,
+                                        1,
+                                        13,
+                                        19
+                                    ],
+                                    "left": "10.01 13:19",
+                                    "right": "10.31 13:18",
+                                    "refundHandlFeeStr": "票价 20%",
+                                    "timeStatus": 0
+                                },
+                                {
+                                    "beginTime": [
+                                        2025,
+                                        10,
+                                        31,
+                                        13,
+                                        19
+                                    ],
+                                    "left": "10.31 13:19",
+                                    "right": "11.15 13:18",
+                                    "refundHandlFeeStr": "票价 30%",
+                                    "timeStatus": 1
+                                },
+                                {
+                                    "beginTime": [
+                                        2025,
+                                        11,
+                                        15,
+                                        13,
+                                        19
+                                    ],
+                                    "left": "11.15 13:19",
+                                    "refundHandlFeeStr": "停止退票",
+                                    "timeStatus": 1
+                                }
+                            ],
+                            "sessionCount": 1,
+                            "sessionNameList": [
+                                "2025-11-22 周六 19:30"
+                            ],
+                            "earlistSessionTime": 1763811000000,
+                            "earlistRefundTime": [
+                                2025,
+                                9,
+                                29,
+                                13,
+                                18
+                            ]
+                        },
+                        {
+                            "refundRuleList": [
+                                {
+                                    "beginTime": [
+                                        2025,
+                                        10,
+                                        13,
+                                        13,
+                                        18
+                                    ],
+                                    "left": "10.13 13:18",
+                                    "right": "10.15 13:18",
+                                    "refundHandlFeeStr": "免费退票",
+                                    "timeStatus": -1
+                                },
+                                {
+                                    "beginTime": [
+                                        2025,
+                                        10,
+                                        15,
+                                        13,
+                                        19
+                                    ],
+                                    "left": "10.15 13:19",
+                                    "right": "10.31 13:18",
+                                    "refundHandlFeeStr": "票价 20%",
+                                    "timeStatus": 0
+                                },
+                                {
+                                    "beginTime": [
+                                        2025,
+                                        10,
+                                        31,
+                                        13,
+                                        19
+                                    ],
+                                    "left": "10.31 13:19",
+                                    "right": "11.16 13:18",
+                                    "refundHandlFeeStr": "票价 30%",
+                                    "timeStatus": 1
+                                },
+                                {
+                                    "beginTime": [
+                                        2025,
+                                        11,
+                                        16,
+                                        13,
+                                        19
+                                    ],
+                                    "left": "11.16 13:19",
+                                    "refundHandlFeeStr": "停止退票",
+                                    "timeStatus": 1
+                                }
+                            ],
+                            "sessionCount": 1,
+                            "sessionNameList": [
+                                "2025-11-23 周日 19:30"
+                            ],
+                            "earlistSessionTime": 1763897400000,
+                            "earlistRefundTime": [
+                                2025,
+                                10,
+                                13,
+                                13,
+                                18
+                            ]
+                        }
+                    ]
+                },
+                "noteDesc": "该项目支持有条件退票，可在“我的”-“全部订单”-“订单详情”中申请退票，退票可能会有手续费，具体规则如下：",
+                "additionalNote": "具体可申请退票细则,请详见该项目详情页退票政策相关说明或公告信息"
+            },
+            {
+                "name": "实名观演",
+                "value": "一张门票对应一个证件；证件支持：身份证/护照/港澳居民来往内地通行证/台湾居民来往大陆通行证",
+                "type": true,
+                "code": "REAL_NAME_TICKET"
+            },
+            {
+                "name": "电子票",
+                "value": "通过身份证件验票入场（具体以下单后票舱信息为准）",
+                "type": true,
+                "code": "ID_CARD"
+            },
+            {
+                "name": "发票说明",
+                "value": "电子发票\n发票开具方：主办方\n该项目可申请开具电子发票。发票由三方提供，订单交易完成后6日将关闭申请。",
+                "type": false,
+                "code": "BILL_APPLY",
+                "desc": "发票"
+            }
+        ],
+        "specialNoteInfos": [
+            {
+                "name": "预售",
+                "value": "本项目正在预售，下单后无法立即为您配票。正式开票后（一般于节目举办前1-2周），票品信息（包括换票、入场方式）将陆续更新，届时您可通过订单详情页或票舱详情查看。",
+                "type": true,
+                "code": "SHOW_PRESALE",
+                "desc": "此项目为预售，待项目正式开票后为您配票"
+            }
+        ],
+        "announcement": [
+            {
+                "id": "6800db173cd81a0001f08348",
+                "noticeId": "6800db173cd81a0001f08348",
+                "noticeContent": "<p><img src=\"https://cdn.ticketmars.com/image/prod/20250527_47/17483178545506965.png\" alt=\"\" width=\"100%\" height=\"auto\"></p>",
+                "noticeCanDelete": false,
+                "announcementUiMode": "NONE",
+                "frequencyType": "FIRST",
+                "displayPages": [
+                    "TICKET_UP"
+                ],
+                "noticeMoreUrl": "https://mfhl-qa.ticketmars.com/placard/6800db173cd81a0001f08348",
+                "siteIds": [
+                    "6268b17853245f055f21d677"
+                ]
+            }
+        ],
+        "whiteTags": [],
+        "watcherReplacer": "观演",
+        "tour": {
+            "id": "67da81908d42e10001817a09",
+            "tourName": "陈小春生·旦·净·末·丑巡回演唱会",
+            "tourPosterUrl": "https://cdn.ticketmars.com/image/prod/20250319_50/17423732510269098.png",
+            "shows": [
+                {
+                    "showId": "68a450ffa75bed00010175ce",
+                    "showName": "【佛山】2025 陈小春 生·旦·净·末·丑 巡回演唱会-佛山站",
+                    "showDate": "10.25",
+                    "cityName": "佛山站",
+                    "showStatus": "ONSALE",
+                    "existLatestSaleTime": false,
+                    "posterUrl": "https://cdn.ticketmars.com/image/prod/20250819_26/17555991356173212.png",
+                    "showStatusTag": "热销中"
+                },
+                {
+                    "showId": "68bbbb630cdcd60001ffd4d4",
+                    "showName": "【武汉】2025 陈小春 生·旦·净·末·丑 巡回演唱会-武汉站",
+                    "showDate": "11.01",
+                    "cityName": "武汉站",
+                    "showStatus": "PRESALE",
+                    "existLatestSaleTime": false,
+                    "posterUrl": "https://cdn.ticketmars.com/image/prod/20250906_65/17571337080907983.png",
+                    "showStatusTag": "预订中"
+                },
+                {
+                    "showId": "682db501563d810001d2c0fd",
+                    "showName": " 【苏州】2025 陈小春 生·旦·净·末·丑 巡回演唱会-苏州站",
+                    "showDate": "11.15",
+                    "cityName": "苏州站",
+                    "showStatus": "PRESALE",
+                    "existLatestSaleTime": false,
+                    "posterUrl": "https://cdn.ticketmars.com/image/prod/20250522_70/17478967842769870.jpg",
+                    "showStatusTag": "预订中"
+                },
+                {
+                    "showId": "68bfd0ef6e8a8400018918cd",
+                    "showName": "【沈阳】2025陈小春 生∙旦∙净∙末∙丑巡回演唱会-沈阳站",
+                    "showDate": "11.22-11.23",
+                    "cityName": "沈阳站",
+                    "showStatus": "PRESALE",
+                    "existLatestSaleTime": false,
+                    "posterUrl": "https://cdn.ticketmars.com/image/prod/20251001_75/17592967804294791.png",
+                    "showStatusTag": "预订中"
+                },
+                {
+                    "showId": "68bfcf9e9bd548000174e3fd",
+                    "showName": "【西安】2025 陈小春 生·旦·净·末·丑 巡回演唱会-西安站",
+                    "showDate": "11.29",
+                    "cityName": "西安站",
+                    "showStatus": "PRESALE",
+                    "existLatestSaleTime": false,
+                    "posterUrl": "https://cdn.ticketmars.com/image/prod/20250926_79/17588521584513108.png",
+                    "showStatusTag": "预订中"
+                },
+                {
+                    "showId": "68d243c12233fe000154008b",
+                    "showName": " 【南昌】2025 陈小春 生·旦·净·末·丑 巡回演唱会-南昌站",
+                    "showDate": "12.20",
+                    "cityName": "南昌站",
+                    "showStatus": "PENDING",
+                    "existLatestSaleTime": false,
+                    "posterUrl": "https://cdn.ticketmars.com/image/prod/20250924_78/17587022779105871.png",
+                    "showStatusTag": "暂未开售"
+                }
+            ]
+        },
+        "layoutInfo": {
+            "id": "682d5175be975c0001968c0c",
+            "page": "SHOW_DETAIL",
+            "style": "{}",
+            "components": []
+        }
+    }
+}
+
+------------------------------------------------------------------------------------------
+
+fetch("https://m.piaoxingqiu.com/cyy_gatewayapi/home/pub/v3/show_list/search_by_front?cityId=BL1034&ifComponent=0&lang=zh&length=10&offset=0&pageType=ALL_PAGE&sortType=RECOMMEND&terminalSrc=WEB&utcOffset=480&ver=4.45.1&src=WEB", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+    "access-token": "",
+    "cache-control": "no-cache",
+    "front-trace-id": "mh47rqx0kl5eeeeeeem",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "src": "WEB",
+    "terminal-src": "WEB",
+    "utc-offset": "480",
+    "ver": "4.45.1"
+  },
+  "referrer": "https://m.piaoxingqiu.com/list",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+});
+返回结果
+{
+    "statusCode": 200,
+    "comments": "成功",
+    "mode": 0,
+    "result": {},
+    "data": [
+        {
+            "showLimit": 4,
+            "showId": "68bfd0ef6e8a8400018918cd",
+            "stdShowId": "68bfd0ef6e8a8400018918cb",
+            "showName": "【沈阳】2025陈小春 生∙旦∙净∙末∙丑巡回演唱会-沈阳站",
+            "supportSeatPicking": false,
+            "bizShowSessionId": "68bfd0ef6e8a8400018918d8",
+            "stdShowSessionId": "68bfd0ef6e8a8400018918d7",
+            "sessionName": "2025-11-22 周六 19:30",
+            "isPermanent": false,
+            "hasCombo": false,
+            "hasActivity": false,
+            "beginDateTime": 1763776800000,
+            "endDateTime": 1763818200000,
+            "limitation": 4,
+            "passPortRegions": [
+                "OVERSEA"
+            ],
+            "displayCountdownTime": true,
+            "saleTags": [],
+            "ctSession": false,
+            "promoTags": [],
+            "whiteTags": [],
+            "bizSessionStatus": "PRESALE",
+            "hasStock": false,
+            "waitListEnabled": false,
+            "waitListAllMatch": false,
+            "sessionStatus": "LACK_OF_TICKET",
+            "hasSessionSoldOut": true,
+            "captchaTypes": [],
+            "hasChannelDiscount": false,
+            "seatPlans": [
+                {
+                    "seatPlanId": "68d654d2831734000199bcc5",
+                    "stdSeatPlanId": "68d654d2831734000199bcc3",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#E2C3C3",
+                    "originalPrice": 480.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "480",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 480元",
+                    "displayOrder": 1,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68d654d2831734000199bcc8",
+                    "stdSeatPlanId": "68d654d2831734000199bcc6",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#EEDBDB",
+                    "originalPrice": 680.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "680",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 680元",
+                    "displayOrder": 2,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68d654d2831734000199bccb",
+                    "stdSeatPlanId": "68d654d2831734000199bcc9",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#D4CACA",
+                    "originalPrice": 880.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "880",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 880元",
+                    "displayOrder": 3,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68d654d2831734000199bcce",
+                    "stdSeatPlanId": "68d654d2831734000199bccc",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#A69696",
+                    "originalPrice": 1080.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "1,080",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 1080元",
+                    "displayOrder": 5,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68d654d2831734000199bcd1",
+                    "stdSeatPlanId": "68d654d2831734000199bccf",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#7D6161",
+                    "originalPrice": 1380.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "1,380",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 1380元",
+                    "displayOrder": 6,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68d654d2831734000199bcd4",
+                    "stdSeatPlanId": "68d654d2831734000199bcd2",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#D6ACAC",
+                    "originalPrice": 1380.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "1,380",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "内场 1380元",
+                    "displayOrder": 7,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                }
+            ],
+            "utcOffset": 480,
+            "supportPromotion": true,
+            "autoSeatPicking": false
+        },
+        {
+            "showLimit": 4,
+            "showId": "68bfd0ef6e8a8400018918cd",
+            "stdShowId": "68bfd0ef6e8a8400018918cb",
+            "showName": "【沈阳】2025陈小春 生∙旦∙净∙末∙丑巡回演唱会-沈阳站",
+            "supportSeatPicking": false,
+            "bizShowSessionId": "68db42c0403123000146d56e",
+            "stdShowSessionId": "68db42c0403123000146d56d",
+            "sessionName": "2025-11-23 周日 19:30",
+            "isPermanent": false,
+            "hasCombo": false,
+            "hasActivity": false,
+            "beginDateTime": 1763863200000,
+            "endDateTime": 1763902800000,
+            "limitation": 4,
+            "passPortRegions": [
+                "OVERSEA"
+            ],
+            "displayCountdownTime": true,
+            "saleTags": [],
+            "ctSession": false,
+            "promoTags": [],
+            "whiteTags": [],
+            "bizSessionStatus": "PRESALE",
+            "hasStock": false,
+            "waitListEnabled": false,
+            "waitListAllMatch": false,
+            "sessionStatus": "LACK_OF_TICKET",
+            "hasSessionSoldOut": true,
+            "captchaTypes": [],
+            "hasChannelDiscount": false,
+            "seatPlans": [
+                {
+                    "seatPlanId": "68db42ef482d85000141d64d",
+                    "stdSeatPlanId": "68db42ef482d85000141d64b",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#E2C3C3",
+                    "originalPrice": 480.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "480",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 480元",
+                    "displayOrder": 1,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68db42ef482d85000141d650",
+                    "stdSeatPlanId": "68db42ef482d85000141d64e",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#EEDBDB",
+                    "originalPrice": 680.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "680",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 680元",
+                    "displayOrder": 2,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68db42ef482d85000141d653",
+                    "stdSeatPlanId": "68db42ef482d85000141d651",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#D4CACA",
+                    "originalPrice": 880.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "880",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 880元",
+                    "displayOrder": 3,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68db42ef482d85000141d656",
+                    "stdSeatPlanId": "68db42ef482d85000141d654",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#A69696",
+                    "originalPrice": 1080.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "1,080",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 1080元",
+                    "displayOrder": 5,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68db42ef482d85000141d659",
+                    "stdSeatPlanId": "68db42ef482d85000141d657",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#7D6161",
+                    "originalPrice": 1380.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "1,380",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "看台 1380元",
+                    "displayOrder": 6,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                },
+                {
+                    "seatPlanId": "68db42ef482d85000141d65c",
+                    "stdSeatPlanId": "68db42ef482d85000141d65a",
+                    "stdShowId": "68bfd0ef6e8a8400018918cb",
+                    "colorValue": "#D6ACAC",
+                    "originalPrice": 1380.00,
+                    "originalPriceVO": {
+                        "currency": "CNY",
+                        "prefix": "¥",
+                        "suffix": "元",
+                        "yuanNum": "1,380",
+                        "centNum": "00"
+                    },
+                    "seatPlanName": "内场 1380元",
+                    "displayOrder": 7,
+                    "limitation": 4,
+                    "hasActivity": false,
+                    "seatPlanCategory": "BASE",
+                    "isCombo": false,
+                    "isWaitList": false,
+                    "saleTags": [],
+                    "promoTags": [],
+                    "whiteTags": [],
+                    "items": [],
+                    "autoSeatPicking": false
+                }
+            ],
+            "utcOffset": 480,
+            "supportPromotion": true,
+            "autoSeatPicking": false
+        }
+    ]
+}
+------------------------------------------------------------------------------------------------------
+function(){
+        try{ var _desc = Object.getOwnPropertyDescriptors(Storage.prototype).getItem, _old_val = _desc.value }catch(e){ return }
+        var _new_val = saf(function getItem(){
+          if (e["config-hook-domobj"] && e["config-hook-domobj-func"] && e["config-hook-Storage-getItem"]){
+            var expstr = Error().stack.v_split('\n')[2]
+            v_cache_node(expstr, "Storage", "getItem", "func")
+            if (expurl.v_test(expstr)){
+              window.v_log(..._mk_logs('  (f) [Storage getItem func]', origslice.call(arguments), get_log_at(expstr.trim())))
+            }
+          }
+          var r = _old_val.apply(this, arguments)
+          inspect_arguments(this, arguments, r, "Storage", "getItem", "func")
+          return r })
+        try{ Object.defineProperty(Storage.prototype, 'getItem', { value: _new_val, enumerable: _desc['enumerable'], configurable: _desc['configurable'], writable: _desc['writable'], })
+        }catch(e){  }
+      }()
+
+--------------------------------------------------------------------------------------------------------------
+'{"sessionId":"623d7ec5-f93e-4a81-8ce7-3df637a95730","timestamp":1761268161291}'
+{
+  "distinct_id": "6474309bcb521200018c8592",
+  "first_id": "199fb98d8a40-0407b9c44d41ab-4c657b58-921600-199fb98d8b63bc",
+  "props": {
+    "$latest_traffic_source_type": "直接流量",
+    "$latest_search_keyword": "未取到值_直接打开",
+    "$latest_referrer": "",
+    "platform": "WEB",
+    "merchantDomain": "m.piaoxingqiu.com",
+    "product": "PIAOXINGQIU"
+  },
+  "identities": "eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTk5ZmI5OGQ4YTQwLTA0MDdiOWM0NGQ0MWFiLTRjNjU3YjU4LTkyMTYwMC0xOTlmYjk4ZDhiNjNiYyIsIiRpZGVudGl0eV9sb2dpbl9pZCI6IjY0NzQzMDliY2I1MjEyMDAwMThjODU5MiJ9",
+  "history_login_id": {
+    "name": "$identity_login_id",
+    "value": "6474309bcb521200018c8592"
+  },
+  "$device_id": "199fb98d8a40-0407b9c44d41ab-4c657b58-921600-199fb98d8b63bc"
+}
+
+{
+  "distinct_id": "19a13dd4cff3da-01cb772f8c41751-4c657b58-921600-19a13dd4d00363",
+  "first_id": "",
+  "props": {},
+  "identities": "eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTlhMTNkZDRjZmYzZGEtMDFjYjc3MmY4YzQxNzUxLTRjNjU3YjU4LTkyMTYwMC0xOWExM2RkNGQwMDM2MyJ9",
+  "history_login_id": {
+    "name": "",
+    "value": ""
+  },
+  "$device_id": "19a13dd4cff3da-01cb772f8c41751-4c657b58-921600-19a13dd4d00363"
+}
+
+siteId: "6268b17853245f055f21d677"
+
+fetch("https://m.piaoxingqiu.com/cyy_gatewayapi/home/pub/v3/show_list/search_by_front?cityId=BL1034&ifComponent=0&lang=zh&length=10&offset=0&pageType=ALL_PAGE&sortType=RECOMMEND&terminalSrc=WEB&utcOffset=480&ver=4.45.1&src=WEB", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+    "access-token": "",
+    "angry-dog": "X__FDEIyLZ2DKQB69f2PIMUDIl627OFC_fkW5J2oQX_khYgVOx-ZOu4JsCg-f9vtDd70j_Zc5O7Prk6yY3TELVDSzFjyDs5C5Xp61i4qF4LjrUb24femzcmphQLhus0bMEQ0ZVVsVFVFZ1NTMVJFUw.WyIxLjAuMCIsIldFQiJd",
+    "cache-control": "no-cache",
+    "front-trace-id": "mh46mg929l6sssssssr",
+    "pragma": "no-cache",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "src": "WEB",
+    "terminal-src": "WEB",
+    "utc-offset": "480",
+    "ver": "4.45.1"
+  },
+  "referrer": "https://m.piaoxingqiu.com/list",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+});
+{"$identity_cookie_id":"19a13dd4cff3da-01cb772f8c41751-4c657b58-921600-19a13dd4d00363"}
+{"$identity_cookie_id":"19a144c9b7f99b-06cd02bd354e974-4c657b58-921600-19a144c9b80f4e"}
+
+{"distinct_id":"19a14563c940-07251547d93b35-4c657b58-921600-19a14564938a34","first_id":"","props":{},"identities":"eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTlhMTQ1NjNjOTQwLTA3MjUxNTQ3ZDkzYjM1LTRjNjU3YjU4LTkyMTYwMC0xOWExNDU2NDkzOGEzNCJ9","history_login_id":{"name":"","value":""},"$device_id":"19a14563c940-07251547d93b35-4c657b58-921600-19a14564938a34"}

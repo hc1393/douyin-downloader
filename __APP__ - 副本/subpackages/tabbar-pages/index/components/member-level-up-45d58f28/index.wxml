@@ -1,7 +1,0 @@
-<view class="fixed top-0 right-0 bottom-0 left-0 z-110 flex flex-col items-center justify-center bg-_bl_rgba_pl_0_2c_0_2c_0_2c_0_d_6_pr__br_" wx:if="{{show}}">
-    <view bindtap="goEquity" class="relative">
-        <image class="w-600rpx h-800rpx border-rd-20rpx" lazyLoad="true" mode="aspectFill" src="{{__oss__.s(mpxExt,upImage,0)}}"></image>
-    </view>
-    <image bindtap="close" class="w-70rpx h-70rpx mt-50rpx" lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2021/10/20/close.png',0)}}"></image>
-</view>
-<wxs module="__oss__" src="../../../../../wxs/oss28ac43a0.wxs"/>

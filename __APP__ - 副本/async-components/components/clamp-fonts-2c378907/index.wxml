@@ -1,8 +1,0 @@
-<view class="w-_bl_100_p__br_ scale-100">
-    <view bindtap="toggleFonts" class="relative {{isOneLineRight?'text-right':''}}" style="line-height: {{lineHeight}}px; {{fontColor?'color:'+fontColor+';':''}}" wx:if="{{showCom}}">{{showAll?fonts:copyFont}}<view class="{{'inline-flex items-center text-24rpx text-_bl__h_999999_br_ lh-inherit pl-10rpx '+(!showAll?'float-right':'')}}" wx:if="{{needHide}}">{{showAll?closeText:expandText}}<text class="{{'text-24rpx text-_bl__h_999999_br_ lh-inherit pl-4rpx '+(showAll?'i-jiantou-shang':'i-jiantou-xia')}}"></text>
-        </view>
-    </view>
-    <view class="Q-pre-font fixed w-_bl_100_p__br_ left-10000px op-0" style="line-height: {{lineHeight}}px;">{{showAll?fonts:copyFont}}<view class="inline-flex items-center text-24rpx text-_bl__h_999999_br_ lh-inherit pl-10rpx" wx:if="{{needHide}}">{{showAll?closeText:expandText}}<text class="{{'text-24rpx text-_bl__h_999999_br_ lh-inherit pl-4rpx '+(showAll?'i-jiantou-shang':'i-jiantou-xia')}}"></text>
-        </view>
-    </view>
-</view>

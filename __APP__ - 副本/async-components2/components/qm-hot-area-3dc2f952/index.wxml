@@ -1,1 +1,0 @@
-<view catchtap="bindEvent" class="v-qm-hot-area" data-element-content="{{proper.events.page?proper.events.page.link:''}}" data-element-id="{{proper.id}}" data-element-type="图片热区" data-operation-type="{{proper.events.page?proper.events.page.linkText:''}}" data-screen-type="{{traceScreenType}}" style="{{proper&&proper.miniStyle}}"></view>

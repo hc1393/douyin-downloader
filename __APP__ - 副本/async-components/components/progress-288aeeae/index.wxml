@@ -1,3 +1,0 @@
-<view class="min-w-200rpx overflow-hidden" style="height: {{strokeWidth}}; background-color: {{backgroundColor}}; border-radius: {{borderRadius}}; min-width: {{minWidthValue}}">
-    <view animation="{{animation}}" class="w-0" style="height: {{strokeWidth}}; background-color: {{activeColor}};"></view>
-</view>

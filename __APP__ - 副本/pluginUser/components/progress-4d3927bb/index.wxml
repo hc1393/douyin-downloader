@@ -1,6 +1,0 @@
-<view class="w-full h-34 flex items-center">
-    <view class="flex-1 relative overflow-hidden translate-z-0" style="{{height}}{{radius}}{{bg}}">
-        <view class="w-full absolute left-0 top-0 z-2 -translate-x-full delay-0 transition-transform ease-linear" style="{{height}}{{animation}}{{radius}}{{activeBg}}"></view>
-    </view>
-    <slot></slot>
-</view>

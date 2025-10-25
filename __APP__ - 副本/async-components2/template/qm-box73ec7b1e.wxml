@@ -1,3 +1,0 @@
-<template name="qm-box">
-    <view catchtap="bindEvent" class="v-qm-box" data-item="{{data}}" style="{{data&&data.miniStyle}}"></view>
-</template>

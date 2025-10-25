@@ -1,6 +1,0 @@
-<view class="align-top" style="{{__stringify__.stringifyStyle( customStyle,utils.imageStyle( {width:width,height:height} ) )}}">
-    <image binderror="onError" bindload="onLoad" class="block h-100_p_ w-100_p_" lazyLoad="{{lazyLoad}}" mode="{{mode}}" showMenuByLongpress="{{showMenuByLongpress}}" src="{{__oss__.s(mpxExt,imageSrc,0)}}" webp="{{webp}}"></image>
-</view>
-<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>
-<wxs module="__stringify__" src="../../wxs/stringify5cb088ac.wxs"/>
-<wxs module="utils" src="../../wxs/index462b07db.wxs"/>

@@ -1,9 +1,0 @@
-<view class="official-account _22305772 " style="{{bottom}}" wx:if="{{!closeFollowWx&&!takefoodOfficialAccountClose&&mpWechatEnable}}">
-    <view bindtap="closeFollowWxBtn" class="v-qm-follow-wx _22305772 ">
-        <view class="followwx-close _22305772 " wx:if="{{followWxStatus===0}}">
-            <image class="followwx-close-image _22305772 " lazyLoad="true" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/s16/images/2018/07/27/1916647aad4bbe8a.png',0)}}"></image>
-        </view>
-        <official-account binderror="binderror" bindload="bindload" class=" _22305772 "></official-account>
-    </view>
-</view>
-<wxs module="__oss__" src="../../../../../wxs/oss28ac43a0.wxs"/>

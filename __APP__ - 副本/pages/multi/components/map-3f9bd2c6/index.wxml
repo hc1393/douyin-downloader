@@ -1,3 +1,0 @@
-<view class="map-wrap _3f9bd2c6 ">
-    <map bindcallouttap="markertap" class="map _3f9bd2c6 " latitude="{{map.latitude}}" longitude="{{map.longitude}}" markers="{{map.markers}}"></map>
-</view>

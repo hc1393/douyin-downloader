@@ -1,5 +1,0 @@
-<view class="fixed w-full z-99 pb-_bl_calc_pl_env_pl_safe-area-inset-bottom_pr__s_2_pr__br_" style="{{utils.style(style)}}">
-    <slot></slot>
-</view>
-<view class="pb-_bl_calc_pl_env_pl_safe-area-inset-bottom_pr__s_2_pr__br_" style="{{utils.style(placStyle)}}"></view>
-<wxs module="utils" src="../../wxs/index4ebe1cd0.wxs"/>

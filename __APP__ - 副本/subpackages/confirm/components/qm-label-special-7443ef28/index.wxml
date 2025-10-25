@@ -1,9 +1,0 @@
-<view class="flex overflow-hidden h-32 bg-_h_ffedea rounded-8">
-    <view class="flex items-center h-32 bg-_h_fc4930">
-        <text class="text-20 text-hex-fff leading-28 pl-10 inline-flex items-center justify-center">{{leftFont}}</text>
-        <view class="w-20 h-32 overflow-hidden relative">
-            <text class="iconfont i-a-Frame82 text-32_i_ c-_h_ffedea_i_ leading-100_p_ absolute left-50_p_ -translate-x-50_p_"></text>
-        </view>
-    </view>
-    <view class="flex items-center justify-center h-32 text-20 c-_h_fc4930 leading-28 pr-10">{{rightFont}}</view>
-</view>

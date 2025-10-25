@@ -1,9 +1,0 @@
-<view class="w-full h-164 py-32 px-46 box-border flex justify-between">
-    <view bindtap="to" class="flex flex-col justify-between items-center" data-index="{{index}}" wx:for="{{steps}}" wx:key="*this">
-        <view class="{{index!==steps.length-1?'dash-line':''}}">
-            <text class="i-success _i_text-48 _i_text-primary" wx:if="{{item.isComplete}}"></text>
-            <view class="{{'w-48 h-48 rd-full flex justify-center items-center '+(activeStep===index?'bg-primary text-_bl__h_FFF_br_':'bg-_bl__h_FFF_br_ text-_bl__h_666_br_')}}" wx:else>{{index+1}}</view>
-        </view>
-        <text class="{{'text-26 lh-36 '+(item.isComplete||activeStep===index?'text-primary':'text-_bl__h_666_br_')}}">{{item.text}}</text>
-    </view>
-</view>

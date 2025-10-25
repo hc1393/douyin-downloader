@@ -1,3 +1,0 @@
-<std-design-mp-loading wx:if="{{!componentMounted}}"></std-design-mp-loading>
-<std-user bindr="__refEmit" class="ref_index_1" data-r=".ref_index_1"></std-user>
-<std-toast id="showToast"></std-toast>

@@ -1,9 +1,0 @@
-<movable-area class="movable-area {{isShow?'':'invisible'}}" id="advert-movable-area-id">
-    <movable-view animation outOfBounds bindchange="onMoveChange" bindtouchend="onTouchEnd" bindtouchstart="onTouchStart" class="movable-view" direction="all" style="{{movableViewStyle}}" x="{{x}}px" y="{{y}}px">
-        <view class="w-full h-40 flex justify-start items-start">
-            <text catchtap="hide" class="i-fail text-_bl__h_949494_br_ extend-click _i_text-32"></text>
-        </view>
-        <image lazyLoad catchtap="bindLink" class="w-160 h-160" mode="scaleToFill" src="{{__oss__.s(mpxExt,imgUrl,0)}}"></image>
-    </movable-view>
-</movable-area>
-<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>

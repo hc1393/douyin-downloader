@@ -1,3 +1,0 @@
-<template name="qm-line">
-    <view catchtap="bindEvent" class="v-qm-line" data-item="{{data}}" style="{{data&&data.miniStyle}}"></view>
-</template>

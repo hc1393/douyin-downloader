@@ -1,6 +1,0 @@
-<std-transition bind:tap="onClick" catch:touchmove="noop" customStyle="z-index: {{zIndex}}; {{customStyle}};background-color: rgba(0, 0, 0, 0.7);height: 100%;left: 0;position: fixed;top: 0;width: 100%;" duration="{{duration}}" overlay="{{overlay}}" show="{{show}}" wx:if="{{lockScroll}}">
-    <slot></slot>
-</std-transition>
-<std-transition bind:tap="onClick" customStyle="z-index: {{zIndex}}; {{customStyle}};background-color: rgba(0, 0, 0, 0.7);height: 100%;left: 0;position: fixed;top: 0;width: 100%;" duration="{{duration}}" overlay="{{overlay}}" show="{{show}}" wx:else>
-    <slot></slot>
-</std-transition>

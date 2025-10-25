@@ -1,4 +1,0 @@
-<view class="mx-24rpx my-0 h-82rpx border-rd-_bl_20rpx_20rpx_0_0_br_ flex items-center justify-between bg-no-repeat bg-_bl_length_c_100_p__br_" style="background-image: url('https://images.qmai.cn/resource/20210824210816/2023/02/21/confirm-bgi.png')">
-    <view class="text-_bl__h_fff_br_ ml-27rpx text-28rpx">{{text}}</view>
-    <view catchtap="goUserInfo" class="w-146rpx h-46rpx bg-_bl__h_00a47c_br_ border-rd-23rpx text-center lh-46rpx text-24rpx mr-17rpx text-_bl__h_fff_br_" style="background:{{colorTheme}}">{{_i1}}</view>
-</view>

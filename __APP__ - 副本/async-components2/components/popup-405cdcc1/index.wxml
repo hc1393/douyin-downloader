@@ -1,7 +1,0 @@
-<root-portal class=" _405cdcc1 ">
-    <view bindtap="{{closeOnClickOverlay?'hideModal':'noop'}}" catchtouchmove="noop" class=" popup {{position==='top'?'popup--top':''}} {{position==='bottom'?'popup--bottom':''}} {{position==='left'?'popup--left':''}} {{show?'popup--show':'popup--hide'}} _405cdcc1 " style="z-index: {{zIndex}}">
-        <view class="popup-wrap _405cdcc1 ">
-            <slot class=" _405cdcc1 "></slot>
-        </view>
-    </view>
-</root-portal>

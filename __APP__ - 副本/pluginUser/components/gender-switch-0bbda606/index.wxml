@@ -1,4 +1,0 @@
-<view class="flex items-center">
-    <button bindtap="onChoose" class="{{'button min-w-120 h-48 px-16 text-24 rd-8 border border-solid '+(value===male?'_i_bg-primary _i_border-primary _i_text-_bl__h_FFF_br_':'bg-_bl__h_FFF_br_ border-_bl__h_eee_br_ text-_bl__h_333')}}" data-gender="{{male}}">{{_i1}}</button>
-    <button bindtap="onChoose" class="{{'button min-w-120 h-48 px-16 text-24 rd-8 bg-_bl__h_FFF_br_ border border-solid border-_bl__h_eee_br_ ml-16 '+(value===female?'_i_bg-primary _i_border-primary _i_text-_bl__h_FFF_br_':'bg-_bl__h_FFF_br_ border-_bl__h_eee_br_ text-_bl__h_333')}}" data-gender="{{female}}">{{_i2}}</button>
-</view>

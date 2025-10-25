@@ -1,6 +1,0 @@
-<button bindtap="handleTap" class="static m-0 p-0 text-inherit no-underline leading-inherit rounded-none overflow-visible bg-transparent after_c__bl_display_c_none_br_" style="{{buttonStyle}}" wx:if="{{!update&&(isAuth||skip)}}">
-    <slot></slot>
-</button>
-<button bindgetphonenumber="getPhoneNumber" class="static m-0 p-0 text-inherit no-underline leading-inherit rounded-none overflow-visible bg-transparent after_c__bl_display_c_none_br_" data-event-type="wxGetPhoneNumber" data-operation-type="{{traceOperationType}}" data-screen-type="{{traceScreenType}}" hoverClass="none" openType="getPhoneNumber" style="{{buttonStyle}}">
-    <slot></slot>
-</button>

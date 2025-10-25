@@ -1,5 +1,0 @@
-<view>
-    <image class="w-100vw h-100vh" mode="scaleToFill" src="{{__oss__.s(mpxExt,'https://images.qmai.cn/resource/20210824210816/2024/08/03/example01.png',0)}}" wx:if="{{reason==='appIdNotExist'}}"></image>
-    <qm-loading bindreload="tapRetryBtn" isFromErrorPage="{{true}}" isShowNavigator="{{false}}" loadStatus="{{status}}" loadStatusErrorDesc="{{loadStatusErrorDesc}}" loadErrorInfo="{{loadErrorInfo}}" reason="{{reason}}" reasonText="{{reasonText}}" refresh="{{refresh}}" wx:else></qm-loading>
-</view>
-<wxs module="__oss__" src="../../wxs/oss28ac43a0.wxs"/>

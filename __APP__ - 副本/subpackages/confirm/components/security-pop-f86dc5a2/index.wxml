@@ -1,9 +1,0 @@
-<qm-popup bindclose="handleClose" position="bottom" show="{{show}}" zIndex="300">
-    <view bindtap="handleClose" class="box-border pb-_bl_calc_pl_80rpx_a_constant_pl_safe-area-inset-bottom_pr__pr__br_ pb-_bl_calc_pl_80rpx_a_env_pl_safe-area-inset-bottom_pr__pr__br_ bg-_bl__h_ffffff_br_ border-rd-_bl_20rpx_20rpx_0_0_br_">
-        <view class="relative flex items-center justify-center h-120rpx font-bold text-36rpx lh-80rpx text-center">
-            <text class="absolute top-20rpx right-20rpx w-80rpx h-80rpx text-_bl__h_8a8a8a_br_ text-40rpx lh-80rpx i-close"></text>{{title}}</view>
-        <scroll-view enhanced class="box-border w-_bl_100_p__br_ min-h-300rpx max-h-320rpx px-34rpx py-0 text-left" scrollY="{{true}}">
-            <text class="text-_bl__h_333333_br_ text-28rpx">{{content}}</text>
-        </scroll-view>
-    </view>
-</qm-popup>

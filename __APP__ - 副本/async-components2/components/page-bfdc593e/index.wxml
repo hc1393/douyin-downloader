@@ -1,8 +1,0 @@
-<std-navigation-bar background="{{navigationBarBackgroundColor}}" class=" _bfdc593e " title="{{title}}" titleColor="{{navigationBarTextStyle==='white'?'#ffffff':'#000000'}}"></std-navigation-bar>
-<qm-loading bindreload="reload" class=" _bfdc593e " loadStatus="{{loadStatus}}" loadErrorInfo="{{loadErrorInfo}}" wx:if="{{showLoading}}"></qm-loading>
-<view class="page _bfdc593e " style="padding-bottom: {{isNativeTabbarPage?'96rpx':'0'}};" wx:else>
-    <shop-selector fixed class=" _bfdc593e " fixedTop="{{fixedTop}}" wx:if="{{isStoreSelection}}"></shop-selector>
-    <v-custom-page bindopenPinDialog="openPinDialog" bindrunAuthorization="runAuthorization" bodyColor="{{bodyColor}}" class=" _bfdc593e " designData="{{designData}}" designHight="{{designHight}}" traceScreenType="{{screenType}}"></v-custom-page>
-    <authorization bindsuccess="authorizationSuccess" class=" _bfdc593e " id="page-authorization" traceScreenType="{{screenType}}"></authorization>
-</view>
-<v-pin-index-dialog class=" _bfdc593e " id="pinIndexDialog" traceScreenType="{{screenType}}"></v-pin-index-dialog>

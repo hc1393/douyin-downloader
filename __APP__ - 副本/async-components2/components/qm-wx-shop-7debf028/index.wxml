@@ -1,8 +1,0 @@
-<view class="v-qm-hot-area" data-element-content="{{proper.events.page?proper.events.page.link:''}}" data-element-id="{{proper.id}}" data-element-type="微信小店" data-operation-type="{{proper.events.page?proper.events.page.linkText:''}}" data-screen-type="{{traceScreenType}}" style="{{propsValue.style}}" wx:if="{{propsValue.appid}}">
-    <store-home appid="{{propsValue.appid}}" wx:if="{{propsValue.type==='home'}}"></store-home>
-    <block wx:elif="{{propsValue.type==='product'}}">
-        <view style="padding-bottom: 24rpx" wx:for="{{propsValue.productIds}}">
-            <store-product appid="{{propsValue.appid}}" customStyle="{{propsValue.customStyle}}" productId="{{item.id}}"></store-product>
-        </view>
-    </block>
-</view>

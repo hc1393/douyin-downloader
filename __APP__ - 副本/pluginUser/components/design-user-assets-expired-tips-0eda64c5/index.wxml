@@ -1,7 +1,0 @@
-<view class="w-full h-56 rd-8 overflow-hidden text-24 flex items-center" style="{{itemStyle}}" wx:if="{{info.soonExpiredPoints}}">
-    <text>{{info.soonExpiredPoints}}</text>
-    <text>{{_i1}}</text>
-    <text>{{_i2}}</text>
-    <text class="mx-4">{{info.expiredTime}}</text>
-    <text>{{_i3}}</text>
-</view>

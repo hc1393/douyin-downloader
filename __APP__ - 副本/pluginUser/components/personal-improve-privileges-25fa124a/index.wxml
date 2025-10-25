@@ -1,8 +1,0 @@
-<view class="pt-24 px-24">
-    <image lazyLoad class="w-full h-100 rd-8 overflow-hidden" mode="scaleToFill" src="{{__oss__.s(mpxExt,imgUrl,0)}}" wx:if="{{imgUrl}}"></image>
-    <view class="flex items-center w-full min-h-68 max-h-104 p-16 bg-primary-opacity-10 rd-8 overflow-hidden box-border" wx:else>
-        <view class="i-gift text-primary mr-16"></view>
-        <text class="text-26 text-primary flex-1">{{text}}</text>
-    </view>
-</view>
-<wxs module="__oss__" src="../../../wxs/oss28ac43a0.wxs"/>
