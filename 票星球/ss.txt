@@ -1,0 +1,312 @@
+F:\PythonProject\.venv\Scripts\python.exe F:\PythonProject\票星球\演出场次请求.py
+{
+  "statusCode": 200,
+  "comments": "成功",
+  "mode": 0,
+  "result": {},
+  "data": [
+    {
+      "showLimit": 20,
+      "showId": "68d13fd08205b70001f30fba",
+      "stdShowId": "68d13fd08205b70001f30fb9",
+      "showName": "【重庆】苏醒「Nothing More」巡回演唱会-重庆站",
+      "supportSeatPicking": false,
+      "bizShowSessionId": "68d140aae35ec70001c605e5",
+      "stdShowSessionId": "68d140aae35ec70001c605e4",
+      "sessionName": "2025-11-22 周六 19:00",
+      "isPermanent": false,
+      "hasCombo": true,
+      "hasActivity": false,
+      "beginDateTime": 1763776800000,
+      "endDateTime": 1763814600000,
+      "limitation": 6,
+      "passPortRegions": [
+        "OVERSEA"
+      ],
+      "displayCountdownTime": true,
+      "saleTags": [
+        {
+          "code": 1,
+          "displayName": "套票",
+          "name": "套票",
+          "type": "COMBO_BASE"
+        }
+      ],
+      "ctSession": false,
+      "comboDisplayTag": "COMBO",
+      "promoTags": [],
+      "whiteTags": [],
+      "bizSessionStatus": "PRESALE",
+      "hasStock": true,
+      "waitListEnabled": false,
+      "waitListAllMatch": false,
+      "sessionStatus": "PRE_SALE",
+      "hasSessionSoldOut": false,
+      "captchaTypes": [],
+      "hasChannelDiscount": false,
+      "seatPlans": [
+        {
+          "seatPlanId": "68d14198e098e00001988bf6",
+          "stdSeatPlanId": "68d14198e098e00001988bf4",
+          "stdShowId": "68d13fd08205b70001f30fb9",
+          "colorValue": "#D0B1F5",
+          "originalPrice": 335.0,
+          "originalPriceVO": {
+            "currency": "CNY",
+            "prefix": "¥",
+            "suffix": "元",
+            "yuanNum": "335",
+            "centNum": "00"
+          },
+          "seatPlanName": "看台 335元",
+          "displayOrder": 1,
+          "limitation": 6,
+          "hasActivity": false,
+          "seatPlanCategory": "BASE",
+          "isCombo": false,
+          "isWaitList": false,
+          "saleTags": [],
+          "promoTags": [],
+          "whiteTags": [],
+          "items": [],
+          "autoSeatPicking": false
+        },
+        {
+          "seatPlanId": "68d14198e098e00001988bf9",
+          "stdSeatPlanId": "68d14198e098e00001988bf7",
+          "stdShowId": "68d13fd08205b70001f30fb9",
+          "colorValue": "#7F45E7",
+          "originalPrice": 435.0,
+          "originalPriceVO": {
+            "currency": "CNY",
+            "prefix": "¥",
+            "suffix": "元",
+            "yuanNum": "435",
+            "centNum": "00"
+          },
+          "seatPlanName": "看台 435元",
+          "displayOrder": 2,
+          "limitation": 6,
+          "hasActivity": false,
+          "seatPlanCategory": "BASE",
+          "isCombo": false,
+          "isWaitList": false,
+          "saleTags": [],
+          "promoTags": [],
+          "whiteTags": [],
+          "items": [],
+          "autoSeatPicking": false
+        },
+        {
+          "seatPlanId": "68d14198e098e00001988bfc",
+          "stdSeatPlanId": "68d14198e098e00001988bfa",
+          "stdShowId": "68d13fd08205b70001f30fb9",
+          "colorValue": "#4926A0",
+          "originalPrice": 535.0,
+          "originalPriceVO": {
+            "currency": "CNY",
+            "prefix": "¥",
+            "suffix": "元",
+            "yuanNum": "535",
+            "centNum": "00"
+          },
+          "seatPlanName": "看台 535元",
+          "displayOrder": 3,
+          "limitation": 6,
+          "hasActivity": false,
+          "seatPlanCategory": "BASE",
+          "isCombo": false,
+          "isWaitList": false,
+          "saleTags": [],
+          "promoTags": [],
+          "whiteTags": [],
+          "items": [],
+          "autoSeatPicking": false
+        },
+        {
+          "seatPlanId": "68d14198e098e00001988bff",
+          "stdSeatPlanId": "68d14198e098e00001988bfd",
+          "stdShowId": "68d13fd08205b70001f30fb9",
+          "colorValue": "#FF2468",
+          "originalPrice": 635.0,
+          "originalPriceVO": {
+            "currency": "CNY",
+            "prefix": "¥",
+            "suffix": "元",
+            "yuanNum": "635",
+            "centNum": "00"
+          },
+          "seatPlanName": "看台 635元",
+          "displayOrder": 4,
+          "limitation": 6,
+          "hasActivity": false,
+          "seatPlanCategory": "BASE",
+          "isCombo": false,
+          "isWaitList": false,
+          "saleTags": [],
+          "promoTags": [],
+          "whiteTags": [],
+          "items": [],
+          "autoSeatPicking": false
+        },
+        {
+          "seatPlanId": "68d14198e098e00001988c02",
+          "stdSeatPlanId": "68d14198e098e00001988c00",
+          "stdShowId": "68d13fd08205b70001f30fb9",
+          "colorValue": "#FFDC9A",
+          "originalPrice": 835.0,
+          "originalPriceVO": {
+            "currency": "CNY",
+            "prefix": "¥",
+            "suffix": "元",
+            "yuanNum": "835",
+            "centNum": "00"
+          },
+          "seatPlanName": "内场 835元",
+          "displayOrder": 5,
+          "limitation": 6,
+          "hasActivity": false,
+          "seatPlanCategory": "BASE",
+          "isCombo": false,
+          "isWaitList": false,
+          "saleTags": [],
+          "promoTags": [],
+          "whiteTags": [],
+          "items": [],
+          "autoSeatPicking": false
+        },
+        {
+          "seatPlanId": "68d14198e098e00001988c05",
+          "stdSeatPlanId": "68d14198e098e00001988c03",
+          "stdShowId": "68d13fd08205b70001f30fb9",
+          "colorValue": "#FF8F03",
+          "originalPrice": 1035.0,
+          "originalPriceVO": {
+            "currency": "CNY",
+            "prefix": "¥",
+            "suffix": "元",
+            "yuanNum": "1,035",
+            "centNum": "00"
+          },
+          "seatPlanName": "内场 1035元",
+          "displayOrder": 6,
+          "limitation": 6,
+          "hasActivity": false,
+          "seatPlanCategory": "BASE",
+          "isCombo": false,
+          "isWaitList": false,
+          "saleTags": [],
+          "promoTags": [],
+          "whiteTags": [],
+          "items": [],
+          "autoSeatPicking": false
+        },
+        {
+          "seatPlanId": "68e889dabf7b8500016e521c",
+          "stdSeatPlanId": "68e889dabf7b8500016e521a",
+          "stdShowId": "68d13fd08205b70001f30fb9",
+          "originalPrice": 1235.0,
+          "originalPriceVO": {
+            "currency": "CNY",
+            "prefix": "¥",
+            "suffix": "元",
+            "yuanNum": "1,235",
+            "centNum": "00"
+          },
+          "comments": "看台 635元 x 2张",
+          "seatPlanName": "看台套票1235元",
+          "displayOrder": 7,
+          "limitation": 6,
+          "hasActivity": false,
+          "seatPlanCategory": "FREE_COMBO",
+          "unitQty": 2,
+          "isCombo": true,
+          "isWaitList": false,
+          "saleTags": [
+            {
+              "code": 1,
+              "displayName": "套票",
+              "name": "套票",
+              "type": "COMBO_BASE"
+            }
+          ],
+          "promoTags": [],
+          "whiteTags": [],
+          "items": [
+            {
+              "bizSeatPlanId": "68d14198e098e00001988bff",
+              "stdSeatPlanId": "68d14198e098e00001988bfd",
+              "itemSeatPlanName": "看台 635元",
+              "unitQty": 2,
+              "originalPrice": 635.0,
+              "originalPriceVO": {
+                "currency": "CNY",
+                "prefix": "¥",
+                "suffix": "元",
+                "yuanNum": "635",
+                "centNum": "00"
+              }
+            }
+          ],
+          "comboDisplayTag": "COMBO",
+          "autoSeatPicking": false
+        },
+        {
+          "seatPlanId": "68e889f3bf7b8500016e5221",
+          "stdSeatPlanId": "68e889f3bf7b8500016e521f",
+          "stdShowId": "68d13fd08205b70001f30fb9",
+          "originalPrice": 1435.0,
+          "originalPriceVO": {
+            "currency": "CNY",
+            "prefix": "¥",
+            "suffix": "元",
+            "yuanNum": "1,435",
+            "centNum": "00"
+          },
+          "comments": "内场 835元 x 2张",
+          "seatPlanName": "内场套票1435元",
+          "displayOrder": 8,
+          "limitation": 6,
+          "hasActivity": false,
+          "seatPlanCategory": "FREE_COMBO",
+          "unitQty": 2,
+          "isCombo": true,
+          "isWaitList": false,
+          "saleTags": [
+            {
+              "code": 1,
+              "displayName": "套票",
+              "name": "套票",
+              "type": "COMBO_BASE"
+            }
+          ],
+          "promoTags": [],
+          "whiteTags": [],
+          "items": [
+            {
+              "bizSeatPlanId": "68d14198e098e00001988c02",
+              "stdSeatPlanId": "68d14198e098e00001988c00",
+              "itemSeatPlanName": "内场 835元",
+              "unitQty": 2,
+              "originalPrice": 835.0,
+              "originalPriceVO": {
+                "currency": "CNY",
+                "prefix": "¥",
+                "suffix": "元",
+                "yuanNum": "835",
+                "centNum": "00"
+              }
+            }
+          ],
+          "comboDisplayTag": "COMBO",
+          "autoSeatPicking": false
+        }
+      ],
+      "utcOffset": 480,
+      "supportPromotion": true,
+      "autoSeatPicking": false
+    }
+  ]
+}
+
+进程已结束，退出代码为 0

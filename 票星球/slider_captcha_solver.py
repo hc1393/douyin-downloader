@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
+import os
 
 class SliderCaptchaSolver:
     """
@@ -17,10 +18,14 @@ class SliderCaptchaSolver:
         :param img_path: 图像路径
         :return: 预处理后的图像
         """
+        # 检查文件是否存在
+        if not os.path.exists(img_path):
+            raise FileNotFoundError(f"图像文件不存在: {img_path}")
+        
         # 读取图像
         img = cv2.imread(img_path)
         if img is None:
-            raise FileNotFoundError(f"无法读取图像文件: {img_path}")
+            raise FileNotFoundError(f"无法读取图像文件: {img_path}，请检查文件格式是否正确")
         
         # 转换为灰度图像
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -60,10 +65,14 @@ class SliderCaptchaSolver:
         :param slider_path: 滑块图像路径（可选）
         :return: 缺口位置的x坐标
         """
+        # 检查文件是否存在
+        if not os.path.exists(background_path):
+            raise FileNotFoundError(f"背景图像文件不存在: {background_path}")
+        
         # 读取背景图像
         bg_img = cv2.imread(background_path)
         if bg_img is None:
-            raise FileNotFoundError(f"无法读取背景图像文件: {background_path}")
+            raise FileNotFoundError(f"无法读取背景图像文件: {background_path}，请检查文件格式是否正确")
         
         # 转换为灰度图像
         bg_gray = cv2.cvtColor(bg_img, cv2.COLOR_BGR2GRAY)
@@ -109,6 +118,10 @@ class SliderCaptchaSolver:
         # 如果提供了滑块图像，则计算滑块位置
         slider_x = 0
         if slider_path:
+            # 检查文件是否存在
+            if not os.path.exists(slider_path):
+                raise FileNotFoundError(f"滑块图像文件不存在: {slider_path}")
+            
             try:
                 slider_pos, _ = self.find_slider_template(slider_path)
                 slider_x = slider_pos[0]
@@ -127,8 +140,14 @@ class SliderCaptchaSolver:
         :param background_path: 背景图像路径
         :param distance: 计算出的距离
         """
+        # 检查文件是否存在
+        if not os.path.exists(background_path):
+            raise FileNotFoundError(f"背景图像文件不存在: {background_path}")
+        
         # 读取图像
         img = cv2.imread(background_path)
+        if img is None:
+            raise FileNotFoundError(f"无法读取背景图像文件: {background_path}，请检查文件格式是否正确")
         
         # 在图像上绘制检测结果
         if distance > 0:

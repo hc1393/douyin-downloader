@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 import math
+import os
 
 class AdvancedSliderSolver:
     """
@@ -32,10 +33,14 @@ class AdvancedSliderSolver:
         :param method: 边缘检测方法 ('canny', 'sobel', 'laplacian')
         :return: 处理后的图像
         """
+        # 检查文件是否存在
+        if not os.path.exists(image_path):
+            raise FileNotFoundError(f"图像文件不存在: {image_path}")
+        
         # 读取图像
         img = cv2.imread(image_path)
         if img is None:
-            raise FileNotFoundError(f"无法读取图像文件: {image_path}")
+            raise FileNotFoundError(f"无法读取图像文件: {image_path}，请检查文件格式是否正确")
         
         # 转换为灰度图像
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -104,12 +109,22 @@ class AdvancedSliderSolver:
         :param template_path: 缺口模板图像路径
         :return: 缺口位置
         """
+        # 检查文件是否存在
+        if not os.path.exists(background_path):
+            raise FileNotFoundError(f"背景图像文件不存在: {background_path}")
+        
+        if not os.path.exists(template_path):
+            raise FileNotFoundError(f"模板图像文件不存在: {template_path}")
+        
         # 读取图像
         background = cv2.imread(background_path, 0)
         template = cv2.imread(template_path, 0)
         
-        if background is None or template is None:
-            raise FileNotFoundError("无法读取图像文件")
+        if background is None:
+            raise FileNotFoundError(f"无法读取背景图像文件: {background_path}，请检查文件格式是否正确")
+        
+        if template is None:
+            raise FileNotFoundError(f"无法读取模板图像文件: {template_path}，请检查文件格式是否正确")
         
         # 模板匹配
         res = cv2.matchTemplate(background, template, cv2.TM_CCOEFF_NORMED)
@@ -128,6 +143,10 @@ class AdvancedSliderSolver:
         :param background_path: 背景图像路径
         :return: 缺口位置
         """
+        # 检查文件是否存在
+        if not os.path.exists(background_path):
+            raise FileNotFoundError(f"背景图像文件不存在: {background_path}")
+        
         # 图像预处理
         img, gray, edges = self.preprocess_image(background_path, method='canny')
         
@@ -173,6 +192,10 @@ class AdvancedSliderSolver:
         :param background_path: 背景图像路径（带滑块）
         :return: 滑块位置
         """
+        # 检查文件是否存在
+        if not os.path.exists(background_path):
+            raise FileNotFoundError(f"背景图像文件不存在: {background_path}")
+        
         # 图像预处理
         img, gray, edges = self.preprocess_image(background_path, method='canny')
         
@@ -202,10 +225,18 @@ class AdvancedSliderSolver:
         :param method: 检测方法 ('feature', 'template')
         :return: 滑块需要移动的距离
         """
+        # 检查文件是否存在
+        if not os.path.exists(background_path):
+            raise FileNotFoundError(f"背景图像文件不存在: {background_path}")
+        
         if method == 'template':
             # 需要提供模板图像路径
             template_path = "gap_template.png"
             try:
+                # 检查模板文件是否存在
+                if not os.path.exists(template_path):
+                    raise FileNotFoundError(f"模板图像文件不存在: {template_path}")
+                
                 top_left, bottom_right, score = self.detect_gap_by_template_matching(
                     background_path, template_path
                 )
@@ -246,10 +277,14 @@ class AdvancedSliderSolver:
         :param background_path: 背景图像路径
         :param result_info: 计算结果信息
         """
+        # 检查文件是否存在
+        if not os.path.exists(background_path):
+            raise FileNotFoundError(f"背景图像文件不存在: {background_path}")
+        
         # 读取图像
         img = cv2.imread(background_path)
         if img is None:
-            raise FileNotFoundError(f"无法读取图像文件: {background_path}")
+            raise FileNotFoundError(f"无法读取背景图像文件: {background_path}，请检查文件格式是否正确")
         
         # 根据不同方法绘制结果
         method = result_info.get('method', 'default')
