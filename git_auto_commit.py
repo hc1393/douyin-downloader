@@ -1,7 +1,9 @@
 import subprocess
 import sys
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
+import time
+import argparse
 
 def run_command(command, cwd=None):
     """运行命令并返回结果"""
@@ -31,8 +33,7 @@ def check_git_status():
             print(f"错误: 无法检查Git状态 - {stderr}")
             return False
     
-    print("Git仓库状态:")
-    print(stdout)
+    print("Git仓库状态检查完成")
     return True
 
 def check_git_config():
@@ -88,9 +89,12 @@ def check_changes_to_commit():
             print(f"  {file}")
     return True
 
-def commit_changes():
+def commit_changes(message=None):
     """提交更改"""
-    commit_message = f"Auto commit at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+    if not message:
+        commit_message = f"Auto commit at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+    else:
+        commit_message = message
     print(f"提交更改: {commit_message}")
     
     code, stdout, stderr = run_command(f'git commit -m "{commit_message}"')
@@ -130,9 +134,47 @@ def push_changes():
     print(stdout)
     return True
 
+def schedule_commit(target_time):
+    """定时提交"""
+    print(f"设置定时提交任务，目标时间: {target_time}")
+    
+    # 解析目标时间
+    try:
+        target_datetime = datetime.strptime(target_time, "%Y-%m-%d %H:%M:%S")
+    except ValueError:
+        print("错误: 时间格式不正确，请使用 YYYY-MM-DD HH:MM:SS 格式")
+        return False
+    
+    # 计算等待时间
+    now = datetime.now()
+    if target_datetime <= now:
+        print("错误: 目标时间必须晚于当前时间")
+        return False
+    
+    wait_seconds = (target_datetime - now).total_seconds()
+    print(f"将在 {wait_seconds} 秒后执行提交 ({target_datetime.strftime('%Y-%m-%d %H:%M:%S')})")
+    
+    # 等待到指定时间
+    while datetime.now() < target_datetime:
+        time.sleep(1)
+    
+    print("到达指定时间，开始执行提交...")
+    return True
+
 def main():
     """主函数"""
-    print(f"开始自动Git提交流程: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    parser = argparse.ArgumentParser(description="Git自动提交工具")
+    parser.add_argument("-m", "--message", help="提交信息")
+    parser.add_argument("-t", "--time", help="定时提交时间 (格式: YYYY-MM-DD HH:MM:SS)")
+    
+    args = parser.parse_args()
+    
+    print(f"开始Git自动提交流程: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    # 如果指定了定时提交时间
+    if args.time:
+        if not schedule_commit(args.time):
+            sys.exit(1)
     
     # 检查是否在Git仓库中
     if not check_git_status():
@@ -151,7 +193,7 @@ def main():
         return
     
     # 提交更改
-    if not commit_changes():
+    if not commit_changes(args.message):
         sys.exit(1)
     
     # 推送更改
