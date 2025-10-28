@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import time
 import argparse
 
-def run_command(command, cwd=None):
+def run_command(command, cwd=None, timeout=30):
     """运行命令并返回结果"""
     try:
         result = subprocess.run(
@@ -14,16 +14,19 @@ def run_command(command, cwd=None):
             cwd=cwd,
             capture_output=True, 
             text=True,
-            encoding='utf-8'
+            encoding='utf-8',
+            timeout=timeout
         )
         return result.returncode, result.stdout, result.stderr
+    except subprocess.TimeoutExpired:
+        return -2, "", f"命令执行超时 ({timeout}秒)"
     except Exception as e:
         return -1, "", str(e)
 
 def check_git_status():
     """检查Git状态"""
     print("检查Git仓库状态...")
-    code, stdout, stderr = run_command("git status")
+    code, stdout, stderr = run_command("git status", timeout=10)
     
     if code != 0:
         if "not a git repository" in stderr:
@@ -39,7 +42,7 @@ def check_git_status():
 def check_git_config():
     """检查Git配置"""
     print("检查Git配置...")
-    code, stdout, stderr = run_command("git config --list")
+    code, stdout, stderr = run_command("git config --list", timeout=10)
     
     if code != 0:
         print(f"警告: 无法获取Git配置 - {stderr}")
@@ -59,7 +62,7 @@ def check_git_config():
 def add_files():
     """添加文件到暂存区"""
     print("添加文件到暂存区...")
-    code, stdout, stderr = run_command("git add .")
+    code, stdout, stderr = run_command("git add .", timeout=20)
     
     if code != 0:
         print(f"错误: 添加文件失败 - {stderr}")
@@ -71,7 +74,7 @@ def add_files():
 def check_changes_to_commit():
     """检查是否有更改需要提交"""
     print("检查是否有更改需要提交...")
-    code, stdout, stderr = run_command("git diff --cached --name-only")
+    code, stdout, stderr = run_command("git diff --cached --name-only", timeout=10)
     
     if code != 0:
         print(f"错误: 无法检查暂存区更改 - {stderr}")
@@ -97,7 +100,7 @@ def commit_changes(message=None):
         commit_message = message
     print(f"提交更改: {commit_message}")
     
-    code, stdout, stderr = run_command(f'git commit -m "{commit_message}"')
+    code, stdout, stderr = run_command(f'git commit -m "{commit_message}"', timeout=20)
     
     if code != 0:
         if "nothing to commit" in stderr or "nothing added to commit" in stderr:
@@ -119,13 +122,20 @@ def commit_changes(message=None):
 
 def push_changes():
     """推送更改到远程仓库"""
-    print("推送更改到远程仓库...")
-    code, stdout, stderr = run_command("git push")
+    print("推送更改到远程仓库... (超时时间: 60秒)")
+    code, stdout, stderr = run_command("git push", timeout=60)
     
     if code != 0:
-        if "fatal: No configured push destination" in stderr:
+        if code == -2:  # 超时
+            print("错误: 推送超时，可能是网络连接问题")
+            return False
+        elif "fatal: No configured push destination" in stderr:
             print("警告: 未设置远程仓库，跳过推送")
             return True
+        elif "Permission denied" in stderr or "Authentication failed" in stderr:
+            print("错误: 推送权限不足，请检查您的Git凭据")
+            print("您可能需要配置SSH密钥或使用个人访问令牌")
+            return False
         else:
             print(f"错误: 推送失败 - {stderr}")
             return False
@@ -197,7 +207,9 @@ def main():
         sys.exit(1)
     
     # 推送更改
-    push_changes()
+    if not push_changes():
+        print("推送失败，但本地提交已完成")
+        sys.exit(1)
     
     print("自动提交流程完成")
 
