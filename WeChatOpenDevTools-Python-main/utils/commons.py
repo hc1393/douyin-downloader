@@ -66,9 +66,19 @@ class Commons:
             self.wechatutils_instance.print_process_not_found_message()
 
         # 管理会话
-        while self.active_sessions:
-            self.manage_sessions()
-            time.sleep(5)  # 每5秒检查一次
+        if self.active_sessions:
+            print(Color.YELLOW + "\n[*] 按 Ctrl+C 停止监听或关闭微信" + Color.END)
+            try:
+                while self.active_sessions:
+                    self.manage_sessions()
+                    time.sleep(5)  # 每5秒检查一次
+            except KeyboardInterrupt:
+                print(Color.YELLOW + "\n[!] 用户中断监听" + Color.END)
+        else:
+            try:
+                input(Color.YELLOW + "\n按回车键返回..." + Color.END)
+            except:
+                pass
 
     def load_wechatEx_cookie_hook(self):
         path = self.wechatutils_instance.get_configs_path()
@@ -91,25 +101,47 @@ class Commons:
             self.wechatutils_instance.print_process_not_found_message()
 
         # 管理会话
-        while self.active_sessions:
-            self.manage_sessions()
-            time.sleep(5)  # 每5秒检查一次
+        if self.active_sessions:
+            print(Color.YELLOW + "\n[*] 按 Ctrl+C 停止监听或关闭微信" + Color.END)
+            try:
+                while self.active_sessions:
+                    self.manage_sessions()
+                    time.sleep(5)  # 每5秒检查一次
+            except KeyboardInterrupt:
+                print(Color.YELLOW + "\n[!] 用户中断监听" + Color.END)
+        else:
+            try:
+                input(Color.YELLOW + "\n按回车键返回..." + Color.END)
+            except:
+                pass
 
     def load_wechatEXE_configs(self):
         wechat_instances = self.wechatutils_instance.get_wechat_pids_and_versions()
         if wechat_instances:
             print(Color.RED + f"[-] 请退出所有微信实例后再执行该命令 " + Color.END)
+            try:
+                input(Color.YELLOW + "\n按回车键返回..." + Color.END)
+            except:
+                pass
             return 0
         
         wechatEXEpath = self.wechatutils_instance.find_installation_path("微信")
         path = self.wechatutils_instance.get_configs_path()
         wechatEXE_hookcode = open(path + "..\\scripts\\WechatWin.dll\\hook.js", "r", encoding="utf-8").read()
         self.inject_wechatDLL(wechatEXEpath, wechatEXE_hookcode)
+        try:
+            input(Color.YELLOW + "\n按回车键返回..." + Color.END)
+        except:
+            pass
 
     def load_wechatEXE_and_wechatEx(self):
         wechat_instances = self.wechatutils_instance.get_wechat_pids_and_versions()
         if wechat_instances:
             print(Color.RED + f"[-] 请关闭所有微信实例后再执行该命令 " + Color.END)
+            try:
+                input(Color.YELLOW + "\n按回车键返回..." + Color.END)
+            except:
+                pass
             return 0
         self.load_wechatEXE_configs()
         self.load_wechatEx_configs()

@@ -10,7 +10,7 @@ def create_desktop_shortcut():
         desktop = Path.home() / "Desktop"
         
         # 获取可执行文件路径
-        exe_path = Path("F:/PythonProject/WeChatOpenDevTools-Python-main/dist/WechatOpenDevTools.exe")
+        exe_path = Path(__file__).parent / "dist" / "WechatOpenDevTools.exe"
         
         # 检查 exe 文件是否存在
         if not exe_path.exists():
@@ -18,14 +18,9 @@ def create_desktop_shortcut():
             print(f"请确保文件存在于: {exe_path}")
             return False
             
-        # 创建 .lnk 快捷方式文件的路径
-        shortcut_path = desktop / "WechatOpenDevTools.lnk"
-        
-        # 使用 Windows 的 mklink 命令创建快捷方式
-        # 实际上，我们将创建一个批处理文件作为替代方案
-        
         # 创建批处理文件
         bat_content = f"""@echo off
+REM WechatOpenDevTools 快捷启动脚本
 cd /d "{exe_path.parent}"
 "{exe_path.name}" %*
 """
@@ -37,8 +32,9 @@ cd /d "{exe_path.parent}"
         print(f"已在桌面创建快捷方式: {bat_path}")
         print("双击桌面上的 WechatOpenDevTools.bat 即可运行程序")
         print("\n使用方法:")
-        print("- 双击运行程序（显示帮助信息）")
-        print("- 右键编辑批处理文件可以添加默认参数")
+        print("1. 双击运行程序（显示帮助信息）")
+        print("2. 右键编辑批处理文件可以添加默认参数")
+        print("3. 以管理员身份运行以获得完整功能")
         
         return True
         
@@ -48,3 +44,4 @@ cd /d "{exe_path.parent}"
 
 if __name__ == "__main__":
     create_desktop_shortcut()
+    input("\n按回车键退出...")

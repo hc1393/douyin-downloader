@@ -1,0 +1,163 @@
+import subprocess
+import sys
+import os
+from datetime import datetime
+
+def run_command(command, cwd=None):
+    """运行命令并返回结果"""
+    try:
+        result = subprocess.run(
+            command, 
+            shell=True, 
+            cwd=cwd,
+            capture_output=True, 
+            text=True,
+            encoding='utf-8'
+        )
+        return result.returncode, result.stdout, result.stderr
+    except Exception as e:
+        return -1, "", str(e)
+
+def check_git_status():
+    """检查Git状态"""
+    print("检查Git仓库状态...")
+    code, stdout, stderr = run_command("git status")
+    
+    if code != 0:
+        if "not a git repository" in stderr:
+            print("错误: 当前目录不是Git仓库")
+            return False
+        else:
+            print(f"错误: 无法检查Git状态 - {stderr}")
+            return False
+    
+    print("Git仓库状态:")
+    print(stdout)
+    return True
+
+def check_git_config():
+    """检查Git配置"""
+    print("检查Git配置...")
+    code, stdout, stderr = run_command("git config --list")
+    
+    if code != 0:
+        print(f"警告: 无法获取Git配置 - {stderr}")
+        return False
+    
+    # 检查必要的配置
+    has_user_name = "user.name" in stdout
+    has_user_email = "user.email" in stdout
+    
+    if not has_user_name:
+        print("警告: 未设置Git用户名")
+    if not has_user_email:
+        print("警告: 未设置Git邮箱")
+        
+    return has_user_name and has_user_email
+
+def add_files():
+    """添加文件到暂存区"""
+    print("添加文件到暂存区...")
+    code, stdout, stderr = run_command("git add .")
+    
+    if code != 0:
+        print(f"错误: 添加文件失败 - {stderr}")
+        return False
+    
+    print("文件添加完成")
+    return True
+
+def check_changes_to_commit():
+    """检查是否有更改需要提交"""
+    print("检查是否有更改需要提交...")
+    code, stdout, stderr = run_command("git diff --cached --name-only")
+    
+    if code != 0:
+        print(f"错误: 无法检查暂存区更改 - {stderr}")
+        return False
+    
+    files_to_commit = stdout.strip().split('\n') if stdout.strip() else []
+    
+    if not files_to_commit or (len(files_to_commit) == 1 and files_to_commit[0] == ''):
+        print("没有文件需要提交")
+        return False
+    
+    print(f"以下文件将被提交:")
+    for file in files_to_commit:
+        if file:  # 避免打印空行
+            print(f"  {file}")
+    return True
+
+def commit_changes():
+    """提交更改"""
+    commit_message = f"Auto commit at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+    print(f"提交更改: {commit_message}")
+    
+    code, stdout, stderr = run_command(f'git commit -m "{commit_message}"')
+    
+    if code != 0:
+        if "nothing to commit" in stderr or "nothing added to commit" in stderr:
+            print("没有更改需要提交")
+            return False
+        elif "Please tell me who you are" in stderr:
+            print("错误: 请配置Git用户信息")
+            print("运行以下命令配置:")
+            print('  git config --global user.name "Your Name"')
+            print('  git config --global user.email "your.email@example.com"')
+            return False
+        else:
+            print(f"错误: 提交失败 - {stderr}")
+            return False
+    
+    print("提交成功")
+    print(stdout)
+    return True
+
+def push_changes():
+    """推送更改到远程仓库"""
+    print("推送更改到远程仓库...")
+    code, stdout, stderr = run_command("git push")
+    
+    if code != 0:
+        if "fatal: No configured push destination" in stderr:
+            print("警告: 未设置远程仓库，跳过推送")
+            return True
+        else:
+            print(f"错误: 推送失败 - {stderr}")
+            return False
+    
+    print("推送完成")
+    print(stdout)
+    return True
+
+def main():
+    """主函数"""
+    print(f"开始自动Git提交流程: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    # 检查是否在Git仓库中
+    if not check_git_status():
+        sys.exit(1)
+    
+    # 检查Git配置
+    check_git_config()
+    
+    # 添加文件
+    if not add_files():
+        sys.exit(1)
+    
+    # 检查是否有更改需要提交
+    if not check_changes_to_commit():
+        print("没有更改需要提交，流程结束")
+        return
+    
+    # 提交更改
+    if not commit_changes():
+        sys.exit(1)
+    
+    # 推送更改
+    push_changes()
+    
+    print("自动提交流程完成")
+
+if __name__ == "__main__":
+    main()

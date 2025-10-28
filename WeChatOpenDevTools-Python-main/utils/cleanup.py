@@ -73,6 +73,10 @@ class CleanupUtils:
                 success_count += 1
 
         print(Color.GREEN + f"[+] 清理完成，成功处理 {success_count}/{total_count} 个路径" + Color.END)
+        try:
+            input(Color.YELLOW + "\n按回车键返回..." + Color.END)
+        except:
+            pass
         return success_count, total_count
 
 if __name__ == "__main__":

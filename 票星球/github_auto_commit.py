@@ -71,12 +71,29 @@ class GitHubAutoCommit:
             raise Exception(f"添加文件失败: {stderr}")
         return stdout
     
+    def check_if_changes_to_commit(self):
+        """
+        检查是否有更改需要提交
+        
+        :return: 是否有更改需要提交
+        """
+        code, stdout, stderr = self.run_command("git diff --cached --name-only")
+        if code != 0:
+            raise Exception(f"检查暂存区更改失败: {stderr}")
+        
+        files_to_commit = stdout.strip().split('\n') if stdout.strip() else []
+        return bool(files_to_commit and files_to_commit[0])
+    
     def commit_changes(self, message):
         """
         提交更改
         
         :param message: 提交信息
         """
+        # 检查是否有更改需要提交
+        if not self.check_if_changes_to_commit():
+            return "没有需要提交的更改"
+        
         # 转义提交信息中的特殊字符
         escaped_message = message.replace('"', '\\"')
         command = f'git commit -m "{escaped_message}"'
@@ -143,6 +160,7 @@ class GitHubAutoCommit:
             
             # 如果没有需要提交的更改，则直接返回
             if commit_result == "没有需要提交的更改":
+                print("ℹ️  没有文件需要提交，跳过推送步骤")
                 return commit_result
             
             # 如果没有指定分支，则使用当前分支
