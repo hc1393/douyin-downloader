@@ -1,0 +1,29 @@
+/* 首页样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.welcome {
+  margin-bottom: 50rpx;
+}
+
+.welcome-text {
+  font-size: 42rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 60%;
+}

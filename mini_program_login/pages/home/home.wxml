@@ -1,0 +1,7 @@
+<!-- 首页 -->
+<view class="container">
+  <view class="welcome">
+    <text class="welcome-text">欢迎使用小程序</text>
+  </view>
+  <button class="logout-btn" bindtap="onLogout">退出登录</button>
+</view>

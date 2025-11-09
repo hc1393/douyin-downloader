@@ -1,0 +1,37 @@
+<!-- 登录页面 -->
+<view class="container">
+  <view class="header">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <text class="title">用户登录</text>
+  </view>
+
+  <form bindsubmit="onLogin">
+    <view class="input-group">
+      <view class="input-item">
+        <image class="icon" src="/images/user.png" mode="aspectFit"></image>
+        <input class="input" name="username" placeholder="请输入用户名/手机号" placeholder-class="placeholder" />
+      </view>
+      
+      <view class="input-item">
+        <image class="icon" src="/images/password.png" mode="aspectFit"></image>
+        <input class="input" name="password" placeholder="请输入密码" password="{{true}}" placeholder-class="placeholder" />
+      </view>
+    </view>
+
+    <button class="login-btn" form-type="submit">登录</button>
+    
+    <view class="footer">
+      <navigator class="link" url="../register/register">立即注册</navigator>
+      <navigator class="link" url="../forgot/forgot">忘记密码?</navigator>
+    </view>
+  </form>
+  
+  <view class="third-party-login">
+    <text class="divider">其他登录方式</text>
+    <view class="icons">
+      <image class="third-icon" src="/images/wechat.png" bindtap="wechatLogin"></image>
+      <image class="third-icon" src="/images/qq.png" bindtap="qqLogin"></image>
+      <image class="third-icon" src="/images/weibo.png" bindtap="weiboLogin"></image>
+    </view>
+  </view>
+</view>

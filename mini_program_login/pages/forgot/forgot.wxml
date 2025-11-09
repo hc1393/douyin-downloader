@@ -1,0 +1,33 @@
+<!-- 忘记密码页面 -->
+<view class="container">
+  <view class="header">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <text class="title">找回密码</text>
+  </view>
+
+  <form bindsubmit="onResetPassword">
+    <view class="input-group">
+      <view class="input-item">
+        <image class="icon" src="/images/mobile.png" mode="aspectFit"></image>
+        <input class="input" name="mobile" placeholder="请输入手机号" placeholder-class="placeholder" />
+      </view>
+      
+      <view class="input-item">
+        <image class="icon" src="/images/code.png" mode="aspectFit"></image>
+        <input class="input" name="code" placeholder="请输入验证码" placeholder-class="placeholder" />
+        <button class="code-btn" bindtap="getCode">获取验证码</button>
+      </view>
+      
+      <view class="input-item">
+        <image class="icon" src="/images/password.png" mode="aspectFit"></image>
+        <input class="input" name="newPassword" placeholder="请输入新密码" password="{{true}}" placeholder-class="placeholder" />
+      </view>
+    </view>
+
+    <button class="reset-btn" form-type="submit">重置密码</button>
+    
+    <view class="footer">
+      <navigator class="link" url="../login/login">返回登录</navigator>
+    </view>
+  </form>
+</view>
