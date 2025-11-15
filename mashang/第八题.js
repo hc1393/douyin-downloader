@@ -157,5 +157,4 @@ function get_m_t(page){
     return [t,m_time]
 }
 
-
 // 实现OOOoO函数 - 在第八题.js中定义的加密函数
