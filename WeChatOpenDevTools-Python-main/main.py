@@ -33,6 +33,9 @@ def main():
 
         if args.x:
             print_colored_message("[*] 正在开启小程序F12调试功能...", Color.GREEN)
+            print_colored_message("[!] 注意：微信4.1.0版本可能已禁用传统调试方法", Color.YELLOW)
+            print_colored_message("[!] 推荐使用微信官方开发者工具获取完整调试功能", Color.YELLOW)
+            print_colored_message("[!] 详细信息请查看 WECHAT_410_LIMITATIONS.md 文件", Color.YELLOW)
             commons.load_wechatEx_configs()
         elif args.c:
             print_colored_message("[*] 正在开启内置浏览器F12调试功能...", Color.GREEN)

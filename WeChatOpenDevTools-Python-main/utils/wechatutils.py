@@ -25,6 +25,7 @@ class WechatUtils:
     def is_wechatEx_process(self, cmdline):
         process_name = "WeChatAppEx"
         return cmdline and process_name in cmdline[0] and "--type=" not in ' '.join(cmdline)
+        
     def get_wechat_pids_and_versions(self):
         processes = (proc.info for proc in psutil.process_iter(['pid', 'cmdline'])) 
         wechatEx_processes = (p for p in processes if self.is_wechatEx_process(p['cmdline']))
@@ -32,8 +33,8 @@ class WechatUtils:
         for process in wechatEx_processes:
             pid = process['pid']
             version = self.extract_version_number(process['cmdline'])
-            if version in self.version_list:
-                wechat_instances.append((pid, version))
+            # 允许任何版本的微信进程
+            wechat_instances.append((pid, version))
         return wechat_instances
 
     def get_wechat_pid_and_version(self):
@@ -43,7 +44,7 @@ class WechatUtils:
     def get_wechat_pids_and_versions_mac(self):
         try:
             pid_command = "ps aux | grep 'WeChatAppEx' |  grep -v 'grep' | grep ' --client_version' | grep '-user-agent=' | awk '{print $2}'"
-            version_command = "ps aux | grep 'WeChatAppEx' |  grep -v 'grep' | grep ' --client_version' | grep '-user-agent=' | grep -oE 'MacWechat/([0-9]+\.)+[0-9]+\(0x\d+\)' |  grep -oE '(0x\d+)' | sed 's/0x//g'"
+            version_command = "ps aux | grep 'WeChatAppEx' |  grep -v 'grep' | grep ' --client_version' | grep '-user-agent=' | grep -oE 'MacWechat/([0-9]+\\.)+[0-9]+\\(0x[0-9]+\\)' |  grep -oE '(0x[0-9]+)' | sed 's/0x//g'"
             pids = subprocess.run(pid_command, shell=True, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.split()
             versions = subprocess.run(version_command, shell=True, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.split()
             return list(zip(map(int, pids), versions))
@@ -67,7 +68,7 @@ class WechatUtils:
                     display_name = winreg.QueryValueEx(sub_key, "DisplayName")[0]
                     # 排除企业微信 和 适配英文区域安装的WeChat
                     if program_name == display_name or display_name == 'WeChat':
-                        install_location = winreg.QueryValueEx(sub_key, "InstallLocation")[0]+"\\WeChat.exe"
+                        install_location = winreg.QueryValueEx(sub_key, "InstallLocation")[0].strip('"')+"\\WeChat.exe"
                         print(Color.GREEN + f"[+] 查找到{program_name}的安装路径是：{install_location}" + Color.END)
                         print(Color.GREEN + f"[+] 正在尝试重启微信..."+ Color.END)
                         return install_location
@@ -84,13 +85,13 @@ class WechatUtils:
         return int(version_match.group(1)) if version_match else None
     
     def get_wechat_pid_and_version(self):
-        processes = (proc.info for proc in psutil.process_iter(['pid', 'cmdline']))	
+        processes = (proc.info for proc in psutil.process_iter(['pid', 'cmdline']))    
         wechatEx_processes = (p for p in processes if self.is_wechatEx_process(p['cmdline']))
         for process in wechatEx_processes:
             pid = process['pid']
             version = self.extract_version_number(process['cmdline'])
-            if version in self.version_list:
-                return pid, version
+            # 允许任何版本的微信进程
+            return pid, version
         
         return None, None
     
@@ -100,10 +101,9 @@ class WechatUtils:
     def get_wechat_pid_and_version_mac(self):
         try:
             pid_command="ps aux | grep 'WeChatAppEx' |  grep -v 'grep' | grep ' --client_version' | grep '-user-agent=' | awk '{print $2}' | tail -n 1"
-            version_command = "ps aux | grep 'WeChatAppEx' |  grep -v 'grep' | grep ' --client_version' | grep '-user-agent=' | grep -oE 'MacWechat/([0-9]+\.)+[0-9]+\(0x\d+\)' |  grep -oE '(0x\d+)' | sed 's/0x//g' | head -n 1"
+            version_command = "ps aux | grep 'WeChatAppEx' |  grep -v 'grep' | grep ' --client_version' | grep '-user-agent=' | grep -oE 'MacWechat/([0-9]+\\.)+[0-9]+\\(0x[0-9]+\\)' |  grep -oE '(0x[0-9]+)' | sed 's/0x//g' | head -n 1"
             pid  = subprocess.run(pid_command, shell=True, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.replace("\n","")
             version  = subprocess.run(version_command, shell=True, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.replace("\n","")
             return int(pid),version
         except subprocess.CalledProcessError as e:
             return e.stderr
-

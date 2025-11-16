@@ -1,6 +1,13 @@
 import psutil
 import re
-from utils.colors import Color
+
+# 重新定义颜色类，避免依赖
+class Color:
+    RED = '\033[91m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    BLUE = '\033[94m'
+    END = '\033[0m'
 
 class VersionDetector:
     """
@@ -22,7 +29,7 @@ class VersionDetector:
             try:
                 if proc.info['name'] == 'WeChat.exe':
                     self.wechat_processes.append(proc.info)
-                elif proc.info['name'] == 'WeChatAppEx.exe' or 'WeChatAppEx' in (proc.info['cmdline'] or []):
+                elif proc.info['name'] == 'WeChatAppEx.exe' or (proc.info['cmdline'] and 'WeChatAppEx' in ''.join(proc.info['cmdline'])):
                     self.miniprogram_processes.append(proc.info)
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 pass
@@ -67,7 +74,7 @@ class VersionDetector:
         """
         processes = self.detect_wechat_processes()
         if not processes['miniprogram']:
-            return None
+            return None, None
             
         latest_process = None
         latest_version = 0

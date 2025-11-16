@@ -1,7 +1,15 @@
 import frida
 import json
 import os
-from utils.colors import Color
+
+# 重新定义颜色类，避免依赖
+class Color:
+    RED = '\033[91m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    BLUE = '\033[94m'
+    END = '\033[0m'
+
 from new_version_support.version_detector import VersionDetector
 
 class DebugTool:
@@ -48,6 +56,21 @@ class DebugTool:
             print(Color.RED + f"[-] 生成Hook脚本失败: {e}" + Color.END)
             return None
             
+    def on_message(self, message, data):
+        """
+        处理来自Frida脚本的消息
+        """
+        try:
+            if message['type'] == 'send':
+                payload = message['payload']
+                print(Color.GREEN + f"[Frida] {payload}" + Color.END)
+            elif message['type'] == 'error':
+                print(Color.RED + f"[Frida Error] {message['description']}" + Color.END)
+                print(Color.RED + f"  Line: {message['lineNumber']}" + Color.END)
+                print(Color.RED + f"  Stack: {message['stack']}" + Color.END)
+        except Exception as e:
+            print(Color.RED + f"[!] 消息处理出错: {e}" + Color.END)
+            
     def attach_to_process(self, pid, script_content):
         """
         附加到指定进程并执行脚本
@@ -55,6 +78,7 @@ class DebugTool:
         try:
             session = self.device.attach(pid)
             script = session.create_script(script_content)
+            script.on('message', self.on_message)
             script.load()
             print(Color.GREEN + f"[+] 成功附加到进程 {pid}" + Color.END)
             return session, script
@@ -69,23 +93,30 @@ class DebugTool:
         print(Color.GREEN + "[*] 正在检测微信小程序进程..." + Color.END)
         
         # 检测小程序进程
-        process_info, version = self.version_detector.get_latest_miniprogram_process()
-        if not process_info:
+        processes = self.version_detector.detect_wechat_processes()
+        miniprogram_processes = processes['miniprogram']
+        
+        if not miniprogram_processes:
             print(Color.RED + "[-] 未检测到小程序进程，请确保微信已运行并打开了小程序" + Color.END)
             return False
             
-        print(Color.GREEN + f"[+] 检测到小程序进程，PID: {process_info['pid']}, 版本: {version}" + Color.END)
+        # 选择一个进程进行调试（选择第一个）
+        target_process = miniprogram_processes[0]
+        print(Color.GREEN + f"[+] 检测到小程序进程，PID: {target_process['pid']}" + Color.END)
         
-        # 加载配置
-        config = self.load_config(version)
-        if not config:
-            # 尝试使用最新版本的配置
-            config = self.load_config(13080813)  # 微信4.1.0假设版本
-            if not config:
-                print(Color.RED + "[-] 未找到匹配的配置文件，请确认版本支持" + Color.END)
-                return False
+        # 尝试加载最新版本的配置
+        versions_to_try = [13080813, 11275, 11253, 11205, 11159]  # 按优先级排序
+        config = None
+        
+        for version in versions_to_try:
+            config = self.load_config(version)
+            if config:
+                print(Color.GREEN + f"[+] 使用配置文件版本: {config['Version']}" + Color.END)
+                break
                 
-        print(Color.GREEN + f"[+] 使用配置文件版本: {config['Version']}" + Color.END)
+        if not config:
+            print(Color.RED + "[-] 未找到任何可用的配置文件" + Color.END)
+            return False
         
         # 生成Hook脚本
         script_content = self.generate_hook_script(config)
@@ -93,7 +124,7 @@ class DebugTool:
             return False
             
         # 附加到进程
-        session, script = self.attach_to_process(process_info['pid'], script_content)
+        session, script = self.attach_to_process(target_process['pid'], script_content)
         if not session:
             return False
             

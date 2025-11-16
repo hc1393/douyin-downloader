@@ -2,9 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/mp-unpack" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/mp-unpack/mp-unpack" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/unveilr-v2.0.0" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/unveilr-v2.0.0/unveilr-v2.0.0" vcs="Git" />
   </component>
 </project>

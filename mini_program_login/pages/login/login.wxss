@@ -60,6 +60,29 @@
   color: #ccc;
 }
 
+.eye-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 20rpx;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+
+.remember-password, .auto-login {
+  display: flex;
+  align-items: center;
+}
+
+.option-text {
+  font-size: 28rpx;
+  color: #666;
+  margin-left: 10rpx;
+}
+
 .login-btn {
   margin-top: 50rpx;
   background-color: #00bfff;
@@ -124,8 +147,18 @@
   margin-top: 30rpx;
 }
 
+.third-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0 30rpx;
+}
+
+.third-btn::after {
+  border: none;
+}
+
 .third-icon {
   width: 70rpx;
   height: 70rpx;
-  margin: 0 30rpx;
 }

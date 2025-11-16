@@ -2,7 +2,22 @@
 Page({
   data: {
     username: '',
-    password: ''
+    password: '',
+    showPassword: false,
+    rememberPassword: false,
+    autoLogin: false
+  },
+
+  onLoad: function() {
+    // 页面加载时检查是否记住密码
+    const rememberInfo = wx.getStorageSync('rememberInfo');
+    if (rememberInfo) {
+      this.setData({
+        username: rememberInfo.username || '',
+        password: rememberInfo.password || '',
+        rememberPassword: true
+      });
+    }
   },
 
   /**
@@ -24,10 +39,37 @@ Page({
   },
 
   /**
+   * 切换密码可见性
+   */
+  togglePasswordVisibility: function() {
+    this.setData({
+      showPassword: !this.data.showPassword
+    });
+  },
+
+  /**
+   * 记住密码选项更改
+   */
+  onRememberPasswordChange: function(e) {
+    this.setData({
+      rememberPassword: e.detail.value
+    });
+  },
+
+  /**
+   * 自动登录选项更改
+   */
+  onAutoLoginChange: function(e) {
+    this.setData({
+      autoLogin: e.detail.value
+    });
+  },
+
+  /**
    * 登录按钮点击事件
    */
   onLogin: function(e) {
-    const { username, password } = e.detail.value;
+    const { username, password } = this.data;
     
     // 表单验证
     if (!username) {
@@ -50,6 +92,16 @@ Page({
     wx.showLoading({
       title: '登录中...'
     });
+    
+    // 根据选项决定是否记住密码
+    if (this.data.rememberPassword) {
+      wx.setStorageSync('rememberInfo', {
+        username: this.data.username,
+        password: this.data.password
+      });
+    } else {
+      wx.removeStorageSync('rememberInfo');
+    }
     
     // 模拟登录请求（实际开发中需要替换为真实的API调用）
     setTimeout(() => {

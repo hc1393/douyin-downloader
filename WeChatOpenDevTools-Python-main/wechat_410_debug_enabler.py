@@ -64,6 +64,19 @@ class WeChat410DebugEnabler:
             # 查找微信安装路径
             install_path = self.wechat_utils.find_installation_path("微信")
             
+            # 如果通过注册表未找到，尝试常见路径
+            if not install_path or not os.path.exists(install_path):
+                common_paths = [
+                    r"D:\Weixin\WeChat.exe",
+                    r"C:\Program Files (x86)\Tencent\WeChat\WeChat.exe",
+                    r"C:\Program Files\Tencent\WeChat\WeChat.exe"
+                ]
+                
+                for path in common_paths:
+                    if os.path.exists(path):
+                        install_path = path
+                        break
+            
             if not install_path or not os.path.exists(install_path):
                 print(Color.RED + "[-] 未找到微信安装路径" + Color.END)
                 return False

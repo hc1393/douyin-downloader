@@ -5,6 +5,7 @@ import frida
 import sys
 import time
 import platform
+import os
 
 class Commons:
     def __init__(self):
@@ -53,15 +54,34 @@ class Commons:
         if wechat_instances:
             for pid, version in wechat_instances:
                 try:
-                    wechatEx_hookcode = open(path + "../scripts/hook.js", "r", encoding="utf-8").read()
-                    wechatEx_addresses = open(path + f"../configs/address_{version}_x64.json").read()
+                    # 对于微信4.1.0版本(13080813)使用专用的hook脚本
+                    if version == 13080813:
+                        # 优先使用综合hook脚本，如果不存在则使用普通410脚本
+                        if os.path.exists(path + "../scripts/comprehensive_hook_410.js"):
+                            wechatEx_hookcode = open(path + "../scripts/comprehensive_hook_410.js", "r", encoding="utf-8").read()
+                            send_message = "[+] 正在使用综合调试方案"
+                        else:
+                            wechatEx_hookcode = open(path + "../scripts/hook_410.js", "r", encoding="utf-8").read()
+                            send_message = "[+] 正在使用标准调试方案"
+                    else:
+                        wechatEx_hookcode = open(path + "../scripts/hook.js", "r", encoding="utf-8").read()
+                        send_message = "[+] 正在使用兼容调试方案"
+                        
+                    # 尝试匹配版本配置文件，如果没有匹配的则使用默认配置
+                    config_file = f"../configs/address_{version}_x64.json"
+                    if not os.path.exists(path + config_file):
+                        # 使用最新版本配置文件
+                        config_file = "../configs/address_13080813_x64.json"
+                    
+                    wechatEx_addresses = open(path + config_file).read()
                     wechatEx_hookcode = "var address=" + wechatEx_addresses + wechatEx_hookcode
                     session = self.inject_wechatEx(pid, wechatEx_hookcode)
                     if session:
                         self.active_sessions.append(session)
-                    print(Color.GREEN +f"[+] 成功注入{version}小程序版本，PID: {pid}", Color.END)
+                    print(Color.GREEN +f"[+] 成功注入小程序版本，PID: {pid}", Color.END)
+                    print(Color.GREEN + send_message, Color.END)
                 except Exception as e:
-                    print(Color.RED + f"[-] 注入{version}小程序版本失败！", Color.END)
+                    print(Color.RED + f"[-] 注入小程序版本失败: {e}！", Color.END)
         else:
             self.wechatutils_instance.print_process_not_found_message()
 
@@ -94,9 +114,9 @@ class Commons:
                     session = self.inject_wechatEx(pid, cookie_hook_code)
                     if session:
                         self.active_sessions.append(session)
-                    print(Color.GREEN +f"[+] 成功注入{version}小程序Cookie监控，PID: {pid}", Color.END)
+                    print(Color.GREEN +f"[+] 成功注入小程序Cookie监控，PID: {pid}", Color.END)
                 except Exception as e:
-                    print(Color.RED + f"[-] 注入{version}小程序Cookie监控失败！", Color.END)
+                    print(Color.RED + f"[-] 注入小程序Cookie监控失败！", Color.END)
         else:
             self.wechatutils_instance.print_process_not_found_message()
 

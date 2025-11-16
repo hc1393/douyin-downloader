@@ -19,7 +19,15 @@
 
  - [开启微信内置浏览器F12](#%E5%BC%80%E5%90%AF%E5%BE%AE%E4%BF%A1%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8F12)
 
+ - [绕过微信版本检查](#%E7%BB%95%E8%BF%87%E5%BE%AE%E4%BF%A1%E7%89%88%E6%9C%AC%E6%A3%80%E6%9F%A5)
+
+ - [自动启动微信并绕过版本检查](#%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8%E5%BE%AE%E4%BF%A1%E5%B9%B6%E7%BB%95%E8%BF%87%E7%89%88%E6%9C%AC%E6%A3%80%E6%9F%A5)
+
 [4. 常见问题](#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
+
+[5. 微信4.1.0版本说明](#微信4.1.0版本说明)
+
+[6. 微信4.1.0版本限制说明](#微信4.1.0版本限制说明)
 
 
 ---
@@ -32,6 +40,7 @@
 
 | Windows 微信版本 | 小程序版本 | 是否为最新版 |
 | ---------------- | ---------- | ------------ |
+| 4.1.0            | 13080813   | ✅           |
 |                 | 11275_x64   | ✅           |
 |                 | 11253_x64   | ✅           |
 |                 | 11205_x64   | ✅           |
@@ -113,7 +122,81 @@ python  main.py -c
 
 ---
 
-### 常见问题
+### 绕过微信版本检查
+
+对于因微信版本过低而无法登录的情况，可以通过以下方式绕过版本检查：
+
+```python
+python new_version_support/main.py -b
+```
+
+该工具将通过Hook技术拦截微信的版本检查机制，允许你使用较低版本的微信正常登录。
+
+运行后，工具会自动：
+1. 检测正在运行的微信进程
+2. 注入绕过脚本
+3. 拦截版本检查相关函数调用
+4. 允许微信正常登录
+
+注意：使用此功能需要以管理员权限运行。
+
+---
+
+### 自动启动微信并绕过版本检查
+
+对于需要自动启动微信并同时应用版本检查绕过的情况，可以使用以下命令：
+
+```python
+python new_version_support/main.py -a
+```
+
+该工具将：
+1. 自动查找微信安装路径
+2. 启动微信客户端
+3. 等待微信完全启动
+4. 应用版本检查绕过
+
+这是最方便的一键式解决方案，特别适合需要频繁使用低版本微信的场景。
+
+注意：使用此功能需要以管理员权限运行。
+
+---
+
+## 微信4.1.0版本说明
+
+对于微信4.1.0版本，由于微信加强了安全机制，传统的调试方法可能已经失效。虽然本工具可以成功注入微信进程，但可能会遇到内存访问错误：
+
+```
+内存访问错误已忽略: Error: access violation accessing 0x7ff70111456f
+replaceParams error: Error: access violation accessing 0x7ff700ef255c
+Interceptor error for version 13080813: Error: access violation accessing 0x7ff700d23b38
+```
+
+这些错误是由于微信4.1.0版本对内部结构进行了调整，导致配置文件中保存的内存地址失效。
+
+### 解决方案
+
+1. **使用微信官方开发者工具**（推荐）：
+   - 下载地址：https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
+   - 这是官方支持的调试方式，功能完整且稳定
+
+2. **尝试使用本工具**：
+   - 即使有内存访问错误，注入本身是成功的
+   - 可以尝试打开微信小程序后按F12键查看是否能打开调试界面
+   - 可以尝试右键点击小程序界面查看是否有调试选项
+
+3. **查看详细说明**：
+   - 更多信息请参考 [DEBUGGING_410_ISSUES.md](DEBUGGING_410_ISSUES.md) 文件
+
+---
+
+## 微信4.1.0版本限制说明
+
+微信4.1.0版本显著增强了安全机制，传统的非官方调试方法已经失效。详细信息请参考 [WECHAT_410_LIMITATIONS.md](WECHAT_410_LIMITATIONS.md) 文件。
+
+---
+
+## 常见问题
 
 * 无法修改中文
   
@@ -121,7 +204,7 @@ python  main.py -c
 * 提示找不到版本或微信未运行❌
   
   - 1. 请先看支持的微信版本和小程序版本
-       - 如果还有问题看：[微信版本和小程序版本都是符合要求的，但是仍然显示“未找到匹配版本的微信进程或微信未运行”](https://github.com/JaveleyQAQ/WeChatOpenDevTools-Python/issues/38)
+       - 如果还有问题看：[微信版本和小程序版本都是符合要求的，但是仍然显示"未找到匹配版本的微信进程或微信未运行"](https://github.com/JaveleyQAQ/WeChatOpenDevTools-Python/issues/38)
     2. **如果微信版本相同小程序版本不同，就删除小程序版本目录并重启微信，直到刷出支持的小程序版本目录**
     3. 最后回到上级目录，设置文件夹权限为只读，这样就能一直保持小程序版本一致
        [image](https://github.com/JaveleyQAQ/WeChatOpenDevTools-Python/assets/132129852/c2b793c3-6d81-424e-a167-3b1e584cef6f)
@@ -138,4 +221,3 @@ python  main.py -c
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=javeleyqaq/WeChatOpenDevTools-Python&type=Date)](https://star-history.com/#javeleyqaq/WeChatOpenDevTools-Python&Date)
-
