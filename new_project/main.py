@@ -300,6 +300,33 @@ class DouyinDownloader(Star):
             logger.error(f"验证视频文件失败: {e}")
             return False
 
+    def _transcode_video(self, input_path: str) -> str | None:
+        """转码视频为微信兼容格式 (H.264+AAC)"""
+        try:
+            import subprocess
+            output_path = input_path.replace('.mp4', '_h264.mp4')
+            cmd = [
+                'ffmpeg', '-y', '-i', input_path,
+                '-c:v', 'libx264', '-preset', 'fast',
+                '-crf', '23', '-c:a', 'aac',
+                '-movflags', '+faststart',
+                output_path
+            ]
+            result = subprocess.run(cmd, capture_output=True, timeout=120)
+            if result.returncode == 0 and os.path.exists(output_path):
+                logger.info(f"视频转码成功: {output_path}")
+                os.remove(input_path)
+                return output_path
+            else:
+                logger.error(f"视频转码失败: {result.stderr.decode()[:200]}")
+                return None
+        except FileNotFoundError:
+            logger.warning("ffmpeg 未安装，跳过视频转码")
+            return None
+        except Exception as e:
+            logger.error(f"视频转码异常: {e}")
+            return None
+
     async def _download_file(self, session: requests.Session, url: str, filename: str) -> str | None:
         """下载文件到临时目录"""
         try:
@@ -440,6 +467,14 @@ class DouyinDownloader(Star):
             if not file_path or not os.path.exists(file_path):
                 yield self._text_result(event, "视频下载失败，请稍后重试。")
                 return
+
+            # 尝试转码为微信兼容格式 (H.264+AAC)
+            original_path = file_path
+            transcoded_path = self._transcode_video(file_path)
+            if transcoded_path:
+                file_path = transcoded_path
+            else:
+                logger.info("转码跳过，使用原始视频文件")
 
             file_size_mb = os.path.getsize(file_path) / (1024 * 1024)
             if file_size_mb > 100:
