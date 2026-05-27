@@ -155,13 +155,25 @@ class DouyinDownloader(Star):
     def _parse_iesdouyin_page(self, html: str) -> dict | None:
         """解析 iesdouyin 分享页面，提取视频/图文信息"""
         try:
-            # 提取 _ROUTER_DATA
-            match = re.search(r'window\._ROUTER_DATA\s*=\s*(\{.*?\})\s*;?\s*(?:</script>|window\.)', html, re.DOTALL)
-            if not match:
+            # 提取 _ROUTER_DATA（使用括号计数法提取完整JSON）
+            router_match = re.search(r'window\._ROUTER_DATA\s*=\s*\{', html)
+            if not router_match:
                 logger.warning("未找到 _ROUTER_DATA")
                 return None
 
-            raw = match.group(1)
+            start = router_match.end() - 1  # 指向 '{'
+            bracket_count = 0
+            end = start
+            for i in range(start, min(start + 1000000, len(html))):
+                if html[i] == '{':
+                    bracket_count += 1
+                elif html[i] == '}':
+                    bracket_count -= 1
+                    if bracket_count == 0:
+                        end = i + 1
+                        break
+            raw = html[start:end]
+            logger.info(f"_ROUTER_DATA 长度: {len(raw)}")
             raw = raw.encode('raw_unicode_escape').decode('unicode_escape')
             data = json.loads(raw)
 
