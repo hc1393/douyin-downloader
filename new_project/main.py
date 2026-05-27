@@ -290,22 +290,29 @@ class DouyinDownloader(Star):
             logger.info(msg)
 
         try:
-            # 优先使用 iesdouyin 分享页面（数据直接嵌入HTML，无需JS渲染）
+            # 使用分享页面提取数据（数据直接嵌入HTML，无需JS渲染）
             if aweme_id:
-                share_url = f"https://www.iesdouyin.com/share/video/{aweme_id}/"
-                debug(f"iesdouyin: {share_url}")
-                try:
-                    resp = session.get(share_url, timeout=20)
-                    debug(f"iesdouyin响应: status={resp.status_code}, len={len(resp.text)}")
-                except Exception as e:
-                    debug(f"iesdouyin请求异常: {type(e).__name__}")
-                    resp = None
+                share_urls = [
+                    f"https://www.iesdouyin.com/share/video/{aweme_id}/",
+                    f"https://www.douyin.com/share/video/{aweme_id}",
+                    f"https://m.douyin.com/share/video/{aweme_id}",
+                ]
+                for share_url in share_urls:
+                    debug(f"请求: {share_url[:50]}")
+                    try:
+                        resp = session.get(share_url, timeout=15)
+                        debug(f"响应: status={resp.status_code}, len={len(resp.text)}")
+                    except Exception as e:
+                        debug(f"请求异常: {type(e).__name__}")
+                        continue
 
-                if resp and resp.status_code == 200 and len(resp.text) > 1000:
-                    result = self._parse_iesdouyin_page(resp.text)
-                    if result:
-                        return result
-                    debug("iesdouyin解析返回None")
+                    if resp.status_code == 200 and len(resp.text) > 10000:
+                        result = self._parse_iesdouyin_page(resp.text)
+                        if result:
+                            return result
+                        debug(f"解析返回None")
+                    else:
+                        debug(f"页面过短({len(resp.text)}KB)，跳过")
 
             # 备用：请求原始页面
             debug(f"备用请求: {url[:60]}")
