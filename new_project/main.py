@@ -289,13 +289,21 @@ class DouyinDownloader(Star):
             if aweme_id:
                 share_url = f"https://www.iesdouyin.com/share/video/{aweme_id}/"
                 logger.info(f"请求分享页面: {share_url}")
-                resp = session.get(share_url, timeout=15)
-                logger.info(f"分享页面响应: status={resp.status_code}, length={len(resp.text)}")
+                try:
+                    resp = session.get(share_url, timeout=20)
+                    logger.info(f"分享页面响应: status={resp.status_code}, length={len(resp.text)}")
+                except Exception as e:
+                    logger.error(f"请求分享页面失败: {e}")
+                    resp = None
 
-                if resp.status_code == 200 and len(resp.text) > 1000:
+                if resp and resp.status_code == 200 and len(resp.text) > 1000:
                     result = self._parse_iesdouyin_page(resp.text)
                     if result:
                         return result
+                    else:
+                        logger.warning("iesdouyin 页面解析返回 None")
+                else:
+                    logger.warning(f"iesdouyin 响应无效: {resp.status_code if resp else 'None'}, len={len(resp.text) if resp else 0}")
 
             # 备用：请求原始页面
             logger.info(f"请求原始页面: {url}")
@@ -708,9 +716,15 @@ class DouyinDownloader(Star):
         logger.info(f"aweme_id: {aweme_id}")
 
         # 获取内容信息
-        content_info = await self._get_content_info(session, real_url, aweme_id)
+        try:
+            content_info = await self._get_content_info(session, real_url, aweme_id)
+        except Exception as e:
+            logger.error(f"获取内容信息异常: {e}", exc_info=True)
+            yield self._text_result(event, f"获取信息异常: {type(e).__name__}: {e}")
+            return
+
         if not content_info:
-            yield self._text_result(event, "获取作品信息失败，请稍后重试。")
+            yield self._text_result(event, f"获取作品信息失败。aweme_id={aweme_id}，请检查日志。")
             return
 
         title = content_info.get('title', '抖音作品')
