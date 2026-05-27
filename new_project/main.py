@@ -15,14 +15,14 @@ from astrbot.core.message.components import Video, Image
 logger = logging.getLogger(__name__)
 
 # 抖音链接正则（合并为一个模式用于自动检测）
-DOUYIN_REGEX = r'(?:https?://v\.douyin\.com/\S+|https?://www\.douyin\.com/(?:video|note)/\d+\S*|https?://www\.iesdouyin\.com/share/video/\d+\S*)'
+DOUYIN_REGEX = r'(?:https?://v\.douyin\.com/\S+|https?://(?:www|m)\.douyin\.com/(?:video|note)/\d+\S*|https?://(?:www|m)\.iesdouyin\.com/share/(?:video|slides)/\d+\S*)'
 
 # 用于提取 URL 的模式列表
 DOUYIN_PATTERNS = [
     r'https?://v\.douyin\.com/\S+',
-    r'https?://www\.douyin\.com/video/\d+',
-    r'https?://www\.douyin\.com/note/\d+',
-    r'https?://www\.iesdouyin\.com/share/video/\d+',
+    r'https?://(?:www|m)\.douyin\.com/video/\d+',
+    r'https?://(?:www|m)\.douyin\.com/note/\d+',
+    r'https?://(?:www|m)\.iesdouyin\.com/share/(?:video|slides)/\d+',
 ]
 
 
@@ -66,9 +66,11 @@ class DouyinDownloader(Star):
         if "v.douyin.com" not in url:
             return url
 
-        # 方法1: GET 请求跟踪重定向
+        # 方法1: GET 请求跟踪重定向（用移动UA，避免被封）
+        mobile_ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1'
         try:
-            resp = session.get(url, allow_redirects=True, timeout=15)
+            resp = session.get(url, allow_redirects=True, timeout=15,
+                               headers={'User-Agent': mobile_ua})
             resolved = resp.url
             logger.info(f"GET 解析: {url} -> {resolved} (status={resp.status_code})")
 
@@ -76,6 +78,17 @@ class DouyinDownloader(Star):
                 return resolved
         except Exception as e:
             logger.warning(f"GET 请求失败: {e}")
+
+        # 方法1b: 不跟踪重定向，从 Location 头提取
+        try:
+            resp = session.get(url, allow_redirects=False, timeout=10,
+                               headers={'User-Agent': mobile_ua})
+            location = resp.headers.get('Location', '')
+            if location and 'douyin.com' in location:
+                logger.info(f"从 Location 提取: {location[:100]}")
+                return location
+        except Exception as e:
+            logger.warning(f"GET(no-redirect) 请求失败: {e}")
 
         # 方法2: 从响应体中提取 aweme_id
         try:
@@ -123,6 +136,7 @@ class DouyinDownloader(Star):
             r'/video/(\d+)',
             r'/note/(\d+)',
             r'/share/video/(\d+)',
+            r'/share/slides/(\d+)',
             r'aweme_id=(\d+)',
             r'itemId=(\d+)',
             r'awemeId=(\d+)',
@@ -137,6 +151,21 @@ class DouyinDownloader(Star):
 
         logger.warning(f"无法从URL提取 aweme_id: {url}")
         return None
+
+    def _pick_best_image_url(self, url_list: list) -> str:
+        """从 url_list 中选择最佳图片URL（优先 jpeg 格式）"""
+        if not url_list:
+            return ''
+        # 优先选 jpeg 格式（兼容性最好）
+        for u in url_list:
+            if '.jpeg' in u or '.jpg' in u:
+                return self._clean_image_url(u)
+        # 其次选非 webp
+        for u in url_list:
+            if '.webp' not in u:
+                return self._clean_image_url(u)
+        # 最后用第一个
+        return self._clean_image_url(url_list[0])
 
     def _clean_image_url(self, url: str) -> str:
         """清理图片URL，获取最高画质"""
@@ -236,7 +265,7 @@ class DouyinDownloader(Star):
             for img in aweme.get('images', []):
                 url_list = img.get('url_list', [])
                 if url_list:
-                    img_url = self._clean_image_url(url_list[0])
+                    img_url = self._pick_best_image_url(url_list)
                     if img_url and len(img_url) > 30:
                         images.append(img_url)
 
@@ -292,16 +321,19 @@ class DouyinDownloader(Star):
 
         try:
             # 使用分享页面提取数据（数据直接嵌入HTML，无需JS渲染）
+            # m.douyin.com 对服务器IP不封禁，优先使用
+            mobile_ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1'
             if aweme_id:
                 share_urls = [
-                    f"https://www.iesdouyin.com/share/video/{aweme_id}/",
-                    f"https://www.douyin.com/share/video/{aweme_id}",
-                    f"https://m.douyin.com/share/video/{aweme_id}",
+                    (f"https://m.douyin.com/share/video/{aweme_id}", mobile_ua),
+                    (f"https://www.iesdouyin.com/share/video/{aweme_id}/", None),
+                    (f"https://www.douyin.com/share/video/{aweme_id}", None),
                 ]
-                for share_url in share_urls:
+                for share_url, ua in share_urls:
                     debug(f"请求: {share_url[:50]}")
                     try:
-                        resp = session.get(share_url, timeout=15)
+                        headers = {'User-Agent': ua} if ua else None
+                        resp = session.get(share_url, timeout=15, headers=headers)
                         debug(f"响应: status={resp.status_code}, len={len(resp.text)}")
                     except Exception as e:
                         debug(f"请求异常: {type(e).__name__}")
@@ -313,7 +345,7 @@ class DouyinDownloader(Star):
                             return result
                         debug(f"解析返回None")
                     else:
-                        debug(f"页面过短({len(resp.text)}KB)，跳过")
+                        debug(f"页面过短({len(resp.text)}B)，跳过")
 
             # 备用：请求原始页面
             debug(f"备用请求: {url[:60]}")
@@ -703,17 +735,10 @@ class DouyinDownloader(Star):
         if self.proxy:
             session.proxies = {'http': self.proxy, 'https': self.proxy}
         session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Referer': 'https://www.douyin.com/',
-            'Connection': 'keep-alive',
-            'Sec-Fetch-Dest': 'document',
-            'Sec-Fetch-Mode': 'navigate',
-            'Sec-Fetch-Site': 'none',
-            'Sec-Fetch-User': '?1',
-            'Upgrade-Insecure-Requests': '1',
+            'Referer': 'https://m.douyin.com/',
         })
 
         # 解析短链接
