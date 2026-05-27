@@ -3,6 +3,7 @@ import re
 import json
 import tempfile
 import logging
+import time
 
 import requests
 
@@ -268,12 +269,13 @@ class DouyinDownloader(Star):
             return None
 
     def _safe_filename(self, title: str, max_len: int = 30) -> str:
-        """生成安全的文件名"""
-        # 只保留中文、字母、数字
-        safe = re.sub(r'[^一-龥a-zA-Z0-9]', '', title)
-        if not safe:
-            safe = 'douyin'
-        return safe[:max_len]
+        """生成安全的文件名（纯ASCII，避免CDN上传失败）"""
+        timestamp = str(int(time.time() * 1000))[-8:]
+        # 从标题中提取英文和数字作为前缀
+        safe = re.sub(r'[^a-zA-Z0-9]', '', title)
+        if safe:
+            return f'{safe[:10]}_{timestamp}'
+        return f'dy_{timestamp}'
 
     async def _download_file(self, session: requests.Session, url: str, filename: str) -> str | None:
         """下载文件到临时目录"""
