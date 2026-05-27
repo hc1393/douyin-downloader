@@ -1,0 +1,7 @@
+{
+  "cookie_file": {
+    "description": "抖音 Cookie 文件路径（Netscape 格式），留空则使用插件目录下的 cookies.txt",
+    "type": "string",
+    "default": ""
+  }
+}
