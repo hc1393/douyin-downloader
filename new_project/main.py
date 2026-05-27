@@ -282,31 +282,33 @@ class DouyinDownloader(Star):
             logger.error(f"解析 iesdouyin 页面失败: {e}", exc_info=True)
             return None
 
-    async def _get_content_info(self, session: requests.Session, url: str, aweme_id: str = None) -> dict | None:
+    async def _get_content_info(self, session: requests.Session, url: str, aweme_id: str = None, debug_info: list = None) -> dict | None:
         """从页面提取内容信息（视频或图文）"""
+        def debug(msg):
+            if debug_info is not None:
+                debug_info.append(msg)
+            logger.info(msg)
+
         try:
             # 优先使用 iesdouyin 分享页面（数据直接嵌入HTML，无需JS渲染）
             if aweme_id:
                 share_url = f"https://www.iesdouyin.com/share/video/{aweme_id}/"
-                logger.info(f"请求分享页面: {share_url}")
+                debug(f"iesdouyin: {share_url}")
                 try:
                     resp = session.get(share_url, timeout=20)
-                    logger.info(f"分享页面响应: status={resp.status_code}, length={len(resp.text)}")
+                    debug(f"iesdouyin响应: status={resp.status_code}, len={len(resp.text)}")
                 except Exception as e:
-                    logger.error(f"请求分享页面失败: {e}")
+                    debug(f"iesdouyin请求异常: {type(e).__name__}")
                     resp = None
 
                 if resp and resp.status_code == 200 and len(resp.text) > 1000:
                     result = self._parse_iesdouyin_page(resp.text)
                     if result:
                         return result
-                    else:
-                        logger.warning("iesdouyin 页面解析返回 None")
-                else:
-                    logger.warning(f"iesdouyin 响应无效: {resp.status_code if resp else 'None'}, len={len(resp.text) if resp else 0}")
+                    debug("iesdouyin解析返回None")
 
             # 备用：请求原始页面
-            logger.info(f"请求原始页面: {url}")
+            debug(f"备用请求: {url[:60]}")
             resp = session.get(url, timeout=15)
             logger.info(f"原始页面响应: status={resp.status_code}, length={len(resp.text)}")
             resp.raise_for_status()
@@ -566,9 +568,10 @@ class DouyinDownloader(Star):
                 except Exception as e:
                     logger.error(f"API 接口请求失败: {e}")
 
-            logger.warning(f"所有提取方法均失败: images={len(images)}, has_play_addr={bool(re.search(r'\"play_addr\"', resp.text))}")
+            debug(f"备用方法均失败: images={len(images)}")
             return None
         except Exception as e:
+            debug(f"异常: {type(e).__name__}: {str(e)[:80]}")
             logger.error(f"获取内容信息失败: {e}", exc_info=True)
             return None
 
@@ -716,15 +719,17 @@ class DouyinDownloader(Star):
         logger.info(f"aweme_id: {aweme_id}")
 
         # 获取内容信息
+        debug_info = []
         try:
-            content_info = await self._get_content_info(session, real_url, aweme_id)
+            content_info = await self._get_content_info(session, real_url, aweme_id, debug_info)
         except Exception as e:
             logger.error(f"获取内容信息异常: {e}", exc_info=True)
-            yield self._text_result(event, f"获取信息异常: {type(e).__name__}: {e}")
+            yield self._text_result(event, f"获取信息异常: {type(e).__name__}: {str(e)[:100]}")
             return
 
         if not content_info:
-            yield self._text_result(event, f"获取作品信息失败。aweme_id={aweme_id}，请检查日志。")
+            debug_msg = " | ".join(debug_info) if debug_info else "无调试信息"
+            yield self._text_result(event, f"获取作品信息失败。\n调试: {debug_msg}")
             return
 
         title = content_info.get('title', '抖音作品')
