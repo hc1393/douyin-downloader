@@ -127,7 +127,6 @@ class DouyinDownloader(Star):
             images = []
 
             # 方法1: 从顶级 images 数组中提取（图文作品的主要来源）
-            # 使用递归括号匹配找到完整的 images JSON 数组
             for images_match in re.finditer(r'"images"\s*:\s*\[', resp.text):
                 start = images_match.end() - 1
                 bracket_count = 0
@@ -141,7 +140,6 @@ class DouyinDownloader(Star):
                             end = i + 1
                             break
                 images_json = resp.text[start:end]
-                # 提取每个图片对象中的 url_list
                 url_pattern = r'"url_list"\s*:\s*\[\s*"(https?://[^"]*)"'
                 for match in re.finditer(url_pattern, images_json):
                     try:
@@ -152,7 +150,32 @@ class DouyinDownloader(Star):
                     except json.JSONDecodeError:
                         pass
 
-            # 方法2: 从 video.images 中提取（图文视频的备用来源）
+            # 方法2: 从 image_list 数组中提取
+            if len(images) < 2:
+                for img_list_match in re.finditer(r'"image_list"\s*:\s*\[', resp.text):
+                    start = img_list_match.end() - 1
+                    bracket_count = 0
+                    end = start
+                    for i in range(start, min(start + 500000, len(resp.text))):
+                        if resp.text[i] == '[':
+                            bracket_count += 1
+                        elif resp.text[i] == ']':
+                            bracket_count -= 1
+                            if bracket_count == 0:
+                                end = i + 1
+                                break
+                    img_list_json = resp.text[start:end]
+                    url_pattern = r'"url_list"\s*:\s*\[\s*"(https?://[^"]*)"'
+                    for match in re.finditer(url_pattern, img_list_json):
+                        try:
+                            decoded_url = json.loads('"' + match.group(1) + '"')
+                            decoded_url = self._clean_image_url(decoded_url)
+                            if decoded_url not in images and len(decoded_url) > 30:
+                                images.append(decoded_url)
+                        except json.JSONDecodeError:
+                            pass
+
+            # 方法3: 从 video.images 中提取
             if len(images) < 2:
                 video_images_pattern = r'"video"\s*:\s*\{[^}]*?"images"\s*:\s*\[(.*?)\]'
                 video_images_match = re.search(video_images_pattern, resp.text, re.DOTALL)
@@ -167,7 +190,7 @@ class DouyinDownloader(Star):
                         except json.JSONDecodeError:
                             pass
 
-            # 方法3: 从 cover 和 origin_cover 中提取封面图
+            # 方法4: 从 cover 和 origin_cover 中提取封面图
             cover_patterns = [
                 r'"cover"\s*:\s*\{[^}]*?"url_list"\s*:\s*\[\s*"(https?://[^"]*)"',
                 r'"origin_cover"\s*:\s*\{[^}]*?"url_list"\s*:\s*\[\s*"(https?://[^"]*)"',
@@ -184,7 +207,7 @@ class DouyinDownloader(Star):
                     except json.JSONDecodeError:
                         pass
 
-            # 方法4: 搜索所有抖音CDN图片URL（更宽松的兜底方案）
+            # 方法5: 搜索所有抖音CDN图片URL（兜底方案）
             if len(images) < 2:
                 all_img_pattern = r'"(https?://[^"]*(?:douyinpic|byteimg)[^"]*(?:\.jpeg|\.jpg|\.png|\.webp|/obj/)[^"]*)"'
                 all_img_urls = re.findall(all_img_pattern, resp.text, re.IGNORECASE)
@@ -197,9 +220,8 @@ class DouyinDownloader(Star):
                     except json.JSONDecodeError:
                         pass
 
-            # 方法5: 从 aweme/detail API 响应格式中提取
+            # 方法6: 从 aweme/detail API 响应格式中提取
             if len(images) < 2:
-                # 尝试匹配 JSON 嵌套的 images 数组
                 detail_pattern = r'"images"\s*:\s*\[\s*\{[^]]*?"url_list"\s*:\s*\[\s*"(https?://[^"]*)"'
                 for match in re.finditer(detail_pattern, resp.text, re.DOTALL):
                     try:
@@ -221,12 +243,32 @@ class DouyinDownloader(Star):
 
             # aweme_type: 0=普通视频, 68=图文作品, 其他值也可能表示图文
             is_image_post = aweme_type in (68, 101, 102, 103) or len(images) >= 2
-            logger.info(f"提取到 {len(images)} 张图片，aweme_type={aweme_type}，is_image_post={is_image_post}")
+            has_play_addr = bool(re.search(r'"play_addr"\s*:\s*\{', resp.text))
+            logger.info(f"提取到 {len(images)} 张图片，aweme_type={aweme_type}，is_image_post={is_image_post}，has_play_addr={has_play_addr}")
             for i, img_url in enumerate(images[:5]):
-                logger.debug(f"图片{i+1}: {img_url[:100]}...")
+                logger.info(f"图片{i+1}: {img_url[:100]}...")
 
-            # 如果是图文作品且有图片，返回图片类型
-            if images and (is_image_post or not re.search(r'"play_addr"\s*:\s*\{', resp.text)):
+            # 调试：如果提取到的图片不足2张，保存页面快照用于分析
+            if len(images) < 2:
+                try:
+                    debug_path = os.path.join(tempfile.gettempdir(), 'douyin_debug.html')
+                    with open(debug_path, 'w', encoding='utf-8') as f:
+                        f.write(resp.text)
+                    logger.info(f"调试：页面已保存到 {debug_path}，长度 {len(resp.text)}")
+
+                    # 打印页面中关键字段的存在情况
+                    for field in ['images', 'image_list', 'image_post_info', 'slide_images', 'play_addr', 'aweme_type']:
+                        count = resp.text.count(f'"{field}"')
+                        logger.info(f"调试：字段 \"{field}\" 出现 {count} 次")
+                except Exception as e:
+                    logger.error(f"保存调试页面失败: {e}")
+
+            # 判断逻辑：
+            # 1. aweme_type 为图文类型 → 图文
+            # 2. 提取到 >=2 张图片 → 图文（即使有 play_addr）
+            # 3. 有图片但无 play_addr → 图文
+            # 4. 否则 → 视频
+            if images and (is_image_post or not has_play_addr):
                 return {
                     'type': 'image',
                     'title': title,
@@ -250,7 +292,6 @@ class DouyinDownloader(Star):
                 duration_match = re.search(r'"duration"\s*:\s*(\d+)', resp.text)
                 duration = int(duration_match.group(1)) // 1000 if duration_match else 0
 
-                # 即使是视频，也检查是否有单张图片（可能是封面）
                 cover_url = images[0] if images else None
 
                 return {
@@ -262,6 +303,15 @@ class DouyinDownloader(Star):
                     'height': height,
                     'duration': duration,
                     'cover': cover_url,
+                }
+
+            # 最后兜底：如果有图片就返回图片类型
+            if images:
+                return {
+                    'type': 'image',
+                    'title': title,
+                    'author': author,
+                    'images': images,
                 }
 
             return None
