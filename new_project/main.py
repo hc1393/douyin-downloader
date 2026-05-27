@@ -152,18 +152,119 @@ class DouyinDownloader(Star):
         url = re.sub(r'&crop=.*?(?=&|$)', '', url)
         return url
 
+    def _parse_iesdouyin_page(self, html: str) -> dict | None:
+        """解析 iesdouyin 分享页面，提取视频/图文信息"""
+        try:
+            # 提取 _ROUTER_DATA
+            match = re.search(r'window\._ROUTER_DATA\s*=\s*(\{.*?\})\s*;?\s*(?:</script>|window\.)', html, re.DOTALL)
+            if not match:
+                logger.warning("未找到 _ROUTER_DATA")
+                return None
+
+            raw = match.group(1)
+            # 处理 unicode 转义
+            raw = raw.encode('raw_unicode_escape').decode('unicode_escape')
+            data = json.loads(raw)
+
+            # 递归查找 aweme 数据
+            def find_aweme(obj, depth=0):
+                if depth > 6:
+                    return None
+                if isinstance(obj, dict):
+                    if 'aweme_type' in obj and ('desc' in obj or 'video' in obj):
+                        return obj
+                    for v in obj.values():
+                        r = find_aweme(v, depth + 1)
+                        if r:
+                            return r
+                elif isinstance(obj, list):
+                    for item in obj:
+                        r = find_aweme(item, depth + 1)
+                        if r:
+                            return r
+                return None
+
+            aweme = find_aweme(data)
+            if not aweme:
+                logger.warning("在 _ROUTER_DATA 中未找到 aweme 数据")
+                return None
+
+            desc = aweme.get('desc', '抖音作品')
+            nickname = aweme.get('author', {}).get('nickname', '未知作者')
+            aweme_type = aweme.get('aweme_type', 0)
+
+            # 提取图片
+            images = []
+            for img in aweme.get('images', []):
+                url_list = img.get('url_list', [])
+                if url_list:
+                    img_url = self._clean_image_url(url_list[0])
+                    if img_url and len(img_url) > 30:
+                        images.append(img_url)
+
+            logger.info(f"iesdouyin 解析: desc={desc[:30]}, aweme_type={aweme_type}, images={len(images)}")
+
+            # 判断类型：aweme_type 68=图文, 2=图集, 0=视频
+            if images and (aweme_type in (68, 2, 101, 102, 103) or len(images) >= 2):
+                return {
+                    'type': 'image',
+                    'title': desc,
+                    'author': nickname,
+                    'images': images,
+                }
+
+            # 提取视频
+            video = aweme.get('video', {})
+            play_addr = video.get('play_addr', {})
+            url_list = play_addr.get('url_list', [])
+            if url_list:
+                video_url = url_list[0].replace('/playwm/', '/play/')
+                # 检查是否是真正的视频（不是音频文件）
+                if '.mp3' not in video_url and 'music' not in video_url:
+                    return {
+                        'type': 'video',
+                        'video_url': video_url,
+                        'title': desc,
+                        'author': nickname,
+                        'width': video.get('width', 0),
+                        'height': video.get('height', 0),
+                        'duration': video.get('duration', 0) // 1000,
+                    }
+
+            # 兜底：有图片就返回图片
+            if images:
+                return {
+                    'type': 'image',
+                    'title': desc,
+                    'author': nickname,
+                    'images': images,
+                }
+
+            return None
+        except Exception as e:
+            logger.error(f"解析 iesdouyin 页面失败: {e}", exc_info=True)
+            return None
+
     async def _get_content_info(self, session: requests.Session, url: str, aweme_id: str = None) -> dict | None:
         """从页面提取内容信息（视频或图文）"""
         try:
-            logger.info(f"请求页面: {url}")
-            resp = session.get(url, timeout=15)
-            logger.info(f"页面响应: status={resp.status_code}, length={len(resp.text)}")
-            resp.raise_for_status()
+            # 优先使用 iesdouyin 分享页面（数据直接嵌入HTML，无需JS渲染）
+            if aweme_id:
+                share_url = f"https://www.iesdouyin.com/share/video/{aweme_id}/"
+                logger.info(f"请求分享页面: {share_url}")
+                resp = session.get(share_url, timeout=15)
+                logger.info(f"分享页面响应: status={resp.status_code}, length={len(resp.text)}")
 
-            # 检查页面内容是否有效
-            if len(resp.text) < 500:
-                logger.warning(f"页面内容过短 ({len(resp.text)} bytes)，可能是错误页面")
-                logger.info(f"页面内容: {resp.text[:500]}")
+                if resp.status_code == 200 and len(resp.text) > 1000:
+                    result = self._parse_iesdouyin_page(resp.text)
+                    if result:
+                        return result
+
+            # 备用：请求原始页面
+            logger.info(f"请求原始页面: {url}")
+            resp = session.get(url, timeout=15)
+            logger.info(f"原始页面响应: status={resp.status_code}, length={len(resp.text)}")
+            resp.raise_for_status()
 
             # 提取标题
             title_match = re.search(r'"desc"\s*:\s*"([^"]{1,200})"', resp.text)
@@ -571,15 +672,6 @@ class DouyinDownloader(Star):
 
         # 获取内容信息
         content_info = await self._get_content_info(session, real_url, aweme_id)
-
-        # 如果第一次失败，尝试直接用 aweme_id 构造 URL
-        if not content_info and aweme_id:
-            for url_template in [f"https://www.douyin.com/video/{aweme_id}", f"https://www.douyin.com/note/{aweme_id}"]:
-                logger.info(f"重试: {url_template}")
-                content_info = await self._get_content_info(session, url_template, aweme_id)
-                if content_info:
-                    break
-
         if not content_info:
             yield self._text_result(event, "获取作品信息失败，请稍后重试。")
             return
