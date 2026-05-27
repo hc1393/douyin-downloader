@@ -10,7 +10,7 @@ import requests
 
 from astrbot.api.star import Context, Star
 from astrbot.api.event import filter, AstrMessageEvent
-from astrbot.core.message.components import Video, Image
+from astrbot.core.message.components import Video, Image, Record
 
 logger = logging.getLogger(__name__)
 
@@ -52,6 +52,11 @@ class DouyinDownloader(Star):
         """创建多图片结果"""
         images = [Image.fromFileSystem(p) for p in file_paths]
         return event.chain_result(images)
+
+    def _audio_result(self, event: AstrMessageEvent, file_path: str):
+        """创建音频结果"""
+        record = Record.fromFileSystem(file_path)
+        return event.chain_result([record])
 
     async def _extract_url(self, text: str) -> str | None:
         """从消息文本中提取抖音链接"""
@@ -167,6 +172,103 @@ class DouyinDownloader(Star):
         # 最后用第一个
         return self._clean_image_url(url_list[0])
 
+    def _extract_music_info(self, aweme: dict) -> dict | None:
+        """从 aweme 数据中提取音乐信息"""
+        music = aweme.get('music', {})
+        if not music:
+            return None
+
+        music_title = music.get('title', '')
+        music_author = music.get('author', '')
+        music_mid = music.get('mid', '')
+        music_duration = music.get('duration', 0)
+
+        # 方法1: 从 video.play_addr 中提取音频URL（图文作品的音乐在这里）
+        video = aweme.get('video', {})
+        play_addr = video.get('play_addr', {})
+        url_list = play_addr.get('url_list', [])
+        if url_list:
+            raw_url = url_list[0]
+            # 提取 video_id 参数中的真实音频URL
+            vid_match = re.search(r'video_id=(https?://[^&]+\.mp3)', raw_url)
+            if vid_match:
+                music_url = vid_match.group(1)
+                logger.info(f"从 video_id 提取音乐URL: {music_url[:80]}")
+                return {
+                    'url': music_url,
+                    'title': music_title or '未知音乐',
+                    'author': music_author or '未知作者',
+                    'mid': music_mid,
+                    'duration': music_duration,
+                }
+            # 如果没有 mp3，尝试用 play 替换 playwm
+            if '/playwm/' in raw_url:
+                music_url = raw_url.replace('/playwm/', '/play/')
+                return {
+                    'url': music_url,
+                    'title': music_title or '未知音乐',
+                    'author': music_author or '未知作者',
+                    'mid': music_mid,
+                    'duration': music_duration,
+                }
+
+        # 方法2: 从 music.play_url 获取
+        play_url = music.get('play_url', {})
+        if isinstance(play_url, dict):
+            uri = play_url.get('uri', '')
+            url_list = play_url.get('url_list', [])
+            if url_list:
+                return {
+                    'url': url_list[0],
+                    'title': music_title or '未知音乐',
+                    'author': music_author or '未知作者',
+                    'mid': music_mid,
+                    'duration': music_duration,
+                }
+            if uri:
+                return {
+                    'url': f'https://aweme.snssdk.com/aweme/v1/play/?{uri}',
+                    'title': music_title or '未知音乐',
+                    'author': music_author or '未知作者',
+                    'mid': music_mid,
+                    'duration': music_duration,
+                }
+        elif isinstance(play_url, str) and play_url.startswith('http'):
+            return {
+                'url': play_url,
+                'title': music_title or '未知音乐',
+                'author': music_author or '未知作者',
+                'mid': music_mid,
+                'duration': music_duration,
+            }
+
+        logger.warning(f"无法提取音乐URL, mid={music_mid}")
+        return None
+
+    async def _extract_audio_from_video(self, video_path: str) -> str | None:
+        """从视频文件中提取音频"""
+        try:
+            import subprocess
+            audio_path = video_path.rsplit('.', 1)[0] + '.mp3'
+            cmd = [
+                'ffmpeg', '-y', '-i', video_path,
+                '-vn', '-acodec', 'libmp3lame', '-q:a', '2',
+                audio_path
+            ]
+            result = subprocess.run(cmd, capture_output=True, timeout=60)
+            if result.returncode == 0 and os.path.exists(audio_path):
+                logger.info(f"音频提取成功: {audio_path}")
+                return audio_path
+            else:
+                logger.warning(f"音频提取失败: {result.stderr.decode()[:200]}")
+                return None
+        except FileNotFoundError:
+            logger.warning("ffmpeg 未安装，无法提取音频")
+            return None
+        except Exception as e:
+            logger.error(f"音频提取异常: {e}")
+            return None
+
     def _clean_image_url(self, url: str) -> str:
         """清理图片URL，获取最高画质"""
         # 替换缩略图为原图
@@ -269,16 +371,24 @@ class DouyinDownloader(Star):
                     if img_url and len(img_url) > 30:
                         images.append(img_url)
 
-            logger.info(f"iesdouyin 解析: desc={desc[:30]}, aweme_type={aweme_type}, images={len(images)}")
+            # 提取音乐信息
+            music_info = self._extract_music_info(aweme)
+            if music_info:
+                logger.info(f"提取到音乐: {music_info['title'][:30]} - {music_info['author'][:20]}")
+
+            logger.info(f"iesdouyin 解析: desc={desc[:30]}, aweme_type={aweme_type}, images={len(images)}, music={bool(music_info)}")
 
             # 判断类型：aweme_type 68=图文, 2=图集, 0=视频
             if images and (aweme_type in (68, 2, 101, 102, 103) or len(images) >= 2):
-                return {
+                result = {
                     'type': 'image',
                     'title': desc,
                     'author': nickname,
                     'images': images,
                 }
+                if music_info:
+                    result['music'] = music_info
+                return result
 
             # 提取视频
             video = aweme.get('video', {})
@@ -288,7 +398,7 @@ class DouyinDownloader(Star):
                 video_url = url_list[0].replace('/playwm/', '/play/')
                 # 检查是否是真正的视频（不是音频文件）
                 if '.mp3' not in video_url and 'music' not in video_url:
-                    return {
+                    result = {
                         'type': 'video',
                         'video_url': video_url,
                         'title': desc,
@@ -297,15 +407,21 @@ class DouyinDownloader(Star):
                         'height': video.get('height', 0),
                         'duration': video.get('duration', 0) // 1000,
                     }
+                    if music_info:
+                        result['music'] = music_info
+                    return result
 
             # 兜底：有图片就返回图片
             if images:
-                return {
+                result = {
                     'type': 'image',
                     'title': desc,
                     'author': nickname,
                     'images': images,
                 }
+                if music_info:
+                    result['music'] = music_info
+                return result
 
             return None
         except Exception as e:
@@ -772,9 +888,16 @@ class DouyinDownloader(Star):
         author = content_info.get('author', '未知作者')
 
         # 根据类型处理
+        music_info = content_info.get('music')
         if content_info['type'] == 'image':
             # 图文作品
-            yield self._text_result(event, f"正在下载 {len(content_info['images'])} 张图片...")
+            img_count = len(content_info['images'])
+            has_music = bool(music_info)
+            status_msg = f"正在下载 {img_count} 张图片"
+            if has_music:
+                status_msg += " + 背景音乐"
+            status_msg += "..."
+            yield self._text_result(event, status_msg)
 
             image_paths = await self._download_images(session, content_info['images'], title)
 
@@ -789,8 +912,28 @@ class DouyinDownloader(Star):
                 f"作者: {author}\n"
                 f"图片数量: {len(image_paths)}张"
             )
+            if has_music:
+                caption += f"\n音乐: {music_info['title'][:30]} - {music_info['author'][:20]}"
             yield self._text_result(event, caption)
             yield self._images_result(event, image_paths)
+
+            # 下载并发送音乐
+            if has_music:
+                safe_title = self._safe_filename(title, 20)
+                audio_path = await self._download_file(session, music_info['url'], f'{safe_title}.mp3')
+                if audio_path and os.path.exists(audio_path):
+                    audio_size = os.path.getsize(audio_path) / (1024 * 1024)
+                    if audio_size < 50:
+                        yield self._audio_result(event, audio_path)
+                    else:
+                        logger.warning(f"音频文件过大 ({audio_size:.1f}MB)，跳过发送")
+                    try:
+                        os.remove(audio_path)
+                        os.rmdir(os.path.dirname(audio_path))
+                    except OSError:
+                        pass
+                else:
+                    logger.warning("音乐下载失败")
 
             # 清理临时文件
             for path in image_paths:
@@ -846,6 +989,9 @@ class DouyinDownloader(Star):
             resolution = f"{width}x{height}" if width else "未知"
             duration_str = f"{duration // 60}:{duration % 60:02d}" if duration else "未知"
 
+            # 提取视频中的音频
+            audio_path = await self._extract_audio_from_video(file_path)
+
             caption = (
                 f"下载完成！\n"
                 f"类型: 视频作品\n"
@@ -855,8 +1001,20 @@ class DouyinDownloader(Star):
                 f"时长: {duration_str}\n"
                 f"大小: {file_size_mb:.1f}MB"
             )
+            if audio_path:
+                caption += f"\n已提取背景音乐"
             yield self._text_result(event, caption)
             yield self._video_result(event, file_path)
+
+            # 发送提取的音频
+            if audio_path and os.path.exists(audio_path):
+                audio_size = os.path.getsize(audio_path) / (1024 * 1024)
+                if audio_size < 50:
+                    yield self._audio_result(event, audio_path)
+                try:
+                    os.remove(audio_path)
+                except OSError:
+                    pass
 
             try:
                 os.remove(file_path)
