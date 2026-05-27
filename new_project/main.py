@@ -324,6 +324,7 @@ class DouyinDownloader(Star):
             # m.douyin.com 对服务器IP不封禁，优先使用
             mobile_ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1'
             if aweme_id:
+                debug(f"aweme_id={aweme_id}, len={len(aweme_id)}")
                 share_urls = [
                     (f"https://m.douyin.com/share/video/{aweme_id}", mobile_ua),
                     (f"https://www.iesdouyin.com/share/video/{aweme_id}/", None),
@@ -751,10 +752,10 @@ class DouyinDownloader(Star):
             yield self._text_result(event, "无法解析作品ID，请检查链接是否正确。")
             return
 
-        logger.info(f"aweme_id: {aweme_id}")
+        logger.info(f"aweme_id: {aweme_id} (len={len(aweme_id)})")
 
         # 获取内容信息
-        debug_info = []
+        debug_info = [f"aweme_id={aweme_id}(len={len(aweme_id)})"]
         try:
             content_info = await self._get_content_info(session, real_url, aweme_id, debug_info)
         except Exception as e:
