@@ -62,51 +62,70 @@ class DouyinDownloader(Star):
 
     async def _resolve_short_url(self, session: requests.Session, url: str) -> str:
         """解析短链接，获取真实 URL"""
-        if "v.douyin.com" in url:
-            try:
-                # 方法1: HEAD 请求
-                resp = session.head(url, allow_redirects=True, timeout=10)
-                resolved = resp.url
-                logger.info(f"HEAD 解析: {url} -> {resolved}")
+        if "v.douyin.com" not in url:
+            return url
 
-                # 检查是否解析成功（不再是短链接）
-                if "v.douyin.com" not in resolved:
-                    return resolved
+        # 方法1: GET 请求跟踪重定向
+        try:
+            resp = session.get(url, allow_redirects=True, timeout=15)
+            resolved = resp.url
+            logger.info(f"GET 解析: {url} -> {resolved} (status={resp.status_code})")
 
-                # 方法2: GET 请求（某些情况下HEAD被拦截）
-                resp = session.get(url, allow_redirects=True, timeout=10)
-                resolved = resp.url
-                logger.info(f"GET 解析: {url} -> {resolved}")
+            if "v.douyin.com" not in resolved and "douyin.com" in resolved:
+                return resolved
+        except Exception as e:
+            logger.warning(f"GET 请求失败: {e}")
 
-                if "v.douyin.com" not in resolved:
-                    return resolved
+        # 方法2: 从响应体中提取 aweme_id
+        try:
+            aweme_patterns = [
+                r'aweme_id=(\d+)',
+                r'"awemeId"\s*:\s*"(\d+)"',
+                r'/video/(\d{15,25})',
+                r'/note/(\d{15,25})',
+                r'itemId=(\d+)',
+            ]
+            for pattern in aweme_patterns:
+                match = re.search(pattern, resp.text)
+                if match:
+                    aweme_id = match.group(1)
+                    logger.info(f"从响应体提取到 aweme_id: {aweme_id}")
+                    return f"https://www.douyin.com/video/{aweme_id}"
+        except Exception:
+            pass
 
-                # 方法3: 从响应体中提取重定向URL
-                location_match = re.search(r'href="(https?://www\.douyin\.com/[^"]+)"', resp.text)
-                if location_match:
-                    logger.info(f"从响应体提取URL: {location_match.group(1)}")
-                    return location_match.group(1)
+        # 方法3: 从响应体中提取重定向URL
+        try:
+            href_patterns = [
+                r'href="(https?://www\.douyin\.com/video/[^"]+)"',
+                r'href="(https?://www\.douyin\.com/note/[^"]+)"',
+                r'href="(https?://www\.iesdouyin\.com/[^"]+)"',
+                r'window\.location\.href\s*=\s*["\']([^"\']+)["\']',
+            ]
+            for pattern in href_patterns:
+                match = re.search(pattern, resp.text)
+                if match:
+                    logger.info(f"从响应体提取URL: {match.group(1)}")
+                    return match.group(1)
+        except Exception:
+            pass
 
-                # 方法4: 从响应体中提取 aweme_id
-                aweme_match = re.search(r'aweme_id=(\d+)', resp.text)
-                if aweme_match:
-                    aweme_id = aweme_match.group(1)
-                    constructed = f"https://www.douyin.com/video/{aweme_id}"
-                    logger.info(f"从响应体构造URL: {constructed}")
-                    return constructed
-
-            except Exception as e:
-                logger.warning(f"解析短链接失败: {e}，使用原始链接")
+        logger.warning(f"短链接解析失败，使用原始URL: {url}")
         return url
 
     async def _extract_aweme_id(self, url: str) -> str | None:
         """从 URL 中提取 aweme_id"""
+        if not url:
+            return None
+
         patterns = [
             r'/video/(\d+)',
             r'/note/(\d+)',
             r'/share/video/(\d+)',
             r'aweme_id=(\d+)',
-            r'/(\d{15,25})',  # 兜底：URL中15-25位数字（抖音ID通常19位）
+            r'itemId=(\d+)',
+            r'awemeId=(\d+)',
+            r'/(\d{15,25})(?:/|$|\?)',  # 兜底：URL路径中的15-25位数字
         ]
         for pattern in patterns:
             match = re.search(pattern, url)
@@ -525,10 +544,17 @@ class DouyinDownloader(Star):
         # 创建 session
         session = requests.Session()
         session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 12; Pixel 4 Build/SP1A.210812.016.C1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'zh-CN,zh;q=0.9',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Referer': 'https://www.douyin.com/',
+            'Connection': 'keep-alive',
+            'Sec-Fetch-Dest': 'document',
+            'Sec-Fetch-Mode': 'navigate',
+            'Sec-Fetch-Site': 'none',
+            'Sec-Fetch-User': '?1',
+            'Upgrade-Insecure-Requests': '1',
         })
 
         # 解析短链接
@@ -545,6 +571,15 @@ class DouyinDownloader(Star):
 
         # 获取内容信息
         content_info = await self._get_content_info(session, real_url, aweme_id)
+
+        # 如果第一次失败，尝试直接用 aweme_id 构造 URL
+        if not content_info and aweme_id:
+            for url_template in [f"https://www.douyin.com/video/{aweme_id}", f"https://www.douyin.com/note/{aweme_id}"]:
+                logger.info(f"重试: {url_template}")
+                content_info = await self._get_content_info(session, url_template, aweme_id)
+                if content_info:
+                    break
+
         if not content_info:
             yield self._text_result(event, "获取作品信息失败，请稍后重试。")
             return
