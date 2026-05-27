@@ -29,7 +29,8 @@ DOUYIN_PATTERNS = [
 class DouyinDownloader(Star):
     def __init__(self, context: Context, config: dict = None):
         super().__init__(context, config)
-        logger.info("DouyinDownloader 插件已加载")
+        self.proxy = (config or {}).get('proxy', '')
+        logger.info(f"DouyinDownloader 插件已加载, proxy={self.proxy or '无'}")
 
     def _text_result(self, event: AstrMessageEvent, text: str):
         """创建纯文字结果（禁用文字转图片）"""
@@ -699,6 +700,8 @@ class DouyinDownloader(Star):
 
         # 创建 session
         session = requests.Session()
+        if self.proxy:
+            session.proxies = {'http': self.proxy, 'https': self.proxy}
         session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',

@@ -1,6 +1,6 @@
 {
-  "cookie_file": {
-    "description": "抖音 Cookie 文件路径（Netscape 格式），留空则使用插件目录下的 cookies.txt",
+  "proxy": {
+    "description": "HTTP代理地址（如 http://127.0.0.1:7890），留空则不使用代理。云服务器建议配置代理以绕过抖音IP封锁。",
     "type": "string",
     "default": ""
   }
