@@ -64,30 +64,58 @@ class DouyinDownloader(Star):
         """解析短链接，获取真实 URL"""
         if "v.douyin.com" in url:
             try:
+                # 方法1: HEAD 请求
                 resp = session.head(url, allow_redirects=True, timeout=10)
-                return resp.url
+                resolved = resp.url
+                logger.info(f"HEAD 解析: {url} -> {resolved}")
+
+                # 检查是否解析成功（不再是短链接）
+                if "v.douyin.com" not in resolved:
+                    return resolved
+
+                # 方法2: GET 请求（某些情况下HEAD被拦截）
+                resp = session.get(url, allow_redirects=True, timeout=10)
+                resolved = resp.url
+                logger.info(f"GET 解析: {url} -> {resolved}")
+
+                if "v.douyin.com" not in resolved:
+                    return resolved
+
+                # 方法3: 从响应体中提取重定向URL
+                location_match = re.search(r'href="(https?://www\.douyin\.com/[^"]+)"', resp.text)
+                if location_match:
+                    logger.info(f"从响应体提取URL: {location_match.group(1)}")
+                    return location_match.group(1)
+
+                # 方法4: 从响应体中提取 aweme_id
+                aweme_match = re.search(r'aweme_id=(\d+)', resp.text)
+                if aweme_match:
+                    aweme_id = aweme_match.group(1)
+                    constructed = f"https://www.douyin.com/video/{aweme_id}"
+                    logger.info(f"从响应体构造URL: {constructed}")
+                    return constructed
+
             except Exception as e:
                 logger.warning(f"解析短链接失败: {e}，使用原始链接")
         return url
 
     async def _extract_aweme_id(self, url: str) -> str | None:
         """从 URL 中提取 aweme_id"""
-        match = re.search(r'/video/(\d+)', url)
-        if match:
-            return match.group(1)
+        patterns = [
+            r'/video/(\d+)',
+            r'/note/(\d+)',
+            r'/share/video/(\d+)',
+            r'aweme_id=(\d+)',
+            r'/(\d{15,25})',  # 兜底：URL中15-25位数字（抖音ID通常19位）
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, url)
+            if match:
+                aweme_id = match.group(1)
+                logger.info(f"提取到 aweme_id: {aweme_id} (pattern: {pattern})")
+                return aweme_id
 
-        match = re.search(r'/note/(\d+)', url)
-        if match:
-            return match.group(1)
-
-        match = re.search(r'/share/video/(\d+)', url)
-        if match:
-            return match.group(1)
-
-        match = re.search(r'aweme_id=(\d+)', url)
-        if match:
-            return match.group(1)
-
+        logger.warning(f"无法从URL提取 aweme_id: {url}")
         return None
 
     def _clean_image_url(self, url: str) -> str:
@@ -105,7 +133,7 @@ class DouyinDownloader(Star):
         url = re.sub(r'&crop=.*?(?=&|$)', '', url)
         return url
 
-    async def _get_content_info(self, session: requests.Session, url: str) -> dict | None:
+    async def _get_content_info(self, session: requests.Session, url: str, aweme_id: str = None) -> dict | None:
         """从页面提取内容信息（视频或图文）"""
         try:
             resp = session.get(url, timeout=15)
@@ -314,6 +342,58 @@ class DouyinDownloader(Star):
                     'images': images,
                 }
 
+            # 如果页面提取失败但有 aweme_id，尝试 API 接口
+            if aweme_id:
+                logger.info(f"页面提取失败，尝试 API 接口: aweme_id={aweme_id}")
+                try:
+                    api_url = f"https://www.douyin.com/aweme/v1/web/aweme/detail/?aweme_id={aweme_id}&aid=1128&version_name=23.5.0"
+                    api_resp = session.get(api_url, timeout=15)
+                    if api_resp.status_code == 200:
+                        data = api_resp.json()
+                        aweme_detail = data.get('aweme_detail', {})
+                        if aweme_detail:
+                            # 从 API 响应中提取信息
+                            desc = aweme_detail.get('desc', '抖音作品')
+                            author_info = aweme_detail.get('author', {})
+                            nickname = author_info.get('nickname', '未知作者')
+                            aweme_type = aweme_detail.get('aweme_type', 0)
+
+                            # 提取图片
+                            images = []
+                            for img in aweme_detail.get('images', []):
+                                url_list = img.get('url_list', [])
+                                if url_list:
+                                    img_url = self._clean_image_url(url_list[0])
+                                    if img_url and len(img_url) > 30:
+                                        images.append(img_url)
+
+                            if images:
+                                logger.info(f"API 提取到 {len(images)} 张图片")
+                                return {
+                                    'type': 'image',
+                                    'title': desc,
+                                    'author': nickname,
+                                    'images': images,
+                                }
+
+                            # 提取视频
+                            video = aweme_detail.get('video', {})
+                            play_addr = video.get('play_addr', {})
+                            url_list = play_addr.get('url_list', [])
+                            if url_list:
+                                video_url = url_list[0].replace('/playwm/', '/play/')
+                                return {
+                                    'type': 'video',
+                                    'video_url': video_url,
+                                    'title': desc,
+                                    'author': nickname,
+                                    'width': video.get('width', 0),
+                                    'height': video.get('height', 0),
+                                    'duration': video.get('duration', 0) // 1000,
+                                }
+                except Exception as e:
+                    logger.error(f"API 接口请求失败: {e}")
+
             return None
         except Exception as e:
             logger.error(f"获取内容信息失败: {e}")
@@ -456,7 +536,7 @@ class DouyinDownloader(Star):
         logger.info(f"aweme_id: {aweme_id}")
 
         # 获取内容信息
-        content_info = await self._get_content_info(session, real_url)
+        content_info = await self._get_content_info(session, real_url, aweme_id)
         if not content_info:
             yield self._text_result(event, "获取作品信息失败，请稍后重试。")
             return
