@@ -57,7 +57,7 @@ class DouyinDownloader(Star):
         """创建音频结果（同时发送语音和文件，兼容不同平台）"""
         filename = os.path.basename(file_path)
         record = Record.fromFileSystem(file_path)
-        file_comp = File(name=filename, file_=file_path)
+        file_comp = File(name=filename, file=file_path)
         return event.chain_result([record, file_comp])
 
     async def _extract_url(self, text: str) -> str | None:
