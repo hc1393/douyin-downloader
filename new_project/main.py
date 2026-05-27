@@ -162,30 +162,55 @@ class DouyinDownloader(Star):
                 return None
 
             raw = match.group(1)
-            # 处理 unicode 转义
             raw = raw.encode('raw_unicode_escape').decode('unicode_escape')
             data = json.loads(raw)
 
-            # 递归查找 aweme 数据
-            def find_aweme(obj, depth=0):
-                if depth > 6:
-                    return None
-                if isinstance(obj, dict):
-                    if 'aweme_type' in obj and ('desc' in obj or 'video' in obj):
-                        return obj
-                    for v in obj.values():
-                        r = find_aweme(v, depth + 1)
-                        if r:
-                            return r
-                elif isinstance(obj, list):
-                    for item in obj:
-                        r = find_aweme(item, depth + 1)
-                        if r:
-                            return r
-                return None
+            # 方法1: 直接从 item_list 提取（最可靠）
+            aweme = None
+            try:
+                loader = data.get('loaderData', {})
+                for key, val in loader.items():
+                    if isinstance(val, dict) and 'videoInfoRes' in val:
+                        item_list = val.get('videoInfoRes', {}).get('item_list', [])
+                        if item_list:
+                            aweme = item_list[0]
+                            logger.info(f"从 item_list 提取到 aweme: {aweme.get('desc', '')[:30]}")
+                            break
+            except Exception as e:
+                logger.warning(f"item_list 提取失败: {e}")
 
-            aweme = find_aweme(data)
+            # 方法2: 递归查找（备用）
             if not aweme:
+                def find_aweme(obj, depth=0):
+                    if depth > 6:
+                        return None
+                    if isinstance(obj, dict):
+                        if 'aweme_type' in obj and ('desc' in obj or 'video' in obj):
+                            return obj
+                        for v in obj.values():
+                            r = find_aweme(v, depth + 1)
+                            if r:
+                                return r
+                    elif isinstance(obj, list):
+                        for item in obj:
+                            r = find_aweme(item, depth + 1)
+                            if r:
+                                return r
+                    return None
+
+                aweme = find_aweme(data)
+
+            if not aweme:
+                # 检查是否被过滤
+                try:
+                    for key, val in loader.items():
+                        if isinstance(val, dict) and 'videoInfoRes' in val:
+                            filter_list = val.get('videoInfoRes', {}).get('filter_list', [])
+                            if filter_list:
+                                reason = filter_list[0].get('filter_reason', 'unknown')
+                                logger.warning(f"视频被过滤: {reason}")
+                except Exception:
+                    pass
                 logger.warning("在 _ROUTER_DATA 中未找到 aweme 数据")
                 return None
 
