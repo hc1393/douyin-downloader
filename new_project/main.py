@@ -4,6 +4,7 @@ import json
 import tempfile
 import logging
 import time
+import struct
 
 import requests
 
@@ -277,6 +278,28 @@ class DouyinDownloader(Star):
             return f'{safe[:10]}_{timestamp}'
         return f'dy_{timestamp}'
 
+    def _validate_video(self, file_path: str) -> bool:
+        """验证视频文件是否有效"""
+        try:
+            with open(file_path, 'rb') as f:
+                header = f.read(12)
+                if len(header) < 12:
+                    return False
+                # MP4 文件在第4-8字节有 'ftyp' 标记
+                if header[4:8] == b'ftyp':
+                    return True
+                # 也检查是否是 RIFF (WebM/MKV 等)
+                if header[:4] == b'RIFF':
+                    return True
+                # 检查是否是 FLV
+                if header[:3] == b'FLV':
+                    return True
+                logger.warning(f"视频文件头不符合预期: {header[:8].hex()}")
+                return False
+        except Exception as e:
+            logger.error(f"验证视频文件失败: {e}")
+            return False
+
     async def _download_file(self, session: requests.Session, url: str, filename: str) -> str | None:
         """下载文件到临时目录"""
         try:
@@ -286,9 +309,23 @@ class DouyinDownloader(Star):
             resp = session.get(url, timeout=60, stream=True)
             resp.raise_for_status()
 
+            # 检查 Content-Type，确保是视频/图片
+            content_type = resp.headers.get('Content-Type', '')
+            logger.info(f"下载文件 Content-Type: {content_type}, URL: {url[:80]}...")
+
+            file_size = 0
             with open(file_path, 'wb') as f:
                 for chunk in resp.iter_content(chunk_size=8192):
                     f.write(chunk)
+                    file_size += len(chunk)
+
+            logger.info(f"文件下载完成: {file_path}, 大小: {file_size} bytes")
+
+            if file_size < 1000:
+                logger.error(f"文件过小 ({file_size} bytes)，可能下载失败")
+                os.remove(file_path)
+                os.rmdir(tmp_dir)
+                return None
 
             return file_path
         except Exception as e:
@@ -384,7 +421,21 @@ class DouyinDownloader(Star):
             yield self._text_result(event, "正在下载高清无水印视频...")
 
             safe_title = self._safe_filename(title, 20)
-            file_path = await self._download_file(session, content_info['video_url'], f'{safe_title}.mp4')
+            video_url = content_info['video_url']
+
+            # 尝试下载视频，先用无水印URL，失败则用带水印URL
+            file_path = await self._download_file(session, video_url, f'{safe_title}.mp4')
+
+            # 验证视频文件
+            if file_path and os.path.exists(file_path):
+                if not self._validate_video(file_path):
+                    logger.warning(f"视频文件验证失败，尝试备用URL")
+                    os.remove(file_path)
+                    os.rmdir(os.path.dirname(file_path))
+                    # 尝试带水印的URL
+                    backup_url = video_url.replace('/play/', '/playwm/')
+                    if backup_url != video_url:
+                        file_path = await self._download_file(session, backup_url, f'{safe_title}.mp4')
 
             if not file_path or not os.path.exists(file_path):
                 yield self._text_result(event, "视频下载失败，请稍后重试。")
