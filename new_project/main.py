@@ -10,7 +10,7 @@ import requests
 
 from astrbot.api.star import Context, Star
 from astrbot.api.event import filter, AstrMessageEvent
-from astrbot.core.message.components import Video, Image, Record
+from astrbot.core.message.components import Video, Image, Record, File
 
 logger = logging.getLogger(__name__)
 
@@ -54,9 +54,11 @@ class DouyinDownloader(Star):
         return event.chain_result(images)
 
     def _audio_result(self, event: AstrMessageEvent, file_path: str):
-        """创建音频结果"""
+        """创建音频结果（同时发送语音和文件，兼容不同平台）"""
+        filename = os.path.basename(file_path)
         record = Record.fromFileSystem(file_path)
-        return event.chain_result([record])
+        file_comp = File(name=filename, file_=file_path)
+        return event.chain_result([record, file_comp])
 
     async def _extract_url(self, text: str) -> str | None:
         """从消息文本中提取抖音链接"""
