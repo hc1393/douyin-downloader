@@ -136,8 +136,15 @@ class DouyinDownloader(Star):
     async def _get_content_info(self, session: requests.Session, url: str, aweme_id: str = None) -> dict | None:
         """从页面提取内容信息（视频或图文）"""
         try:
+            logger.info(f"请求页面: {url}")
             resp = session.get(url, timeout=15)
+            logger.info(f"页面响应: status={resp.status_code}, length={len(resp.text)}")
             resp.raise_for_status()
+
+            # 检查页面内容是否有效
+            if len(resp.text) < 500:
+                logger.warning(f"页面内容过短 ({len(resp.text)} bytes)，可能是错误页面")
+                logger.info(f"页面内容: {resp.text[:500]}")
 
             # 提取标题
             title_match = re.search(r'"desc"\s*:\s*"([^"]{1,200})"', resp.text)
@@ -394,9 +401,10 @@ class DouyinDownloader(Star):
                 except Exception as e:
                     logger.error(f"API 接口请求失败: {e}")
 
+            logger.warning(f"所有提取方法均失败: images={len(images)}, has_play_addr={bool(re.search(r'\"play_addr\"', resp.text))}")
             return None
         except Exception as e:
-            logger.error(f"获取内容信息失败: {e}")
+            logger.error(f"获取内容信息失败: {e}", exc_info=True)
             return None
 
     def _safe_filename(self, title: str, max_len: int = 30) -> str:
