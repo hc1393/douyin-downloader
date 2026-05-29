@@ -5,6 +5,8 @@ import tempfile
 import logging
 import time
 import struct
+import asyncio
+import zipfile
 
 import requests
 
@@ -49,16 +51,34 @@ class DouyinDownloader(Star):
         return event.chain_result([img])
 
     def _images_result(self, event: AstrMessageEvent, file_paths: list):
-        """创建多图片结果"""
-        images = [Image.fromFileSystem(p) for p in file_paths]
-        return event.chain_result(images)
+        """逐张发送图片，每张单独一条消息"""
+        results = []
+        for path in file_paths:
+            img = Image.fromFileSystem(path)
+            results.append(event.chain_result([img]))
+        return results
+
+    def _pack_images_zip(self, file_paths: list, title: str) -> str | None:
+        """将多张图片打包成 zip 文件，返回 zip 路径"""
+        try:
+            safe_name = self._safe_filename(title, 30)
+            zip_dir = tempfile.mkdtemp(prefix='dy_zip_')
+            zip_path = os.path.join(zip_dir, f'{safe_name}.zip')
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
+                for i, path in enumerate(file_paths):
+                    if os.path.exists(path):
+                        ext = os.path.splitext(path)[1] or '.jpeg'
+                        zf.write(path, f'{i+1:02d}{ext}')
+            logger.info(f"打包完成: {zip_path} ({os.path.getsize(zip_path)/1024:.0f} KB)")
+            return zip_path
+        except Exception as e:
+            logger.error(f"打包失败: {e}")
+            return None
 
     def _audio_result(self, event: AstrMessageEvent, file_path: str):
-        """创建音频结果（同时发送语音和文件，兼容不同平台）"""
-        filename = os.path.basename(file_path)
+        """创建音频结果（仅发 Record，不发 File，兼容 weixin_oc）"""
         record = Record.fromFileSystem(file_path)
-        file_comp = File(name=filename, file=file_path)
-        return event.chain_result([record, file_comp])
+        return event.chain_result([record])
 
     async def _extract_url(self, text: str) -> str | None:
         """从消息文本中提取抖音链接"""
@@ -445,7 +465,9 @@ class DouyinDownloader(Star):
                 debug(f"aweme_id={aweme_id}, len={len(aweme_id)}")
                 share_urls = [
                     (f"https://m.douyin.com/share/video/{aweme_id}", mobile_ua),
+                    (f"https://m.douyin.com/share/slides/{aweme_id}", mobile_ua),
                     (f"https://www.iesdouyin.com/share/video/{aweme_id}/", None),
+                    (f"https://www.iesdouyin.com/share/slides/{aweme_id}/", None),
                     (f"https://www.douyin.com/share/video/{aweme_id}", None),
                 ]
                 for share_url, ua in share_urls:
@@ -917,16 +939,65 @@ class DouyinDownloader(Star):
             if has_music:
                 caption += f"\n音乐: {music_info['title'][:30]} - {music_info['author'][:20]}"
             yield self._text_result(event, caption)
-            yield self._images_result(event, image_paths)
+
+            # 图片超过3张时打包成zip发送，否则逐张发送
+            if len(image_paths) > 3:
+                zip_path = self._pack_images_zip(image_paths, title)
+                if zip_path and os.path.exists(zip_path):
+                    try:
+                        yield self._text_result(event, f"图片较多，已打包为压缩文件（{len(image_paths)} 张）")
+                        await asyncio.sleep(0.5)
+                        zip_size = os.path.getsize(zip_path) / (1024 * 1024)
+                        if zip_size < 100:
+                            file_comp = File(name=os.path.basename(zip_path), file=zip_path)
+                            yield event.chain_result([file_comp])
+                        else:
+                            yield self._text_result(event, f"压缩文件过大 ({zip_size:.1f}MB)，改为逐张发送")
+                            for i, img_result in enumerate(self._images_result(event, image_paths)):
+                                if i > 0: await asyncio.sleep(2)
+                                try: yield img_result
+                                except: pass
+                    except Exception as e:
+                        logger.warning(f"zip发送失败: {e}，回退逐张发送")
+                        for i, img_result in enumerate(self._images_result(event, image_paths)):
+                            if i > 0: await asyncio.sleep(2)
+                            try: yield img_result
+                            except: pass
+                    finally:
+                        try:
+                            os.remove(zip_path)
+                            os.rmdir(os.path.dirname(zip_path))
+                        except: pass
+                else:
+                    # 打包失败，逐张发送
+                    for i, img_result in enumerate(self._images_result(event, image_paths)):
+                        if i > 0: await asyncio.sleep(2)
+                        try: yield img_result
+                        except: pass
+            else:
+                # 少量图片直接逐张发送
+                for i, img_result in enumerate(self._images_result(event, image_paths)):
+                    if i > 0: await asyncio.sleep(2)
+                    try: yield img_result
+                    except: pass
 
             # 下载并发送音乐
             if has_music:
                 safe_title = self._safe_filename(title, 20)
-                audio_path = await self._download_file(session, music_info['url'], f'{safe_title}.mp3')
+                music_url = music_info.get('url', '')
+                logger.info(f"准备下载音乐: {music_url[:80]}")
+                audio_path = await self._download_file(session, music_url, f'{safe_title}.mp3')
                 if audio_path and os.path.exists(audio_path):
                     audio_size = os.path.getsize(audio_path) / (1024 * 1024)
+                    logger.info(f"音乐下载成功: {audio_path}, {audio_size:.2f}MB")
                     if audio_size < 50:
-                        yield self._audio_result(event, audio_path)
+                        await asyncio.sleep(1)
+                        try:
+                            yield self._audio_result(event, audio_path)
+                            logger.info("音乐发送成功")
+                        except Exception as e:
+                            logger.error(f"音乐发送失败: {e}")
+                            yield self._text_result(event, f"音乐: {music_info.get('title', '')} - {music_info.get('author', '')}")
                     else:
                         logger.warning(f"音频文件过大 ({audio_size:.1f}MB)，跳过发送")
                     try:
@@ -935,7 +1006,7 @@ class DouyinDownloader(Star):
                     except OSError:
                         pass
                 else:
-                    logger.warning("音乐下载失败")
+                    logger.warning(f"音乐下载失败: url={music_url[:80]}")
 
             # 清理临时文件
             for path in image_paths:
@@ -1012,6 +1083,7 @@ class DouyinDownloader(Star):
             if audio_path and os.path.exists(audio_path):
                 audio_size = os.path.getsize(audio_path) / (1024 * 1024)
                 if audio_size < 50:
+                    await asyncio.sleep(1)
                     yield self._audio_result(event, audio_path)
                 try:
                     os.remove(audio_path)
